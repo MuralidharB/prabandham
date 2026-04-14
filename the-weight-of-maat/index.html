@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Weight of Ma'at — Title Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0A0703;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+
+  .tp-page {
+    background: #150F07;
+    width: 100%;
+    max-width: 680px;
+    min-height: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tp-border-top, .tp-border-bottom {
+    position: absolute; left: 0; right: 0; height: 6px; background: #C9A84C; opacity: 0.7;
+  }
+  .tp-border-top { top: 0; }
+  .tp-border-bottom { bottom: 0; }
+  .tp-border-left, .tp-border-right {
+    position: absolute; top: 0; bottom: 0; width: 6px; background: #C9A84C; opacity: 0.7;
+  }
+  .tp-border-left { left: 0; }
+  .tp-border-right { right: 0; }
+  .tp-border-inner-top, .tp-border-inner-bottom {
+    position: absolute; left: 0; right: 0; height: 1px; background: #C9A84C; opacity: 0.3;
+  }
+  .tp-border-inner-top { top: 12px; }
+  .tp-border-inner-bottom { bottom: 12px; }
+  .tp-border-inner-left, .tp-border-inner-right {
+    position: absolute; top: 0; bottom: 0; width: 1px; background: #C9A84C; opacity: 0.3;
+  }
+  .tp-border-inner-left { left: 12px; }
+  .tp-border-inner-right { right: 12px; }
+
+  .tp-corner { position: absolute; width: 32px; height: 32px; }
+  .tp-corner svg { width: 32px; height: 32px; }
+  .tp-corner-tl { top: 0; left: 0; }
+  .tp-corner-tr { top: 0; right: 0; transform: scaleX(-1); }
+  .tp-corner-bl { bottom: 0; left: 0; transform: scaleY(-1); }
+  .tp-corner-br { bottom: 0; right: 0; transform: scale(-1); }
+
+  .tp-eyerow {
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+    margin-bottom: 1.4rem;
+  }
+
+  .tp-series {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.5em;
+    color: #8B6F35;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+    margin-bottom: 0.8rem;
+  }
+
+  .tp-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.7s forwards;
+    margin-bottom: 1.8rem;
+    width: 260px;
+  }
+  .tp-divider::before, .tp-divider::after {
+    content: ''; flex: 1; height: 0.5px; background: #C9A84C; opacity: 0.5;
+  }
+  .tp-divider-gem {
+    width: 5px; height: 5px; background: #C9A84C; transform: rotate(45deg); opacity: 0.8;
+  }
+
+  .tp-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(30px, 5vw, 48px);
+    font-weight: 500;
+    color: #E8D5A3;
+    letter-spacing: 0.08em;
+    text-align: center;
+    line-height: 1.2;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.9s forwards;
+    margin-bottom: 0.5rem;
+  }
+  .tp-title-the {
+    font-size: clamp(14px, 2.5vw, 22px);
+    font-weight: 400;
+    letter-spacing: 0.5em;
+    color: #C9A84C;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .tp-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: #8B6F35;
+    letter-spacing: 0.2em;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.3s forwards;
+    margin-bottom: 2.6rem;
+  }
+
+  .tp-scales {
+    opacity: 0;
+    animation: fadeIn 1.5s ease 1.5s forwards;
+    margin-bottom: 2.4rem;
+  }
+
+  .tp-ornament-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.8s forwards;
+    margin-bottom: 1.6rem;
+    width: 320px;
+  }
+  .tp-ornament-row::before, .tp-ornament-row::after {
+    content: ''; flex: 1; height: 0.5px; background: #C9A84C; opacity: 0.4;
+  }
+  .tp-ornament-text {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: #8B6F35;
+    white-space: nowrap;
+  }
+
+  .tp-chapters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    opacity: 0;
+    animation: fadeUp 1s ease 2s forwards;
+    margin-bottom: 3rem;
+    width: 100%;
+    max-width: 400px;
+  }
+  .tp-chapter-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: #6B5430;
+    letter-spacing: 0.1em;
+    text-align: center;
+    line-height: 1.7;
+  }
+  .tp-chapter-num {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    font-style: normal;
+    color: #8B6F35;
+    letter-spacing: 0.3em;
+    margin-right: 6px;
+  }
+  .tp-epilogue {
+    margin-top: 6px;
+    color: #4A3520;
+  }
+  .tp-epilogue .tp-chapter-num {
+    color: #4A3520;
+  }
+
+  .tp-bottom-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 2.3s forwards;
+    margin-bottom: 1.4rem;
+    width: 200px;
+  }
+  .tp-bottom-divider::before, .tp-bottom-divider::after {
+    content: ''; flex: 1; height: 0.5px; background: #C9A84C; opacity: 0.35;
+  }
+  .tp-bottom-gem {
+    width: 4px; height: 4px; background: #8B6F35; transform: rotate(45deg);
+  }
+
+  .tp-author-line {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    color: #8B6F35;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 2.5s forwards;
+    text-transform: uppercase;
+  }
+
+  .tp-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-style: italic;
+    color: #4A3520;
+    letter-spacing: 0.2em;
+    margin-top: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 2.7s forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .scales-arm { transform-origin: 200px 64px; animation: swayLeft 6s ease-in-out 3s infinite; }
+  .pan-left   { transform-origin: 90px 100px; animation: swayRight 6s ease-in-out 3s infinite; }
+  .pan-right  { transform-origin: 310px 100px; animation: swayLeft 6s ease-in-out 3s infinite; }
+
+  @keyframes swayLeft  { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(-2deg)} }
+  @keyframes swayRight { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(2deg)} }
+</style>
+</head>
+<body>
+
+<div class="tp-page">
+
+  <!-- Frame borders -->
+  <div class="tp-border-top"></div>
+  <div class="tp-border-bottom"></div>
+  <div class="tp-border-left"></div>
+  <div class="tp-border-right"></div>
+  <div class="tp-border-inner-top"></div>
+  <div class="tp-border-inner-bottom"></div>
+  <div class="tp-border-inner-left"></div>
+  <div class="tp-border-inner-right"></div>
+
+  <!-- Corner ornaments -->
+  <div class="tp-corner tp-corner-tl">
+    <svg viewBox="0 0 32 32"><path d="M0 0 L32 0 L32 6 L6 6 L6 32 L0 32 Z" fill="#C9A84C" opacity="0.9"/><path d="M12 12 L32 12" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/><path d="M12 12 L12 32" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/></svg>
+  </div>
+  <div class="tp-corner tp-corner-tr">
+    <svg viewBox="0 0 32 32"><path d="M0 0 L32 0 L32 32 L26 32 L26 6 L0 6 Z" fill="#C9A84C" opacity="0.9"/><path d="M0 12 L20 12" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/><path d="M20 12 L20 32" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/></svg>
+  </div>
+  <div class="tp-corner tp-corner-bl">
+    <svg viewBox="0 0 32 32"><path d="M0 0 L6 0 L6 26 L32 26 L32 32 L0 32 Z" fill="#C9A84C" opacity="0.9"/><path d="M12 0 L12 20" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/><path d="M12 20 L32 20" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/></svg>
+  </div>
+  <div class="tp-corner tp-corner-br">
+    <svg viewBox="0 0 32 32"><path d="M0 26 L26 26 L26 0 L32 0 L32 32 L0 32 Z" fill="#C9A84C" opacity="0.9"/><path d="M0 20 L20 20" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/><path d="M20 0 L20 20" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/></svg>
+  </div>
+
+  <!-- Eye of Horus -->
+  <div class="tp-eyerow">
+    <svg width="56" height="30" viewBox="0 0 52 28">
+      <ellipse cx="26" cy="14" rx="24" ry="11" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+      <line x1="2" y1="14" x2="0" y2="10" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+      <line x1="50" y1="14" x2="52" y2="10" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+      <circle cx="26" cy="14" r="6" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.8"/>
+      <circle cx="26" cy="14" r="2.5" fill="#C9A84C" opacity="0.7"/>
+      <line x1="26" y1="20" x2="22" y2="26" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+      <line x1="26" y1="20" x2="26" y2="27" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+      <line x1="26" y1="20" x2="30" y2="26" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <p class="tp-series">A Novel of Ancient Egypt</p>
+
+  <div class="tp-divider"><div class="tp-divider-gem"></div></div>
+
+  <h1 class="tp-title">
+    <span class="tp-title-the">The</span>
+    Weight of Ma'at
+  </h1>
+
+  <p class="tp-subtitle">Thebes, Year Sixteen of the Reign of Ramesses IX</p>
+
+  <!-- Scales of Ma'at -->
+  <div class="tp-scales">
+    <svg width="220" height="170" viewBox="0 0 400 220">
+      <!-- Pillar -->
+      <line x1="200" y1="30" x2="200" y2="185" stroke="#C9A84C" stroke-width="1.5" opacity="0.8"/>
+      <!-- Apex -->
+      <polygon points="200,20 194,36 206,36" fill="#C9A84C" opacity="0.9"/>
+      <!-- Fulcrum block -->
+      <rect x="176" y="56" width="48" height="8" rx="2" fill="#C9A84C" opacity="0.4"/>
+      <!-- Arm -->
+      <g class="scales-arm">
+        <line x1="90" y1="64" x2="310" y2="64" stroke="#C9A84C" stroke-width="1.2" opacity="0.7"/>
+        <circle cx="200" cy="64" r="4" fill="#C9A84C" opacity="0.9"/>
+        <circle cx="90"  cy="64" r="3" fill="#C9A84C" opacity="0.7"/>
+        <circle cx="310" cy="64" r="3" fill="#C9A84C" opacity="0.7"/>
+      </g>
+      <!-- Left pan — heart -->
+      <g class="pan-left">
+        <line x1="90" y1="64" x2="76"  y2="130" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+        <line x1="90" y1="64" x2="104" y2="130" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+        <path d="M68 130 Q90 148 112 130" fill="none" stroke="#C9A84C" stroke-width="1.2" opacity="0.8"/>
+        <line x1="68" y1="130" x2="112" y2="130" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+        <ellipse cx="90" cy="120" rx="10" ry="7" fill="none" stroke="#E8D5A3" stroke-width="0.8" opacity="0.75"/>
+        <line x1="84" y1="120" x2="96" y2="120" stroke="#E8D5A3" stroke-width="0.5" opacity="0.5"/>
+        <line x1="90" y1="113" x2="90" y2="127" stroke="#E8D5A3" stroke-width="0.5" opacity="0.5"/>
+        <circle cx="90" cy="120" r="2" fill="#E8D5A3" opacity="0.6"/>
+      </g>
+      <!-- Right pan — feather -->
+      <g class="pan-right">
+        <line x1="310" y1="64" x2="296" y2="130" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+        <line x1="310" y1="64" x2="324" y2="130" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+        <path d="M288 130 Q310 148 332 130" fill="none" stroke="#C9A84C" stroke-width="1.2" opacity="0.8"/>
+        <line x1="288" y1="130" x2="332" y2="130" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+        <line x1="310" y1="108" x2="310" y2="128" stroke="#E8D5A3" stroke-width="0.8" opacity="0.75"/>
+        <path d="M310 108 Q320 114 320 120 Q318 126 310 128 Q302 126 300 120 Q300 114 310 108" fill="none" stroke="#E8D5A3" stroke-width="0.7" opacity="0.65"/>
+        <line x1="304" y1="113" x2="316" y2="119" stroke="#E8D5A3" stroke-width="0.5" opacity="0.5"/>
+        <line x1="304" y1="119" x2="316" y2="125" stroke="#E8D5A3" stroke-width="0.5" opacity="0.5"/>
+      </g>
+      <!-- Base -->
+      <rect x="196" y="178" width="8" height="22" rx="1" fill="#C9A84C" opacity="0.6"/>
+      <line x1="175" y1="200" x2="225" y2="200" stroke="#C9A84C" stroke-width="0.8" opacity="0.4"/>
+      <!-- Labels -->
+      <text x="90"  y="215" text-anchor="middle" font-family="Cinzel,serif" font-size="9" fill="#8B6F35" letter-spacing="2" opacity="0.7">The Heart</text>
+      <text x="310" y="215" text-anchor="middle" font-family="Cinzel,serif" font-size="9" fill="#8B6F35" letter-spacing="2" opacity="0.7">The Feather</text>
+    </svg>
+  </div>
+
+  <div class="tp-ornament-row">
+    <span class="tp-ornament-text">✦ &nbsp; Contents &nbsp; ✦</span>
+  </div>
+
+  <div class="tp-chapters">
+    <div class="tp-chapter-item"><span class="tp-chapter-num">I.</span>What the Darkness Keeps</div>
+    <div class="tp-chapter-item"><span class="tp-chapter-num">II.</span>The Scribe's Inheritance</div>
+    <div class="tp-chapter-item"><span class="tp-chapter-num">III.</span>The Weight a Man Carries</div>
+    <div class="tp-chapter-item"><span class="tp-chapter-num">IV.</span>The River Between Worlds</div>
+    <div class="tp-chapter-item"><span class="tp-chapter-num">V.</span>The Man Who Counted the Dead</div>
+    <div class="tp-chapter-item"><span class="tp-chapter-num">VI.</span>The Face in the Dark</div>
+    <div class="tp-chapter-item"><span class="tp-chapter-num">VII.</span>The Sealing of the Thinning</div>
+    <div class="tp-chapter-item tp-epilogue"><span class="tp-chapter-num">—</span>The Record That Remains</div>
+  </div>
+
+  <div class="tp-bottom-divider"><div class="tp-bottom-gem"></div></div>
+
+  <p class="tp-author-line">A Story of the Place of Truth</p>
+  <p class="tp-year">Deir el-Medina, Western Thebes</p>
+
+</div>
+</body>
+</html>

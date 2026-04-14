@@ -1,0 +1,337 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500&display=swap');
+
+  .chapter-wrap {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+    color: var(--color-text-primary);
+  }
+
+  .book-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    text-align: center;
+    margin-bottom: 0.4rem;
+  }
+
+  .ornament-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--color-text-tertiary);
+    margin-bottom: 1.5rem;
+  }
+
+  .ornament-line::before,
+  .ornament-line::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 0.5px;
+    background: var(--color-border-secondary);
+  }
+
+  .chapter-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .chapter-title {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--color-text-primary);
+    margin: 0 0 0.3rem;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+
+  .chapter-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .epigraph {
+    border-left: 2px solid var(--color-border-secondary);
+    margin: 0 0 2.5rem 1rem;
+    padding: 0.5rem 0 0.5rem 1.2rem;
+  }
+
+  .epigraph-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0 0 0.4rem;
+  }
+
+  .epigraph-source {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+  }
+
+  .dropcap-para {
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--color-text-primary);
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  .dropcap-para::first-letter {
+    font-family: 'Cinzel', serif;
+    font-size: 4.2em;
+    font-weight: 500;
+    float: left;
+    line-height: 0.75;
+    margin: 0.08em 0.1em 0 0;
+    color: var(--color-text-primary);
+  }
+
+  .body-para {
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--color-text-primary);
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  .body-para em {
+    font-style: italic;
+  }
+
+  .scene-break {
+    text-align: center;
+    color: var(--color-text-tertiary);
+    margin: 2.2rem 0;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    opacity: 0.45;
+  }
+
+  .end-mark {
+    text-align: center;
+    margin-top: 3rem;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--color-text-tertiary);
+    opacity: 0.5;
+  }
+</style>
+
+<div class="chapter-wrap">
+  <h2 class="sr-only">Chapter Five of The Weight of Ma'at — Kha and Nefertari confront the priest Usermontu at the mortuary temple of Ramesses III, where the full scope of his purpose is revealed and the supernatural makes its first full appearance</h2>
+
+  <p class="book-title">The Weight of Ma'at</p>
+  <div class="ornament-line">✦</div>
+
+  <p class="chapter-label">Chapter Five</p>
+  <h1 class="chapter-title">The Man Who Counted the Dead</h1>
+  <p class="chapter-subtitle">Medinet Habu — The Mortuary Temple of Ramesses III, Midday, Day Two</p>
+
+  <div class="epigraph">
+    <p class="epigraph-text">"As for any man who shall enter this tomb in his impurity — I will seize his neck like a bird's. He shall be judged for it by the great god."</p>
+    <p class="epigraph-source">— Tomb inscription, Sixth Dynasty</p>
+  </div>
+
+  <p class="dropcap-para">The mortuary temple of Ramesses III at Medinet Habu was the largest and best-preserved complex on the west bank, and it announced itself from a considerable distance in the way that only a structure built with genuine theological confidence could — not grandly, not aggressively, but with the settled permanence of something that expected to be here long after the people looking at it were gone. Its outer pylon rose forty feet from the flat desert plain, painted in the bright registers of military triumph — the great Pharaoh smiting his enemies, the counted hands of the defeated, the gods of Egypt observing in their painted serenity the eternal, reenacted victory of order over chaos. Kha had seen these images his whole life, in one form or another, and had spent enough time working in the service of royal architecture to understand that they were not merely decorative. Every image on every temple wall was a statement of ongoing truth. The Pharaoh smote his enemies not once, in history, but continuously, in the act of the painting's existence. The image was the event. This was why images were sacred, why names inscribed in stone were more permanent than names spoken aloud, why the destruction of an image was a form of murder and the erasure of a name a form of annihilation.</p>
+
+  <p class="body-para">They entered through the side gate that served the temple's administrative wing, where the daily offering records were kept and the priest rotation schedules were posted, and where a junior temple worker took Nefertari's movement authorization with the bored efficiency of someone processing a document type he had seen many times, which either meant it was genuinely common or that Nefertari's preparation was thorough enough to have created that impression. He stamped it, handed it back, pointed them toward the inner court, and returned to his ledger. Kha had his leave papers ready but was not asked for them. This was either good management or insufficient caution, and in either case it served their purpose.</p>
+
+  <p class="body-para">The inner court was a different world from the administrative gate. The outer areas of an Egyptian temple were accessible to the public on festival days and to temple workers on ordinary days, but the inner sanctuaries operated on a different principle entirely — the principle of progressive restriction, each doorway a threshold between a more and a less sacred space, the architecture itself enacting the theological truth that the divine became more concentrated as you moved inward, until at the very center, in the inner sanctuary where the cult statue resided, you were standing in a space of pure compressed holiness that only the senior priests were permitted to enter, and only after specific purification rites that could take days to complete.</p>
+
+  <p class="body-para">Kha had never been inside a temple's inner court. He had worked around them, outside them, in the structural spaces behind their walls, but a craftsman was not a priest and the inner court was not for craftsmen. He was aware of this as he walked through the second pylon gate behind Nefertari, who was moving with enough professional certainty to make the distinction unremarkable, and he occupied himself with looking at the walls.</p>
+
+  <p class="body-para">Every surface was painted. This was standard — he knew this in the abstract, as a professional fact about temple construction — but knowing it abstractly and standing inside it were different experiences. The walls of Ramesses III's mortuary temple were covered from floor to ceiling in images of the ritual life of the temple, the daily offerings, the festivals, the processions, the Pharaoh in his various aspects of divinity, the gods in their various aspects of authority, the whole complex interplay of divine and royal and cosmic power rendered in line and color with the precision of people who understood that the images were not representations of sacred events but enactments of them. Every figure on every wall was permanently, continuously doing what it depicted. The offering bearers were permanently offering. The priests were permanently purifying. The Pharaoh was permanently making ma'at — laying the small figure of the goddess with her feather on the offering table before the gods, renewing the cosmic order with every painted gesture, forever and without interruption.</p>
+
+  <p class="body-para">It was, Kha thought, a very particular vision of eternity. Not rest. Not paradise. <em>Maintenance</em>. The endless labor of keeping the world from falling into the chaos that pressed against it from all sides and that would, without this continuous effort, reclaim everything. The Egyptians had never believed the world was self-sustaining. They had always understood it as a project, requiring upkeep, requiring ritual, requiring the daily renewed commitment of priests and kings and craftsmen and farmers and every person who woke each morning and spoke the names and did their part. Ma'at was not a state of being. It was an act. It had to be performed, again and again, or it would not continue.</p>
+
+  <p class="body-para">This was what made the robbery of the dead so serious. Not the theft. Not even the desecration, in the ordinary moral sense. The dead were part of the maintenance. Their proper burial, their correct passage through the judgment, their successful arrival in the Field of Reeds — these were not private matters. They were contributions to the total weight of ma'at, the accumulated right order of the universe, the ongoing balance that kept everything from reverting to the chaos before creation. Every soul that passed correctly through the judgment added its weight to the scales. Every soul that could not — every soul stripped of its canopic jars, its heart scarabs, its named and specific components — was a deficit. A debt owed to the order of things. An absence in the machinery that was supposed to keep the world running.</p>
+
+  <p class="body-para">Forty-seven objects confirmed. The actual number higher. How many incomplete souls? How many failed passages? How large a deficit had been accumulating, quietly and deliberately, over seven years of careful falsified paperwork and sealed passages and a merchant's back room full of antiques?</p>
+
+  <p class="body-para">He was still thinking about this when Nefertari stopped walking.</p>
+
+  <div class="scene-break">— ✦ —</div>
+
+  <p class="body-para">The priest was waiting for them in the second court.</p>
+
+  <p class="body-para">He was sitting on the base of one of the Osiride pillars — the great standing figures of Ramesses III in the form of Osiris that lined the colonnade, each one twice human height, each one holding the crook and flail, each one wearing the white mummy wrappings of the resurrected god — and he was reading from a small papyrus roll with the unhurried attention of a man who had no appointments and no particular expectations about the day. He looked up when they entered the court, and he looked directly at them, and the fact that he looked directly rather than glancing and then returning to his reading told them, unambiguously, that he had been waiting.</p>
+
+  <p class="body-para">He was older than Kha had imagined — perhaps sixty-five, perhaps older, with the particular agelessness of very thin men in hot climates, where the absence of fat compressed the usual markers of age into something that read more as severity than decay. He was shaved to the scalp in the priestly manner, and he wore craftsman's clothes as the merchant had said — a plain kilt, no linen, no insignia — but the merchant had been right that the bearing persisted regardless. He sat with the posture of a man who had spent decades standing in formal ritual contexts, and you could not quite make the clothes override it. He was a priest the way Kha was a foreman — in the bones, past the point where dress made any difference.</p>
+
+  <p class="body-para">His eyes were the remarkable thing. They were the dark, patient eyes of someone who had been looking at a very large distance for a very long time, and had become accustomed to the scale. They looked at Kha and Nefertari without urgency, without fear, with what Kha could only describe as the steady attention of a man doing an accounting — tallying what they were, what they knew, what they carried. When they came to the satchel on Nefertari's shoulder, they paused for a fraction of a second, and something moved in them that was not surprise. It was closer to confirmation.</p>
+
+  <p class="body-para">"You found it before Tamyt collected it," he said. His voice was unremarkable — a working voice, worn smooth by years of ritual use. "I wondered if you would." He rolled the papyrus closed with a precise, unhurried motion. "Sit down. You have walked from the ferry landing in the midday heat and you look it."</p>
+
+  <p class="body-para">Neither of them sat. Kha stood with the satchel and Nefertari stood with her document case and the court around them was absolutely still — the colonnade empty, the offering tables bare, no junior priests in attendance, no temple workers crossing the open ground. He had arranged this. Whatever else he had arranged or not arranged, he had arranged to be alone when they arrived, which meant he had known they were coming and had made choices about the circumstances of the conversation rather than simply alerting the people above him in the network to intercept it.</p>
+
+  <p class="body-para">This was information. A man who wanted them gone would not have wanted this conversation at all.</p>
+
+  <p class="body-para">"You are Usermontu," Nefertari said. Not a question.</p>
+
+  <p class="body-para">"I am." He looked at her with something that was almost professional respect. "You are the woman who inherited Hapu's credentials. I heard about you two days ago. You are better than he was — faster, at least. He was careful but he moved slowly. You have moved quickly and in the right direction." He paused. "I am sorry about Hapu. He was not supposed to die."</p>
+
+  <p class="body-para">"And yet," Nefertari said.</p>
+
+  <p class="body-para">"And yet," he agreed, with a flatness that carried something under it — not guilt, exactly, but the acknowledgment of a cost he had accounted for and continued to carry. "The Mayor's people acted without consulting me. They have a habit of resolving problems in ways that do not require subtlety, because subtlety has never been necessary in their work before. I was informed after the fact." He looked at Nefertari steadily. "This does not absolve the outcome. I know that."</p>
+
+  <p class="body-para">"And Userhat?" Kha said.</p>
+
+  <p class="body-para">Usermontu looked at him — a longer look than he had given Nefertari, the look of a man encountering someone he has thought about in the abstract and is now placing in three dimensions. "The foreman of the left gang," he said. "Kha, son of Amenemhat. Third generation. Yes." He was quiet for a moment. "Userhat asked his question in the wrong company. He mentioned the passage to a man on the ferry who was in the employment of the Mayor's administrator. It was reported and acted on within the day." He looked at the Osiride pillar beside him — at the great painted face of Ramesses III in his Osiris form, serene and white-wrapped and imperishable — and then back at Kha. "He was thirty-one years old. He had a wife and two sons in the village. The oldest son will be a painter. I know this because I have been watching Deir el-Medina for seven years and I have learned the people in it more thoroughly than I intended to." Something moved in his face that was not quite grief but occupied the same space. "What was done to him was wrong. It was a wrong that was done in the service of something I believe is right, and I have not yet determined whether that is a distinction that survives scrutiny."</p>
+
+  <p class="body-para">"It does not," Kha said.</p>
+
+  <p class="body-para">"No," Usermontu said. "Probably not."</p>
+
+  <div class="scene-break">— ✦ —</div>
+
+  <p class="body-para">The silence in the second court had a quality that the silence in smaller spaces did not. It was amplified by the scale of the pillars, by the painted walls pressing their eternal scenes inward, by the absence of any sound from the temple beyond — no chanting, no sistrum, no sandaled feet on stone. As though the temple had been emptied specifically for this conversation, or as though the conversation itself was a kind of ritual and the temple had recognized it as such and arranged itself accordingly.</p>
+
+  <p class="body-para">"Tell me what you are doing," Kha said. "Not the mechanism. Not the Mayor and Nebwenenef and the merchant. Tell me what the components are for. Whose shadow is in the figure. What the three remaining tombs contain that everything else has been building toward." He looked at the old priest with the directness of a man who has spent two days arriving at a question and intends to have it answered. "You arranged to be here alone when we came. You could have warned the network and had us stopped before we reached the temple gate. You did not. You want this conversation. So have it."</p>
+
+  <p class="body-para">Usermontu looked at him for a long moment. Then he stood — with the careful deliberateness of an old man whose joints had opinions about rapid movement — and walked to the center of the court, where a flat offering table stood on a limestone base worn smooth by decades of daily ritual. He set the rolled papyrus on it and looked at them from across its width.</p>
+
+  <p class="body-para">"Forty years ago," he said, "I gave testimony before an inquiry into tomb robbery. Three tombs, disturbed. Goods removed. The inquiry found the culprits — minor officials, easily sacrificed — and filed its report and closed the matter." He looked at the offering table. "But the matter was not closed. Because the goods that had been removed from those three tombs were not recovered. They were sold, dispersed, lost into the private holdings of families who did not know what they had purchased, and the dead whose goods they were remained incomplete. Their passage through the Duat was blocked. Their judgment could not be completed. Their souls —" He stopped, and when he resumed his voice had a different quality, the quality of a man describing something he has seen rather than something he believes. "The weight of the incomplete dead does not dissipate. It accumulates. It collects in the places where the dead are concentrated — the valley, the necropolis, the cliff faces where the burials are, the boundary between the living world and the Duat. I felt it in those three tombs forty years ago. A pressure. A wrongness in the spiritual architecture of the space, like a crack in a load-bearing wall."</p>
+
+  <p class="body-para">Kha said nothing. He had used that exact phrase, to himself, two days ago in the burial chamber. He did not say this.</p>
+
+  <p class="body-para">"The inquiry closed. No one listened. The crack remained. And over the following decades —" Usermontu spread his hands, a gesture that encompassed the whole of the west bank visible beyond the temple pylons. "More robberies. More removed goods. More incomplete dead. Each one adding to the weight. Each one widening the crack. By the time I reached my current understanding, approximately fifteen years ago, the imbalance in the accumulation of the dead had become critical. Not in a way that was visible to ordinary perception. But in the ritual architecture of the necropolis — in the <em>heka</em> patterns of the valley, in the behavior of the protective mechanisms on the older tombs — I could feel it clearly. Something was building. The boundary was thinning. The dead who could not move forward were pressing against it from the other side."</p>
+
+  <p class="body-para">"You are describing what has been happening in the valley," Nefertari said slowly. "The wrongness we have been calling an imbalance. The tombs found open from the inside. The presence at the edge of the village at dusk." She looked at him with the expression of a scholar whose theory has just been confirmed by a primary source she had not expected to find still living. "That is not a consequence of the robbery. That was already building before the robbery. The robbery has been accelerating something that was already in motion."</p>
+
+  <p class="body-para">"Yes," Usermontu said. "The robbery I have been conducting for the last seven years is not the cause of the imbalance. It is — a response to it. An attempt to correct it." He looked at them both steadily. "I have been collecting the components of a specific ritual. A binding. The largest and most complex binding in the funerary tradition — something that has not been performed since the early dynasties, and whose text exists in complete form in only one source, which is the restricted archive of the House of Life at Heliopolis, where I spent three years studying it before I understood what needed to be done." He paused. "The ritual is called the <em>Sealing of the Thinning</em>. Its purpose is to repair the boundary between the living world and the Duat. To close the crack. To restore the proper accumulation of the dead so that the incomplete souls can be processed, the judgment completed, the balance restored."</p>
+
+  <p class="body-para">The second court was very quiet. Kha looked at the Osiride pillars, at the great figures of the dead king in his resurrection form, at the walls covered in the permanent enacted ritual of maintaining the world, and he thought about what Usermontu was saying, and he found that he could not immediately locate the objection he had prepared on the walk from the ferry landing, because the objection had assumed a different kind of purpose.</p>
+
+  <p class="body-para">"The ritual requires specific components," Nefertari said. Her voice was careful — the voice of someone working through implications in real time. "Components that cannot simply be created or commissioned. They must be taken from specific tombs. Specific dead people."</p>
+
+  <p class="body-para">"The ritual requires the willing contribution of seven royal souls," Usermontu said. "Seven souls whose accumulation in the valley predates the current imbalance — souls whose burial goods are intact and whose passage through the judgment is complete. Souls who have already arrived in the Field of Reeds and who can therefore contribute their weight to the binding without being harmed by it." He looked at them with the patience of a man who has anticipated every objection and has had forty years to develop his answers. "I am not breaking anyone. I am borrowing. The canopic jars, the heart scarabs, the shadow — these are temporary loans. Once the binding is complete, once the boundary is sealed and the accumulated deficit of incomplete souls is addressed, the components are returned to their tombs. Every object goes back. Every burial is restored. The ritual specifically requires it."</p>
+
+  <p class="body-para">"That is what you believe," Kha said.</p>
+
+  <p class="body-para">"That is what the text prescribes."</p>
+
+  <p class="body-para">"The text is four thousand years old and has not been performed in living memory," Kha said. "And in the meantime, for seven years, the goods have been out of the tombs, and the souls have been incomplete, and the boundary has been thinning. And two people are dead. And my daughter —"</p>
+
+  <p class="body-para">He stopped. The word had come out harder than he intended, carrying a weight it had been accumulating since the sand in the sandals and the too-quick answer and the Bes figurine behind the storage jar.</p>
+
+  <p class="body-para">Usermontu looked at him. Something changed in the old man's face — a shift, small and significant, from the measured composure of a man delivering a position he had prepared to the more complicated expression of someone who has just been reminded that his abstraction has specific faces.</p>
+
+  <p class="body-para">"Your daughter was not harmed," he said. "She was brought to the valley to observe. One of my — one of the people working with me brought her there without my knowledge or authorization. When I discovered it, I ended that person's involvement in the work immediately." He met Kha's eyes. "She saw nothing that would damage her. I verified this."</p>
+
+  <p class="body-para">"She has not been sleeping," Kha said.</p>
+
+  <p class="body-para">"No," Usermontu said. And then, after a pause that was long enough to be its own kind of admission: "The boundary near the valley has been thinning for some time. People who sleep in proximity to the necropolis sometimes — feel the pressure of it. In their dreams. It is not targeted at her. It is a general condition of the area, which has been worsening as the ritual's completion has been delayed." He looked at his hands, which were resting on the offering table with the stillness of hands that had spent decades performing precise ritual work. "This is why the work must be completed. Not only for the balance of the dead, but for the living who are feeling the consequences of the imbalance. Your daughter. The other people in the village who have not been sleeping. The animals that have been leaving the cliff face at night. The —" He stopped.</p>
+
+  <p class="body-para">"The presence at the edge of the village at dusk," Nefertari said quietly. "What is it?"</p>
+
+  <p class="body-para">Usermontu looked at her for a long moment. Then he said: "It is counting."</p>
+
+  <p class="body-para">"We know," Kha said. "What is it counting?"</p>
+
+  <p class="body-para">"The deficit," Usermontu said. "The incomplete souls. The Ma'at that is owed." He looked toward the temple pylons, toward the west, toward the cliffs and the valley beyond them. "When the accumulation of unresolved dead reaches a threshold — when the balance tips far enough — the mechanism of Ma'at corrects itself. Automatically. Without mercy and without selectivity. It does not distinguish between those who caused the imbalance and those who simply exist in its vicinity." He looked back at them. His voice was completely level. "The figure at the edge of the village is not a ghost. It is not a god. It is a corrective mechanism. And when it finishes counting — when its accounting of the deficit is complete — what happens next will not be stopped by any authority the Mayor or the Vizier or the Pharaoh himself can bring to bear on it, because what happens next is not political. It is structural. It is what Ma'at does when it is sufficiently violated." He paused. "I have read the accounts from the First Intermediate Period, when the accumulated failures of the late Old Kingdom tipped the balance. I have read what happened to the necropolis at Memphis when the mechanism corrected itself. The texts are kept restricted for the same reason the binding ritual is kept restricted. Because there are things in the history of this civilization that the administration does not wish the population to know are possible."</p>
+
+  <p class="body-para">The second court was absolutely still. Even the painted figures on the walls seemed to have gone quieter, the eternal reenactment of order suspended for a moment at the edges of Kha's perception, as though the images themselves were listening.</p>
+
+  <p class="body-para">"How long?" Kha asked.</p>
+
+  <p class="body-para">"Before the mechanism completes its counting?" Usermontu looked at the sky — the white afternoon sky, Ra at his peak, the solar barque at its highest and most distant point from the underworld it would have to navigate in a few hours. "Not long. The acceleration has been significant in the last month. The objects I have collected are close to the critical number. The figure has been coming closer to the village each night." He looked at Kha directly. "You have seen it."</p>
+
+  <p class="body-para">Kha thought of the thing he had seen, two nights ago, at the edge of the village near the south gate — the figure that was not quite Anubis and not quite human, that had been there at the edge of the torchlight when he came back from Nefertari's house, that he had told himself was a trick of tired eyes and the desert heat. He had not mentioned it to Nefertari. He had not mentioned it to himself, precisely.</p>
+
+  <p class="body-para">"What are the three remaining tombs?" Nefertari asked. She had taken out her papyrus and her pen without Kha noticing, because she was the kind of person who took notes at the edge of catastrophe, which he was finding that he valued enormously. "The last components. What do they contain?"</p>
+
+  <p class="body-para">Usermontu looked at the document in her hands and then looked at Kha, and the look contained the specific quality of a question that was not quite being asked aloud: <em>can she be trusted with this?</em></p>
+
+  <p class="body-para">"She is the reason we are here," Kha said. "She is the reason any of this is visible at all. If you have something to say, say it to both of us."</p>
+
+  <p class="body-para">Usermontu nodded once — the small, precise nod of a man who has made an assessment and is satisfied with it. He reached into his robe and produced a folded papyrus sheet, old and carefully preserved, and set it on the offering table beside his rolled text. "The three remaining tombs contain the heart scarabs and the second shadow component of the seventh and final contributing soul. A king of the early New Kingdom — Thutmose I, first of his name, who was buried in the valley before the valley became what it is now, whose funerary goods were among the first to be disturbed in the original robbery scandal forty years ago, and whose incomplete state is — a significant part of why the mechanism began counting when it did. He was the largest single contributor to the deficit. He has been incomplete the longest." He looked at the papyrus sheet. "The heart scarabs are in the tomb designated KV20 — the first royal tomb cut in the valley, now very old and difficult of access. The second shadow component is in KV38, which is a secondary tomb, cut later, whose existence is not in the main necropolis records." He paused. "And the third tomb — KV47 — contains nothing that belongs to the ritual. It contains the man who has been managing the network from above the Mayor. The man whose name does not appear in any document connected to this operation. The man who I have been trying to identify for three years and who I am now certain is using the cover of the ritual's preparation to conduct his own operation entirely." He looked at both of them with the expression of a man who has arrived at the conclusion he has been building toward and finds that he does not enjoy it. "I have been used. The Mayor, Nebwenenef, the merchant — they are my network, yes. But above them is a person I did not recruit and cannot account for. Someone who recognized what I was assembling and inserted himself into the supply chain somewhere between my first contact with Nebwenenef and the second year of the operation. Someone with the knowledge to understand what the ritual is, what it will do, and what the moment of its completion will create."</p>
+
+  <p class="body-para">"A window," Nefertari said. Her pen had stopped moving. "The moment when the binding is performed — the moment when the boundary is sealed and the deficit is addressed — the power required would be immense. The accumulated <em>heka</em> of seven royal souls, focused and released in a single ritual event. That window would be —"</p>
+
+  <p class="body-para">"The most powerful ritual moment in three hundred years," Usermontu said. "Yes. A person present at that moment, with the knowledge to redirect even a fraction of that power —" He stopped. "I do not know what he intends to do with it. I know only that whatever it is, it is not in the interest of the balance I am trying to restore. It is the opposite. It is someone who wants to use the correction of ma'at as the instrument of its further destruction."</p>
+
+  <p class="body-para">The afternoon light was shifting in the second court, the shadows of the Osiride pillars lengthening across the offering table, the painted walls moving from gold to amber in the way of walls that have absorbed the light of a million afternoons and have developed an opinion about how it should be rendered. The Pharaoh on the wall above the offering table — Ramesses III in his ritual posture, laying the small figure of Ma'at before the gods, doing the work of order, doing it continuously, forever — looked down at them with his painted eyes and his serene painted certainty that the world was maintainable, that the order held, that the scales balanced.</p>
+
+  <p class="body-para">Kha looked back at him and thought: <em>you did not know about this part.</em></p>
+
+  <p class="body-para">"The figure," he said. He set the satchel on the offering table and unwrapped the cloth. The black granite shabti sat in the afternoon light and absorbed it in the same way it had absorbed the lamp light in the merchant's back room — not reflecting, exactly, but receiving, the way a vessel received what was poured into it. "It was supposed to go to Tamyt this afternoon."</p>
+
+  <p class="body-para">"Yes," Usermontu said. He looked at the figure with the complicated expression of a man looking at something he made that has gone further than he intended. "Tamyt is mine. She has been holding components for me at the temple for two years. She does not know who is above the Mayor. She does not know about KV47." He looked at Kha. "She is not a bad person. She is a person who was told a specific story about why the work was important, and who believed it, because the story was true. She is not responsible for the parts of it she does not know."</p>
+
+  <p class="body-para">"Like Panenhesy," Kha said.</p>
+
+  <p class="body-para">"Like Panenhesy. Yes. Like almost everyone in this operation except the person in KV47, whose name I do not have, and me." He looked at the figure. "And me, who constructed the operation and is therefore responsible for all of it, including the parts I did not intend." He said this without self-pity, without the dramatizing of guilt that Kha had seen in Panenhesy. It was a plain statement of accounting. He had built this thing and the thing had been infiltrated and people had died and his daughter had sand in her sandals. These were the facts. They sat in the offering table alongside the granite figure and the old papyrus text and Nefertari's document case, and none of them were negotiable.</p>
+
+  <p class="body-para">"What do you need from us?" Nefertari said. She said it in the voice of someone who has processed everything she has heard and arrived at the only productive question remaining.</p>
+
+  <p class="body-para">Usermontu looked at her. Something in his face shifted — a small, involuntary thing, the expression of a man who has been working alone for a long time and has not expected to be asked that question in that tone.</p>
+
+  <p class="body-para">"I need to complete the ritual before the mechanism finishes its count," he said. "I need KV20 and KV38 accessed, the remaining components retrieved, and the binding performed at the valley in the correct window — which is four nights from now, at the third hour of the night, when the star Sothis rises and provides the astronomical alignment the ritual requires. This is not negotiable. The window is fixed and it will not recur for eleven years." He looked at them both. "I need someone who knows the valley — who knows the internal architecture of those two tombs, who can navigate them in the dark without the inspection maps that I cannot obtain through the administrative channels because those channels are now compromised. I need someone who can get me into the necropolis at night without going through the official entry points, which are watched." He looked at Kha with the steady eyes of a man who knows exactly what he is asking. "You built those passages. You know every weakness in every wall. You said so yourself, I believe."</p>
+
+  <p class="body-para">The afternoon light continued its shift. The shadows of the pillars touched the offering table now, the Osiride kings above them in their eternal posture of resurrection, patient and enormous and entirely certain about the world in a way that Kha was not.</p>
+
+  <p class="body-para">"You are asking me," Kha said slowly, "to help a priest who authorized the operation that killed my closest friend, enter two royal tombs without authorization, retrieve the final components of a ritual whose full consequences neither of you can guarantee, in four days, so that a boundary between the living world and the realm of the dead can be sealed before a cosmic corrective mechanism does something the historical texts describe in terms alarming enough that they are kept restricted." He paused. "While somewhere in KV47 — a tomb I have worked in and whose architecture I know — there is an unknown person with an unknown purpose who has been waiting for exactly this moment."</p>
+
+  <p class="body-para">"Yes," Usermontu said.</p>
+
+  <p class="body-para">"And the alternative," Kha said, "is that I report all of this to the Vizier's office via Nefertari's audit authority, the administrative network is dismantled, you are arrested or removed from the project, the ritual does not happen in four days, and the mechanism —"</p>
+
+  <p class="body-para">"Finishes its count," Usermontu said. "And does what it came to do. To the valley. To the necropolis. To the village that lives in its shadow." A pause. "To everyone who sleeps near those cliffs and has been feeling, for months, that something in their dreams is not quite right."</p>
+
+  <p class="body-para">Merit's face, in the thin starlight. Her eyes open and looking at nothing, surfacing from a depth. <em>I cannot remember what I was dreaming.</em></p>
+
+  <p class="body-para">Kha looked at the granite figure on the offering table. He looked at the walls. He looked at the painted Pharaoh laying the small Ma'at before the gods — the act that had to be performed, again and again, or the world would not continue. He thought about what it meant to be a person who built the rooms the dead walked in, who had spent his whole life as a small mechanism in the enormous, intricate machinery of keeping the balance. He had looked the other way before. He had put things on the shelf in the dark. He had been a careful man who understood the value of silence, and the silence had cost Userhat, and Hapu, and his daughter's sleep, and the accumulated weight of forty-seven missing objects pressing against a boundary that was now thin enough that something was walking the edge of the village at dusk, counting.</p>
+
+  <p class="body-para">"The person in KV47," Nefertari said. "Before we agree to anything — we find out who it is. We go to KV47 first, before the ritual, and we find out what he intends to do with the moment of the binding, and we determine whether it can be prevented." She looked at Usermontu with the directness of someone who has decided that directness is the only available currency. "If it cannot be prevented, then everything you are proposing is simply delivering the most powerful ritual moment in three hundred years to someone who intends to use it for something you yourself described as the opposite of ma'at. And in that case, the ritual is worse than no ritual."</p>
+
+  <p class="body-para">Usermontu looked at her. The old, patient eyes. The forty years. The long view of a man who had been looking at a very large distance and had become accustomed to the scale.</p>
+
+  <p class="body-para">"Yes," he said. "That is correct."</p>
+
+  <p class="body-para">"Then we start with KV47," she said. "Tomorrow night."</p>
+
+  <p class="body-para">"Tomorrow night," Kha said. He said it the way you committed to the beginning of something — not with enthusiasm, not with certainty about the outcome, but with the flat acknowledgment of a man who has finished looking at the shape of his available choices and has found that there is only one of them that leads somewhere worth going.</p>
+
+  <p class="body-para">The shadows of the pillars lay fully across the offering table now. The black granite figure sat in the shadow and seemed, in the way it had been seeming since the merchant's back room, to be paying attention. Kha wrapped it back in the cloth and put it in the satchel and felt again the weight that was heavier than stone — the weight of something old and sealed and fed and patient, a shadow that had been waiting inside granite for three weeks to be reunited with whatever it belonged to, and that would wait as long as it needed to, because shadows were not subject to the same urgencies as the living.</p>
+
+  <p class="body-para">They left Usermontu in the second court of the mortuary temple of Ramesses III, sitting again at the base of his Osiride pillar, the papyrus roll in his hands, the afternoon light turning the painted walls from amber to the first deep gold of late afternoon. He did not watch them go. He was already reading again, with the unhurried attention of a man who had spent forty years being patient and had four days left to be patient in, and who intended to use all of them.</p>
+
+  <p class="body-para">Outside the temple gates, the plain of the west bank stretched north and south under the white sky, and the cliffs rose above the plain, and behind the cliffs was the valley, and inside the valley were the tombs and the painted rooms and the incomplete dead and the something that walked at dusk, counting. And inside KV47, in the dark, in the sealed passage of a tomb that Kha had worked in twenty years ago and whose every measurement he could still recall as precisely as his own daughter's face, was a person who knew all of this and had been waiting, quietly and invisibly, for exactly the moment that was now four days away.</p>
+
+  <p class="body-para">Kha looked at the cliffs. He looked at the sky. Ra was beginning his descent.</p>
+
+  <p class="body-para">"Four days," Nefertari said, beside him.</p>
+
+  <p class="body-para">"Four days," he agreed.</p>
+
+  <p class="body-para">They walked north toward the ferry landing, and neither of them looked back, and the temple behind them stood in its ancient certainty and did not offer any opinion on whether they were going to be enough.</p>
+
+  <div class="end-mark">✦ &nbsp; End of Chapter Five &nbsp; ✦</div>
+</div>

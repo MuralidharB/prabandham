@@ -1,0 +1,390 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500&display=swap');
+
+  .chapter-wrap {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+    color: var(--color-text-primary);
+  }
+
+  .chapter-ornament {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .ornament-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--color-text-tertiary);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+  }
+
+  .ornament-line::before,
+  .ornament-line::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 0.5px;
+    background: var(--color-border-secondary);
+  }
+
+  .book-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    text-align: center;
+    margin-bottom: 0.4rem;
+  }
+
+  .chapter-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .chapter-title {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--color-text-primary);
+    margin: 0 0 0.3rem;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+
+  .chapter-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 2rem 0;
+  }
+
+  .scene-break {
+    text-align: center;
+    color: var(--color-text-tertiary);
+    margin: 2.2rem 0;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    opacity: 0.45;
+  }
+
+  .epigraph {
+    border-left: 2px solid var(--color-border-secondary);
+    margin: 0 0 2.5rem 1rem;
+    padding: 0.5rem 0 0.5rem 1.2rem;
+  }
+
+  .epigraph-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0 0 0.4rem;
+  }
+
+  .epigraph-source {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+  }
+
+  .dropcap-para {
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--color-text-primary);
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  .dropcap-para::first-letter {
+    font-family: 'Cinzel', serif;
+    font-size: 4.2em;
+    font-weight: 500;
+    float: left;
+    line-height: 0.75;
+    margin: 0.08em 0.1em 0 0;
+    color: var(--color-text-primary);
+  }
+
+  .body-para {
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--color-text-primary);
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  .body-para em {
+    font-style: italic;
+  }
+
+  .dialogue-para {
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--color-text-primary);
+    margin-bottom: 1.4rem;
+    text-align: justify;
+    padding-left: 1.2rem;
+    border-left: 0.5px solid var(--color-border-tertiary);
+  }
+
+  .end-mark {
+    text-align: center;
+    margin-top: 3rem;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--color-text-tertiary);
+    opacity: 0.5;
+  }
+</style>
+
+<div class="chapter-wrap">
+  <h2 class="sr-only">Chapter Two of The Weight of Ma'at — Kha returns to the village and meets Nefertari, the scribe's assistant who has inherited a dead man's investigation</h2>
+
+  <p class="book-title">The Weight of Ma'at</p>
+
+  <div class="chapter-ornament">
+    <div class="ornament-line">✦</div>
+  </div>
+
+  <p class="chapter-label">Chapter Two</p>
+  <h1 class="chapter-title">The Scribe's Inheritance</h1>
+  <p class="chapter-subtitle">Deir el-Medina — The Same Evening</p>
+
+  <div class="epigraph">
+    <p class="epigraph-text">"I have not committed theft. I have not uttered lies. I have not acted with deceit. I have not carried away the food offerings. I have not been an eavesdropper."</p>
+    <p class="epigraph-source">— The 42 Negative Confessions, The Book of the Dead</p>
+  </div>
+
+  <p class="dropcap-para">The village held its breath in the hour before the evening meal. This was the time when the ovens were lit and the smell of bread moved through the single street like a rumor — warm and specific and carrying within it the exact shape of how much was left and how many mouths it had to answer for. Children who had been running since midmorning went quiet. Dogs settled in doorways. The linen weavers rolled their frames and the water carriers set down their yokes, and for twenty minutes the whole of Deir el-Medina existed in a suspended state between the labor of the day and whatever the evening would require of it, and every person in it knew, without consulting anyone or anything, exactly how much smaller the world had become since the grain ships stopped coming.</p>
+
+  <p class="body-para">Kha washed at the communal basin near the south end of the street, where the water was changed twice a day by the two youngest apprentices on a rotating schedule, a duty they resented and which Kha privately considered excellent discipline for exactly that reason. He washed his hands and face and the back of his neck, which was dusty from the valley, and he did not think about the burial chamber. He had made an arrangement with himself on the walk back over the ridge — a temporary arrangement, the kind you make with a thought you are not ready to fully have — which was simply that he would eat first, and then he would think. The thought would keep. It had already kept for seven years in the shape of Userhat's death, which he had never properly examined, and it could keep for another hour in the shape of displaced dust and fresh plaster in a room where nothing should be fresh.</p>
+
+  <p class="body-para">He was almost at his own door when he saw the lamp burning in the scribe's house.</p>
+
+  <p class="body-para">This was notable because the scribe's house had been dark for eleven days.</p>
+
+  <div class="scene-break">— ✦ —</div>
+
+  <p class="body-para">The scribe's name had been Amenhotep-sa-Hapu, which was longer than anyone used in daily conversation, so the village had called him Hapu, and Hapu had been twenty-four years old and ambitious in the particular way of young men who have been educated beyond their station and have not yet learned that education and advancement are not the same thing. He had arrived four months ago from the House of Life at the temple of Mut in Karnak, assigned to conduct what the official document described as a routine inventory audit of the necropolis holdings — tomb goods catalogued against official records, seals inspected, paperwork reconciled. This happened occasionally. The machinery of the state required maintenance. Kha had not thought much about it.</p>
+
+  <p class="body-para">Hapu had been killed eleven days ago at the bottom of the secondary shaft in the tomb of Amenhotep III, which was three valleys over from the current work site and had been sealed for sixty years. The official determination was misadventure — a young scribe, unfamiliar with the terrain, who had ignored the standard prohibitions against entering unlit areas without an escort. The shaft was thirty feet deep. His lamp, found at the bottom beside him, had been extinguished by the fall. This was what the report said. Kha had read the report because the overseer had posted it at the north gate as a reminder to all crew members that the safety protocols existed for a reason.</p>
+
+  <p class="body-para">Kha had read it twice. He had noted, with the quiet precision of a man who has spent his life measuring distances, that the secondary shaft of Amenhotep III's tomb was at the far end of a long descending corridor, behind two sets of sealed doors, in a section of the valley that a young scribe on a routine inventory audit had no professional reason to enter at all.</p>
+
+  <p class="body-para">He had said nothing about this. He had filed it in the same place he filed most things that disturbed him — a deep internal shelf, in the dark, out of the way — and he had continued working.</p>
+
+  <p class="body-para">The lamp in Hapu's house was the color of new oil and it moved once, slightly, as he stood looking at it. Not the movement of a lamp being carried. The movement of a lamp being turned down, or turned up, by a hand that was working at a table.</p>
+
+  <p class="body-para">Someone was in the dead scribe's house. Someone was working by lamplight, on an evening when the rest of the village was thinking about bread.</p>
+
+  <p class="body-para">Kha stood at his own door for a moment. He looked at the lamp. He looked at his door. He thought about his daughter Merit, who would be inside with whatever she had managed to find for their supper, and who had not been sleeping well, and who he had not spoken to properly in three days because every conversation lately seemed to bend toward the subject of the grain ships and then flatten into silence.</p>
+
+  <p class="body-para">He turned and walked toward the scribe's house.</p>
+
+  <p class="body-para">It was, he recognized even as he did it, the opposite of the arrangement he had made with himself. But arrangements made with oneself at noon on a limestone ridge had a way of not surviving contact with the evening.</p>
+
+  <div class="scene-break">— ✦ —</div>
+
+  <p class="body-para">The door was not locked. In Deir el-Medina, doors were rarely locked, because a village this size had no meaningful secrets in the domestic sense — everyone knew which marriages were unhappy and which children were difficult and which households kept wine they didn't share and which ones would give you their last measure of oil if you came to them in genuine need. The locks on doors here were symbolic gestures toward privacy rather than practical security. What the people of this village truly locked was their mouths, and they locked them with a thoroughness that would have impressed any palace official.</p>
+
+  <p class="body-para">He knocked once and pushed the door open without waiting. This was the custom. Waiting outside a door in this village communicated either extreme formality or a level of hostility so advanced that you were giving the occupant time to prepare for it.</p>
+
+  <p class="body-para">The woman at the table looked up at him without surprise, which surprised him.</p>
+
+  <p class="body-para">She was perhaps twenty-two, twenty-three. She sat cross-legged on a reed mat, with a low scribe's table in front of her and a lamp at her left side, and she had the kind of stillness that came not from composure but from the deliberate suppression of a great deal of movement that wanted very much to happen. Her hair was plaited back from her face in the utilitarian style of someone who has given up on appearance as a project for the day. She was wearing a plain white linen sheath the color of old limestone, and she had ink on her right hand from the index finger to the wrist, the specific deep-blue-black of the better quality carbon inks, the kind that the House of Life used for documents of formal standing. On the table in front of her were three papyrus sheets, a small cedar box, and a cup of water that had gone warm. She had been here for hours.</p>
+
+  <p class="body-para">"You are the foreman," she said. "Kha, son of Amenemhat."</p>
+
+  <p class="body-para">"I am," he said. "And you are sitting in a dead man's house."</p>
+
+  <p class="body-para">"I was assigned to it," she said. "Officially. I have the document if you need to read it, though the seal is from the temple administration office and the wax is a particular shade of red that the village scribes don't use, which means someone will have to send to Karnak to verify it, which will take approximately three weeks, by which point — " she paused, and something shifted in her expression, a fraction of a degree in the direction of honesty — "by which point I will either have found what I came to find, or I will be dead, and the document's provenance will be someone else's problem."</p>
+
+  <p class="body-para">Kha looked at her for a moment. Then he stepped inside and set the door behind him to within an inch of closed — the position that said, in the village's wordless vocabulary, that this was a conversation that did not need an audience — and he said: "Who are you?"</p>
+
+  <div class="scene-break">— ✦ —</div>
+
+  <p class="body-para">Her name was Nefertari-Tawy, which she rendered in the official manner when introducing herself in a professional context — full name, father's name, institutional affiliation — and which she immediately shortened, in the way of someone who has decided that formality in this situation is a waste of both their time. She was Nefertari. She had been Hapu's assistant for three months, assigned to him from the same House of Life, trained in both hieratic and the older, more formal hieroglyphic script, qualified in the accounting system used by the royal necropolis administration, and present — she said this plainly, without particular emotion — when Hapu told her, eight days before his death, that he had found something in the inventory records that he did not yet understand but that he believed was serious.</p>
+
+  <p class="body-para">"He didn't tell me what," she said. "He was cautious that way. He had a habit of forming the complete thought before he spoke any part of it, which made him slow in conversation but precise in writing, and which I found irritating at the time and have reconsidered since."</p>
+
+  <p class="body-para">"What did he leave you?"</p>
+
+  <p class="body-para">She turned one of the papyrus sheets toward him without speaking. He came to the table and crouched to read it, because in this village you did not pick up another scribe's documents without being invited to, and she had not invited him to pick it up.</p>
+
+  <p class="body-para">It was a column of inventory numbers. Tomb goods — listed by category, by tomb designation, by date of original inspection, by date of most recent inspection, by assigned seal-number. Standard format. He had seen this kind of document many times, because a foreman's signature sometimes appeared on them when new stonework was added to an already-catalogued site. He scanned down the column. Then he scanned it again, because his eye had caught something on the first pass that he hadn't immediately named.</p>
+
+  <p class="body-para">"The seal numbers," he said.</p>
+
+  <p class="body-para">"Yes," she said.</p>
+
+  <p class="body-para">"The date of most recent inspection for these six tombs is within the last eight months." He looked at her. "These are New Kingdom tombs. Two of them are more than a century old. They are not scheduled for inspection."</p>
+
+  <p class="body-para">"They are not," she agreed. "And yet here is a record of inspection. With seal numbers. Which means someone went into these tombs, checked their condition, and filed a report. Officially. Under an inspection code that does not exist in the current administration's filing system, which I verified against the master records at the temple office."</p>
+
+  <p class="body-para">"Someone invented an inspection protocol," Kha said slowly, "in order to have a reason to open sealed tombs."</p>
+
+  <p class="body-para">"Someone invented a bureaucratic mechanism," she said. "And the bureaucratic mechanism, once created, generated paperwork, and the paperwork went into the files, and the files are maintained by three overworked junior scribes who are each responsible for a section of records and who do not communicate with each other, and none of whom have ever been asked to reconcile their sections against the master catalogue, because reconciliation requires someone with full access to all three sections simultaneously and the authority to question discrepancies." She stopped. "Hapu had that authority. I have it now. Or rather, I have his access tokens and his appointment letters, which amount to the same thing, until someone notices that he is dead and rescinds them, which — given the current state of administrative communication between this valley and the east bank — may take another week."</p>
+
+  <p class="body-para">Kha straightened up. He looked at the three papyrus sheets on the table — the inventory numbers, and two others he hadn't yet read — and he thought about the seam in the plaster on the western wall of the burial chamber, and the dust on the floor, and the specific quality of silence in a room that has recently been used.</p>
+
+  <p class="body-para">"How many tombs?" he asked.</p>
+
+  <p class="body-para">"In the inventory records? Six that I can confirm." She hesitated, and the hesitation was the first thing she had done that looked like uncertainty rather than the controlled deployment of information. "But the records are incomplete. Someone has been removing documents. Not obviously — not pulling sheets from the files, which would be noticed. Replacing them. Making clean copies with small alterations. The alteration is in the seal numbers, which are sequential in the original system and non-sequential in the replacements. If you don't know the original numbering system, you don't see it."</p>
+
+  <p class="body-para">"But you know it."</p>
+
+  <p class="body-para">"Hapu taught it to me." A beat. "He was very thorough."</p>
+
+  <p class="body-para">The oil in the lamp settled and the flame dipped and recovered. Outside, someone in the street said something in a low voice and someone else laughed, the brief, tired laugh of the end of a long day, and then the street was quiet again.</p>
+
+  <p class="body-para">"Why are you telling me this?" Kha asked.</p>
+
+  <div class="scene-break">— ✦ —</div>
+
+  <p class="body-para">She told him because Hapu's notes contained his name. Not as a suspect — he understood this, and she said it plainly, looking at him with the directness of someone who has decided that indirection is too expensive under current circumstances. Hapu had noted the name of the foreman of the left gang as a person of interest in the specific sense that he had a question he intended to ask, which was whether the foreman had any knowledge of a secondary access passage in the current principal tomb. The note was dated six days before Hapu's death. The question had never been asked.</p>
+
+  <p class="body-para">"He knew about the passage," Kha said. Not a question.</p>
+
+  <p class="body-para">"He had found a reference to it in the construction documents. Not in the main file — in a supplementary record that had been misfiled, which is either incompetence or the kind of error that is so small and so plausible that it functions as concealment." She looked at him steadily. "Did you cut that passage?"</p>
+
+  <p class="body-para">"Yes."</p>
+
+  <p class="body-para">"On whose order?"</p>
+
+  <p class="body-para">"The overseer's."</p>
+
+  <p class="body-para">"Did you question it?"</p>
+
+  <p class="body-para">The word landed between them and stayed there. He looked at it. "No," he said. This was not quite true, but the truth of it — that he had questioned it inwardly and not aloud, that the inward question and the outward compliance were different things and he had always known they were different things — was a more complicated answer than the situation currently required.</p>
+
+  <p class="body-para">"Your friend," she said. "Userhat."</p>
+
+  <p class="body-para">"My former colleague."</p>
+
+  <p class="body-para">"Hapu's notes say Userhat was present at the construction briefing where the hidden passage was authorized."</p>
+
+  <p class="body-para">The room became very still. Kha was aware of his own breathing — the controlled, measured breathing of a man who has just heard the exact thing he was afraid he was going to hear — and he made it slower, and he said: "Where did Hapu find that?"</p>
+
+  <p class="body-para">"A crew attendance record. Routine document. Normally no one would cross-reference a crew attendance record from seven years ago against a supplementary construction order from the same period." She paused. "Hapu was very thorough," she said again, and this time there was something in it that was not professional assessment.</p>
+
+  <p class="body-para">Kha sat down on the floor, because the low mat was Nefertari's and it would not have been appropriate to take it, and because his legs had decided this was the moment to register the full length of the day. He sat with his back against the wall and his hands on his knees and he looked at the ceiling of the dead scribe's house, which was low and slightly uneven in the way of all the ceilings in this village, built to a functional specification rather than a graceful one, because the people who built the most beautiful rooms in the world lived in the most ordinary houses.</p>
+
+  <p class="body-para">"The tomb was entered recently," he said. "The western passage. Someone opened it from inside and resealed it. The plaster is new. I found it today."</p>
+
+  <p class="body-para">She did not react with the surprise of someone receiving new information. She reacted with the stillness of someone whose existing information has just been confirmed. She reached for one of the other papyrus sheets and turned it toward him. It was a list of objects — small objects, each annotated with a tomb designation and a catalogue number. He read the first three entries and felt the cold begin at the base of his spine.</p>
+
+  <p class="body-para">Canopic jars. Ushabti figurines. Heart scarabs. The small, intimate objects of the burial rite — the ones that weren't the gold and the jewels the uninformed imagined when they thought about tomb robbery. The ones that mattered more.</p>
+
+  <p class="body-para">A canopic jar held the organs of the dead. The liver, the lungs, the stomach, the intestines — each in its own vessel, each under the protection of one of the four sons of Horus, each necessary for the reassembly of the body in the afterlife. A body without its canopic jars was incomplete. An incomplete body could not receive its Ka. A Ka without a body had nowhere to return to. The chain of consequences moved forward with a terrible mechanical logic, through the five parts of the soul, through the judgment of Ma'at, through the weighing of the heart against the feather of truth, and arrived finally at the Field of Reeds — the Egyptian paradise, the ideal landscape of abundant water and green reeds and perpetual harvest — and found the gate closed. Not locked. Not guarded. Simply not available to someone who had arrived without the correct parts.</p>
+
+  <p class="body-para">The people who had moved these objects out of these tombs had not simply stolen gold. They had stolen futures. They had taken from the dead the only things the dead truly needed, and the dead — as every person in Deir el-Medina understood from birth — were not passive in their needs.</p>
+
+  <p class="body-para">"How many objects?" Kha asked.</p>
+
+  <p class="body-para">"That I can confirm are missing? Forty-seven. The actual number is almost certainly higher. The catalogue records have been altered in the same way as the inspection records — the same hand, I think, though I am not certain. Someone with administrative access and the patience to do it slowly, over months, in small enough increments that no single discrepancy would trigger review." She stopped. Then she said, in a voice that was completely flat: "The objects are being sold. I found a record in the market accounts of a merchant in Thebes — east bank, near the temple of Amun — of unusual purchases in the category of private devotional objects over the last fourteen months. The descriptions match. He is buying them cheaply and selling them to wealthy Thebans who want antique burial goods for their own tombs because it is fashionable. Because it is cheaper than commissioning new ones. Because they do not think about where the antiques come from, or they do think about it and they have decided that it is acceptable."</p>
+
+  <p class="body-para">"They are buying," Kha said slowly, "the pieces of dead kings."</p>
+
+  <p class="body-para">"Yes."</p>
+
+  <p class="body-para">"And using them in their own burials."</p>
+
+  <p class="body-para">"Yes."</p>
+
+  <p class="body-para">"So the dead kings are —" He stopped. He had been going to say <em>are incomplete</em>, and the word had come out correctly in his mind, but what he felt underneath it was something larger and less technical than that, the thing that lived under all the craft and the engineering and the professional language of his work, the thing that he kept very carefully at a distance during the working day because it was not useful to feel it when you were cutting stone at the bottom of a shaft thirty feet below the earth. What he felt was the weight of it. Forty-seven objects. Six confirmed tombs. Months of carefully falsified paperwork. A young scribe at the bottom of a shaft. And somewhere above all of it, in the warm lamplight of a house or an office or a temple on the east bank, someone who had looked at the elaborate, ancient, load-bearing structure of the Egyptian relationship between the living and the dead, and had decided that it was a business opportunity.</p>
+
+  <p class="body-para">"Yes," Nefertari said, because he hadn't finished his sentence and he didn't need to.</p>
+
+  <div class="scene-break">— ✦ —</div>
+
+  <p class="body-para">They sat in silence for a moment. It was a particular silence — not the silence of two strangers who have nothing to say, but the silence of two people who have just understood that they have walked separately to the edge of the same cliff and are now standing there together, looking down.</p>
+
+  <p class="body-para">"You said you would either find what you came for or be dead," Kha said. "You said it the way you had already considered both possibilities."</p>
+
+  <p class="body-para">"Hapu was twenty-four years old," she said. "He was careful. He was in a sealed tomb he had no reason to be in, in the dark, and he fell. Thirty feet is very survivable, if you are lucky. The physicians say the injuries were consistent with the fall." She straightened one of the papyrus sheets on the table, a small, precise gesture. "They are also consistent with being thrown."</p>
+
+  <p class="body-para">"Then why are you still here?"</p>
+
+  <p class="body-para">The question was genuine — not a challenge, not an accusation. He wanted to understand what had made her stay, because understanding what kept a person in a dangerous place was useful information about the kind of person they were, and the kind of person she was mattered, if they were going to do what they were both now clearly going to do, whether or not they had yet said so aloud.</p>
+
+  <p class="body-para">"Because the records are here," she said. "And because I am the only person in this valley who currently has the administrative access to read all three sections of the necropolis catalogue simultaneously, and that access expires the moment someone in Karnak processes Hapu's death notification and rescinds his appointment letters." She paused. "And because," she added, and her voice shifted very slightly, in the way that voices shift when a person moves from the public version of their reasoning to the private one, "Hapu's mother was a linen weaver. His father carried water for the dye works. He earned his place in the House of Life on the merit of an examination he took at fourteen and passed on the first attempt, which almost no one does. He worked for four years to be assigned to a posting of this significance." She looked at the papyrus sheets on the table. "He deserved better than thirty feet and a report that says <em>misadventure</em>."</p>
+
+  <p class="body-para">Kha looked at her for a moment. He thought of Userhat — of a very different dead man, older, rougher, who had never in his life taken an examination of any kind, who had learned to read by watching over Kha's shoulder during rest periods and asking relentless questions, who had died at the bottom of a shaft in the valley where he had worked for twenty years, and whose death had been ruled an accident, and whose name Kha had spoken into the darkness of the desert on the walk home that day and had not spoken aloud since.</p>
+
+  <p class="body-para">"The Egyptians believe," he said, "that a person continues to exist as long as their name is spoken." He said it the way you said things you already knew, when you needed to hear them in the air rather than in your head. "That is why the dead commission inscriptions. Why a tomb is covered in text. The name, repeated, is a form of ongoing life."</p>
+
+  <p class="body-para">"Yes," Nefertari said. She was watching him.</p>
+
+  <p class="body-para">"And a person whose name is erased — scratched from the wall, omitted from the record, replaced with someone else's inscription — that person is extinguished. Finally and completely." He was quiet for a moment. "What is being done to the dead in these tombs is the same thing. The canopic jars are their names. The ushabti are their names. Every object that was placed for them, specifically, in accordance with their individual rites, is part of the record that says: this person existed. This person was someone." He stopped. "Hapu is being erased too. <em>Misadventure</em>. A report. A filed document. He becomes a name that is spoken less and less, until no one speaks it."</p>
+
+  <p class="body-para">"Yes," she said again, very quietly.</p>
+
+  <p class="body-para">"And Userhat."</p>
+
+  <p class="body-para">She did not ask who Userhat was. She would read the name in Hapu's notes tomorrow, or perhaps she already had. She simply waited, in the way of someone who understands that some sentences need to finish in their own time.</p>
+
+  <p class="body-para">"And Userhat," Kha said again. It was not quite a sentence. It was something else — an agreement, or an accounting, or the sound of a stone finally shifting from the shelf where it had sat in the dark for seven years, beginning its long fall toward whatever was at the bottom.</p>
+
+  <div class="scene-break">— ✦ —</div>
+
+  <p class="body-para">He left the scribe's house an hour later, when the oil in the lamp was low and the street outside was fully dark. The moon was a thin nail-paring above the western cliffs, and the stars were out in their full authority — the stars that the astronomers named and tracked and used to calibrate the orientation of every royal tomb in the valley, the stars that the painters reproduced on tomb ceilings with such precision that modern astronomers could use them to date the construction to within a decade. Kha knew the sky the way he knew the floor of a tomb — by function, by position, by the way each element related to every other element. He had grown up watching it. He had worked under it. He had aligned shafts by it. He knew that the ancient ones had believed the stars were the souls of the righteous dead, walking the eternal fields of the sky-Nile in their transformed state, the <em>Akh</em> made luminous.</p>
+
+  <p class="body-para">He stood for a moment and looked up at them, these ten thousand small deliberate lights, and he thought: <em>somewhere in that field there is a soul that cannot find its place because its canopic jars are in a merchant's house in Thebes.</em> And another. And another. Forty-seven objects. How many souls? How many incomplete dead, unable to pass the judgment of Ma'at, unable to speak their negative confessions before the forty-two Assessors, unable to have their hearts weighed against the feather of truth, because the truth required a heart that was whole, and a whole heart required a body, and a body required its organs, and its organs were currently arranged on a wealthy Theban's shelf as decorative antiques?</p>
+
+  <p class="body-para">This was the Egyptian vision of cosmic horror. Not monsters. Not darkness for its own sake. The systematic disruption of the mechanism that allowed existence to continue. Ma'at — the order that held everything up — could be chipped at. It could be eroded. Not in a single blow but in forty-seven small ones, and then forty-eight, and then more, each one a filing error, a falsified inspection record, a sealed passage opened and resealed, a young scribe sent into the dark to fall.</p>
+
+  <p class="body-para">He went inside. Merit was asleep on her mat, which meant it was later than he had understood, and the supper she had left for him was a small portion of cold bread and a few dried figs on a pottery shard, which was exactly what he had expected and which was, this particular evening, exactly enough. He ate it sitting by the door, in the dark, listening to his daughter's quiet breathing.</p>
+
+  <p class="body-para">Merit was seventeen. She had her mother's face and her mother had been dead for six years and looking at Merit was therefore a compound experience that Kha had made his peace with in the way you made peace with the worst things — not by accepting them, exactly, but by learning to carry them without putting them down, because putting them down was not an option and pretending they were lighter than they were was a form of dishonesty he had never been able to sustain.</p>
+
+  <p class="body-para">She was not sleeping well. He had noticed it a week ago and told himself it was the heat, because the early summer heat in the village was formidable and young women her age were sometimes affected by it. He had noticed it again three nights ago when he woke at the third hour to find her sitting upright on her mat, eyes open, looking at nothing, and had spoken her name three times before she turned to him with the expression of someone surfacing from a depth, confused about which direction was up. He had asked her what she had been dreaming. She had said she could not remember. She had lain back down and her breathing had steadied, and in the morning she had not mentioned it.</p>
+
+  <p class="body-para">He had not mentioned it either. He looked at her now, sleeping, her face composed and young and slightly furrowed in the way of people who are not as deeply asleep as they appear to be, and he thought about what Nefertari had said — that Hapu's notes contained his name, that Hapu had intended to ask him a question, that someone had ensured the question was never asked. He thought about the hidden passage and the fresh plaster. He thought about his daughter brought to the tomb in the night, brought by someone, shown something, as an initiation — this was what she had told him, two weeks ago, when he had found sand in her sandals that matched the sand of the valley floor, not the village path, and had asked her directly.</p>
+
+  <p class="body-para">She had said: <em>it was nothing. A game. Some of the older girls and two of the boys. They went to look at the old tombs on a dare. It was nothing.</em></p>
+
+  <p class="body-para">He had believed her. Or rather, he had wanted to believe her, which was a different thing, and he had let the wanting be enough, because the alternative was to understand that someone had deliberately taken a seventeen-year-old girl into the valley at night for reasons that were not a game, and that the someone had specifically chosen her, and that the specific reason for the choice was very likely her father's name.</p>
+
+  <p class="body-para">The Bes figurine was behind the storage jar. He got up, found it in the dark by feel — the squat, familiar weight of it, the rough-carved lion face, the wide-legged stance of a god who planted himself in doorways and dared the darkness to come through — and he brought it back to the corner where it belonged.</p>
+
+  <p class="body-para">He set it down. He looked at it in the thin starlight from the doorway. Then he pressed his palms flat against the cool mudbrick floor, the way he pressed them every morning, and he named the gods. He named all of them, one by one, in the correct order, with the weight of a man who is no longer doing it out of habit. He named Ra. He named Osiris. He named Anubis, the jackal-headed guardian of the necropolis, whose domain was this valley, whose business was the dead, and who he hoped — with the specific, narrow hope of a man making a very particular request to a very specific divine authority — was paying attention.</p>
+
+  <p class="body-para">He named Userhat. He said it quietly, barely above breath, and then again at full voice, the way the funerary rites required, the way the inscriptions were read, to give the name its full weight in the air of the world.</p>
+
+  <p class="body-para">Then he sat with his back against the wall and waited for the night to pass.</p>
+
+  <p class="body-para">In the corner of the room, the Bes figurine grinned its terrible grin, and the darkness outside the door, for the moment, stayed where it was.</p>
+
+  <div class="end-mark">✦ &nbsp; End of Chapter Two &nbsp; ✦</div>
+</div>

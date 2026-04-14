@@ -1,0 +1,319 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500&display=swap');
+
+  :root {
+    --gold: #C9A84C;
+    --gold-dim: #8B6F35;
+    --stone: #E8DFC8;
+    --shadow: rgba(0,0,0,0.18);
+    --ink: #1A1208;
+    --papyrus: #F5EDD8;
+    --papyrus-dark: #E8DABC;
+    --border-thin: 0.5px solid var(--color-border-tertiary);
+  }
+
+  .chapter-wrap {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+    color: var(--color-text-primary);
+  }
+
+  .chapter-ornament {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    opacity: 0.55;
+  }
+
+  .ornament-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--gold-dim);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+  }
+
+  .ornament-line::before,
+  .ornament-line::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 0.5px;
+    background: var(--color-border-secondary);
+  }
+
+  .book-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    text-align: center;
+    margin-bottom: 0.4rem;
+  }
+
+  .chapter-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .chapter-title {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--color-text-primary);
+    margin: 0 0 0.3rem;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+
+  .chapter-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 2rem 0;
+    color: var(--color-text-tertiary);
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 0.5px;
+    background: var(--color-border-tertiary);
+  }
+
+  .divider-glyph {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    opacity: 0.5;
+  }
+
+  .dropcap-para {
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--color-text-primary);
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  .dropcap-para::first-letter {
+    font-family: 'Cinzel', serif;
+    font-size: 4.2em;
+    font-weight: 500;
+    float: left;
+    line-height: 0.75;
+    margin: 0.08em 0.1em 0 0;
+    color: var(--color-text-primary);
+  }
+
+  .body-para {
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--color-text-primary);
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  .body-para em {
+    font-style: italic;
+    color: var(--color-text-primary);
+  }
+
+  .scene-break {
+    text-align: center;
+    color: var(--color-text-tertiary);
+    margin: 2.2rem 0;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    opacity: 0.45;
+  }
+
+  .epigraph {
+    border-left: 2px solid var(--color-border-secondary);
+    margin: 0 0 2.5rem 1rem;
+    padding: 0.5rem 0 0.5rem 1.2rem;
+  }
+
+  .epigraph-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0 0 0.4rem;
+  }
+
+  .epigraph-source {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+  }
+
+  .end-mark {
+    text-align: center;
+    margin-top: 3rem;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--color-text-tertiary);
+    opacity: 0.5;
+  }
+</style>
+
+<div class="chapter-wrap">
+  <h2 class="sr-only">Chapter One of The Weight of Ma'at — opening chapter of an ancient Egyptian dark fantasy novel set in Deir el-Medina during the reign of Ramesses IX</h2>
+
+  <p class="book-title">The Weight of Ma'at</p>
+
+  <div class="chapter-ornament">
+    <div class="ornament-line">✦</div>
+  </div>
+
+  <p class="chapter-label">Chapter One</p>
+  <h1 class="chapter-title">What the Darkness Keeps</h1>
+  <p class="chapter-subtitle">Deir el-Medina — Year Sixteen of the Reign of Ramesses IX, Son of Ra, Lord of the Two Lands</p>
+
+  <div class="epigraph">
+    <p class="epigraph-text">"O my heart which I had from my mother, do not stand up against me as a witness."</p>
+    <p class="epigraph-source">— The Book of the Dead, Chapter 30B</p>
+  </div>
+
+  <p class="dropcap-para">Before a man of Deir el-Medina opened his eyes each morning, he prayed. This was not devotion in the way a scribe might describe it — not incense and ceremony and the ringing of temple sistrums. It was something quieter and more necessary, like breathing. A man woke in darkness, pressed his palms flat against the cool mudbrick of his sleeping mat, and he spoke the names. Ra, who had sailed through the night underworld and survived again. Osiris, who had been murdered and reassembled and made to live. Bes, the squat lion-dwarf who crouched at the corner of every doorway in the village, grinning his terrible grin, keeping the night terrors at bay. A man named them all. He did this because he understood, in the way that only people who worked among the dead truly understood, that the world did not continue by accident.</p>
+
+  <p class="body-para">The sun rose each morning because it was <em>earned</em>. Ra in his solar barque, navigating the twelve hours of the Duat — the dark underworld through which all light must pass — faced the serpent Apophis every single night. Every single night, that battle was fought. Every single night, it could be lost. The priests in Karnak knew this. The astronomers who tracked the stars from their limestone rooftops knew this. And the men of the Set Maat — the Place of Truth, which the living called Deir el-Medina — they knew it better than anyone, because they were the ones who built the roads the dead would walk, and they had seen what waited in the dark at the end of those roads.</p>
+
+  <p class="body-para">So a man prayed. And then he stood, and washed his face and hands in the clay basin by the door, because cleanliness was not vanity — it was armor. The gods did not speak to the impure. The dead did not respect the unwashed. And in a village where every man knew how to read a tomb wall, where every woman had mixed the pigments that gave the afterlife its color, the line between the sacred and the ordinary had long since worn away to almost nothing.</p>
+
+  <div class="scene-break">— ✦ —</div>
+
+  <p class="body-para">Kha, foreman of the left gang, did not pray to Bes that morning. He had moved the little figurine from its corner two weeks ago, after his daughter complained it watched her sleep. He had put it behind a storage jar and told himself he would move it back. He had not moved it back. He stood in the blue-grey dark before sunrise and named the gods anyway, out of habit, out of a lifetime of mornings exactly like this one, and then he put on his kilt and his sandals and he went to look at the grain level in the household storage pit.</p>
+
+  <p class="body-para">It had not improved in the night. He had not expected it to improve in the night. He looked at it anyway, the way a man probes a bad tooth with his tongue — not because it helps, but because the body insists on knowing the shape of what hurts.</p>
+
+  <p class="body-para">The grain ships from the east bank had not come in three months. The official reason changed every week. First it was flooding in the delta storehouses, then a dispute over accounting weights, then an illness among the dock workers, then simply silence from the office of the Vizier, which was the most frightening explanation of all. The village of Deir el-Medina received its pay in commodities — grain, fish, oil, natron, firewood, pottery. These were not luxuries. These were the agreement. The state asked these men and their families to live here, sealed in a walled village between the Nile floodplain and the desert cliffs, forbidden from speaking of their work to outsiders, forbidden from leaving without permission, bound to the necropolis by oath and tradition and the weight of everything they knew. In exchange, the state kept them fed. That was the entire arrangement. And the state had stopped keeping its end.</p>
+
+  <div class="scene-break">— ✦ —</div>
+
+  <p class="body-para">The village woke around him as he walked to the north gate. Deir el-Medina was a single long street, wide enough for two men to pass comfortably, lined on both sides with identical mudbrick houses that were nevertheless entirely distinct to anyone who lived there. He knew every door. He knew which households had added an extra room onto the back for a grown son who hadn't yet married. He knew which whitewashed walls were freshly done and which had been left to grey because there was no point maintaining appearances when your roof leaked. He knew that the house of the painter Amenwa had a crack in the outer wall that had been there for eleven years and had never been repaired because Amenwa's wife believed the crack was where their dead infant son had gone out into the world, and to seal it would be to trap him.</p>
+
+  <p class="body-para">People in the west of Thebes thought about death differently from people in the east. In the city, death was a destination — a place you went, a judgment you faced, a door through which you passed and did not return. On the west bank, in the shadow of the cliffs where the dead kings lay in their painted rooms, death was more like weather. It was around you. It was present. You worked inside it every day, descending into the earth with your chisels and your lamps, cutting rooms and passages for a Pharaoh who was still alive, and you understood in your bones that the wall between living and dead was not a wall at all. It was a curtain. And curtains moved.</p>
+
+  <p class="body-para">This was not morbidity. It was simply geography.</p>
+
+  <div class="scene-break">— ✦ —</div>
+
+  <p class="body-para">At the north gate, six men from his crew were already assembled, squatting in the dust with their tool kits, sharing a small loaf that someone had brought from home. They greeted him the way workers greet a foreman — respectfully, without warmth, in the manner of men who respect competence and have learned not to confuse it with affection. Kha counted them. His full crew was eleven. The other five would come from the direction of the south end of the village, and two of those would be late, because two of them were always late, and he had long ago adjusted his expectations accordingly.</p>
+
+  <p class="body-para">"Any word from the storehouse?" one of them asked. The youngest, a boy barely past his initiation, whose name was Hay and who had not yet learned to ask questions in a tone that didn't carry the full weight of his anxiety.</p>
+
+  <p class="body-para">"No," Kha said.</p>
+
+  <p class="body-para">Hay looked at him. Kha looked back at him. The boy had the good sense to leave it there.</p>
+
+  <p class="body-para">They walked in the pale pre-dawn light along the path that climbed the ridge behind the village, the path they had walked five days of every week for the whole of their working lives, the path that led from the world of the living up over the limestone spine of the western mountain and down into the Valley of the Kings. The torches they carried were the only warm light in a world of grey-blue stone. Kha walked at the back, as foreman. He watched his crew ahead of him — their shapes, their pace, their particular ways of moving — and he thought, as he thought most mornings, that he knew these men better than he knew his own wife. He knew which of them favoured their left knee in cold weather and which would slow on the final climb if they had been drinking the night before. He knew which of them were careful and which were fast and which were both and which were neither. He had spent seven years building the tomb of the man whose name he was not permitted to speak aloud outside of official contexts — a Pharaoh whose death would be attended by ceremony and grief and the full weight of state religion, and who in the meantime simply existed, aging in his palace on the east bank, unaware that the rooms being prepared for his eternity had been the organizing principle of thirty-seven families' lives for the better part of a decade.</p>
+
+  <div class="scene-break">— ✦ —</div>
+
+  <p class="body-para">The Egyptian understanding of death was not simple, and anyone who told you it was had either not read the texts or had read only the parts that translated cleanly into other languages. A person was not a single thing. A person was five things, at minimum. There was the <em>Ka</em> — the life-force, the double, the part of you that needed to be fed and sustained even after death, which was why tomb walls were painted with endless scenes of offerings and feasts, why the false door was carved so the Ka could pass through and receive its daily bread. There was the <em>Ba</em> — the personality, the individual soul, depicted as a human-headed bird that could fly freely between the tomb and the world, that needed to be able to return to the body each night, which was why the body had to be preserved, why mummification was not vanity but practical necessity. There was the <em>Akh</em> — the transformed, glorified spirit that resulted from the successful union of Ka and Ba, the part that went on to the Field of Reeds if the judgment went well. There was the <em>Sheut</em> — the shadow, which followed a person everywhere in life and persisted after death, which could be manipulated by those who knew the right spells. And there was the <em>Ren</em> — the name, which was perhaps the most important of all, because a person whose name was spoken continued to exist, and a person whose name was erased was truly, finally, permanently dead.</p>
+
+  <p class="body-para">The men of Deir el-Medina knew all of this not as theology but as engineering. A tomb was not a monument. A tomb was a machine. Every room had a purpose. Every painting had a function. The corridors were sized to allow the Ba its passage. The shafts were oriented to catch the light of specific stars. The false doors were placed according to calculations so old that the scribes who copied them no longer fully understood the reasoning, only the instruction. When Kha cut a passage, he was not making art. He was manufacturing the conditions for a specific kind of survival. He had taken this seriously for twenty-six years. He intended to take it seriously until he died, and then he intended to benefit from the same seriousness in the people who would one day prepare his own much smaller tomb in the hillside cemetery above the village.</p>
+
+  <p class="body-para">This was the compact. This was the arrangement between the living and the dead, between the workers and the state, between the people of this village and the gods who had established the order of the universe in the first moments of creation. <em>Ma'at</em> — truth, order, balance, cosmic justice — was not an abstract principle. It was a load-bearing wall. Everything stood on it. And like any load-bearing wall, you only understood its importance when you heard the first crack.</p>
+
+  <div class="scene-break">— ✦ —</div>
+
+  <p class="body-para">Kha heard the crack — not literally, not yet — at the third hour of the working day.</p>
+
+  <p class="body-para">They had descended into the tomb through the entrance shaft, past the two guardian statues whose faces he had watched the sculptor finish three years ago and which now regarded him with the particular blank serenity of objects that have accepted their permanent occupation. Down the first corridor, past the well shaft, through the antechamber with its unfinished astronomical ceiling — the painter Ipy had fallen ill in the spring, and his substitutes were competent but not gifted, and Kha could see the difference in the star clusters on the eastern half, though he had never said so to anyone — and then into the descending passage that led to the burial chamber itself.</p>
+
+  <p class="body-para">He came to inspect the progress of the sarcophagus recess. He came because the overseer had asked for a measurement report by the end of the week, and because Kha was the kind of foreman who took measurements himself rather than trusting reports, which had saved him from at least three professional disasters over the years. He came with his lamp and his measuring cord and his small wax tablet for notes, and he crouched at the entrance to the burial chamber and he looked at the floor.</p>
+
+  <p class="body-para">The floor was wrong.</p>
+
+  <p class="body-para">He looked at it for a long time. Then he raised his lamp and looked at it from a different angle. The limestone floor of the burial chamber had been smoothed by his own crew over the course of four days two months ago. He remembered the work. He remembered supervising the final leveling, running his palm across the surface to check for any irregularities, finding two and having them corrected before he signed off. He had looked at this floor perhaps fifty times since that day. He knew every feature of it.</p>
+
+  <p class="body-para">There was dust on the western side that should not have been there. Fine, pale dust, the color of the limestone chips that came off a chisel during cutting. It had settled into a pattern — not random, not the general accumulation that gathered everywhere in a tomb no matter how carefully you worked. It was a dispersal pattern. Something had disturbed the air in this chamber recently, from the direction of the western wall. Something had moved, in a sealed room, in the dark, in a tomb that had been locked since the last inspection ten days ago.</p>
+
+  <p class="body-para">Kha stood very still for a moment and did something he had trained himself out of doing years ago. He listened.</p>
+
+  <p class="body-para">The tomb said nothing. It pressed its silence against him the way the earth pressed against the walls — from all sides, total, ancient, the silence of a place that had been designed for an occupant who had not yet arrived.</p>
+
+  <p class="body-para">He crossed to the western wall. He held his lamp close. The wall was solid — of course it was solid, it was a foot of limestone backed by forty feet of cliff — and he ran his palm across it the way he had run his palm across the floor two months ago, checking for what he already knew he was going to find and hoping, with the particularly specific hope of a man who has recognized bad news and is not yet ready to fully receive it, that he was wrong.</p>
+
+  <p class="body-para">He was not wrong. He found the seam with his fingertips before he found it with his eyes. A crack in the plaster, hairline-thin, running in a straight horizontal line twenty-two inches long. Not a settling crack. Not a flaw in the stone. The line was too even. Too deliberate. This was a seam. This was a join.</p>
+
+  <p class="body-para">There was a passage behind the western wall. He had cut it himself.</p>
+
+  <p class="body-para">He had cut it, and then he had sealed it, and then he had plastered it, and then he had painted the first three inches of the plaster in the same red-ochre ground color as the rest of the wall so that the join would be invisible to any eye that did not already know to look. He had done this in the fourth year of the tomb's construction, on direct orders from the overseer, who had told him it was a standard architectural redundancy — a secondary access route in case the main entrance shaft collapsed or flooded during construction. He had accepted this explanation because it was plausible, and because the overseer had been his superior for sixteen years, and because a man who asks too many questions in this village learns quickly that questions are a kind of currency, and you spend them carefully.</p>
+
+  <p class="body-para">The plaster at the seam was not seven years old. He could tell by the color, by the texture, by the faint chalky smell that fresh plaster held for weeks after application. Someone had opened this passage and resealed it. Recently. Carefully. Almost perfectly.</p>
+
+  <p class="body-para">Almost.</p>
+
+  <p class="body-para">Kha straightened up. He turned and looked back up the descending passage toward the antechamber, which was empty. He looked at the lamp in his hand. The flame was steady — no drafts, no movement of air. Whatever had been done here, it was finished. Whatever had come through this wall, it was gone.</p>
+
+  <p class="body-para">He stood in the burial chamber of a living Pharaoh and understood three things with a clarity that surprised him, given that his mind had gone very quiet in the way it always did when something was seriously wrong.</p>
+
+  <p class="body-para">The first thing: he was not supposed to have found this.</p>
+
+  <p class="body-para">The second thing: the person who had done this knew exactly what this tomb contained, where every passage ran, and how to move through it in the dark. There were perhaps eight men alive who had that knowledge. Six of them were in his crew, currently eating their noon bread in the antechamber above. One of them was the overseer, who had given him the original order to cut the hidden passage. And one of them was Kha himself.</p>
+
+  <p class="body-para">The third thing was the one that kept him standing very still in the lamplight for a long time before he moved. It was this: Userhat, his friend, had died at the bottom of a shaft in this valley seven years ago. And Userhat had been the only other person present the day Kha received the order to cut the hidden passage, and the only other person who had questioned whether a secondary access route made any sense in a tomb of this design.</p>
+
+  <p class="body-para">Userhat had asked his question aloud. Kha had asked his only inwardly.</p>
+
+  <p class="body-para">He turned his lamp down to a low burn, the way you did when you needed to preserve oil for the journey back, and he walked out of the burial chamber without looking at the wall again. He climbed the descending passage, passed through the antechamber without stopping, went up through the entrance shaft into the white blaze of noon in the Valley of the Kings, and stood in the sun until his eyes adjusted and his breathing slowed.</p>
+
+  <p class="body-para">The valley was quiet. The limestone cliffs shimmered with heat. Somewhere above him, a vulture turned on a column of hot air, patient and enormous and entirely indifferent.</p>
+
+  <p class="body-para">He thought: <em>I should tell no one.</em></p>
+
+  <p class="body-para">He thought: <em>I should tell the overseer.</em></p>
+
+  <p class="body-para">He thought: <em>Userhat.</em></p>
+
+  <p class="body-para">He went back down to tell his crew to pack their tools. He told them, when they asked, that there was nothing wrong. He said the measurements could wait until tomorrow. He said it with the flat, matter-of-fact tone that foremen use when they want to communicate that a thing has been decided and there is no space for further conversation, and his crew, who had worked with him for years and knew his tones, accepted this without comment.</p>
+
+  <p class="body-para">Only Hay looked back at him as they climbed toward the ridge, with the expression of someone who has heard, from very far away, the first note of something that has not yet resolved into a sound he recognizes.</p>
+
+  <p class="body-para">Kha did not look back at the tomb.</p>
+
+  <p class="body-para">He looked at the sky. Ra was beginning his descent toward the western horizon, beginning the long turn toward the underworld, toward the twelve hours of darkness that had to be survived before morning. Every night, the serpent. Every night, the battle. Every morning, the question of whether the sun would return answered again, for one more day.</p>
+
+  <p class="body-para">He thought of the dust on the western floor, the plaster at the seam, the steady flame of his lamp in a room where the air should have been completely still.</p>
+
+  <p class="body-para">Something had been in that tomb. Something had taken what it came for and gone back through the wall and replaced the plaster and smoothed the floor — almost — and trusted that no one would look closely enough to notice.</p>
+
+  <p class="body-para">It had trusted wrong. But it had trusted correctly about almost everyone else. And the difference between almost everyone and everyone was, at this particular moment, one man standing on a limestone ridge above the Valley of the Kings, watching the sun go down, saying nothing.</p>
+
+  <p class="body-para">For now.</p>
+
+  <div class="end-mark">✦ &nbsp; End of Chapter One &nbsp; ✦</div>
+</div>
