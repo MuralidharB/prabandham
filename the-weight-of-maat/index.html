@@ -172,6 +172,12 @@
     letter-spacing: 0.1em;
     text-align: center;
     line-height: 1.7;
+    text-decoration: none;
+    display: block;
+    transition: color 0.2s ease;
+  }
+  .tp-chapter-item:hover {
+    color: #C9A84C;
   }
   .tp-chapter-num {
     font-family: 'Cinzel', serif;
@@ -228,6 +234,24 @@
     animation: fadeUp 0.8s ease 2.7s forwards;
   }
 
+  .tp-home-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: #8B6F35;
+    text-decoration: none;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 0.8s ease 0.3s forwards;
+    transition: color 0.2s ease;
+  }
+  .tp-home-link:hover {
+    color: #C9A84C;
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -248,6 +272,8 @@
 <body>
 
 <div class="tp-page">
+
+  <a href="../index.html" class="tp-home-link">← Home</a>
 
   <!-- Frame borders -->
   <div class="tp-border-top"></div>
@@ -350,14 +376,14 @@
   </div>
 
   <div class="tp-chapters">
-    <div class="tp-chapter-item"><span class="tp-chapter-num">I.</span>What the Darkness Keeps</div>
-    <div class="tp-chapter-item"><span class="tp-chapter-num">II.</span>The Scribe's Inheritance</div>
-    <div class="tp-chapter-item"><span class="tp-chapter-num">III.</span>The Weight a Man Carries</div>
-    <div class="tp-chapter-item"><span class="tp-chapter-num">IV.</span>The River Between Worlds</div>
-    <div class="tp-chapter-item"><span class="tp-chapter-num">V.</span>The Man Who Counted the Dead</div>
-    <div class="tp-chapter-item"><span class="tp-chapter-num">VI.</span>The Face in the Dark</div>
-    <div class="tp-chapter-item"><span class="tp-chapter-num">VII.</span>The Sealing of the Thinning</div>
-    <div class="tp-chapter-item tp-epilogue"><span class="tp-chapter-num">—</span>The Record That Remains</div>
+    <a href="chapter-1.html" class="tp-chapter-item"><span class="tp-chapter-num">I.</span>What the Darkness Keeps</a>
+    <a href="chapter-2.html" class="tp-chapter-item"><span class="tp-chapter-num">II.</span>The Scribe's Inheritance</a>
+    <a href="chapter-3.html" class="tp-chapter-item"><span class="tp-chapter-num">III.</span>The Weight a Man Carries</a>
+    <a href="chapter-4.html" class="tp-chapter-item"><span class="tp-chapter-num">IV.</span>The River Between Worlds</a>
+    <a href="chapter-5.html" class="tp-chapter-item"><span class="tp-chapter-num">V.</span>The Man Who Counted the Dead</a>
+    <a href="chapter-6.html" class="tp-chapter-item"><span class="tp-chapter-num">VI.</span>The Face in the Dark</a>
+    <a href="chapter-7.html" class="tp-chapter-item"><span class="tp-chapter-num">VII.</span>The Sealing of the Thinning</a>
+    <a href="epilogue.html" class="tp-chapter-item tp-epilogue"><span class="tp-chapter-num">—</span>The Record That Remains</a>
   </div>
 
   <div class="tp-bottom-divider"><div class="tp-bottom-gem"></div></div>
