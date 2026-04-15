@@ -1,0 +1,609 @@
+/**
+ * The Second Voice — Book-Specific Styles
+ * Unique aesthetic: Cormorant Garamond fonts, gold/cream colors, spacious layout
+ */
+
+/* ========================================
+   CSS VARIABLES
+   ======================================== */
+
+:root {
+  --bg: #ffffff;
+  --paper: #111111;
+  --paper-dim: #222222;
+  --paper-muted: #888880;
+  --gold: #8a6e3a;
+  --gold-dim: #b89a60;
+  --gold-pale: #e8dcc8;
+  --rule: rgba(0, 0, 0, 0.12);
+  --body-max: 680px;
+}
+
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+html {
+  background: var(--bg);
+  color: var(--paper);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 20px;
+  line-height: 1.85;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* ========================================
+   BOOK HEADER
+   ======================================== */
+
+.book-header {
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+  position: relative;
+}
+
+.book-header::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--gold-dim), transparent);
+  margin: 2.5rem auto 0;
+}
+
+.book-title {
+  font-family: 'Cormorant SC', serif;
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  color: var(--paper-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.ornament {
+  color: var(--gold);
+  font-size: 1.4rem;
+  letter-spacing: 0.3em;
+  margin: 0.6rem 0;
+  opacity: 0.7;
+}
+
+.chapter-eyebrow {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  opacity: 0.85;
+}
+
+.chapter-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--paper);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+/* ========================================
+   CONTENT WRAPPER
+   ======================================== */
+
+.content-wrap {
+  max-width: var(--body-max);
+  margin: 0 auto;
+  padding: 0 2rem 8rem;
+}
+
+/* ========================================
+   TYPOGRAPHY - CHAPTER BODY
+   ======================================== */
+
+p {
+  margin-bottom: 1.5em;
+  color: #111111;
+  font-size: 1rem;
+  hanging-punctuation: first;
+}
+
+p + p {
+  text-indent: 1.8em;
+  margin-top: -0.5em;
+}
+
+/* Drop cap on first paragraph */
+.chapter-body > p:first-of-type {
+  text-indent: 0;
+}
+
+.chapter-body > p:first-of-type::first-letter {
+  font-family: 'IM Fell English', serif;
+  font-size: 5.2em;
+  font-weight: 400;
+  line-height: 0.72;
+  float: left;
+  margin-right: 0.08em;
+  margin-top: 0.05em;
+  color: var(--gold);
+  font-style: normal;
+}
+
+/* ========================================
+   TYPOGRAPHY - PROLOGUE BODY
+   ======================================== */
+
+/* Prologue prose — slightly more spacious, more ceremonial */
+.prologue-body p {
+  margin-bottom: 1.8em;
+  color: #111111;
+  font-size: 1rem;
+  line-height: 2;
+}
+
+.prologue-body p + p {
+  text-indent: 0;
+  margin-top: 0;
+}
+
+/* No drop cap — prologue begins in a different register */
+.prologue-body > p:first-of-type {
+  text-indent: 0;
+}
+
+/* Short-line stanza breaks — the psalm structure */
+.stanza {
+  margin: 2.8rem 0;
+  padding: 0;
+}
+
+.stanza p {
+  margin-bottom: 0.6em;
+  text-indent: 0 !important;
+}
+
+.stanza p:last-child {
+  margin-bottom: 0;
+}
+
+/* The single short line that carries the most weight */
+.lone-line {
+  display: block;
+  text-align: center;
+  font-style: italic;
+  color: var(--paper-muted);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  margin: 3rem 0;
+}
+
+/* ========================================
+   SECTION BREAKS & DIVIDERS
+   ======================================== */
+
+.section-break {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 3.5rem 0;
+  color: var(--gold-dim);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+}
+
+.section-break::before,
+.section-break::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* ========================================
+   TEXT EMPHASIS
+   ======================================== */
+
+em {
+  font-style: italic;
+  color: #111111;
+  font-weight: 400;
+}
+
+/* ========================================
+   CHAPTER END MARKER
+   ======================================== */
+
+.chapter-end {
+  text-align: center;
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--rule);
+  color: var(--paper-muted);
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+}
+
+/* ========================================
+   CHAPTER NAVIGATION
+   ======================================== */
+
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--body-max);
+  margin: 3rem auto 0;
+  padding: 2rem 2rem 0;
+  border-top: 1px solid var(--rule);
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--paper-muted);
+}
+
+.chapter-nav a {
+  color: var(--gold);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.chapter-nav a:hover {
+  opacity: 0.7;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+.book-header,
+.content-wrap {
+  animation: fadeUp 1.2s ease both;
+}
+
+.content-wrap {
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   LANDING PAGE STYLES
+   ======================================== */
+
+/* Hero block */
+.hero {
+  width: 100%;
+  max-width: var(--body-max);
+  padding: 7rem 2rem 4rem;
+  text-align: center;
+  animation: fadeUp 1.4s ease both;
+}
+
+.pre-title {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  color: var(--paper-muted);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--paper);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.title-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin: 2.2rem auto;
+  max-width: 320px;
+  color: var(--gold);
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+}
+
+.title-rule::before,
+.title-rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--paper-muted);
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 420px;
+  margin: 0 auto 1rem;
+  letter-spacing: 0.01em;
+}
+
+/* Chapter list */
+.chapter-list {
+  width: 100%;
+  max-width: var(--body-max);
+  padding: 0 2rem 6rem;
+  animation: fadeUp 1.4s ease 0.3s both;
+}
+
+.list-heading {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  color: var(--paper-muted);
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.chapter-item {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 2.8rem 1fr auto;
+  align-items: baseline;
+  gap: 0 1.2rem;
+  transition: background 0.15s;
+  cursor: pointer;
+  position: relative;
+}
+
+.chapter-item:first-child {
+  border-top: 1px solid var(--rule);
+}
+
+.chapter-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold-pale);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+.chapter-item:hover::after {
+  opacity: 0.35;
+}
+
+.ch-number {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  padding-top: 0.15em;
+  white-space: nowrap;
+}
+
+.ch-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--paper);
+  line-height: 1.3;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.ch-location {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: var(--paper-muted);
+  display: block;
+}
+
+.ch-arrow {
+  font-size: 0.85rem;
+  color: var(--gold-dim);
+  opacity: 0.5;
+  transition: opacity 0.2s, transform 0.2s;
+  align-self: center;
+}
+
+.chapter-item:hover .ch-arrow {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* Prologue link */
+.prologue-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 1.4rem 0 1.8rem;
+  border-bottom: 1px solid var(--rule);
+  border-top: 1px solid var(--rule);
+  margin-bottom: 0.1rem;
+  display: grid;
+  grid-template-columns: 2.8rem 1fr auto;
+  align-items: baseline;
+  gap: 0 1.2rem;
+  transition: background 0.15s;
+  cursor: pointer;
+  position: relative;
+}
+
+.prologue-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold-pale);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+.prologue-link:hover::after {
+  opacity: 0.35;
+}
+
+.prologue-link:hover .ch-arrow {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* Footer */
+.site-footer {
+  width: 100%;
+  max-width: var(--body-max);
+  padding: 0 2rem 5rem;
+  text-align: center;
+}
+
+.site-footer p {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--paper-muted);
+  line-height: 2;
+}
+
+/* ========================================
+   ADSENSE INTEGRATION
+   ======================================== */
+
+.ad-container {
+  margin: 3rem auto;
+  text-align: center;
+  max-width: 728px;
+}
+
+.ad-container.ad-top {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.ad-container.ad-mid {
+  margin: 4rem auto;
+}
+
+.ad-container.ad-bottom {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+
+/* Placeholder styling (before AdSense approval) */
+.ad-placeholder {
+  background: rgba(232, 223, 200, 0.15);
+  border: 1px dashed var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  opacity: 0.5;
+}
+
+.ad-placeholder.ad-horizontal {
+  width: 100%;
+  max-width: 728px;
+  height: 90px;
+  margin: 0 auto;
+}
+
+.ad-placeholder.ad-rectangle {
+  width: 300px;
+  height: 250px;
+  margin: 0 auto;
+}
+
+.ad-label {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--paper-muted);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .ad-placeholder.ad-horizontal {
+    max-width: 320px;
+    height: 50px;
+  }
+
+  .ad-placeholder.ad-rectangle {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 18px;
+  }
+
+  .book-header {
+    padding: 3.5rem 1.5rem 2rem;
+  }
+
+  .content-wrap {
+    padding: 0 1.5rem 6rem;
+  }
+
+  .hero {
+    padding: 5rem 1.5rem 3rem;
+  }
+
+  .chapter-list {
+    padding: 0 1.5rem 5rem;
+  }
+
+  .title {
+    font-size: clamp(2.6rem, 12vw, 4rem);
+  }
+
+  .ch-location {
+    display: none;
+  }
+}
+
+@media print {
+  .ad-container,
+  .chapter-nav,
+  .site-footer {
+    display: none;
+  }
+}
