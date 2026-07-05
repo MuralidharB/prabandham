@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" class="cover">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cover — A Quantum Computing Primer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="cover">
+<div class="shell">
+<aside class="side"><p class="home-link"><a href="../index.html">← Prabandham</a></p><p class="brand"><a href="index.html">A Quantum Computing Primer</a></p>
+<p class="tagline">amplitude · phase · interference</p>
+<details open><summary>Contents</summary><nav aria-label="Book contents">
+<p class="part-label">Part I — Foundations</p><ol>
+<li><a href="ch01.html"><span class="ket">|0001⟩</span><span>Bits vs. Qubits</span></a></li>
+<li><a href="ch02.html"><span class="ket">|0010⟩</span><span>Registers, Classical and Quantum</span></a></li>
+<li><a href="ch03.html"><span class="ket">|0011⟩</span><span>Superposition &amp; Entanglement</span></a></li>
+</ol>
+<p class="part-label">Part II — Operations</p><ol>
+<li><a href="ch04.html"><span class="ket">|0100⟩</span><span>Gates: The Quantum Instruction Set</span></a></li>
+<li><a href="ch05.html"><span class="ket">|0101⟩</span><span>Amplitudes &amp; Phases</span></a></li>
+<li><a href="ch06.html"><span class="ket">|0110⟩</span><span>Measurement</span></a></li>
+</ol>
+<p class="part-label">Part III — The Algorithmic Core</p><ol>
+<li><a href="ch07.html"><span class="ket">|0111⟩</span><span>The Universal Pipeline</span></a></li>
+<li><a href="ch08.html"><span class="ket">|1000⟩</span><span>Quantum Primitives</span></a></li>
+</ol>
+<p class="part-label">Part IV — Power &amp; Limits</p><ol>
+<li><a href="ch09.html"><span class="ket">|1001⟩</span><span>Where Quantum Fits: Complexity</span></a></li>
+<li><a href="ch10.html"><span class="ket">|1010⟩</span><span>Two Algorithms in Full: Grover &amp; Shor</span></a></li>
+</ol>
+<p class="part-label">Part V — Consequences</p><ol>
+<li><a href="ch11.html"><span class="ket">|1011⟩</span><span>The Cryptographic Threat</span></a></li>
+</ol>
+</nav></details></aside>
+<main>
+
+
+<p class="eyebrow">A working primer · eleven chapters</p>
+<h1>A Quantum Computing Primer</h1>
+<p class="dek" style="max-width:60ch">From the state of a single qubit to the
+cryptographic migration it forces — organized around one recurring idea: quantum
+algorithms write answers in <span style="color:var(--phase);font-weight:600">phase</span>,
+then convert them to <span style="color:var(--amp);font-weight:600">amplitude</span>
+before measurement can look.</p>
+<p class="hero-ket">|ψ⟩ = <span class="am">α</span>|0⟩ + <span class="am">β</span>e<sup><span class="ph">iφ</span></sup>|1⟩</p>
+<p class="legend">notation used throughout — <span class="am">teal: amplitude</span> · <span class="ph">violet: phase</span> · chapters numbered as basis states</p>
+<div class="toc-grid"><h2 class="part-head">Part I — Foundations</h2><a class="toc-card" href="ch01.html"><span class="ket">|0001⟩</span><h3>Bits vs. Qubits</h3><p>The state of a classical bit is a fact. The state of a qubit is a direction.</p></a><a class="toc-card" href="ch02.html"><span class="ket">|0010⟩</span><h3>Registers, Classical and Quantum</h3><p>Why n qubits carry 2ⁿ amplitudes — and why you still can&#x27;t read them all.</p></a><a class="toc-card" href="ch03.html"><span class="ket">|0011⟩</span><h3>Superposition &amp; Entanglement</h3><p>From one qubit in two states at once to two qubits with no individual states at all.</p></a><h2 class="part-head">Part II — Operations</h2><a class="toc-card" href="ch04.html"><span class="ket">|0100⟩</span><h3>Gates: The Quantum Instruction Set</h3><p>Every quantum program is a sequence of rotations. A handful of them suffice.</p></a><a class="toc-card" href="ch05.html"><span class="ket">|0101⟩</span><h3>Amplitudes &amp; Phases</h3><p>Phase is physically real, computationally essential — and invisible until you rotate it.</p></a><a class="toc-card" href="ch06.html"><span class="ket">|0110⟩</span><h3>Measurement</h3><p>Collapse is a blunt instrument. Algorithms succeed by finishing their work before it falls.</p></a><h2 class="part-head">Part III — The Algorithmic Core</h2><a class="toc-card" href="ch07.html"><span class="ket">|0111⟩</span><h3>The Universal Pipeline</h3><p>Flat superposition → oracle → phase-to-amplitude conversion → measure. Every algorithm in this book is an instance of this sentence.</p></a><a class="toc-card" href="ch08.html"><span class="ket">|1000⟩</span><h3>Quantum Primitives</h3><p>The five reusable engines: QFT, amplitude amplification, Hamiltonian simulation, quantum walks, QSVT.</p></a><h2 class="part-head">Part IV — Power &amp; Limits</h2><a class="toc-card" href="ch09.html"><span class="ket">|1001⟩</span><h3>Where Quantum Fits: Complexity</h3><p>BQP among its neighbors — what quantum computers speed up, and what they don&#x27;t.</p></a><a class="toc-card" href="ch10.html"><span class="ket">|1010⟩</span><h3>Two Algorithms in Full: Grover &amp; Shor</h3><p>One quadratic, one exponential. Both are phase-to-amplitude conversion, dressed differently.</p></a><h2 class="part-head">Part V — Consequences</h2><a class="toc-card" href="ch11.html"><span class="ket">|1011⟩</span><h3>The Cryptographic Threat</h3><p>What Shor&#x27;s algorithm actually breaks, why the clock started before the hardware exists, and what migration looks like.</p></a></div>
+
+
+</main>
+</div>
+</body>
+</html>

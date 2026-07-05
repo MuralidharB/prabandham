@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Universal Pipeline — A Quantum Computing Primer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="side"><p class="home-link"><a href="../index.html">← Prabandham</a></p><p class="brand"><a href="index.html">A Quantum Computing Primer</a></p>
+<p class="tagline">amplitude · phase · interference</p>
+<details open><summary>Contents</summary><nav aria-label="Book contents">
+<p class="part-label">Part I — Foundations</p><ol>
+<li><a href="ch01.html"><span class="ket">|0001⟩</span><span>Bits vs. Qubits</span></a></li>
+<li><a href="ch02.html"><span class="ket">|0010⟩</span><span>Registers, Classical and Quantum</span></a></li>
+<li><a href="ch03.html"><span class="ket">|0011⟩</span><span>Superposition &amp; Entanglement</span></a></li>
+</ol>
+<p class="part-label">Part II — Operations</p><ol>
+<li><a href="ch04.html"><span class="ket">|0100⟩</span><span>Gates: The Quantum Instruction Set</span></a></li>
+<li><a href="ch05.html"><span class="ket">|0101⟩</span><span>Amplitudes &amp; Phases</span></a></li>
+<li><a href="ch06.html"><span class="ket">|0110⟩</span><span>Measurement</span></a></li>
+</ol>
+<p class="part-label">Part III — The Algorithmic Core</p><ol>
+<li><a href="ch07.html" aria-current="page"><span class="ket">|0111⟩</span><span>The Universal Pipeline</span></a></li>
+<li><a href="ch08.html"><span class="ket">|1000⟩</span><span>Quantum Primitives</span></a></li>
+</ol>
+<p class="part-label">Part IV — Power &amp; Limits</p><ol>
+<li><a href="ch09.html"><span class="ket">|1001⟩</span><span>Where Quantum Fits: Complexity</span></a></li>
+<li><a href="ch10.html"><span class="ket">|1010⟩</span><span>Two Algorithms in Full: Grover &amp; Shor</span></a></li>
+</ol>
+<p class="part-label">Part V — Consequences</p><ol>
+<li><a href="ch11.html"><span class="ket">|1011⟩</span><span>The Cryptographic Threat</span></a></li>
+</ol>
+</nav></details></aside>
+<main>
+<p class="eyebrow"><span class="ket">|0111⟩</span> &nbsp;Part III — The Algorithmic Core</p><h1>The Universal Pipeline</h1><p class="dek">Flat superposition → oracle → phase-to-amplitude conversion → measure. Every algorithm in this book is an instance of this sentence.</p>
+
+<p>Strip away the specifics of any quantum algorithm and the same skeleton remains.
+This chapter is the thesis of the book; Parts III–IV are its evidence.</p>
+<div class="math">flat superposition &nbsp;→&nbsp; oracle / compute &nbsp;→&nbsp; <span class="ph">phase</span>-to-<span class="am">amplitude</span> conversion &nbsp;→&nbsp; measure</div>
+<p class="legend">notation — <span class="am">teal: amplitude</span> · <span class="ph">violet: phase</span></p>
+<h2>Stage 1 — Flat superposition</h2>
+<p>Hadamards across the register produce equal amplitude on all 2ⁿ inputs. Like a
+diffraction grating illuminated evenly, this stage contains no answer — it prepares
+a canvas on which interference can paint one.</p>
+<h2>Stage 2 — Oracle / compute</h2>
+<p>A reversible computation imprints the problem's structure onto the state — almost
+always as <em>phase</em>. Grover's oracle flips the sign of the marked item. Shor's
+modular exponentiation entangles the control register with function values, encoding
+the period in relative phases. Critically, the standard-basis statistics are still
+flat after this stage: the answer is written where measurement cannot see it.</p>
+<h2>Stage 3 — Phase-to-amplitude conversion</h2>
+<p>The signature move. A carefully chosen unitary makes the phase pattern interfere:
+components pointing the same way reinforce; opposed components cancel. Grover's
+diffusion operator and Shor's inverse QFT are the two converters you will study in
+chapter |1010⟩ — different machinery, identical job. Probability mass flows toward
+answer-encoding strings.</p>
+<h2>Stage 4 — Measure</h2>
+<p>Now, and only now, the blunt instrument falls — onto a distribution the algorithm
+has spent its whole run sharpening.</p>
+<figure class="fig"><svg viewBox="0 0 780 265" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The universal quantum algorithm pipeline: flatten, phase-mark, convert phase to amplitude, measure"><defs>
+<marker id="ah-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--phase)"/></marker>
+<marker id="ah-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--amp)"/></marker>
+<marker id="ah-i" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/></marker>
+</defs><rect x="30" y="129" width="14" height="46" fill="var(--amp)" rx="1.5"/><rect x="48" y="129" width="14" height="46" fill="var(--amp)" rx="1.5"/><rect x="66" y="129" width="14" height="46" fill="var(--amp)" rx="1.5"/><rect x="84" y="129" width="14" height="46" fill="var(--amp)" rx="1.5"/><rect x="102" y="129" width="14" height="46" fill="var(--amp)" rx="1.5"/><rect x="120" y="129" width="14" height="46" fill="var(--amp)" rx="1.5"/><rect x="138" y="129" width="14" height="46" fill="var(--amp)" rx="1.5"/><rect x="156" y="129" width="14" height="46" fill="var(--amp)" rx="1.5"/><rect x="225" y="129" width="14" height="46" fill="#AEBCB6" rx="1.5"/><rect x="243" y="129" width="14" height="46" fill="#AEBCB6" rx="1.5"/><rect x="261" y="129" width="14" height="46" fill="#AEBCB6" rx="1.5"/><rect x="279" y="129" width="14" height="46" fill="#AEBCB6" rx="1.5"/><rect x="297" y="129" width="14" height="46" fill="#AEBCB6" rx="1.5"/><rect x="315" y="129" width="14" height="46" fill="var(--amp)" rx="1.5"/><rect x="313" y="127" width="18" height="50" fill="none" stroke="var(--phase)" stroke-width="2"/><text x="322.0" y="191" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="600" fill="var(--phase)" text-anchor="middle" style="">−</text><rect x="333" y="129" width="14" height="46" fill="#AEBCB6" rx="1.5"/><rect x="351" y="129" width="14" height="46" fill="#AEBCB6" rx="1.5"/><rect x="420" y="165" width="14" height="10" fill="#AEBCB6" rx="1.5"/><rect x="438" y="165" width="14" height="10" fill="#AEBCB6" rx="1.5"/><rect x="456" y="165" width="14" height="10" fill="#AEBCB6" rx="1.5"/><rect x="474" y="165" width="14" height="10" fill="#AEBCB6" rx="1.5"/><rect x="492" y="165" width="14" height="10" fill="#AEBCB6" rx="1.5"/><rect x="510" y="47" width="14" height="128" fill="var(--amp)" rx="1.5"/><rect x="528" y="165" width="14" height="10" fill="#AEBCB6" rx="1.5"/><rect x="546" y="165" width="14" height="10" fill="#AEBCB6" rx="1.5"/><path d="M 628.0 175 A 62 62 0 0 1 752.0 175" fill="none" stroke="var(--rule)" stroke-width="8"/><line x1="690.0" y1="175" x2="730.0" y2="129" stroke="var(--ink)" stroke-width="3" marker-end="url(#ah-i)"/><circle cx="690.0" cy="175" r="5" fill="var(--ink)"/><text x="690.0" y="195" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="600" fill="var(--amp)" text-anchor="middle" style="">|101⟩</text><line x1="24" y1="175" x2="180" y2="175" stroke="var(--ink)" stroke-width="1.5"/><text x="105.0" y="218" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="var(--ink)" text-anchor="middle" style="letter-spacing:.1em">1 · FLATTEN</text><text x="105.0" y="238" font-family="Archivo, sans-serif" font-size="12" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">equal amplitude</text><line x1="188" y1="120" x2="211" y2="120" stroke="var(--ink)" stroke-width="2" marker-end="url(#ah-i)"/><line x1="219" y1="175" x2="375" y2="175" stroke="var(--ink)" stroke-width="1.5"/><text x="300.0" y="218" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="var(--ink)" text-anchor="middle" style="letter-spacing:.1em">2 · PHASE-MARK</text><text x="300.0" y="238" font-family="Archivo, sans-serif" font-size="12" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">answer sign-flipped</text><line x1="383" y1="120" x2="406" y2="120" stroke="var(--ink)" stroke-width="2" marker-end="url(#ah-i)"/><line x1="414" y1="175" x2="570" y2="175" stroke="var(--ink)" stroke-width="1.5"/><text x="495.0" y="218" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="var(--ink)" text-anchor="middle" style="letter-spacing:.1em">3 · CONVERT</text><text x="495.0" y="238" font-family="Archivo, sans-serif" font-size="12" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">phase → amplitude</text><line x1="578" y1="120" x2="601" y2="120" stroke="var(--ink)" stroke-width="2" marker-end="url(#ah-i)"/><line x1="609" y1="175" x2="765" y2="175" stroke="var(--ink)" stroke-width="1.5"/><text x="690.0" y="218" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="var(--ink)" text-anchor="middle" style="letter-spacing:.1em">4 · MEASURE</text><text x="690.0" y="238" font-family="Archivo, sans-serif" font-size="12" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">one loud outcome</text><text x="300.0" y="58" font-family="Archivo, sans-serif" font-size="12" font-weight="500" fill="var(--phase)" text-anchor="middle" style="">statistics still flat —</text><text x="300.0" y="76" font-family="Archivo, sans-serif" font-size="12" font-weight="500" fill="var(--phase)" text-anchor="middle" style="">answer hidden in phase</text><text x="495.0" y="30" font-family="Archivo, sans-serif" font-size="12" font-weight="500" fill="var(--amp)" text-anchor="middle" style="">interference moves the mass</text></svg><figcaption>The four-stage pipeline. After stage 2 the statistics are still flat: the violet phase mark is invisible to measurement until stage 3 converts it into the tall teal bar.</figcaption></figure>
+<h2>Why this shape is forced</h2>
+<p>Each stage answers a constraint from Part I. Flat superposition exploits the
+exponential state space (ch. |0010⟩). Phase encoding works because phase is real but
+statistically invisible (ch. |0101⟩). Conversion is required because measurement only
+sees magnitudes (ch. |0110⟩). The pipeline isn't a convention — it is the unique
+shape of an algorithm that respects what quantum mechanics gives and withholds.</p>
+
+<div class="pager"><a class="prev" href="ch06.html"><small>← Previous · |0110⟩</small>Measurement</a><a class="next" href="ch08.html"><small>Next · |1000⟩ →</small>Quantum Primitives</a></div>
+</main>
+</div>
+</body>
+</html>

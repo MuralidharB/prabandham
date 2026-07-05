@@ -1,0 +1,155 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --paper:#EFF1ED; --panel:#F7F8F5; --ink:#1B2432; --faint:#5A6472;
+  --grid:#DDE2DC; --amp:#1F6F6B; --phase:#6B4FA0; --rule:#C7CDC4;
+  --maxch:70ch;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font:400 1.06rem/1.72 "Source Serif 4", Georgia, serif;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:32px 32px;
+}
+a{color:var(--amp); text-decoration-thickness:1px; text-underline-offset:3px}
+a:hover{color:var(--phase)}
+a:focus-visible, button:focus-visible, summary:focus-visible{
+  outline:2px solid var(--phase); outline-offset:3px; border-radius:2px}
+code, .ket, .math{font-family:"IBM Plex Mono", monospace}
+
+/* ---- shell: sidebar + main ---- */
+.shell{display:grid; grid-template-columns:280px 1fr; min-height:100vh}
+.side{
+  border-right:1px solid var(--rule); background:var(--panel);
+  padding:2rem 1.4rem; position:sticky; top:0; height:100vh; overflow-y:auto}
+.side .brand{font:800 1.05rem/1.2 Archivo,sans-serif; letter-spacing:.02em;
+  text-transform:uppercase; margin:0 0 .25rem}
+.side .brand a{color:var(--ink); text-decoration:none}
+.side .tagline{font:500 .72rem/1.5 "IBM Plex Mono",monospace; color:var(--faint);
+  margin:0 0 1.6rem}
+.side .home-link{font:600 .66rem/1 "IBM Plex Mono",monospace; letter-spacing:.12em;
+  text-transform:uppercase; margin:0 0 1rem}
+.side .home-link a{color:var(--faint); text-decoration:none}
+.side .home-link a:hover{color:var(--phase)}
+.side nav{font-family:Archivo,sans-serif; font-size:.85rem}
+.part-label{font:600 .68rem/1 "IBM Plex Mono",monospace; color:var(--faint);
+  letter-spacing:.14em; text-transform:uppercase; margin:1.3rem 0 .5rem;
+  border-top:1px solid var(--rule); padding-top:.9rem}
+.side nav ol{list-style:none; margin:0; padding:0}
+.side nav li{margin:.32rem 0}
+.side nav a{color:var(--ink); text-decoration:none; display:flex; gap:.55rem;
+  align-items:baseline; padding:.14rem .3rem; border-radius:3px}
+.side nav a:hover{background:var(--grid)}
+.side nav a[aria-current="page"]{background:var(--ink); color:var(--paper)}
+.side nav a[aria-current="page"] .ket{color:#9FD9CF}
+.side nav .ket{color:var(--amp); font-size:.72rem; white-space:nowrap}
+
+main{padding:3.2rem clamp(1.2rem,5vw,4.5rem); max-width:calc(var(--maxch) + 9rem)}
+.eyebrow{font:600 .74rem/1 "IBM Plex Mono",monospace; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--faint); margin:0 0 .8rem}
+.eyebrow .ket{color:var(--amp); font-size:.95em; letter-spacing:0}
+h1{font:800 clamp(1.9rem,4vw,2.7rem)/1.12 Archivo,sans-serif;
+  letter-spacing:-.015em; margin:.1rem 0 .6rem}
+.dek{font-style:italic; color:var(--faint); font-size:1.12rem; margin:0 0 2.2rem;
+  max-width:var(--maxch)}
+h2{font:700 1.28rem/1.3 Archivo,sans-serif; margin:2.6rem 0 .7rem;
+  padding-top:1.4rem; border-top:1px solid var(--rule)}
+h3{font:700 1.02rem/1.35 Archivo,sans-serif; margin:1.8rem 0 .4rem}
+p, ul, ol{max-width:var(--maxch)}
+li{margin:.3rem 0}
+strong{font-weight:600}
+
+/* ---- math + notation ---- */
+.math{
+  display:block; background:var(--panel); border:1px solid var(--rule);
+  border-left:3px solid var(--amp); padding:1rem 1.3rem; margin:1.3rem 0;
+  font-size:.98rem; line-height:1.9; overflow-x:auto; max-width:var(--maxch)}
+.math .ph{color:var(--phase); font-weight:600}
+.math .am{color:var(--amp); font-weight:600}
+.legend{font:500 .74rem/1.5 "IBM Plex Mono",monospace; color:var(--faint);
+  margin:-.7rem 0 1.3rem}
+.legend .am{color:var(--amp)} .legend .ph{color:var(--phase)}
+
+/* ---- callouts & figures ---- */
+.note{background:var(--panel); border:1px solid var(--rule);
+  border-left:3px solid var(--phase); padding:.9rem 1.2rem; margin:1.4rem 0;
+  max-width:var(--maxch)}
+.note .tag{font:600 .68rem/1 "IBM Plex Mono",monospace; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--phase); display:block; margin-bottom:.35rem}
+figure.dropin{
+  border:1.5px dashed var(--faint); background:repeating-linear-gradient(
+    -45deg, transparent 0 14px, rgba(107,79,160,.05) 14px 28px);
+  padding:2.2rem 1.4rem; margin:1.6rem 0; text-align:center;
+  max-width:var(--maxch); border-radius:4px}
+figure.dropin .tag{font:600 .7rem/1 "IBM Plex Mono",monospace;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--phase)}
+figure.dropin p{margin:.5rem auto 0; font-size:.92rem; color:var(--faint)}
+table{border-collapse:collapse; margin:1.4rem 0; font-size:.94rem; max-width:var(--maxch)}
+th,td{border:1px solid var(--rule); padding:.5rem .8rem; text-align:left;
+  vertical-align:top; background:var(--panel)}
+th{font:700 .8rem/1.3 Archivo,sans-serif; text-transform:uppercase;
+  letter-spacing:.06em}
+
+/* ---- pager ---- */
+.pager{display:flex; justify-content:space-between; gap:1rem; margin-top:3.5rem;
+  border-top:1px solid var(--rule); padding-top:1.4rem; max-width:var(--maxch)}
+.pager a{font:700 .88rem/1.4 Archivo,sans-serif; text-decoration:none;
+  color:var(--ink); max-width:46%}
+.pager a small{display:block; font:600 .66rem/1 "IBM Plex Mono",monospace;
+  color:var(--faint); letter-spacing:.14em; text-transform:uppercase;
+  margin-bottom:.3rem}
+.pager a:hover{color:var(--amp)}
+.pager .next{text-align:right; margin-left:auto}
+
+/* ---- cover ---- */
+.cover main{max-width:none; padding-top:4rem}
+.cover .hero-ket{font:600 clamp(1.2rem,3vw,1.9rem)/1.4 "IBM Plex Mono",monospace;
+  margin:2.2rem 0 .4rem}
+.cover .hero-ket .am{color:var(--amp)} .cover .hero-ket .ph{color:var(--phase)}
+.cover h1{font-size:clamp(2.6rem,6vw,4.2rem); max-width:16ch}
+.toc-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:1rem; margin-top:2.4rem; max-width:1100px}
+.toc-card{background:var(--panel); border:1px solid var(--rule); padding:1.1rem 1.2rem;
+  text-decoration:none; color:var(--ink); border-radius:4px; display:block}
+.toc-card:hover{border-color:var(--amp); color:var(--ink)}
+.toc-card .ket{font:600 .74rem/1 "IBM Plex Mono",monospace; color:var(--amp)}
+.toc-card h3{margin:.45rem 0 .25rem; font-size:1.02rem}
+.toc-card p{margin:0; font-size:.88rem; color:var(--faint)}
+.part-head{grid-column:1/-1; margin:1.2rem 0 -.2rem}
+
+/* ---- responsive ---- */
+@media (max-width:920px){
+  .shell{grid-template-columns:1fr}
+  .side{position:static; height:auto; border-right:0;
+    border-bottom:1px solid var(--rule)}
+  .side details{margin-top:.4rem}
+  .side summary{font:700 .85rem/1 Archivo,sans-serif; cursor:pointer;
+    padding:.4rem 0}
+}
+@media (min-width:921px){ .side details{display:contents}
+  .side summary{display:none} }
+
+/* ---- annotated deep-dive: intuition blocks ---- */
+.plain{background:transparent; border-left:3px solid var(--phase);
+  padding:.15rem 1.1rem; margin:.9rem 0 1.5rem; max-width:var(--maxch);
+  font-style:italic; color:#3E4756}
+.plain .tag{font:600 .66rem/1 "IBM Plex Mono",monospace; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--phase); font-style:normal;
+  display:block; margin-bottom:.2rem}
+.deep-dive-head{margin-top:3rem; border-top:3px double var(--rule);
+  padding-top:1.6rem}
+.deep-dive-head .tag{font:600 .7rem/1 "IBM Plex Mono",monospace;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--amp)}
+
+/* ---- rendered figures ---- */
+figure.fig{margin:1.8rem 0; max-width:var(--maxch); padding:0}
+figure.fig svg{width:100%; height:auto; display:block; background:var(--panel);
+  border:1px solid var(--rule); border-radius:5px}
+figure.fig figcaption{font:500 .8rem/1.55 "IBM Plex Mono",monospace;
+  color:var(--faint); margin-top:.55rem}

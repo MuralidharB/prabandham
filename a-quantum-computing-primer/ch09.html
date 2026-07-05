@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where Quantum Fits: Complexity — A Quantum Computing Primer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="side"><p class="home-link"><a href="../index.html">← Prabandham</a></p><p class="brand"><a href="index.html">A Quantum Computing Primer</a></p>
+<p class="tagline">amplitude · phase · interference</p>
+<details open><summary>Contents</summary><nav aria-label="Book contents">
+<p class="part-label">Part I — Foundations</p><ol>
+<li><a href="ch01.html"><span class="ket">|0001⟩</span><span>Bits vs. Qubits</span></a></li>
+<li><a href="ch02.html"><span class="ket">|0010⟩</span><span>Registers, Classical and Quantum</span></a></li>
+<li><a href="ch03.html"><span class="ket">|0011⟩</span><span>Superposition &amp; Entanglement</span></a></li>
+</ol>
+<p class="part-label">Part II — Operations</p><ol>
+<li><a href="ch04.html"><span class="ket">|0100⟩</span><span>Gates: The Quantum Instruction Set</span></a></li>
+<li><a href="ch05.html"><span class="ket">|0101⟩</span><span>Amplitudes &amp; Phases</span></a></li>
+<li><a href="ch06.html"><span class="ket">|0110⟩</span><span>Measurement</span></a></li>
+</ol>
+<p class="part-label">Part III — The Algorithmic Core</p><ol>
+<li><a href="ch07.html"><span class="ket">|0111⟩</span><span>The Universal Pipeline</span></a></li>
+<li><a href="ch08.html"><span class="ket">|1000⟩</span><span>Quantum Primitives</span></a></li>
+</ol>
+<p class="part-label">Part IV — Power &amp; Limits</p><ol>
+<li><a href="ch09.html" aria-current="page"><span class="ket">|1001⟩</span><span>Where Quantum Fits: Complexity</span></a></li>
+<li><a href="ch10.html"><span class="ket">|1010⟩</span><span>Two Algorithms in Full: Grover &amp; Shor</span></a></li>
+</ol>
+<p class="part-label">Part V — Consequences</p><ol>
+<li><a href="ch11.html"><span class="ket">|1011⟩</span><span>The Cryptographic Threat</span></a></li>
+</ol>
+</nav></details></aside>
+<main>
+<p class="eyebrow"><span class="ket">|1001⟩</span> &nbsp;Part IV — Power &amp; Limits</p><h1>Where Quantum Fits: Complexity</h1><p class="dek">BQP among its neighbors — what quantum computers speed up, and what they don&#x27;t.</p>
+
+<p>Quantum computers do not “try everything in parallel and pick the best.” Their
+power is precise, bounded, and best expressed in the language of complexity classes.</p>
+<h2>BQP and its neighbors</h2>
+<p><strong>BQP</strong> — bounded-error quantum polynomial time — is the class of
+problems a quantum computer solves efficiently with high probability. What is known,
+and what is believed:</p>
+<ul>
+<li><strong>P ⊆ BQP</strong>: quantum computers can do everything classical ones can,
+efficiently. (Reversible simulation of classical circuits.)</li>
+<li><strong>BQP ⊆ PSPACE</strong>: a classical machine with enough memory can simulate
+any quantum computation — slowly. Quantum computers compute nothing
+<em>uncomputable</em>; they change costs, not possibility.</li>
+<li><strong>Factoring ∈ BQP</strong> (Shor), while it is believed to lie outside P —
+the flagship evidence that BQP strictly exceeds classical polynomial time.</li>
+<li><strong>NP-complete problems are believed to lie outside BQP.</strong> Grover gives
+a quadratic — not exponential — speedup on brute-force search, and the BBBV theorem
+proves the quadratic is optimal for unstructured problems.</li>
+</ul>
+<h2>The shape of quantum advantage</h2>
+<p>The pattern from Part III explains the boundary: exponential speedups appear where
+the problem has <em>algebraic structure a converter can exploit</em> — periodicity for
+the QFT, physical dynamics for Hamiltonian simulation. Where there is no structure,
+only the generic √-speedup of amplitude amplification remains. Quantum computing is
+a scalpel for structured problems, not a hammer for hard ones.</p>
+<figure class="fig"><svg viewBox="0 0 700 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Complexity landscape: P inside the intersection of NP and BQP, all inside PSPACE; factoring in BQP beyond P; NP-complete believed outside BQP"><defs>
+<marker id="ah-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--phase)"/></marker>
+<marker id="ah-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--amp)"/></marker>
+<marker id="ah-i" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/></marker>
+</defs><rect x="18" y="18" width="664" height="394" fill="none" stroke="var(--ink)" stroke-width="1.5" rx="10"/><text x="660" y="46" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="600" fill="var(--ink)" text-anchor="end" style="">PSPACE</text><ellipse cx="270" cy="220" rx="212" ry="152" fill="var(--phase)" opacity="0.08"/><ellipse cx="270" cy="220" rx="212" ry="152" fill="none" stroke="var(--phase)" stroke-width="2"/><ellipse cx="432" cy="220" rx="212" ry="152" fill="var(--amp)" opacity="0.08"/><ellipse cx="432" cy="220" rx="212" ry="152" fill="none" stroke="var(--amp)" stroke-width="2"/><text x="150" y="92" font-family="IBM Plex Mono, monospace" font-size="16" font-weight="600" fill="var(--phase)" text-anchor="middle" style="">NP</text><text x="556" y="92" font-family="IBM Plex Mono, monospace" font-size="16" font-weight="600" fill="var(--amp)" text-anchor="middle" style="">BQP</text><circle cx="351" cy="252" r="66" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.8"/><text x="351" y="250" font-family="IBM Plex Mono, monospace" font-size="16" font-weight="600" fill="var(--ink)" text-anchor="middle" style="">P</text><text x="351" y="272" font-family="Archivo, sans-serif" font-size="10.5" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">classical, efficient</text><text x="351" y="128" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="var(--ink)" text-anchor="middle" style="">factoring · discrete log</text><text x="351" y="146" font-family="Archivo, sans-serif" font-size="11" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">in BQP, believed outside P — Shor</text><text x="146" y="222" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="var(--ink)" text-anchor="middle" style="">NP-complete</text><text x="146" y="240" font-family="Archivo, sans-serif" font-size="11" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">SAT · TSP</text><text x="146" y="256" font-family="Archivo, sans-serif" font-size="10.5" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">believed outside BQP;</text><text x="146" y="270" font-family="Archivo, sans-serif" font-size="10.5" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">Grover: √ speedup only</text><text x="576" y="222" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="var(--ink)" text-anchor="middle" style="">quantum</text><text x="576" y="238" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="var(--ink)" text-anchor="middle" style="">simulation</text><text x="576" y="256" font-family="Archivo, sans-serif" font-size="10.5" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">natively quantum;</text><text x="576" y="270" font-family="Archivo, sans-serif" font-size="10.5" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">not known in NP</text><text x="350.0" y="404" font-family="Archivo, sans-serif" font-size="11" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">containments P ⊆ BQP ⊆ PSPACE are proven; every separation shown is conjectured</text></svg><figcaption>The landscape as best believed today. Quantum advantage lives in the crescent of BQP beyond P — structured problems like factoring — not in the NP-complete region.</figcaption></figure>
+<div class="note"><span class="tag">Keep this</span>
+Three anchors: quantum ⊇ classical (P ⊆ BQP); quantum ≤ exponential classical
+(BQP ⊆ PSPACE); and the interesting middle — factoring-like structured problems —
+is where the field's consequences, including Part V's, live.</div>
+
+<div class="pager"><a class="prev" href="ch08.html"><small>← Previous · |1000⟩</small>Quantum Primitives</a><a class="next" href="ch10.html"><small>Next · |1010⟩ →</small>Two Algorithms in Full: Grover &amp; Shor</a></div>
+</main>
+</div>
+</body>
+</html>

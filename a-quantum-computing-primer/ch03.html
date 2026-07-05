@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Superposition &amp; Entanglement — A Quantum Computing Primer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="side"><p class="home-link"><a href="../index.html">← Prabandham</a></p><p class="brand"><a href="index.html">A Quantum Computing Primer</a></p>
+<p class="tagline">amplitude · phase · interference</p>
+<details open><summary>Contents</summary><nav aria-label="Book contents">
+<p class="part-label">Part I — Foundations</p><ol>
+<li><a href="ch01.html"><span class="ket">|0001⟩</span><span>Bits vs. Qubits</span></a></li>
+<li><a href="ch02.html"><span class="ket">|0010⟩</span><span>Registers, Classical and Quantum</span></a></li>
+<li><a href="ch03.html" aria-current="page"><span class="ket">|0011⟩</span><span>Superposition &amp; Entanglement</span></a></li>
+</ol>
+<p class="part-label">Part II — Operations</p><ol>
+<li><a href="ch04.html"><span class="ket">|0100⟩</span><span>Gates: The Quantum Instruction Set</span></a></li>
+<li><a href="ch05.html"><span class="ket">|0101⟩</span><span>Amplitudes &amp; Phases</span></a></li>
+<li><a href="ch06.html"><span class="ket">|0110⟩</span><span>Measurement</span></a></li>
+</ol>
+<p class="part-label">Part III — The Algorithmic Core</p><ol>
+<li><a href="ch07.html"><span class="ket">|0111⟩</span><span>The Universal Pipeline</span></a></li>
+<li><a href="ch08.html"><span class="ket">|1000⟩</span><span>Quantum Primitives</span></a></li>
+</ol>
+<p class="part-label">Part IV — Power &amp; Limits</p><ol>
+<li><a href="ch09.html"><span class="ket">|1001⟩</span><span>Where Quantum Fits: Complexity</span></a></li>
+<li><a href="ch10.html"><span class="ket">|1010⟩</span><span>Two Algorithms in Full: Grover &amp; Shor</span></a></li>
+</ol>
+<p class="part-label">Part V — Consequences</p><ol>
+<li><a href="ch11.html"><span class="ket">|1011⟩</span><span>The Cryptographic Threat</span></a></li>
+</ol>
+</nav></details></aside>
+<main>
+<p class="eyebrow"><span class="ket">|0011⟩</span> &nbsp;Part I — Foundations</p><h1>Superposition &amp; Entanglement</h1><p class="dek">From one qubit in two states at once to two qubits with no individual states at all.</p>
+
+<p>Superposition is a single system carrying amplitude over multiple outcomes at once.
+Entanglement is what happens when superposition spans <em>multiple</em> systems: the
+joint state is definite, but the parts no longer have states of their own.</p>
+<h2>The Bell pair</h2>
+<p>The canonical entangled state of two qubits:</p>
+<div class="math">|Φ⁺⟩ = ( |00⟩ + |11⟩ ) / √2</div>
+<p>Half the amplitude on “both zero,” half on “both one,” and — crucially —
+<strong>nothing</strong> on |01⟩ or |10⟩. Measure either qubit and you get a random bit;
+but the other qubit's outcome is then fixed to match, regardless of distance.</p>
+<h3>Non-factorability is the definition</h3>
+<p>Try to write |Φ⁺⟩ as (a|0⟩+b|1⟩) ⊗ (c|0⟩+d|1⟩). Expanding gives
+ac|00⟩ + ad|01⟩ + bc|10⟩ + bd|11⟩. Killing the cross terms forces ad = bc = 0,
+which then kills either the |00⟩ or the |11⟩ term too. No factorization exists.
+That failure <em>is</em> entanglement: correlation that cannot be decomposed into
+separate local descriptions.</p>
+<h3>The two-gate recipe</h3>
+<p>Start at |00⟩. Hadamard on qubit A spreads amplitude: (|00⟩+|10⟩)/√2. CNOT with
+A as control copies the correlation: (|00⟩+|11⟩)/√2. Spread, then correlate — two
+gates, and you have the unit currency of entanglement.</p>
+<h2>Four Bell states, one basis</h2>
+<p>Varying the sign and the pairing gives |Φ⁻⟩ = (|00⟩−|11⟩)/√2,
+|Ψ⁺⟩ = (|01⟩+|10⟩)/√2, and |Ψ⁻⟩ = (|01⟩−|10⟩)/√2. Together the four form an
+orthonormal basis for the two-qubit space — the working alphabet of teleportation,
+superdense coding, and entanglement-based QKD.</p>
+<div class="note"><span class="tag">Scaling up</span>
+The register states inside Shor's algorithm — where a control register becomes
+correlated with the values of modular exponentiation — are this same phenomenon at
+scale. A Bell pair is the two-qubit special case of the correlations every serious
+quantum algorithm builds and then harvests through interference.</div>
+
+<div class="pager"><a class="prev" href="ch02.html"><small>← Previous · |0010⟩</small>Registers, Classical and Quantum</a><a class="next" href="ch04.html"><small>Next · |0100⟩ →</small>Gates: The Quantum Instruction Set</a></div>
+</main>
+</div>
+</body>
+</html>

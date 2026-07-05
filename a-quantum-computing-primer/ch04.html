@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gates: The Quantum Instruction Set — A Quantum Computing Primer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="side"><p class="home-link"><a href="../index.html">← Prabandham</a></p><p class="brand"><a href="index.html">A Quantum Computing Primer</a></p>
+<p class="tagline">amplitude · phase · interference</p>
+<details open><summary>Contents</summary><nav aria-label="Book contents">
+<p class="part-label">Part I — Foundations</p><ol>
+<li><a href="ch01.html"><span class="ket">|0001⟩</span><span>Bits vs. Qubits</span></a></li>
+<li><a href="ch02.html"><span class="ket">|0010⟩</span><span>Registers, Classical and Quantum</span></a></li>
+<li><a href="ch03.html"><span class="ket">|0011⟩</span><span>Superposition &amp; Entanglement</span></a></li>
+</ol>
+<p class="part-label">Part II — Operations</p><ol>
+<li><a href="ch04.html" aria-current="page"><span class="ket">|0100⟩</span><span>Gates: The Quantum Instruction Set</span></a></li>
+<li><a href="ch05.html"><span class="ket">|0101⟩</span><span>Amplitudes &amp; Phases</span></a></li>
+<li><a href="ch06.html"><span class="ket">|0110⟩</span><span>Measurement</span></a></li>
+</ol>
+<p class="part-label">Part III — The Algorithmic Core</p><ol>
+<li><a href="ch07.html"><span class="ket">|0111⟩</span><span>The Universal Pipeline</span></a></li>
+<li><a href="ch08.html"><span class="ket">|1000⟩</span><span>Quantum Primitives</span></a></li>
+</ol>
+<p class="part-label">Part IV — Power &amp; Limits</p><ol>
+<li><a href="ch09.html"><span class="ket">|1001⟩</span><span>Where Quantum Fits: Complexity</span></a></li>
+<li><a href="ch10.html"><span class="ket">|1010⟩</span><span>Two Algorithms in Full: Grover &amp; Shor</span></a></li>
+</ol>
+<p class="part-label">Part V — Consequences</p><ol>
+<li><a href="ch11.html"><span class="ket">|1011⟩</span><span>The Cryptographic Threat</span></a></li>
+</ol>
+</nav></details></aside>
+<main>
+<p class="eyebrow"><span class="ket">|0100⟩</span> &nbsp;Part II — Operations</p><h1>Gates: The Quantum Instruction Set</h1><p class="dek">Every quantum program is a sequence of rotations. A handful of them suffice.</p>
+
+<p>Quantum gates are unitary matrices — reversible, length-preserving linear maps on
+the state vector. Geometrically, every single-qubit gate is a rotation of the Bloch
+sphere. There is no “if,” no “write,” no erase: just rotations, composed.</p>
+<h2>The working set</h2>
+<table>
+<tr><th>Gate</th><th>Action</th><th>Role</th></tr>
+<tr><td><strong>X</strong></td><td>|0⟩ ↔ |1⟩</td><td>Bit flip (quantum NOT)</td></tr>
+<tr><td><strong>Z</strong></td><td>|1⟩ → −|1⟩</td><td>Phase flip — invisible in the standard basis, decisive under interference</td></tr>
+<tr><td><strong>H</strong></td><td>|0⟩ → |+⟩, |1⟩ → |−⟩</td><td>Superposition maker and basis rotator — the phase-to-amplitude workhorse</td></tr>
+<tr><td><strong>S, T</strong></td><td>|1⟩ → i|1⟩, e^{iπ/4}|1⟩</td><td>Finer phase rotations; T unlocks universality</td></tr>
+<tr><td><strong>CNOT</strong></td><td>Flip target iff control is |1⟩</td><td>The entangler; correlation between qubits</td></tr>
+</table>
+<h2>Universality</h2>
+<p>Just as NAND suffices for classical logic, a small set — for instance
+{H, T, CNOT} — can approximate any n-qubit unitary to arbitrary precision. Every
+algorithm in Part III compiles down to circuits over a set like this.</p>
+<h2>Reading a circuit</h2>
+<p>Time flows left to right; each wire is a qubit; gates are boxes on wires; a
+measurement symbol terminates a wire into a classical bit. The Hadamard deserves
+special respect in this notation: applied across a whole register of |0⟩s, it
+produces the uniform superposition over all 2ⁿ strings — step one of nearly every
+algorithm you will meet.</p>
+<figure class="fig"><svg viewBox="0 0 780 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Quantum gate instruction-set reference card: X, Z, H, S, T, CNOT with circuit symbols, actions, and roles"><defs>
+<marker id="ah-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--phase)"/></marker>
+<marker id="ah-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--amp)"/></marker>
+<marker id="ah-i" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/></marker>
+</defs><rect x="18" y="24" width="240" height="205" fill="var(--panel)" stroke="var(--rule)" rx="5"/><line x1="46" y1="86" x2="230" y2="86" stroke="var(--ink)" stroke-width="1.5"/><rect x="114.0" y="62" width="48" height="48" fill="var(--paper)" stroke="var(--amp)" stroke-width="2.5" rx="4"/><text x="138.0" y="94" font-family="IBM Plex Mono, monospace" font-size="22" font-weight="600" fill="var(--ink)" text-anchor="middle" style="">X</text><text x="138.0" y="146" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--faint)" text-anchor="middle" style="letter-spacing:.12em">BIT FLIP</text><text x="138.0" y="172" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="500" fill="var(--ink)" text-anchor="middle" style="">|0⟩ ↔ |1⟩</text><text x="138.0" y="200" font-family="Archivo, sans-serif" font-size="12.5" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">amplitude mover</text><rect x="272" y="24" width="240" height="205" fill="var(--panel)" stroke="var(--rule)" rx="5"/><line x1="300" y1="86" x2="484" y2="86" stroke="var(--ink)" stroke-width="1.5"/><rect x="368.0" y="62" width="48" height="48" fill="var(--paper)" stroke="var(--amp)" stroke-width="2.5" rx="4"/><text x="392.0" y="94" font-family="IBM Plex Mono, monospace" font-size="22" font-weight="600" fill="var(--ink)" text-anchor="middle" style="">Z</text><text x="392.0" y="146" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--faint)" text-anchor="middle" style="letter-spacing:.12em">PHASE FLIP</text><text x="392.0" y="172" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="500" fill="var(--ink)" text-anchor="middle" style="">|1⟩ → −|1⟩</text><text x="392.0" y="200" font-family="Archivo, sans-serif" font-size="12.5" font-weight="500" fill="var(--phase)" text-anchor="middle" style="">invisible until interference</text><rect x="526" y="24" width="240" height="205" fill="var(--panel)" stroke="var(--rule)" rx="5"/><line x1="554" y1="86" x2="738" y2="86" stroke="var(--ink)" stroke-width="1.5"/><rect x="622.0" y="62" width="48" height="48" fill="var(--paper)" stroke="var(--amp)" stroke-width="2.5" rx="4"/><text x="646.0" y="94" font-family="IBM Plex Mono, monospace" font-size="22" font-weight="600" fill="var(--ink)" text-anchor="middle" style="">H</text><text x="646.0" y="146" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--faint)" text-anchor="middle" style="letter-spacing:.12em">SUPERPOSE / ROTATE BASIS</text><text x="646.0" y="172" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="500" fill="var(--ink)" text-anchor="middle" style="">|0⟩→|+⟩  |1⟩→|−⟩</text><text x="646.0" y="200" font-family="Archivo, sans-serif" font-size="12.5" font-weight="500" fill="var(--phase)" text-anchor="middle" style="">phase ↔ amplitude converter</text><rect x="18" y="245" width="240" height="205" fill="var(--panel)" stroke="var(--rule)" rx="5"/><line x1="46" y1="307" x2="230" y2="307" stroke="var(--ink)" stroke-width="1.5"/><rect x="114.0" y="283" width="48" height="48" fill="var(--paper)" stroke="var(--amp)" stroke-width="2.5" rx="4"/><text x="138.0" y="315" font-family="IBM Plex Mono, monospace" font-size="22" font-weight="600" fill="var(--ink)" text-anchor="middle" style="">S</text><text x="138.0" y="367" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--faint)" text-anchor="middle" style="letter-spacing:.12em">QUARTER PHASE TURN</text><text x="138.0" y="393" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="500" fill="var(--ink)" text-anchor="middle" style="">|1⟩ → i|1⟩</text><text x="138.0" y="421" font-family="Archivo, sans-serif" font-size="12.5" font-weight="500" fill="var(--phase)" text-anchor="middle" style="">finer phase control</text><rect x="272" y="245" width="240" height="205" fill="var(--panel)" stroke="var(--rule)" rx="5"/><line x1="300" y1="307" x2="484" y2="307" stroke="var(--ink)" stroke-width="1.5"/><rect x="368.0" y="283" width="48" height="48" fill="var(--paper)" stroke="var(--amp)" stroke-width="2.5" rx="4"/><text x="392.0" y="315" font-family="IBM Plex Mono, monospace" font-size="22" font-weight="600" fill="var(--ink)" text-anchor="middle" style="">T</text><text x="392.0" y="367" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--faint)" text-anchor="middle" style="letter-spacing:.12em">EIGHTH PHASE TURN</text><text x="392.0" y="393" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="500" fill="var(--ink)" text-anchor="middle" style="">|1⟩ → e^(iπ/4)|1⟩</text><text x="392.0" y="421" font-family="Archivo, sans-serif" font-size="12.5" font-weight="500" fill="var(--phase)" text-anchor="middle" style="">unlocks universality</text><rect x="526" y="245" width="240" height="205" fill="var(--panel)" stroke="var(--rule)" rx="5"/><line x1="554" y1="291" x2="738" y2="291" stroke="var(--ink)" stroke-width="1.5"/><line x1="554" y1="329" x2="738" y2="329" stroke="var(--ink)" stroke-width="1.5"/><circle cx="646.0" cy="291" r="6" fill="var(--amp)"/><line x1="646.0" y1="291" x2="646.0" y2="329" stroke="var(--amp)" stroke-width="2.5"/><circle cx="646.0" cy="329" r="13" fill="none" stroke="var(--amp)" stroke-width="2.5"/><line x1="633.0" y1="329" x2="659.0" y2="329" stroke="var(--amp)" stroke-width="2.5"/><line x1="646.0" y1="316" x2="646.0" y2="342" stroke="var(--amp)" stroke-width="2.5"/><text x="646.0" y="367" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--faint)" text-anchor="middle" style="letter-spacing:.12em">ENTANGLER</text><text x="646.0" y="393" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="500" fill="var(--ink)" text-anchor="middle" style="">flips target iff control = |1⟩</text><text x="646.0" y="421" font-family="Archivo, sans-serif" font-size="12.5" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">correlation between qubits</text></svg><figcaption>The working set as a mnemonic card. Teal marks the gate machinery; note which gates move amplitude, which move phase, and that H alone converts between them.</figcaption></figure>
+<div class="note"><span class="tag">Keep this</span>
+X moves amplitude between outcomes; Z moves phase between components; H converts
+between the two currencies. Most circuit intuition is bookkeeping over those three
+sentences.</div>
+
+<div class="pager"><a class="prev" href="ch03.html"><small>← Previous · |0011⟩</small>Superposition &amp; Entanglement</a><a class="next" href="ch05.html"><small>Next · |0101⟩ →</small>Amplitudes &amp; Phases</a></div>
+</main>
+</div>
+</body>
+</html>

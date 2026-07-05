@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cryptographic Threat — A Quantum Computing Primer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="side"><p class="home-link"><a href="../index.html">← Prabandham</a></p><p class="brand"><a href="index.html">A Quantum Computing Primer</a></p>
+<p class="tagline">amplitude · phase · interference</p>
+<details open><summary>Contents</summary><nav aria-label="Book contents">
+<p class="part-label">Part I — Foundations</p><ol>
+<li><a href="ch01.html"><span class="ket">|0001⟩</span><span>Bits vs. Qubits</span></a></li>
+<li><a href="ch02.html"><span class="ket">|0010⟩</span><span>Registers, Classical and Quantum</span></a></li>
+<li><a href="ch03.html"><span class="ket">|0011⟩</span><span>Superposition &amp; Entanglement</span></a></li>
+</ol>
+<p class="part-label">Part II — Operations</p><ol>
+<li><a href="ch04.html"><span class="ket">|0100⟩</span><span>Gates: The Quantum Instruction Set</span></a></li>
+<li><a href="ch05.html"><span class="ket">|0101⟩</span><span>Amplitudes &amp; Phases</span></a></li>
+<li><a href="ch06.html"><span class="ket">|0110⟩</span><span>Measurement</span></a></li>
+</ol>
+<p class="part-label">Part III — The Algorithmic Core</p><ol>
+<li><a href="ch07.html"><span class="ket">|0111⟩</span><span>The Universal Pipeline</span></a></li>
+<li><a href="ch08.html"><span class="ket">|1000⟩</span><span>Quantum Primitives</span></a></li>
+</ol>
+<p class="part-label">Part IV — Power &amp; Limits</p><ol>
+<li><a href="ch09.html"><span class="ket">|1001⟩</span><span>Where Quantum Fits: Complexity</span></a></li>
+<li><a href="ch10.html"><span class="ket">|1010⟩</span><span>Two Algorithms in Full: Grover &amp; Shor</span></a></li>
+</ol>
+<p class="part-label">Part V — Consequences</p><ol>
+<li><a href="ch11.html" aria-current="page"><span class="ket">|1011⟩</span><span>The Cryptographic Threat</span></a></li>
+</ol>
+</nav></details></aside>
+<main>
+<p class="eyebrow"><span class="ket">|1011⟩</span> &nbsp;Part V — Consequences</p><h1>The Cryptographic Threat</h1><p class="dek">What Shor&#x27;s algorithm actually breaks, why the clock started before the hardware exists, and what migration looks like.</p>
+
+<p>Most primers end at the algorithms. This one ends at their consequences, because
+Shor's algorithm is not an intellectual curiosity — it is a scheduled demolition of
+the public-key cryptography underneath nearly all digital trust.</p>
+<h2>What breaks, and how badly</h2>
+<table>
+<tr><th>Cryptography</th><th>Quantum impact</th><th>Verdict</th></tr>
+<tr><td>RSA, Diffie–Hellman, ECC</td><td>Shor solves factoring & discrete log in
+polynomial time</td><td><strong>Broken outright</strong> at sufficient scale</td></tr>
+<tr><td>AES, symmetric ciphers</td><td>Grover halves effective key length
+(√ speedup only)</td><td>Weakened; AES-256 remains safe</td></tr>
+<tr><td>SHA-2/3 hashing</td><td>Grover-type speedups only</td><td>Larger outputs
+suffice</td></tr>
+</table>
+<p>The asymmetry follows directly from Part IV: public-key schemes rest on
+<em>structured</em> problems (periodicity — exactly what the QFT converts), while
+symmetric primitives present only unstructured search, where the quadratic ceiling
+holds.</p>
+<h2>Harvest now, decrypt later</h2>
+<p>The threat clock did not start with working hardware. Adversaries can record
+encrypted traffic today and decrypt it when a cryptanalytically relevant quantum
+computer (CRQC) arrives. Any data whose confidentiality horizon exceeds the CRQC
+timeline — state secrets, health records, long-lived intellectual property — is
+effectively at risk <em>now</em>. Migration urgency is set by data lifetime plus
+migration duration, not by hardware headlines.</p>
+<h2>Post-quantum cryptography</h2>
+<p>PQC replaces the vulnerable structure: NIST's standardized algorithms — ML-KEM
+(Kyber) for key encapsulation, ML-DSA (Dilithium) and SLH-DSA (SPHINCS+) for
+signatures — rest on lattice and hash problems with no known quantum converter.
+These run on classical hardware; the migration is a software and inventory problem,
+not a hardware one.</p>
+<h2>The real bottleneck: knowing where your cryptography is</h2>
+<p>Enterprises cannot replace what they cannot find. Cryptography hides in TLS
+configurations, certificate estates, libraries, protocols, firmware — and, hardest
+of all, in <em>hand-rolled implementations</em> that no library-signature scanner can
+see. Migration therefore begins with discovery and inventory (CBOMs — cryptographic
+bills of materials), proceeds through prioritization by data lifetime, and lands on
+crypto-agility: architectures that can swap algorithms without rewrites, because
+this migration will not be the last.</p>
+<div class="note"><span class="tag">The arc of this book, closed</span>
+A qubit is a vector (|0001⟩). Phase hides information (|0101⟩). The QFT converts
+periodic phase to amplitude (|0111⟩–|1000⟩). Periodicity underlies RSA (|1010⟩).
+Therefore: inventory your cryptography before the converter is built at scale. The
+mathematics of Part I is the reason for the migration project in Part V.</div>
+
+<div class="pager"><a class="prev" href="ch10.html"><small>← Previous · |1010⟩</small>Two Algorithms in Full: Grover &amp; Shor</a><a class="next" href="index.html"><small>End · ↩</small>Back to cover</a></div>
+</main>
+</div>
+</body>
+</html>

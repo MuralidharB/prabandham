@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Measurement — A Quantum Computing Primer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="side"><p class="home-link"><a href="../index.html">← Prabandham</a></p><p class="brand"><a href="index.html">A Quantum Computing Primer</a></p>
+<p class="tagline">amplitude · phase · interference</p>
+<details open><summary>Contents</summary><nav aria-label="Book contents">
+<p class="part-label">Part I — Foundations</p><ol>
+<li><a href="ch01.html"><span class="ket">|0001⟩</span><span>Bits vs. Qubits</span></a></li>
+<li><a href="ch02.html"><span class="ket">|0010⟩</span><span>Registers, Classical and Quantum</span></a></li>
+<li><a href="ch03.html"><span class="ket">|0011⟩</span><span>Superposition &amp; Entanglement</span></a></li>
+</ol>
+<p class="part-label">Part II — Operations</p><ol>
+<li><a href="ch04.html"><span class="ket">|0100⟩</span><span>Gates: The Quantum Instruction Set</span></a></li>
+<li><a href="ch05.html"><span class="ket">|0101⟩</span><span>Amplitudes &amp; Phases</span></a></li>
+<li><a href="ch06.html" aria-current="page"><span class="ket">|0110⟩</span><span>Measurement</span></a></li>
+</ol>
+<p class="part-label">Part III — The Algorithmic Core</p><ol>
+<li><a href="ch07.html"><span class="ket">|0111⟩</span><span>The Universal Pipeline</span></a></li>
+<li><a href="ch08.html"><span class="ket">|1000⟩</span><span>Quantum Primitives</span></a></li>
+</ol>
+<p class="part-label">Part IV — Power &amp; Limits</p><ol>
+<li><a href="ch09.html"><span class="ket">|1001⟩</span><span>Where Quantum Fits: Complexity</span></a></li>
+<li><a href="ch10.html"><span class="ket">|1010⟩</span><span>Two Algorithms in Full: Grover &amp; Shor</span></a></li>
+</ol>
+<p class="part-label">Part V — Consequences</p><ol>
+<li><a href="ch11.html"><span class="ket">|1011⟩</span><span>The Cryptographic Threat</span></a></li>
+</ol>
+</nav></details></aside>
+<main>
+<p class="eyebrow"><span class="ket">|0110⟩</span> &nbsp;Part II — Operations</p><h1>Measurement</h1><p class="dek">Collapse is a blunt instrument. Algorithms succeed by finishing their work before it falls.</p>
+
+<p>Measurement is the interface between the quantum state and classical reality, and
+it is deliberately unimpressive: measuring an n-qubit register in the standard basis
+returns <strong>one</strong> n-bit string, sampled with probability |amplitude|², and
+collapses the register onto that string. The superposition, the phases, the
+correlations — gone. Measure again and you get the same string.</p>
+<h2>The Born rule</h2>
+<div class="math">Pr[ outcome x ] = | <span class="am">αₓ</span> |²</div>
+<p>Note what the rule does <em>not</em> expose: it squares away the phase. Two states
+whose amplitudes differ only in phase produce identical standard-basis statistics —
+which is precisely why chapter |0101⟩'s basis-rotation trick is necessary.</p>
+<h2>Shots and statistics</h2>
+<p>One measurement is one sample. Real quantum programs run the same circuit many
+times (“shots”) to estimate the outcome distribution — unless the algorithm has
+concentrated nearly all amplitude on a single answer, in which case a handful of
+shots suffice. Good algorithms aim for exactly that concentration.</p>
+<h2>Choosing the question: measurement bases</h2>
+<p>Nothing forces the standard basis. Rotating the state before measuring — an H
+here, a QFT there — is equivalent to asking a different question of the same state.
+The physical measurement stays blunt; the rotation decides what it is blunt
+<em>about</em>. This reframing dissolves a common confusion: quantum algorithms don't
+“read the amplitudes.” They engineer the state so the one question a measurement can
+answer is the question you wanted asked.</p>
+<h2>Partial measurement</h2>
+<p>Measuring only some qubits of an entangled register collapses the rest
+conditionally: measure one half of a Bell pair and the other half snaps to a definite
+state. In Shor's algorithm this appears when the function register is (conceptually)
+measured, leaving the control register in a periodic superposition — the input the
+inverse QFT needs.</p>
+<div class="note"><span class="tag">Keep this</span>
+Measurement gives one sample from |amplitude|² and destroys the rest. All the
+intelligence of a quantum algorithm is spent making that single blunt sample worth
+taking.</div>
+
+<div class="pager"><a class="prev" href="ch05.html"><small>← Previous · |0101⟩</small>Amplitudes &amp; Phases</a><a class="next" href="ch07.html"><small>Next · |0111⟩ →</small>The Universal Pipeline</a></div>
+</main>
+</div>
+</body>
+</html>

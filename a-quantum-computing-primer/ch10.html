@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two Algorithms in Full: Grover &amp; Shor — A Quantum Computing Primer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="side"><p class="home-link"><a href="../index.html">← Prabandham</a></p><p class="brand"><a href="index.html">A Quantum Computing Primer</a></p>
+<p class="tagline">amplitude · phase · interference</p>
+<details open><summary>Contents</summary><nav aria-label="Book contents">
+<p class="part-label">Part I — Foundations</p><ol>
+<li><a href="ch01.html"><span class="ket">|0001⟩</span><span>Bits vs. Qubits</span></a></li>
+<li><a href="ch02.html"><span class="ket">|0010⟩</span><span>Registers, Classical and Quantum</span></a></li>
+<li><a href="ch03.html"><span class="ket">|0011⟩</span><span>Superposition &amp; Entanglement</span></a></li>
+</ol>
+<p class="part-label">Part II — Operations</p><ol>
+<li><a href="ch04.html"><span class="ket">|0100⟩</span><span>Gates: The Quantum Instruction Set</span></a></li>
+<li><a href="ch05.html"><span class="ket">|0101⟩</span><span>Amplitudes &amp; Phases</span></a></li>
+<li><a href="ch06.html"><span class="ket">|0110⟩</span><span>Measurement</span></a></li>
+</ol>
+<p class="part-label">Part III — The Algorithmic Core</p><ol>
+<li><a href="ch07.html"><span class="ket">|0111⟩</span><span>The Universal Pipeline</span></a></li>
+<li><a href="ch08.html"><span class="ket">|1000⟩</span><span>Quantum Primitives</span></a></li>
+</ol>
+<p class="part-label">Part IV — Power &amp; Limits</p><ol>
+<li><a href="ch09.html"><span class="ket">|1001⟩</span><span>Where Quantum Fits: Complexity</span></a></li>
+<li><a href="ch10.html" aria-current="page"><span class="ket">|1010⟩</span><span>Two Algorithms in Full: Grover &amp; Shor</span></a></li>
+</ol>
+<p class="part-label">Part V — Consequences</p><ol>
+<li><a href="ch11.html"><span class="ket">|1011⟩</span><span>The Cryptographic Threat</span></a></li>
+</ol>
+</nav></details></aside>
+<main>
+<p class="eyebrow"><span class="ket">|1010⟩</span> &nbsp;Part IV — Power &amp; Limits</p><h1>Two Algorithms in Full: Grover &amp; Shor</h1><p class="dek">One quadratic, one exponential. Both are phase-to-amplitude conversion, dressed differently.</p>
+
+<p>Two algorithms, studied end to end, are worth twenty surveyed. Grover's shows the
+pipeline at its most transparent; Shor's shows it at its most consequential. Both
+are phase-to-amplitude conversion — the diffusion operator and the inverse QFT are
+the same idea wearing different mathematics.</p>
+<h2>Grover's search — the quadratic engine</h2>
+<p><strong>Problem:</strong> find the one marked item among N with only oracle access.
+Classical cost: ~N/2 queries. Grover: ~(π/4)√N.</p>
+<ol>
+<li><strong>Flatten:</strong> Hadamards put amplitude 1/√N on every item.</li>
+<li><strong>Mark:</strong> the oracle flips the <em>phase</em> of the answer —
+magnitudes untouched, statistics still flat.</li>
+<li><strong>Convert:</strong> the diffusion operator reflects every amplitude about
+the mean. The negative-phase item lands far above the others; each iteration
+transfers more mass to it.</li>
+<li><strong>Repeat ~√N times, then measure.</strong> Overshooting past the optimum
+<em>reduces</em> the success probability — the rotation keeps going — so the
+iteration count is part of the algorithm.</li>
+</ol>
+<figure class="fig"><svg viewBox="0 0 780 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grover amplitude amplification over iterations 0 to 3 on 8 items: the marked bar grows to near certainty at the optimum, then overshoots"><defs>
+<marker id="ah-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--phase)"/></marker>
+<marker id="ah-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--amp)"/></marker>
+<marker id="ah-i" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/></marker>
+</defs><rect x="30" y="152.0" width="14" height="53.0" fill="#AEBCB6" rx="1.5"/><rect x="48" y="152.0" width="14" height="53.0" fill="#AEBCB6" rx="1.5"/><rect x="66" y="152.0" width="14" height="53.0" fill="#AEBCB6" rx="1.5"/><rect x="84" y="152.0" width="14" height="53.0" fill="#AEBCB6" rx="1.5"/><rect x="102" y="152.0" width="14" height="53.0" fill="#AEBCB6" rx="1.5"/><rect x="120" y="152.0" width="14" height="53.0" fill="var(--amp)" rx="1.5"/><rect x="138" y="152.0" width="14" height="53.0" fill="#AEBCB6" rx="1.5"/><rect x="156" y="152.0" width="14" height="53.0" fill="#AEBCB6" rx="1.5"/><line x1="24" y1="205" x2="180" y2="205" stroke="var(--ink)" stroke-width="1.5"/><line x1="24" y1="152.0" x2="180" y2="152.0" stroke="var(--phase)" stroke-width="1.2" stroke-dasharray="4 3"/><text x="105.0" y="236" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--ink)" text-anchor="middle" style="letter-spacing:.1em">ITERATION 0</text><text x="105.0" y="256" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="500" fill="var(--amp)" text-anchor="middle" style="">P(answer) = 0.12</text><rect x="222" y="178.5" width="14" height="26.5" fill="#AEBCB6" rx="1.5"/><rect x="240" y="178.5" width="14" height="26.5" fill="#AEBCB6" rx="1.5"/><rect x="258" y="178.5" width="14" height="26.5" fill="#AEBCB6" rx="1.5"/><rect x="276" y="178.5" width="14" height="26.5" fill="#AEBCB6" rx="1.5"/><rect x="294" y="178.5" width="14" height="26.5" fill="#AEBCB6" rx="1.5"/><rect x="312" y="72.4" width="14" height="132.6" fill="var(--amp)" rx="1.5"/><rect x="330" y="178.5" width="14" height="26.5" fill="#AEBCB6" rx="1.5"/><rect x="348" y="178.5" width="14" height="26.5" fill="#AEBCB6" rx="1.5"/><line x1="216" y1="205" x2="372" y2="205" stroke="var(--ink)" stroke-width="1.5"/><line x1="216" y1="165.2" x2="372" y2="165.2" stroke="var(--phase)" stroke-width="1.2" stroke-dasharray="4 3"/><text x="297.0" y="236" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--ink)" text-anchor="middle" style="letter-spacing:.1em">ITERATION 1</text><text x="297.0" y="256" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="500" fill="var(--amp)" text-anchor="middle" style="">P(answer) = 0.78</text><rect x="414" y="191.7" width="14" height="13.3" fill="#AEBCB6" rx="1.5"/><rect x="432" y="191.7" width="14" height="13.3" fill="#AEBCB6" rx="1.5"/><rect x="450" y="191.7" width="14" height="13.3" fill="#AEBCB6" rx="1.5"/><rect x="468" y="191.7" width="14" height="13.3" fill="#AEBCB6" rx="1.5"/><rect x="486" y="191.7" width="14" height="13.3" fill="#AEBCB6" rx="1.5"/><rect x="504" y="59.2" width="14" height="145.8" fill="var(--amp)" rx="1.5"/><rect x="522" y="191.7" width="14" height="13.3" fill="#AEBCB6" rx="1.5"/><rect x="540" y="191.7" width="14" height="13.3" fill="#AEBCB6" rx="1.5"/><line x1="408" y1="205" x2="564" y2="205" stroke="var(--ink)" stroke-width="1.5"/><line x1="408" y1="175.2" x2="564" y2="175.2" stroke="var(--phase)" stroke-width="1.2" stroke-dasharray="4 3"/><text x="489.0" y="236" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--ink)" text-anchor="middle" style="letter-spacing:.1em">ITERATION 2</text><text x="489.0" y="256" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="500" fill="var(--amp)" text-anchor="middle" style="">P(answer) = 0.95</text><rect x="606" y="158.6" width="14" height="46.4" fill="#AEBCB6" rx="1.5"/><rect x="624" y="158.6" width="14" height="46.4" fill="#AEBCB6" rx="1.5"/><rect x="642" y="158.6" width="14" height="46.4" fill="#AEBCB6" rx="1.5"/><rect x="660" y="158.6" width="14" height="46.4" fill="#AEBCB6" rx="1.5"/><rect x="678" y="158.6" width="14" height="46.4" fill="#AEBCB6" rx="1.5"/><rect x="696" y="118.8" width="14" height="86.2" fill="var(--amp)" rx="1.5"/><rect x="714" y="158.6" width="14" height="46.4" fill="#AEBCB6" rx="1.5"/><rect x="732" y="158.6" width="14" height="46.4" fill="#AEBCB6" rx="1.5"/><line x1="600" y1="205" x2="756" y2="205" stroke="var(--ink)" stroke-width="1.5"/><line x1="600" y1="153.6" x2="756" y2="153.6" stroke="var(--phase)" stroke-width="1.2" stroke-dasharray="4 3"/><text x="681.0" y="236" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--ink)" text-anchor="middle" style="letter-spacing:.1em">ITERATION 3</text><text x="681.0" y="256" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="500" fill="var(--amp)" text-anchor="middle" style="">P(answer) = 0.33</text><text x="105.0" y="34" font-family="Archivo, sans-serif" font-size="12" font-weight="500" fill="var(--faint)" text-anchor="middle" style="">flat start</text><text x="489.0" y="34" font-family="Archivo, sans-serif" font-size="12" font-weight="500" fill="var(--amp)" text-anchor="middle" style="">optimum ≈ (π/4)√N</text><text x="681.0" y="26" font-family="Archivo, sans-serif" font-size="12" font-weight="500" fill="var(--phase)" text-anchor="middle" style="">overshoot — keep going</text><text x="681.0" y="44" font-family="Archivo, sans-serif" font-size="12" font-weight="500" fill="var(--phase)" text-anchor="middle" style="">and it falls again</text><text x="52" y="62" font-family="Archivo, sans-serif" font-size="11" font-weight="500" fill="var(--phase)" text-anchor="start" style="">dashed line: the mean each reflection pivots on</text></svg><figcaption>Eight items, one marked. Each oracle-plus-diffusion round reflects every bar about the dashed mean, pumping the marked amplitude — until the optimum, past which it declines.</figcaption></figure>
+<h2>Shor's factoring — the exponential result</h2>
+<p><strong>Problem:</strong> factor N. Classical reduction: factoring → finding the
+period r of f(x) = aˣ mod N. The quantum part finds r.</p>
+<ol>
+<li><strong>Flatten:</strong> uniform superposition over exponents x in a control
+register.</li>
+<li><strong>Compute:</strong> evaluate aˣ mod N into a second register — entangling
+control with function values. The control register is now a superposition over a
+periodic comb of x-values; the period r lives in its relative phases.</li>
+<li><strong>Convert:</strong> the inverse QFT turns the periodic phase pattern into
+amplitude peaks at multiples of 2ⁿ/r — frequency analysis by interference.</li>
+<li><strong>Measure & post-process:</strong> a peak sample plus continued fractions
+yields r; from r, classical arithmetic extracts the factors.</li>
+</ol>
+
+<section class="deep-dive-head" id="shor-deep-dive">
+<span class="tag">Deep dive · annotated walkthrough</span>
+<h2 style="border-top:0; padding-top:.4rem; margin-top:.4rem">Shor’s Period-Finding, Annotated</h2>
+<p><em>The formal mechanism, with the swing-and-rhythm intuition pinned next to each
+step. Read the formal line, then the annotation that translates it. The single
+picture to hold onto throughout: a child on a swing.</em>
+<strong>Pushes timed with the swing add up and it climbs high. Pushes at random
+times fight each other and it barely moves.</strong> <em>Everything below is that
+one idea, dressed in symbols.</em></p>
+
+<h3>1 · The reduction: factoring becomes “find the loop length”</h3>
+<p>To factor a large number N, pick a random a sharing no common factor with N, and
+consider</p>
+<div class="math">f(x) = aˣ mod N</div>
+<p>This function is <strong>periodic</strong>: there is a smallest r &gt; 0 with
+aʳ ≡ 1 (mod N). That r is the <em>period</em>. If r is even and
+a^(r/2) ≢ −1 (mod N), then gcd( a^(r/2) ± 1, N ) is a nontrivial factor of N.
+Choose a register size Q = 2ⁿ with Q ≥ N² — the reason for that bound arrives in
+step 4.</p>
+<div class="plain"><span class="tag">In plain words</span><p>Raise a number to higher and higher powers and write down each remainder after dividing by N. The list of remainders doesn’t wander off forever; it <strong>loops</strong>, like a pattern on wallpaper. The strange fact Shor exploits: the length of that loop secretly hands you the factors.</p></div>
+
+<h3>2 · Superposition, and the collapse to a periodic comb</h3>
+<p>Prepare the control register in uniform superposition and apply the reversible
+modular-exponentiation unitary |x⟩|0⟩ ↦ |x⟩|aˣ mod N⟩:</p>
+<div class="math">(1/√Q) Σₓ |x⟩ |aˣ mod N⟩ ,&nbsp;&nbsp; x = 0 … Q−1</div>
+<p>This is the step people misread as “the speedup.” It is <em>not</em>. Yes, f is
+now evaluated over all x at once — but measuring here would return a single random
+(x, f(x)) pair, no more useful than one classical evaluation. The superposition is
+necessary but not sufficient: the period is encoded in the <em>correlations</em>
+across the branches, and only interference can extract it.</p>
+<div class="plain"><span class="tag">In plain words</span><p>Playing every possible rhythm at once is not the trick — listening to the mixture naïvely just gives you one random note. The value is that the loop structure is now written <em>across</em> the whole ensemble, where the next step can make it sing.</p></div>
+<p>Now measure the second register (conceptually — by deferred measurement it needn’t
+happen physically). Observing some value f₀ = a^(x₀) mod N collapses the first
+register onto only the x consistent with it:</p>
+<div class="math">(1/√M) Σⱼ |x₀ + j·r⟩ ,&nbsp;&nbsp; j = 0 … M−1,&nbsp; M ≈ Q/r</div>
+<p>The surviving state is a <strong>train of evenly spaced spikes</strong>: period r,
+random offset x₀. The information you want (r) is the <em>spacing</em>. The
+information you can’t control (x₀) is the <em>offset</em>. The whole trick of the
+next step is to read the spacing while discarding the offset.</p>
+<div class="plain"><span class="tag">In plain words</span><p>A drumbeat now exists: a beat every r steps, starting at some random moment. The beat <em>spacing</em> is the secret you’re after; the random starting moment is noise you must learn to ignore.</p></div>
+
+<h3>3 · The Fourier transform, and the interference at its heart</h3>
+<p>Apply the quantum Fourier transform to the first register:</p>
+<div class="math">QFT: |x⟩ ↦ (1/√Q) Σᵧ e^(<span class="ph">2πi·xy/Q</span>) |y⟩</div>
+<p>Acting on the spike train, the amplitude of outcome |y⟩ becomes</p>
+<div class="math"><span class="am">amp(y)</span> = (1/√(QM)) · <span class="ph">e^(2πi·x₀y/Q)</span> · Σⱼ e^(<span class="ph">2πi·jry/Q</span>)</div>
+<p class="legend">left factor: the offset, a pure <span class="ph">phase</span> · right factor: a geometric series of unit phasors</p>
+<p>Two observations carry the entire payoff. First, the offset x₀ appears only inside
+a unit-modulus phase factor — it vanishes when you square for the probability.
+<strong>The random offset is invisible to the measurement</strong>, exactly as
+required. Second, the geometric series is a sum of M unit vectors, each rotated from
+the last by a fixed angle θᵧ = 2πry/Q. Whether they stack or cancel depends
+entirely on that angle.</p>
+<div class="plain"><span class="tag">In plain words</span><p><em>This is the swing.</em> Each phasor is one push. The question for any candidate answer y is: do the pushes land in time, or at random? And note the offset’s fate — <em>where</em> you begin pushing doesn’t change whether the swing builds up. Only the <em>timing</em> matters.</p></div>
+<p><strong>Constructive case — the answers that match the rhythm.</strong> When y is
+a (near-)multiple of Q/r, every phasor points the same way and they stack into a long
+resultant of length ≈ M:</p>
+<div class="math">|<span class="am">amp(y)</span>|² ≈ M/Q = 1/r &nbsp;&nbsp; at each of the r favored outcomes</div>
+<p>These r outcomes together absorb essentially <em>all</em> the probability mass.</p>
+<p><strong>Destructive case — every wrong answer.</strong> For any other y, the
+phasors fan out evenly around the circle and curl back to where they started, summing
+to nearly zero.</p>
+<div class="plain"><span class="tag">In plain words</span><p>Pushes landing in time: they add up, the swing climbs high, probability piles onto exactly the outcomes that encode the loop length. Pushes at random: the swing barely moves — every wrong outcome cancels itself into silence. When you finally look, almost all the loudness sits on the rhythm you were chasing.</p></div>
+<p>A clean picture for the whole transform: it is a <strong>diffraction
+grating</strong>. A periodic row of slits with spacing r throws sharp bright fringes
+at reciprocal spacing Q/r. The QFT is the reciprocal-space transform — a comb in, a
+comb out.</p>
+
+<h3>4 · Reading the loop length off one measurement</h3>
+<p>You measure once and obtain some c ≈ k·Q/r for an unknown integer k. Divide:</p>
+<div class="math">c/Q ≈ k/r</div>
+<p>You hold a number very close to a simple fraction, knowing neither numerator nor
+denominator. The <strong>continued-fraction algorithm</strong> finds the unique
+simplest fraction near a given number — run it on c/Q and it snaps to k/r in lowest
+terms, whose denominator is (a divisor of) r.</p>
+<div class="plain"><span class="tag">In plain words</span><p>You heard the rhythm, but as a slightly fuzzy reading on a dial. Continued fractions is the cleanup step that rounds the fuzzy reading to the exact, clean fraction it must have come from.</p></div>
+<p>This is why Q ≥ N² was demanded up front: two distinct fractions with
+denominators below N differ by at least 1/N², so a fine-enough Q guarantees the
+measured value falls unambiguously into one basin. A run can still fail — k may
+share a factor with r, or r may be odd — but each attempt succeeds with constant
+probability, so a handful of repetitions nails r.</p>
+<div class="plain"><span class="tag">In plain words</span><p>Record the rhythm at high enough resolution that two different rhythms can never be mistaken for each other.</p></div>
+
+<h3>5 · The deeper view: the rhythm is a pitch</h3>
+<p>There is a cleaner framing that unifies all of this with the rest of quantum
+computing. Define the unitary U: |y⟩ ↦ |a·y mod N⟩ — multiplication by a. Because
+applying U a total of r times returns you to the start (aʳ ≡ 1), its eigenvalues
+are e^(<span class="ph">2πi·s/r</span>): the eigen-<em>phases</em> are exactly the
+multiples of 1/r.</p>
+<p>Order-finding is then just <strong>quantum phase estimation</strong> run on U. The
+starting state |1⟩ happens to be an equal superposition of all r eigenvectors, so a
+single run yields a random s, and the QFT-based phase-estimation circuit extracts the
+phase. The modular-exponentiation step is the controlled-U^(2ʲ) operations of phase
+estimation in disguise. Same circuit, two framings — period-finding is the concrete
+view; phase estimation shows why the same machinery powers algorithms far beyond
+factoring.</p>
+<div class="plain"><span class="tag">In plain words</span><p>The loop length is a <em>pitch</em>, and the algorithm is a tuner: it listens to multiplication-by-a and reports the frequency it hums at. Every multiple of 1/r is a note in that chord — one measurement picks a note, and arithmetic names the chord.</p></div>
+</section>
+
+<h2>One idea, two converters</h2>
+<p>Grover's diffusion converts a <em>single</em> phase mark into amplitude, buying a
+quadratic gain. Shor's inverse QFT converts a <em>global periodic</em> phase pattern
+into amplitude, buying an exponential one. The difference in payoff is exactly the
+difference in exploitable structure — chapter |1001⟩'s boundary, made concrete.</p>
+
+<div class="pager"><a class="prev" href="ch09.html"><small>← Previous · |1001⟩</small>Where Quantum Fits: Complexity</a><a class="next" href="ch11.html"><small>Next · |1011⟩ →</small>The Cryptographic Threat</a></div>
+</main>
+</div>
+</body>
+</html>

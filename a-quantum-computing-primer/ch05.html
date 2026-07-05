@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amplitudes &amp; Phases — A Quantum Computing Primer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="side"><p class="home-link"><a href="../index.html">← Prabandham</a></p><p class="brand"><a href="index.html">A Quantum Computing Primer</a></p>
+<p class="tagline">amplitude · phase · interference</p>
+<details open><summary>Contents</summary><nav aria-label="Book contents">
+<p class="part-label">Part I — Foundations</p><ol>
+<li><a href="ch01.html"><span class="ket">|0001⟩</span><span>Bits vs. Qubits</span></a></li>
+<li><a href="ch02.html"><span class="ket">|0010⟩</span><span>Registers, Classical and Quantum</span></a></li>
+<li><a href="ch03.html"><span class="ket">|0011⟩</span><span>Superposition &amp; Entanglement</span></a></li>
+</ol>
+<p class="part-label">Part II — Operations</p><ol>
+<li><a href="ch04.html"><span class="ket">|0100⟩</span><span>Gates: The Quantum Instruction Set</span></a></li>
+<li><a href="ch05.html" aria-current="page"><span class="ket">|0101⟩</span><span>Amplitudes &amp; Phases</span></a></li>
+<li><a href="ch06.html"><span class="ket">|0110⟩</span><span>Measurement</span></a></li>
+</ol>
+<p class="part-label">Part III — The Algorithmic Core</p><ol>
+<li><a href="ch07.html"><span class="ket">|0111⟩</span><span>The Universal Pipeline</span></a></li>
+<li><a href="ch08.html"><span class="ket">|1000⟩</span><span>Quantum Primitives</span></a></li>
+</ol>
+<p class="part-label">Part IV — Power &amp; Limits</p><ol>
+<li><a href="ch09.html"><span class="ket">|1001⟩</span><span>Where Quantum Fits: Complexity</span></a></li>
+<li><a href="ch10.html"><span class="ket">|1010⟩</span><span>Two Algorithms in Full: Grover &amp; Shor</span></a></li>
+</ol>
+<p class="part-label">Part V — Consequences</p><ol>
+<li><a href="ch11.html"><span class="ket">|1011⟩</span><span>The Cryptographic Threat</span></a></li>
+</ol>
+</nav></details></aside>
+<main>
+<p class="eyebrow"><span class="ket">|0101⟩</span> &nbsp;Part II — Operations</p><h1>Amplitudes &amp; Phases</h1><p class="dek">Phase is physically real, computationally essential — and invisible until you rotate it.</p>
+
+<p>Amplitudes have magnitudes and phases. Magnitudes decide measurement statistics
+directly. Phases decide nothing directly — and everything indirectly, because
+interference adds amplitudes <em>before</em> squaring them, so aligned phases reinforce
+and opposed phases cancel.</p>
+<h2>Global phase: physically meaningless</h2>
+<p>The states |ψ⟩ and e^{iθ}|ψ⟩ are indistinguishable by any measurement in any
+basis. An overall phase factors out of every probability. It is notation, not
+physics.</p>
+<h2>Relative phase: physically real, but hidden</h2>
+<p>Compare:</p>
+<div class="math">|+⟩ = ( |0⟩ <span class="ph">+</span> |1⟩ ) / √2 &nbsp;&nbsp;&nbsp;&nbsp; |−⟩ = ( |0⟩ <span class="ph">−</span> |1⟩ ) / √2</div>
+<p class="legend">notation — <span class="am">teal: amplitude</span> · <span class="ph">violet: phase</span></p>
+<p>Measured in the standard basis, both give a 50/50 coin — indistinguishable. But
+apply a Hadamard first: H|+⟩ = |0⟩ and H|−⟩ = |1⟩. One shot now separates them
+perfectly. The phase difference was real all along; the Hadamard rotated the
+measurement basis so that phase became amplitude.</p>
+<h2>Phase as the working currency of computation</h2>
+<p>This is not a curiosity — it is the standard trick. Oracles in Grover's algorithm
+mark the answer by flipping its <em>phase</em>, leaving all magnitudes untouched and
+the state looking (to a standard-basis measurement) exactly as flat as before. The
+period structure in Shor's algorithm lives entirely in phases after modular
+exponentiation. In both cases a subsequent operation — diffusion, inverse QFT —
+cashes the phase pattern out into measurable amplitude.</p>
+<figure class="fig"><svg viewBox="0 0 700 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Phasor interference: aligned phasors stack into a long resultant; evenly rotated phasors cancel to nearly zero"><defs>
+<marker id="ah-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--phase)"/></marker>
+<marker id="ah-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--amp)"/></marker>
+<marker id="ah-i" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/></marker>
+</defs><line x1="55" y1="165" x2="91" y2="165" stroke="var(--phase)" stroke-width="2.5" marker-end="url(#ah-p)"/><line x1="97" y1="165" x2="133" y2="165" stroke="var(--phase)" stroke-width="2.5" marker-end="url(#ah-p)"/><line x1="139" y1="165" x2="175" y2="165" stroke="var(--phase)" stroke-width="2.5" marker-end="url(#ah-p)"/><line x1="181" y1="165" x2="217" y2="165" stroke="var(--phase)" stroke-width="2.5" marker-end="url(#ah-p)"/><line x1="223" y1="165" x2="259" y2="165" stroke="var(--phase)" stroke-width="2.5" marker-end="url(#ah-p)"/><line x1="55" y1="217" x2="259" y2="217" stroke="var(--amp)" stroke-width="5" marker-end="url(#ah-a)"/><text x="160.0" y="143" font-family="Archivo, sans-serif" font-size="13" font-weight="500" fill="var(--ink)" text-anchor="middle" style="">5 pushes, all in rhythm</text><text x="160.0" y="245" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="var(--amp)" text-anchor="middle" style="">resultant ≈ M → loud</text><text x="160.0" y="40" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--ink)" text-anchor="middle" style="letter-spacing:.14em">CONSTRUCTIVE</text><line x1="470.0" y1="190.0" x2="510.5" y2="190.0" stroke="var(--phase)" stroke-width="2.5" marker-end="url(#ah-p)"/><line x1="516.0" y1="190.0" x2="528.5" y2="151.5" stroke="var(--phase)" stroke-width="2.5" marker-end="url(#ah-p)"/><line x1="530.2" y1="146.3" x2="497.5" y2="122.5" stroke="var(--phase)" stroke-width="2.5" marker-end="url(#ah-p)"/><line x1="493.0" y1="119.2" x2="460.3" y2="143.0" stroke="var(--phase)" stroke-width="2.5" marker-end="url(#ah-p)"/><line x1="455.8" y1="146.3" x2="468.3" y2="184.8" stroke="var(--phase)" stroke-width="2.5" marker-end="url(#ah-p)"/><circle cx="470" cy="190" r="5" fill="var(--amp)"/><text x="500" y="228" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="var(--amp)" text-anchor="middle" style="">resultant ≈ 0 → silent</text><text x="495" y="62" font-family="Archivo, sans-serif" font-size="13" font-weight="500" fill="var(--ink)" text-anchor="middle" style="">5 pushes, 72° apart — the walk</text><text x="495" y="80" font-family="Archivo, sans-serif" font-size="13" font-weight="500" fill="var(--ink)" text-anchor="middle" style="">curls back to its start</text><text x="495" y="40" font-family="Archivo, sans-serif" font-size="1" font-weight="500" fill="var(--ink)" text-anchor="middle" style=""></text><text x="495" y="40" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--ink)" text-anchor="middle" style="letter-spacing:.14em">DESTRUCTIVE</text><line x1="330" y1="30" x2="330" y2="270" stroke="var(--rule)" stroke-width="1"/></svg><figcaption>Interference as arrow-walking: each violet phasor is one contribution; the teal resultant is the amplitude that survives. Timing — relative phase — is everything.</figcaption></figure>
+<div class="note"><span class="tag">Keep this</span>
+Global phase: gauge freedom, ignore it. Relative phase: hidden state, recoverable by
+rotating the basis. Algorithms write answers in phase because phase is where you can
+compute without disturbing the statistics — then convert exactly once, at the end.</div>
+
+<div class="pager"><a class="prev" href="ch04.html"><small>← Previous · |0100⟩</small>Gates: The Quantum Instruction Set</a><a class="next" href="ch06.html"><small>Next · |0110⟩ →</small>Measurement</a></div>
+</main>
+</div>
+</body>
+</html>

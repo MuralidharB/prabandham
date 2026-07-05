@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Primitives — A Quantum Computing Primer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="side"><p class="home-link"><a href="../index.html">← Prabandham</a></p><p class="brand"><a href="index.html">A Quantum Computing Primer</a></p>
+<p class="tagline">amplitude · phase · interference</p>
+<details open><summary>Contents</summary><nav aria-label="Book contents">
+<p class="part-label">Part I — Foundations</p><ol>
+<li><a href="ch01.html"><span class="ket">|0001⟩</span><span>Bits vs. Qubits</span></a></li>
+<li><a href="ch02.html"><span class="ket">|0010⟩</span><span>Registers, Classical and Quantum</span></a></li>
+<li><a href="ch03.html"><span class="ket">|0011⟩</span><span>Superposition &amp; Entanglement</span></a></li>
+</ol>
+<p class="part-label">Part II — Operations</p><ol>
+<li><a href="ch04.html"><span class="ket">|0100⟩</span><span>Gates: The Quantum Instruction Set</span></a></li>
+<li><a href="ch05.html"><span class="ket">|0101⟩</span><span>Amplitudes &amp; Phases</span></a></li>
+<li><a href="ch06.html"><span class="ket">|0110⟩</span><span>Measurement</span></a></li>
+</ol>
+<p class="part-label">Part III — The Algorithmic Core</p><ol>
+<li><a href="ch07.html"><span class="ket">|0111⟩</span><span>The Universal Pipeline</span></a></li>
+<li><a href="ch08.html" aria-current="page"><span class="ket">|1000⟩</span><span>Quantum Primitives</span></a></li>
+</ol>
+<p class="part-label">Part IV — Power &amp; Limits</p><ol>
+<li><a href="ch09.html"><span class="ket">|1001⟩</span><span>Where Quantum Fits: Complexity</span></a></li>
+<li><a href="ch10.html"><span class="ket">|1010⟩</span><span>Two Algorithms in Full: Grover &amp; Shor</span></a></li>
+</ol>
+<p class="part-label">Part V — Consequences</p><ol>
+<li><a href="ch11.html"><span class="ket">|1011⟩</span><span>The Cryptographic Threat</span></a></li>
+</ol>
+</nav></details></aside>
+<main>
+<p class="eyebrow"><span class="ket">|1000⟩</span> &nbsp;Part III — The Algorithmic Core</p><h1>Quantum Primitives</h1><p class="dek">The five reusable engines: QFT, amplitude amplification, Hamiltonian simulation, quantum walks, QSVT.</p>
+
+<p>A handful of reusable engines generate nearly every known quantum speedup. Each is
+an instance of the pipeline; each fills the “conversion” stage differently.</p>
+<h2>1 · QFT & phase estimation</h2>
+<p>The quantum Fourier transform maps periodic phase patterns to concentrated
+amplitudes — it is the phase-to-amplitude converter for <em>frequency</em> structure.
+Phase estimation wraps it into a general tool: given a unitary U and an eigenstate,
+it writes U's eigenphase into a register, digit by digit. Shor's algorithm is phase
+estimation applied to modular multiplication; quantum chemistry's energy estimation
+is phase estimation applied to a molecular Hamiltonian.</p>
+<h2>2 · Amplitude amplification</h2>
+<p>Grover's engine, generalized: given any procedure that produces a “good” outcome
+with probability p, amplitude amplification boosts it to near-certainty in O(1/√p)
+iterations — quadratically better than the classical O(1/p) of retrying. Each
+iteration is oracle (phase-mark) plus diffusion (convert); the answer's amplitude
+grows linearly per step while classical probability would only accumulate.</p>
+<h2>3 · Hamiltonian simulation</h2>
+<p>Feynman's founding use case: make the state vector evolve under e^{−iHt} for a
+physical Hamiltonian H. Quantum systems simulate quantum systems natively; the
+classical cost is exponential. This is the primitive behind chemistry, materials,
+and — increasingly — the linear-algebra family of algorithms.</p>
+<h2>4 · Quantum walks</h2>
+<p>The quantum analogue of random walks: amplitude spreads over a graph and
+interferes, propagating quadratically faster than diffusion. Walks power search on
+structured spaces, element-distinctness, and Markov-chain–flavored speedups.</p>
+<h2>5 · QSVT — the unifying frame</h2>
+<p>Quantum singular value transformation applies a chosen polynomial to the singular
+values of a matrix embedded in a unitary. Remarkably, amplitude amplification, phase
+estimation, Hamiltonian simulation, and quantum walks all arise as special cases —
+one polynomial choice each. It is the current best answer to “what is a quantum
+algorithm, really?”: engineered interference expressed as a polynomial transform.</p>
+<table>
+<tr><th>Primitive</th><th>Converts phase pattern of…</th><th>Flagship application</th></tr>
+<tr><td>QFT / phase estimation</td><td>Periodicity / eigenphase</td><td>Shor, chemistry</td></tr>
+<tr><td>Amplitude amplification</td><td>A marked subset</td><td>Grover, search</td></tr>
+<tr><td>Hamiltonian simulation</td><td>Physical dynamics</td><td>Molecules, materials</td></tr>
+<tr><td>Quantum walks</td><td>Graph structure</td><td>Structured search</td></tr>
+<tr><td>QSVT</td><td>Any polynomial of singular values</td><td>All of the above</td></tr>
+</table>
+
+<div class="pager"><a class="prev" href="ch07.html"><small>← Previous · |0111⟩</small>The Universal Pipeline</a><a class="next" href="ch09.html"><small>Next · |1001⟩ →</small>Where Quantum Fits: Complexity</a></div>
+</main>
+</div>
+</body>
+</html>

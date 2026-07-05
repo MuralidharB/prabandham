@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registers, Classical and Quantum — A Quantum Computing Primer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="side"><p class="home-link"><a href="../index.html">← Prabandham</a></p><p class="brand"><a href="index.html">A Quantum Computing Primer</a></p>
+<p class="tagline">amplitude · phase · interference</p>
+<details open><summary>Contents</summary><nav aria-label="Book contents">
+<p class="part-label">Part I — Foundations</p><ol>
+<li><a href="ch01.html"><span class="ket">|0001⟩</span><span>Bits vs. Qubits</span></a></li>
+<li><a href="ch02.html" aria-current="page"><span class="ket">|0010⟩</span><span>Registers, Classical and Quantum</span></a></li>
+<li><a href="ch03.html"><span class="ket">|0011⟩</span><span>Superposition &amp; Entanglement</span></a></li>
+</ol>
+<p class="part-label">Part II — Operations</p><ol>
+<li><a href="ch04.html"><span class="ket">|0100⟩</span><span>Gates: The Quantum Instruction Set</span></a></li>
+<li><a href="ch05.html"><span class="ket">|0101⟩</span><span>Amplitudes &amp; Phases</span></a></li>
+<li><a href="ch06.html"><span class="ket">|0110⟩</span><span>Measurement</span></a></li>
+</ol>
+<p class="part-label">Part III — The Algorithmic Core</p><ol>
+<li><a href="ch07.html"><span class="ket">|0111⟩</span><span>The Universal Pipeline</span></a></li>
+<li><a href="ch08.html"><span class="ket">|1000⟩</span><span>Quantum Primitives</span></a></li>
+</ol>
+<p class="part-label">Part IV — Power &amp; Limits</p><ol>
+<li><a href="ch09.html"><span class="ket">|1001⟩</span><span>Where Quantum Fits: Complexity</span></a></li>
+<li><a href="ch10.html"><span class="ket">|1010⟩</span><span>Two Algorithms in Full: Grover &amp; Shor</span></a></li>
+</ol>
+<p class="part-label">Part V — Consequences</p><ol>
+<li><a href="ch11.html"><span class="ket">|1011⟩</span><span>The Cryptographic Threat</span></a></li>
+</ol>
+</nav></details></aside>
+<main>
+<p class="eyebrow"><span class="ket">|0010⟩</span> &nbsp;Part I — Foundations</p><h1>Registers, Classical and Quantum</h1><p class="dek">Why n qubits carry 2ⁿ amplitudes — and why you still can&#x27;t read them all.</p>
+
+<p>A microprocessor register is a small array of independent bits: a 64-bit register
+holds one 64-bit value, and describing its state takes 64 bits. A quantum register of
+<em>n</em> qubits is not an array of independent qubits — it is a single joint object
+whose state assigns an amplitude to <strong>every one of the 2ⁿ basis strings</strong>:</p>
+<div class="math">|ψ⟩ = <span class="am">α₀₀₀</span>|000⟩ + <span class="am">α₀₀₁</span>|001⟩ + … + <span class="am">α₁₁₁</span>|111⟩</div>
+<p>Three qubits: 8 amplitudes. Fifty qubits: about 10¹⁵ amplitudes — already past
+what a classical supercomputer can store exactly. The state vector grows exponentially
+while the hardware grows linearly. That asymmetry is the raw material of quantum
+advantage.</p>
+<h2>Why this is not free parallelism</h2>
+<p>It is tempting to read “2ⁿ amplitudes” as “2ⁿ parallel computations whose answers
+we can collect.” We cannot. Measuring the register collapses it to <em>one</em> basis
+string, sampled by the |amplitude|² rule — n classical bits out, everything else gone.
+The exponential state space is a workspace, not an output tape. Algorithms must
+choreograph interference so that, by measurement time, the amplitude mass sits on
+strings that encode the answer.</p>
+<h2>Contrasts worth keeping explicit</h2>
+<table>
+<tr><th></th><th>CPU register</th><th>Quantum register</th></tr>
+<tr><td>State description</td><td>n bits</td><td>2ⁿ complex amplitudes</td></tr>
+<tr><td>Sub-parts</td><td>Independent bits</td><td>Generally entangled; no individual states</td></tr>
+<tr><td>Copying</td><td>Trivial (MOV)</td><td>Impossible for unknown states (no-cloning)</td></tr>
+<tr><td>Readout</td><td>Free, non-destructive</td><td>One sample, destructive</td></tr>
+</table>
+<p>The no-cloning theorem deserves a sentence of its own: there is no operation that
+copies an arbitrary unknown quantum state. This is why quantum programs cannot
+checkpoint their state, why debugging is statistical, and — in Part V — why quantum
+key distribution can detect eavesdroppers.</p>
+
+<div class="pager"><a class="prev" href="ch01.html"><small>← Previous · |0001⟩</small>Bits vs. Qubits</a><a class="next" href="ch03.html"><small>Next · |0011⟩ →</small>Superposition &amp; Entanglement</a></div>
+</main>
+</div>
+</body>
+</html>
