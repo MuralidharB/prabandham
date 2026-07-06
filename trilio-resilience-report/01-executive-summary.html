@@ -38,7 +38,70 @@
 <h2 id="s-where-vendors-should-play"><span class="kicker">1.3</span>Where Vendors Should Play</h2>
 <p>Fix the archetype gap that is existential, not the one that is embarrassing — each archetype has a different survival move, and strategies that rank all gaps equally have not decided anything. Assume the hyperscaler floor rises annually and concentrate differentiation above it: cross-platform mobility, independent trust, compromised-account recovery, compliance-grade evidence. Move early on the white space — AI-pipeline protection most urgently, where category credibility is still unclaimed. Make evidence the flagship product, because provable recoverability is the report&rsquo;s safest bet and the hardest capability to commoditize. Architect for the full sovereignty spectrum rather than a sovereign checkbox. Set channel economics deliberately — marketplaces, MSPs, and GSIs now shape competitive position as much as product. Sell to the converged buying center with precision rather than overclaim. And instrument the scenario signposts with pre-agreed responses, because the three open questions resolve differently by segment and early recognition is worth quarters. (Section 11b.)</p>
 <h2 id="s-the-thesis-in-one-line"><span class="kicker">1.4</span>The Thesis in One Line</h2>
-<p>This market now rewards proof and punishes assumption: proven recovery for buyers, provable differentiation for vendors — and the participants who internalize that shift earliest will own the next phase of a category whose strategic importance has never been higher.</p></main><aside class="rail" aria-label="In this chapter"><p class="side-label">In this chapter</p><ul class="rail-list"><li><a href="#s-the-findings-in-brief"><span class="rn">1.1</span><span>The Findings in Brief</span></a></li><li><a href="#s-what-buyers-should-do"><span class="rn">1.2</span><span>What Buyers Should Do</span></a></li><li><a href="#s-where-vendors-should-play"><span class="rn">1.3</span><span>Where Vendors Should Play</span></a></li><li><a href="#s-the-thesis-in-one-line"><span class="rn">1.4</span><span>The Thesis in One Line</span></a></li></ul></aside></div><nav class="pager" aria-label="Chapter navigation"><a href="index.html"><span class="dir">&larr; Back</span><span class="pt">Table of Contents</span></a><a class="next" href="02-market-overview.html"><span class="dir">Next &rarr;</span><span class="pt">2. Market Overview &amp; Definitions</span></a></nav></div></div><footer><div class="footer-in">
+<p>This market now rewards proof and punishes assumption: proven recovery for buyers, provable differentiation for vendors — and the participants who internalize that shift earliest will own the next phase of a category whose strategic importance has never been higher.</p><section class="pulse" data-page="ch1" aria-label="Reader pulse survey"><div class="pulse-head"><span class="kf-label">Reader pulse</span><p class="pulse-sub">Two quick, anonymous questions — answer one and see how other readers voted. Entirely optional.</p></div><div class="pq" data-qid="q1"><p class="pq-q">Which force is driving your organization’s data-protection decisions most right now?</p><div class="pq-opts"><button type="button" class="pq-opt" data-i="0">Ransomware &amp; cyber threats</button><button type="button" class="pq-opt" data-i="1">Cloud &amp; infrastructure change</button><button type="button" class="pq-opt" data-i="2">Regulation &amp; sovereignty</button><button type="button" class="pq-opt" data-i="3">AI workloads</button></div><div class="pq-res" hidden></div></div><div class="pq" data-qid="q2" data-answer="0"><p class="pq-q">No single vendor archetype currently meets the full enterprise requirement set.</p><div class="pq-opts"><button type="button" class="pq-opt" data-i="0">True</button><button type="button" class="pq-opt" data-i="1">False</button></div><div class="pq-res" hidden></div><p class="pq-note" hidden>True — the report finds every archetype’s strengths are complementary, so every consolidation choice accepts some gaps (Chapter 9).</p></div><p class="pulse-foot">Anonymous — no personal data is collected, only counts.</p></section></main><aside class="rail" aria-label="In this chapter"><p class="side-label">In this chapter</p><ul class="rail-list"><li><a href="#s-the-findings-in-brief"><span class="rn">1.1</span><span>The Findings in Brief</span></a></li><li><a href="#s-what-buyers-should-do"><span class="rn">1.2</span><span>What Buyers Should Do</span></a></li><li><a href="#s-where-vendors-should-play"><span class="rn">1.3</span><span>Where Vendors Should Play</span></a></li><li><a href="#s-the-thesis-in-one-line"><span class="rn">1.4</span><span>The Thesis in One Line</span></a></li></ul></aside></div><nav class="pager" aria-label="Chapter navigation"><a href="index.html"><span class="dir">&larr; Back</span><span class="pt">Table of Contents</span></a><a class="next" href="02-market-overview.html"><span class="dir">Next &rarr;</span><span class="pt">2. Market Overview &amp; Definitions</span></a></nav><script>
+(function(){
+  var EP = window.TRILIO_SURVEY_ENDPOINT || null;
+  document.querySelectorAll('.pulse').forEach(function(sec){
+    var page = sec.getAttribute('data-page');
+    sec.querySelectorAll('.pq').forEach(function(pq){
+      var qid = pq.getAttribute('data-qid'), ansAttr = pq.getAttribute('data-answer');
+      var answer = ansAttr === null ? null : parseInt(ansAttr, 10);
+      var opts = Array.prototype.slice.call(pq.querySelectorAll('.pq-opt'));
+      var storeKey = 'trilio-pulse-' + page + '-' + qid;
+      var prior = null;
+      try { prior = localStorage.getItem(storeKey); } catch(e){}
+      function labels(){ return opts.map(function(b){ return b.innerHTML; }); }
+      function render(counts, mine){
+        var res = pq.querySelector('.pq-res'), total = 0, i;
+        for (i = 0; i < counts.length; i++) total += counts[i];
+        var html = '';
+        var labs = labels();
+        for (i = 0; i < counts.length; i++){
+          var pct = total ? Math.round(100 * counts[i] / total) : 0;
+          var cls = 'pq-bar' + (i === mine ? ' mine' : '') + (answer !== null && i === answer ? ' correct' : '');
+          html += '<div class="pq-row"><span class="pq-lab">' + labs[i] +
+                  (i === mine ? ' <em>(you)</em>' : '') + '</span>' +
+                  '<span class="pq-track"><span class="' + cls + '" style="width:' + pct + '%"></span></span>' +
+                  '<span class="pq-pct">' + pct + '%</span></div>';
+        }
+        html += '<p class="pq-total">' + (total === 1 ? '1 response so far' : total + ' responses so far') + '</p>';
+        res.innerHTML = html; res.hidden = false;
+        pq.querySelector('.pq-opts').classList.add('done');
+        opts.forEach(function(b){ b.disabled = true; });
+        var note = pq.querySelector('.pq-note'); if (note) note.hidden = false;
+      }
+      function localOnly(mine){
+        var counts = opts.map(function(_, i){ return i === mine ? 1 : 0; });
+        render(counts, mine);
+        var res = pq.querySelector('.pq-res');
+        res.insertAdjacentHTML('beforeend',
+          '<p class="pq-total pq-pending">Live community results will appear here once the survey endpoint is connected.</p>');
+      }
+      function fetchResults(mine){
+        fetch(EP + '/results?page=' + encodeURIComponent(page) + '&qid=' + encodeURIComponent(qid) + '&nopts=' + opts.length)
+          .then(function(r){ return r.json(); })
+          .then(function(d){ render(d.counts, mine); })
+          .catch(function(){ localOnly(mine); });
+      }
+      opts.forEach(function(btn, i){
+        btn.addEventListener('click', function(){
+          try { localStorage.setItem(storeKey, String(i)); } catch(e){}
+          if (!EP) { localOnly(i); return; }
+          fetch(EP + '/vote', { method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ page: page, qid: qid, choice: i, nopts: opts.length }) })
+            .then(function(r){ return r.json(); })
+            .then(function(d){ render(d.counts, i); })
+            .catch(function(){ localOnly(i); });
+        });
+      });
+      if (prior !== null){
+        var mine = parseInt(prior, 10);
+        if (EP) fetchResults(mine); else localOnly(mine);
+      }
+    });
+  });
+})();
+</script></div></div><footer><div class="footer-in">
 <a href="index.html" aria-label="Trilio"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 37" class="logo" role="img" aria-label="Trilio"><g><polygon fill="#ffffff" points=".07 6.05 .07 11.38 8.59 11.38 8.59 35.9 14.24 35.9 14.24 11.38 22.88 11.38 22.88 6.05 .07 6.05"/><path fill="#ffffff" d="M37.91,24.71h-3.73v11.19h-5.54V6.05h11.08c6.82,0,10.02,4.48,10.02,9.38,0,3.62-1.92,7.25-6.29,8.74l7.57,11.83h-6.4l-6.71-11.3Zm-3.62-5.01h5.01c3.62,0,5.01-2.13,5.01-4.37s-1.49-4.26-4.37-4.26h-5.65v8.63Z"/><rect fill="#ffffff" x="58.16" y="6.05" width="5.54" height="29.84"/><polygon fill="#ffffff" points="72.97 6.05 78.51 6.05 78.51 30.57 93.86 30.57 93.86 35.9 72.97 35.9 72.97 6.05"/><rect fill="#ffffff" x="99.94" y="6.05" width="5.54" height="29.84"/><g><path fill="#58b847" d="M128.29,34.77c3.72,0,7.16-1.4,9.69-3.95,2.56-2.58,3.95-6.1,3.93-9.91,0-7.81-5.98-13.92-13.61-13.92h-1.56v1.08h1.56c7.03,0,12.54,5.64,12.54,12.85,.03,3.53-1.26,6.78-3.61,9.15-2.33,2.34-5.5,3.63-8.92,3.63-7.15,0-12.54-5.5-12.54-12.79,0-3.19,1.1-6.22,3.11-8.55l-.77-.77c-2.2,2.53-3.42,5.83-3.42,9.32,0,7.91,5.85,13.87,13.61,13.87Z"/><path fill="#58b847" d="M128.29,36.91c4.29,0,8.26-1.62,11.18-4.56,2.95-2.97,4.56-7.04,4.53-11.44,0-8.97-6.87-16.02-15.63-16.06h-.58V-.19l-7.31,7.76,7.31,7.76v-5.12h.5c5.85,0,10.44,4.7,10.44,10.7,.02,2.94-1.05,5.65-3.01,7.62-1.94,1.95-4.58,3.03-7.43,3.03-5.95,0-10.44-4.58-10.44-10.65,0-2.61,.89-5.11,2.52-7.04l-.77-.77c-1.82,2.13-2.83,4.9-2.83,7.8,0,6.69,4.95,11.73,11.51,11.73,3.14,0,6.05-1.19,8.19-3.34,2.16-2.18,3.34-5.16,3.32-8.38,0-6.6-5.06-11.77-11.51-11.77h-1.58v3.48l-4.76-5.05,4.76-5.05v3.4h1.58c8.21,0,14.64,6.59,14.64,14.99,.03,4.12-1.47,7.91-4.22,10.68-2.72,2.74-6.42,4.24-10.42,4.24-8.34,0-14.64-6.42-14.64-14.93,0-3.76,1.31-7.33,3.7-10.06l-.77-.76c-2.59,2.93-4.01,6.77-4.01,10.83,0,9.12,6.75,16.01,15.71,16.01Z"/></g></g></svg></a>
 <span>&copy; 2026 Trilio &middot; The State of Data Resilience</span>
 <a href="index.html" style="color:#c6d0e4">Table of contents &rarr;</a>
