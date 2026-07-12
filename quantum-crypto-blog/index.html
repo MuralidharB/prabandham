@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Can't Migrate What You Can't See: Cryptography in the Quantum Era</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141428;
+    --body:#2b2b3d;
+    --muted:#6b7280;
+    --line:#e6e8f0;
+    --bg:#ffffff;
+    --panel:#f7f8fc;
+    --indigo:#4f46e5;
+    --violet:#7c3aed;
+    --teal:#0d9488;
+    --amber:#d97706;
+    --red:#dc2626;
+    --green:#16a34a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--body);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  header.hero{
+    background:linear-gradient(160deg,#141428 0%,#241d4a 55%,#3b2170 100%);
+    color:#fff;padding:80px 0 64px;margin-bottom:8px;
+  }
+  header.hero .wrap{max-width:820px}
+  .kicker{
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:#a5b4fc;margin:0 0 18px;
+  }
+  h1{
+    font-family:'Fraunces',serif;font-weight:600;color:#fff;
+    font-size:clamp(34px,5.4vw,54px);line-height:1.08;letter-spacing:-.02em;margin:0 0 22px;
+  }
+  .dek{font-size:20px;line-height:1.55;color:#d6d9ef;max-width:640px;margin:0}
+  .byline{
+    margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.16);
+    font-size:14px;color:#b9bce0;font-family:'JetBrains Mono',monospace;
+  }
+  main{padding:56px 0 40px}
+  h2{
+    font-family:'Fraunces',serif;font-weight:600;color:var(--ink);
+    font-size:31px;line-height:1.15;letter-spacing:-.015em;
+    margin:64px 0 8px;padding-top:18px;
+  }
+  h2 .num{
+    display:inline-block;font-family:'JetBrains Mono',monospace;font-size:14px;
+    color:var(--violet);font-weight:500;margin-right:12px;vertical-align:middle;
+  }
+  h3{font-family:'Inter';font-weight:700;color:var(--ink);font-size:20px;margin:38px 0 6px}
+  p{margin:18px 0}
+  a{color:var(--indigo);text-decoration:none;border-bottom:1px solid #c7cbf5}
+  a:hover{border-color:var(--indigo)}
+  strong{color:var(--ink);font-weight:650}
+  em{color:var(--ink)}
+  code{
+    font-family:'JetBrains Mono',monospace;font-size:.86em;background:var(--panel);
+    padding:2px 6px;border-radius:5px;color:#3730a3;border:1px solid var(--line);
+  }
+  .lede{font-size:21px;line-height:1.6;color:var(--ink)}
+  .lede::first-letter{
+    font-family:'Fraunces',serif;font-weight:700;font-size:64px;line-height:.8;
+    float:left;margin:6px 12px 0 0;color:var(--violet);
+  }
+  blockquote{
+    margin:34px 0;padding:20px 26px;background:var(--panel);
+    border-left:4px solid var(--violet);border-radius:0 10px 10px 0;
+    font-family:'Fraunces',serif;font-size:21px;line-height:1.45;color:var(--ink);font-weight:500;
+  }
+  .figure{margin:40px 0}
+  .figure svg{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:14px;background:#fff}
+  figcaption{
+    font-size:13.5px;color:var(--muted);margin-top:12px;text-align:center;
+    font-family:'JetBrains Mono',monospace;letter-spacing:.01em;
+  }
+  figcaption b{color:var(--ink);font-weight:600}
+  .callout{
+    background:linear-gradient(120deg,#fef2f2,#fff7ed);border:1px solid #fecaca;
+    border-radius:12px;padding:20px 24px;margin:34px 0;font-size:16.5px;line-height:1.6;
+  }
+  .callout .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--red);font-weight:600;display:block;margin-bottom:6px}
+  hr.sep{border:0;height:1px;background:var(--line);margin:60px 0}
+  footer{border-top:1px solid var(--line);padding:40px 0 80px;color:var(--muted);font-size:14px}
+  footer .wrap{max-width:760px}
+  .src{font-size:13px;line-height:1.9}
+  .src a{color:var(--muted);border-color:var(--line)}
+  ::selection{background:#ddd6fe}
+  @media(max-width:640px){
+    body{font-size:17px}
+    header.hero{padding:56px 0 44px}
+    main{padding:40px 0 24px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Post-Quantum Security &middot; Field Notes</p>
+    <h1>You Can't Migrate What You Can't See</h1>
+    <p class="dek">The quantum threat to cryptography is real, and the standards to survive it already exist. So why is almost everyone stuck? Because the hard part was never picking an algorithm &mdash; it's finding the crypto you forgot you had.</p>
+    <p class="byline">A practitioner's notes on the road to quantum-safe &middot; July 2026</p>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+<p class="lede">Somewhere right now, on a fiber tap or a mirrored port, an encrypted session is being copied and written to cold storage. Nobody's trying to break it today. They don't have to. The plan is to hold it until a cryptographically relevant quantum computer exists, and then read it at leisure. If the data inside still matters in 2032 &mdash; a patient record, a signing key, a diplomatic cable, a decade of trade secrets &mdash; then for that data, the quantum era has <em>already begun</em>.</p>
+
+<p>This is the part of the quantum conversation I keep coming back to. Not the qubit counts, not the race between labs, but the quiet, unglamorous reality that the clock started years ago and most organizations can't tell you what they'd even need to protect. I've spent a good while now going deep on the mechanics &mdash; Shor's algorithm, lattices, the standards process &mdash; and the more I learn, the more convinced I am that the bottleneck isn't the math. It's visibility.</p>
+
+<figure class="figure">
+<svg viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Harvest now, decrypt later timeline">
+  <defs>
+    <linearGradient id="hndlbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#dc2626"/>
+    </linearGradient>
+  </defs>
+  <text x="30" y="34" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2" fill="#6b7280">HARVEST NOW, DECRYPT LATER</text>
+  <!-- axis -->
+  <line x1="40" y1="150" x2="720" y2="150" stroke="#d1d5db" stroke-width="1.5"/>
+  <!-- ticks -->
+  <g font-family="JetBrains Mono, monospace" font-size="12" fill="#141428">
+    <line x1="90" y1="145" x2="90" y2="155" stroke="#9ca3af"/><text x="90" y="176" text-anchor="middle">Today</text>
+    <line x1="300" y1="145" x2="300" y2="155" stroke="#9ca3af"/><text x="300" y="176" text-anchor="middle">…storage…</text>
+    <line x1="640" y1="145" x2="640" y2="155" stroke="#9ca3af"/><text x="640" y="176" text-anchor="middle">"Q-Day"</text>
+  </g>
+  <!-- capture -->
+  <circle cx="90" cy="150" r="8" fill="#4f46e5"/>
+  <text x="90" y="118" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#141428">Traffic captured</text>
+  <text x="90" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#6b7280">RSA / ECC session</text>
+  <!-- arrow flow -->
+  <rect x="98" y="146" width="534" height="8" rx="4" fill="url(#hndlbar)" opacity="0.85"/>
+  <!-- decrypt -->
+  <circle cx="640" cy="150" r="8" fill="#dc2626"/>
+  <text x="640" y="118" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#dc2626">Decrypted retroactively</text>
+  <text x="640" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#6b7280">Shor breaks the key</text>
+  <!-- data lifetime bracket -->
+  <path d="M90 206 L90 214 L640 214 L640 206" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="365" y="234" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#7c3aed" font-weight="600">If your secret must stay secret across this whole span, it is already exposed.</text>
+</svg>
+<figcaption><b>Fig 1.</b> The deadline isn't Q-Day. It's Q-Day minus the shelf-life of the data you're sending today.</figcaption>
+</figure>
+
+<p>So this is my attempt to lay it out the way I actually think about it: the challenges as they really are, what's genuinely at stake, the alternatives on the table, and the catalysts that will &mdash; finally &mdash; force movement. A thesis runs through all of it: <strong>the industry is over-indexed on which algorithm to choose, a problem that's largely solved, and under-invested in the one that isn't &mdash; knowing where your cryptography lives in the first place.</strong></p>
+
+<h2><span class="num">01</span>The Challenges</h2>
+
+<p>Let's be precise about the threat, because vagueness here breeds both panic and complacency. Two quantum algorithms matter for cryptography, and they don't hit equally.</p>
+
+<p><strong>Shor's algorithm</strong> is the guillotine. It factors large integers and solves discrete logarithms in polynomial time, which means it structurally breaks RSA, Diffie-Hellman, and elliptic-curve cryptography &mdash; the entire public-key layer that underpins key exchange and digital signatures. This isn't a "make the key bigger" problem. There is no RSA key length that survives a sufficiently large, error-corrected quantum machine. <strong>Grover's algorithm</strong> is the lesser threat, a quadratic speedup on brute-force search. It effectively halves the security level of symmetric ciphers and hashes &mdash; which sounds dramatic until you realize the fix is trivial: use AES-256 instead of AES-128 and you're back to a comfortable margin. Symmetric crypto survives. Public-key crypto, as we deploy it today, does not.</p>
+
+<figure class="figure">
+<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Shor versus Grover impact matrix">
+  <text x="30" y="30" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2" fill="#6b7280">QUANTUM IMPACT BY PRIMITIVE</text>
+  <!-- three columns -->
+  <!-- BROKEN -->
+  <rect x="30" y="52" width="228" height="212" rx="12" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="144" y="82" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="#dc2626">BROKEN</text>
+  <text x="144" y="102" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#b91c1c">via Shor</text>
+  <g font-family="Inter" font-size="14" fill="#141428">
+    <text x="144" y="140" text-anchor="middle">RSA</text>
+    <text x="144" y="170" text-anchor="middle">Diffie–Hellman</text>
+    <text x="144" y="200" text-anchor="middle">ECC / ECDSA</text>
+    <text x="144" y="230" text-anchor="middle" font-size="12" fill="#6b7280">All public-key key</text>
+    <text x="144" y="247" text-anchor="middle" font-size="12" fill="#6b7280">exchange &amp; signatures</text>
+  </g>
+  <!-- WEAKENED -->
+  <rect x="266" y="52" width="228" height="212" rx="12" fill="#fffbeb" stroke="#fde68a"/>
+  <text x="380" y="82" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="#d97706">WEAKENED</text>
+  <text x="380" y="102" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#b45309">via Grover (½ strength)</text>
+  <g font-family="Inter" font-size="14" fill="#141428">
+    <text x="380" y="140" text-anchor="middle">AES-128</text>
+    <text x="380" y="170" text-anchor="middle">SHA-256 (as MAC)</text>
+    <text x="380" y="222" text-anchor="middle" font-size="12" fill="#6b7280">Fix: double the</text>
+    <text x="380" y="239" text-anchor="middle" font-size="12" fill="#6b7280">key / output size</text>
+  </g>
+  <!-- SURVIVES -->
+  <rect x="502" y="52" width="228" height="212" rx="12" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="616" y="82" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="#16a34a">SURVIVES</text>
+  <text x="616" y="102" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#15803d">no practical dent</text>
+  <g font-family="Inter" font-size="14" fill="#141428">
+    <text x="616" y="140" text-anchor="middle">AES-256</text>
+    <text x="616" y="170" text-anchor="middle">SHA-384 / SHA-512</text>
+    <text x="616" y="222" text-anchor="middle" font-size="12" fill="#6b7280">Symmetric crypto</text>
+    <text x="616" y="239" text-anchor="middle" font-size="12" fill="#6b7280">is broadly safe</text>
+  </g>
+</svg>
+<figcaption><b>Fig 2.</b> Not everything breaks. The damage is concentrated in the public-key layer &mdash; which is precisely the layer everything else trusts.</figcaption>
+</figure>
+
+<p>Here's why that concentration is so dangerous. The public-key layer is the root of trust for nearly everything else. It's how a TLS session agrees on a symmetric key, how your OS verifies a software update is authentic, how a certificate authority vouches for a website. Break the public-key layer and the strong symmetric crypto underneath becomes irrelevant, because the attacker can simply establish themselves as a trusted party or recover the session key at the door.</p>
+
+<p>Now, the part almost nobody has a good answer to. Suppose you accept all of this and want to act. Your first question is deceptively simple: <em>where is RSA in my environment?</em> And the honest answer, for most organizations, is that they have no idea. Cryptography isn't a component you install; it's a behavior scattered across everything. It's in TLS libraries and their transitive dependencies, in the firmware of devices you didn't write, in a VPN concentrator's config, in a hardcoded key in a fifteen-year-old batch job, in a protocol handshake buried three layers deep, and &mdash; the case I find most interesting &mdash; in code where a developer hand-rolled a cipher instead of calling a library, so no dependency scanner will ever flag it.</p>
+
+<figure class="figure">
+<svg viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The cryptography iceberg">
+  <defs>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dbeafe"/><stop offset="1" stop-color="#1e3a8a"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="150" width="760" height="230" fill="url(#water)" opacity="0.35"/>
+  <line x1="0" y1="150" x2="760" y2="150" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="30" y="30" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2" fill="#6b7280">THE CRYPTOGRAPHY ICEBERG</text>
+  <text x="730" y="144" text-anchor="end" font-family="Inter" font-size="12" fill="#1d4ed8" font-style="italic">waterline = what tools can see</text>
+  <!-- iceberg tip -->
+  <path d="M380 60 L470 150 L290 150 Z" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="380" y="112" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600" fill="#312e81">Certificates,</text>
+  <text x="380" y="130" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600" fill="#312e81">TLS configs</text>
+  <!-- submerged -->
+  <path d="M470 150 L560 340 L200 340 L290 150 Z" fill="#4338ca" opacity="0.9" stroke="#3730a3"/>
+  <g font-family="Inter" font-size="13.5" fill="#e0e7ff" text-anchor="middle">
+    <text x="380" y="188">Library &amp; transitive deps</text>
+    <text x="380" y="220">Firmware &amp; embedded devices</text>
+    <text x="380" y="252">Hardcoded &amp; forgotten keys</text>
+    <text x="380" y="284">Protocol internals</text>
+    <text x="380" y="316" font-weight="700" fill="#fff">Hand-rolled, library-less crypto</text>
+  </g>
+  <!-- label + repo annotation -->
+  <text x="596" y="286" font-family="JetBrains Mono, monospace" font-size="11" fill="#1e293b">signature scanners</text>
+  <text x="596" y="302" font-family="JetBrains Mono, monospace" font-size="11" fill="#1e293b">are blind to this base —</text>
+  <a href="https://github.com/MuralidharB/cryto-code-detect" target="_blank">
+    <text x="596" y="326" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="600" fill="#4f46e5" text-decoration="underline">crypto-discovery-bench</text>
+  </a>
+  <text x="596" y="342" font-family="JetBrains Mono, monospace" font-size="11" fill="#1e293b">was built to close it</text>
+</svg>
+<figcaption><b>Fig 3.</b> The certificates you can enumerate are the tip. The migration risk lives below the waterline &mdash; and the deepest layer, homegrown crypto, defeats signature-based discovery entirely.</figcaption>
+</figure>
+
+<p>This is the crux of my thesis. The dominant approach to crypto discovery is signature matching &mdash; scan for known library calls, match against a pattern database. It works for the tip of the iceberg and misses the base. If a discovery tool only knows crypto by its library fingerprint, then anything without a recognizable fingerprint is invisible to it. And "invisible" is the worst possible state for a migration program, because you can't prioritize, remediate, or prove completeness on assets you never knew existed.</p>
+
+<p>This is the problem I've been building toward with <a href="https://github.com/MuralidharB/cryto-code-detect" target="_blank"><code>crypto-discovery-bench</code></a>, an open-source toolkit aimed squarely at that bottom layer. Instead of matching library calls, it uses an LLM to read what the code actually <em>does</em>, so it keeps recognizing cryptography as it gets harder to see &mdash; an aliased import, a textbook RSA built from <code>pow(m, e, n)</code> with no import at all, a keyed MAC hiding inside business logic labeled "checksum." And because "a tool that catches hand-rolled crypto" is easy to claim and hard to trust, it ships with a controlled benchmark that <em>measures</em> the claim rather than asserting it: on the hardest tier &mdash; bespoke crypto with no standard library in sight &mdash; signature scanners fall to essentially zero recall while the semantic detector holds near-perfect, staying precise enough not to flag every checksum and base64 routine it sees. That gap, measured rather than hand-waved, is the entire point.</p>
+
+<h2><span class="num">02</span>What's at Stake</h2>
+
+<p>It's tempting to file this under "future risk," but the harvest-now-decrypt-later model breaks that framing. The right question isn't <em>when will quantum computers arrive</em>, it's <em>how long does my data need to stay confidential</em>. Anything with a long secrecy horizon is on the clock today.</p>
+
+<figure class="figure">
+<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data shelf-life versus Q-Day">
+  <text x="30" y="30" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2" fill="#6b7280">SECRECY HORIZON vs. THREAT WINDOW</text>
+  <!-- vertical Q-day line -->
+  <line x1="560" y1="55" x2="560" y2="270" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="560" y="288" text-anchor="middle" font-family="Inter" font-size="12" font-weight="600" fill="#dc2626">estimated Q-Day window</text>
+  <text x="60" y="288" text-anchor="middle" font-family="Inter" font-size="12" fill="#6b7280">today</text>
+  <line x1="60" y1="55" x2="60" y2="270" stroke="#cbd5e1" stroke-width="1.5"/>
+  <!-- bars: x from 60, scale years -->
+  <!-- each row -->
+  <g font-family="Inter" font-size="13.5">
+    <!-- session tokens -->
+    <text x="240" y="76" text-anchor="end" fill="#141428">Session tokens</text>
+    <rect x="250" y="66" width="40" height="14" rx="7" fill="#16a34a"/>
+    <!-- financial txns -->
+    <text x="240" y="108" text-anchor="end" fill="#141428">Financial transactions</text>
+    <rect x="250" y="98" width="120" height="14" rx="7" fill="#65a30d"/>
+    <!-- IP / trade secrets -->
+    <text x="240" y="140" text-anchor="end" fill="#141428">IP &amp; trade secrets</text>
+    <rect x="250" y="130" width="330" height="14" rx="7" fill="#d97706"/>
+    <!-- health records -->
+    <text x="240" y="172" text-anchor="end" fill="#141428">Health records</text>
+    <rect x="250" y="162" width="410" height="14" rx="7" fill="#dc2626"/>
+    <!-- state / defense secrets -->
+    <text x="240" y="204" text-anchor="end" fill="#141428">State &amp; defense secrets</text>
+    <rect x="250" y="194" width="470" height="14" rx="7" fill="#991b1b"/>
+    <!-- biometrics -->
+    <text x="240" y="236" text-anchor="end" fill="#141428">Biometrics (immutable)</text>
+    <rect x="250" y="226" width="470" height="14" rx="7" fill="#7f1d1d"/>
+  </g>
+  <text x="415" y="256" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#6b7280">bars crossing the red line = data captured today, readable after Q-Day</text>
+</svg>
+<figcaption><b>Fig 4.</b> Short-lived secrets shrug off the quantum threat. Anything that must stay confidential for a decade or more is already in the danger zone.</figcaption>
+</figure>
+
+<p>Play it out by sector and the exposure isn't uniform &mdash; it tracks data longevity and adversary patience. Government and defense sit at the top: classified material carries decades-long secrecy requirements, and nation-state adversaries have both the storage budget and the motive to harvest at scale. Healthcare is close behind, because a medical record is sensitive for a lifetime and regulatory penalties compound the breach. Finance carries a split profile &mdash; most transactions are short-lived, but signing keys, long-term contracts, and the integrity of the payment rails themselves are high-value. Critical infrastructure and utilities worry me for a different reason: long-lived operational technology with firmware that may never be patched in place.</p>
+
+<figure class="figure">
+<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sector exposure heatmap">
+  <text x="30" y="28" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2" fill="#6b7280">SECTOR EXPOSURE</text>
+  <!-- column headers -->
+  <g font-family="Inter" font-size="12" fill="#6b7280" text-anchor="middle">
+    <text x="360" y="60">Data longevity</text>
+    <text x="480" y="60">Adversary interest</text>
+    <text x="600" y="60">Remediation difficulty</text>
+  </g>
+  <!-- rows -->
+  <!-- helper: color squares -->
+  <!-- Gov/Defense -->
+  <g font-family="Inter" font-size="14">
+    <text x="40" y="92" fill="#141428" font-weight="600">Government / Defense</text>
+    <rect x="325" y="78" width="70" height="22" rx="5" fill="#991b1b"/><text x="360" y="94" text-anchor="middle" fill="#fff" font-size="11">Extreme</text>
+    <rect x="445" y="78" width="70" height="22" rx="5" fill="#991b1b"/><text x="480" y="94" text-anchor="middle" fill="#fff" font-size="11">Extreme</text>
+    <rect x="565" y="78" width="70" height="22" rx="5" fill="#dc2626"/><text x="600" y="94" text-anchor="middle" fill="#fff" font-size="11">High</text>
+
+    <text x="40" y="132" fill="#141428" font-weight="600">Healthcare</text>
+    <rect x="325" y="118" width="70" height="22" rx="5" fill="#991b1b"/><text x="360" y="134" text-anchor="middle" fill="#fff" font-size="11">Extreme</text>
+    <rect x="445" y="118" width="70" height="22" rx="5" fill="#d97706"/><text x="480" y="134" text-anchor="middle" fill="#fff" font-size="11">Med</text>
+    <rect x="565" y="118" width="70" height="22" rx="5" fill="#dc2626"/><text x="600" y="134" text-anchor="middle" fill="#fff" font-size="11">High</text>
+
+    <text x="40" y="172" fill="#141428" font-weight="600">Critical infrastructure</text>
+    <rect x="325" y="158" width="70" height="22" rx="5" fill="#dc2626"/><text x="360" y="174" text-anchor="middle" fill="#fff" font-size="11">High</text>
+    <rect x="445" y="158" width="70" height="22" rx="5" fill="#dc2626"/><text x="480" y="174" text-anchor="middle" fill="#fff" font-size="11">High</text>
+    <rect x="565" y="158" width="70" height="22" rx="5" fill="#991b1b"/><text x="600" y="174" text-anchor="middle" fill="#fff" font-size="11">Extreme</text>
+
+    <text x="40" y="212" fill="#141428" font-weight="600">Finance</text>
+    <rect x="325" y="198" width="70" height="22" rx="5" fill="#d97706"/><text x="360" y="214" text-anchor="middle" fill="#fff" font-size="11">Med</text>
+    <rect x="445" y="198" width="70" height="22" rx="5" fill="#dc2626"/><text x="480" y="214" text-anchor="middle" fill="#fff" font-size="11">High</text>
+    <rect x="565" y="198" width="70" height="22" rx="5" fill="#d97706"/><text x="600" y="214" text-anchor="middle" fill="#fff" font-size="11">Med</text>
+
+    <text x="40" y="252" fill="#141428" font-weight="600">General enterprise</text>
+    <rect x="325" y="238" width="70" height="22" rx="5" fill="#d97706"/><text x="360" y="254" text-anchor="middle" fill="#fff" font-size="11">Med</text>
+    <rect x="445" y="238" width="70" height="22" rx="5" fill="#65a30d"/><text x="480" y="254" text-anchor="middle" fill="#fff" font-size="11">Low</text>
+    <rect x="565" y="238" width="70" height="22" rx="5" fill="#d97706"/><text x="600" y="254" text-anchor="middle" fill="#fff" font-size="11">Med</text>
+  </g>
+  <text x="40" y="286" font-family="Inter" font-size="11.5" fill="#6b7280">Exposure isn't uniform — it's the product of how long secrets live and how badly someone wants them.</text>
+</svg>
+<figcaption><b>Fig 5.</b> A rough triage view. The point isn't the exact shading &mdash; it's that "difficulty" is often highest where you have the least visibility.</figcaption>
+</figure>
+
+<p>And then there's the layer beneath all the data: the trust fabric itself. Public-key infrastructure, code signing, and TLS aren't just <em>things that use</em> vulnerable crypto &mdash; they <em>are</em> the vulnerable crypto, operationalized. When Shor arrives, a forged code-signing signature means malicious updates that look authentic. A forged certificate means a convincing impostor for any site. This is systemic risk, not point risk, and it's why the migration can't be treated as a checklist of individual apps.</p>
+
+<h2><span class="num">03</span>The Alternatives</h2>
+
+<p>Here's the good news, and it's real: the cryptographic replacements exist, they're standardized, and they're ready to deploy. In August 2024, NIST finalized the first three post-quantum standards after an eight-year public competition, which means the "we're waiting for the standards" excuse expired two years ago.</p>
+
+<figure class="figure">
+<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Post-quantum cryptography family tree">
+  <text x="30" y="28" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2" fill="#6b7280">THE STANDARDIZED PQC TOOLBOX</text>
+  <!-- root -->
+  <rect x="300" y="46" width="160" height="40" rx="10" fill="#141428"/>
+  <text x="380" y="71" text-anchor="middle" font-family="Inter" font-size="14" font-weight="600" fill="#fff">NIST PQC (2024)</text>
+  <!-- two families -->
+  <line x1="380" y1="86" x2="220" y2="120" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="380" y1="86" x2="540" y2="120" stroke="#94a3b8" stroke-width="1.5"/>
+  <rect x="120" y="120" width="200" height="36" rx="9" fill="#ede9fe" stroke="#c4b5fd"/>
+  <text x="220" y="143" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600" fill="#5b21b6">Lattice-based (MLWE)</text>
+  <rect x="440" y="120" width="200" height="36" rx="9" fill="#ccfbf1" stroke="#5eead4"/>
+  <text x="540" y="143" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600" fill="#0f766e">Hash-based</text>
+  <!-- leaves lattice -->
+  <line x1="180" y1="156" x2="150" y2="196" stroke="#c4b5fd" stroke-width="1.5"/>
+  <line x1="260" y1="156" x2="290" y2="196" stroke="#c4b5fd" stroke-width="1.5"/>
+  <rect x="60" y="196" width="180" height="72" rx="10" fill="#f5f3ff" stroke="#c4b5fd"/>
+  <text x="150" y="220" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#5b21b6">FIPS 203 · ML-KEM</text>
+  <text x="150" y="240" text-anchor="middle" font-family="Inter" font-size="12" fill="#4b5563">Key encapsulation</text>
+  <text x="150" y="257" text-anchor="middle" font-family="Inter" font-size="11" fill="#6b7280">(was Kyber) · the default</text>
+  <rect x="256" y="196" width="180" height="72" rx="10" fill="#f5f3ff" stroke="#c4b5fd"/>
+  <text x="346" y="220" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#5b21b6">FIPS 204 · ML-DSA</text>
+  <text x="346" y="240" text-anchor="middle" font-family="Inter" font-size="12" fill="#4b5563">Digital signatures</text>
+  <text x="346" y="257" text-anchor="middle" font-family="Inter" font-size="11" fill="#6b7280">(was Dilithium) · primary</text>
+  <!-- leaf hash -->
+  <line x1="540" y1="156" x2="540" y2="196" stroke="#5eead4" stroke-width="1.5"/>
+  <rect x="452" y="196" width="188" height="72" rx="10" fill="#f0fdfa" stroke="#5eead4"/>
+  <text x="546" y="220" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#0f766e">FIPS 205 · SLH-DSA</text>
+  <text x="546" y="240" text-anchor="middle" font-family="Inter" font-size="12" fill="#4b5563">Signatures, conservative</text>
+  <text x="546" y="257" text-anchor="middle" font-family="Inter" font-size="11" fill="#6b7280">(was SPHINCS+) · hedge</text>
+  <!-- footnote -->
+  <text x="380" y="300" text-anchor="middle" font-family="Inter" font-size="12.5" fill="#374151">Two lattice standards for speed and size; one hash-based standard as a</text>
+  <text x="380" y="320" text-anchor="middle" font-family="Inter" font-size="12.5" fill="#374151">structurally different fallback if lattices are ever weakened.</text>
+</svg>
+<figcaption><b>Fig 6.</b> The replacements are named, tested, and shipping. This is the part people think is the whole problem. It isn't.</figcaption>
+</figure>
+
+<p>A few things worth understanding about these choices. ML-KEM and ML-DSA rest on lattice problems &mdash; specifically Module Learning With Errors &mdash; which give a good balance of key size and speed. SLH-DSA is deliberately the odd one out: it's built purely on hash functions, a much older and more conservative foundation with no known structural shortcuts. It's slower and its signatures are larger, but it exists precisely so that if someone ever finds a crack in lattice math, we're not left with a monoculture. That diversity is itself a design principle worth internalizing.</p>
+
+<p>What about the more exotic options? <strong>Quantum key distribution</strong> gets a lot of press &mdash; using quantum physics itself to detect eavesdropping on a key exchange. It's real and mathematically elegant, but it needs specialized hardware and dedicated fiber, doesn't authenticate endpoints on its own, and doesn't touch the vast installed base of software that needs to change. For the overwhelming majority of the migration, QKD is a niche, not the answer.</p>
+
+<p>The answer that matters most isn't a specific algorithm at all &mdash; it's <strong>crypto-agility</strong>: architecting systems so the algorithm is a swappable component rather than a hardwired assumption. We just spent eight years choosing these standards; we will not want to spend another eight rebuilding when the next transition comes. If your systems reference crypto through a clean abstraction, the next migration is a configuration change instead of an archaeology project.</p>
+
+<figure class="figure">
+<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Crypto-agility swap layer architecture">
+  <text x="30" y="28" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2" fill="#6b7280">CRYPTO-AGILITY: THE SWAP LAYER</text>
+  <!-- left: brittle -->
+  <text x="185" y="62" text-anchor="middle" font-family="Inter" font-size="14" font-weight="700" fill="#dc2626">Hardwired (brittle)</text>
+  <rect x="70" y="78" width="230" height="54" rx="10" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="185" y="110" text-anchor="middle" font-family="Inter" font-size="13" fill="#141428">Application</text>
+  <line x1="185" y1="132" x2="185" y2="158" stroke="#ef4444" stroke-width="2"/>
+  <rect x="70" y="158" width="230" height="54" rx="10" fill="#fee2e2" stroke="#fca5a5"/>
+  <text x="185" y="182" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#991b1b">RSA-2048 (baked in)</text>
+  <text x="185" y="200" text-anchor="middle" font-family="Inter" font-size="11" fill="#b91c1c">calls scattered everywhere</text>
+  <text x="185" y="244" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#6b7280">changing it = find every call site</text>
+  <!-- right: agile -->
+  <text x="575" y="62" text-anchor="middle" font-family="Inter" font-size="14" font-weight="700" fill="#16a34a">Abstracted (agile)</text>
+  <rect x="460" y="78" width="230" height="54" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="575" y="110" text-anchor="middle" font-family="Inter" font-size="13" fill="#141428">Application</text>
+  <line x1="575" y1="132" x2="575" y2="150" stroke="#22c55e" stroke-width="2"/>
+  <rect x="460" y="150" width="230" height="42" rx="10" fill="#dcfce7" stroke="#86efac"/>
+  <text x="575" y="176" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#15803d">crypto abstraction layer</text>
+  <line x1="510" y1="192" x2="510" y2="212" stroke="#22c55e" stroke-width="1.5"/>
+  <line x1="640" y1="192" x2="640" y2="212" stroke="#22c55e" stroke-width="1.5"/>
+  <rect x="452" y="212" width="118" height="46" rx="9" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="511" y="234" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#15803d">RSA / ECC</text>
+  <text x="511" y="250" text-anchor="middle" font-family="Inter" font-size="10" fill="#6b7280">(today)</text>
+  <rect x="580" y="212" width="118" height="46" rx="9" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="639" y="234" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#047857">ML-KEM</text>
+  <text x="639" y="250" text-anchor="middle" font-family="Inter" font-size="10" fill="#6b7280">(swap in)</text>
+  <text x="575" y="282" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#6b7280">changing it = one config change</text>
+  <!-- divider -->
+  <line x1="380" y1="70" x2="380" y2="270" stroke="#e5e7eb" stroke-width="1"/>
+</svg>
+<figcaption><b>Fig 7.</b> Crypto-agility is the strategy that outlasts any single algorithm. But you can only abstract the crypto you've actually located &mdash; which loops us right back to discovery.</figcaption>
+</figure>
+
+<p>Notice what makes crypto-agility possible: you have to know every place the crypto is invoked in order to route it through an abstraction layer. Which brings the whole discussion back to the same place. Before agility, before algorithm selection, before any of it, comes the <strong>cryptographic inventory</strong> &mdash; a Cryptography Bill of Materials, or CBOM. Standards are the easy part. The inventory is the load-bearing prerequisite, and it's the part the market keeps skipping.</p>
+
+<h2><span class="num">04</span>Catalysts</h2>
+
+<p>If the technology is ready and the risk is real, why hasn't the industry moved? Because migrations of this scale don't happen on the strength of a good argument &mdash; they happen when something forces the calendar. Several forcing functions are now converging, and this is what makes me think the next few years look different from the last few.</p>
+
+<p>The first is <strong>regulation with dates attached</strong>. The NSA's CNSA 2.0 suite sets a staged federal schedule: new deployments expected to comply from 2027, software and firmware signing on the earliest track, and exclusive post-quantum use rolling across networking, operating systems, and cloud services through 2030 to 2033, with full quantum resistance for national-security systems targeted by 2035. Federal deadlines have gravity &mdash; they ripple out through every vendor and contractor who wants to keep selling to government.</p>
+
+<p>The second is subtler but affects everyone with a website: <strong>the collapse of certificate lifetimes</strong>. The CA/Browser Forum has locked in a schedule cutting maximum TLS certificate validity from a year down to 47 days by 2029, stepping through 200 days in 2026 and 100 days in 2027. This isn't a quantum rule per se, but its effect is profound &mdash; you simply cannot renew certificates every six weeks by hand. It forces automation of the entire certificate lifecycle, and an automated, well-inventoried certificate estate is exactly the muscle you need for a post-quantum swap. The industry is being dragged into crypto-agility for operational reasons, and that's a gift.</p>
+
+<figure class="figure">
+<svg viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Quantum migration roadmap">
+  <text x="30" y="30" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2" fill="#6b7280">THE MIGRATION PROGRAM (NOT A PURCHASE)</text>
+  <defs>
+    <marker id="arw" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+  <!-- 4 stages -->
+  <!-- stage 1 -->
+  <rect x="30" y="70" width="150" height="90" rx="12" fill="#4338ca"/>
+  <text x="105" y="104" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="#fff">1 · Discover</text>
+  <text x="105" y="126" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#c7d2fe">Build the CBOM.</text>
+  <text x="105" y="143" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#c7d2fe">Find hidden crypto.</text>
+  <line x1="182" y1="115" x2="204" y2="115" stroke="#7c3aed" stroke-width="2" marker-end="url(#arw)"/>
+  <!-- stage 2 -->
+  <rect x="208" y="70" width="150" height="90" rx="12" fill="#6d28d9"/>
+  <text x="283" y="104" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="#fff">2 · Prioritize</text>
+  <text x="283" y="126" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#ddd6fe">By data shelf-life</text>
+  <text x="283" y="143" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#ddd6fe">&amp; exposure.</text>
+  <line x1="360" y1="115" x2="382" y2="115" stroke="#7c3aed" stroke-width="2" marker-end="url(#arw)"/>
+  <!-- stage 3 -->
+  <rect x="386" y="70" width="150" height="90" rx="12" fill="#7c3aed"/>
+  <text x="461" y="104" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="#fff">3 · Remediate</text>
+  <text x="461" y="126" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#ede9fe">Deploy PQC via an</text>
+  <text x="461" y="143" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#ede9fe">agile abstraction.</text>
+  <line x1="538" y1="115" x2="560" y2="115" stroke="#7c3aed" stroke-width="2" marker-end="url(#arw)"/>
+  <!-- stage 4 -->
+  <rect x="564" y="70" width="166" height="90" rx="12" fill="#9333ea"/>
+  <text x="647" y="104" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="#fff">4 · Verify</text>
+  <text x="647" y="126" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#f3e8ff">Prove completeness.</text>
+  <text x="647" y="143" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#f3e8ff">Re-scan. Repeat.</text>
+  <!-- loop back -->
+  <path d="M647 160 Q647 200 380 200 Q105 200 105 162" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arw)"/>
+  <text x="380" y="222" text-anchor="middle" font-family="Inter" font-size="12" fill="#7c3aed" font-style="italic">continuous — crypto posture drifts, so discovery never truly "finishes"</text>
+</svg>
+<figcaption><b>Fig 8.</b> Every stage after the first depends on the first. Skip discovery and you're prioritizing, remediating, and verifying against a map with the dangerous parts missing.</figcaption>
+</figure>
+
+<p>The third catalyst is the one I'm betting on: <strong>discovery tooling finally maturing past signature matching</strong>. Standards finalization removed the "wait and see" excuse, which shifts the industry's attention to execution &mdash; and execution stalls immediately on the inventory problem. The tools that can see below the waterline, that can recognize cryptography by what the code <em>does</em> rather than which library it <em>calls</em>, are the ones that unblock everything downstream. This is where I think the real work &mdash; and the real opportunity &mdash; lives.</p>
+
+<blockquote>The quantum migration isn't a product you buy. It's a program you run &mdash; and every program starts with an accurate map of the terrain.</blockquote>
+
+<p>So here's where I've landed. The algorithms are solved. The deadlines are set. The operational forcing functions are already reshaping how we handle certificates. What remains stubbornly unsolved is the least glamorous piece: honestly answering <em>what cryptography do I have, and where?</em> Organizations that treat post-quantum as "swap RSA for ML-KEM when we get around to it" will discover, too late, that they never had a full list of the places RSA was hiding. The ones that start with discovery &mdash; that build a real, living cryptographic inventory before they touch an algorithm &mdash; are the ones who'll actually make it across.</p>
+
+<p>You can't migrate what you can't see. Everything else is downstream of that.</p>
+
+<hr class="sep">
+<p style="font-size:15px;color:var(--muted)">These are working notes from my own exploration of the post-quantum space &mdash; part synthesis, part argument. I'd genuinely like to hear where practitioners think the discovery-first framing holds up and where it breaks. That's the conversation worth having.</p>
+
+</div>
+</main>
+
+<footer>
+<div class="wrap">
+<p style="color:var(--ink);font-weight:600;margin-bottom:4px">Sources &amp; references</p>
+<div class="src">
+<a href="https://github.com/MuralidharB/cryto-code-detect">crypto-discovery-bench — semantic (LLM) crypto discovery toolkit &amp; benchmark (referenced above)</a><br>
+<a href="https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards">NIST — First 3 Finalized Post-Quantum Encryption Standards (FIPS 203/204/205), Aug 2024</a><br>
+<a href="https://cloudsecurityalliance.org/blog/2024/08/15/nist-fips-203-204-and-205-finalized-an-important-step-towards-a-quantum-safe-future">Cloud Security Alliance — FIPS 203, 204, 205 Finalized</a><br>
+<a href="https://media.defense.gov/2025/May/30/2003728741/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS.PDF">NSA — CNSA 2.0 Algorithms &amp; Transition Timeline</a><br>
+<a href="https://www.qusecure.com/cnsa-2-0-pqc-requirements-timelines-federal-impact/">CNSA 2.0 — PQC Requirements, Timelines, Federal Impact</a><br>
+<a href="https://www.digicert.com/blog/tls-certificate-lifetimes-will-officially-reduce-to-47-days">DigiCert — TLS Certificate Lifetimes Reducing to 47 Days (CA/B Forum SC-081v3)</a><br>
+<a href="https://www.sectigo.com/resource-library/sectigo-cab-reduce-ssl-tls-certificates-lifespan-47-days">Sectigo — CA/B Forum Cuts SSL/TLS Certificate Lifespan to 47 Days</a>
+</div>
+</div>
+</footer>
+
+</body>
+</html>
