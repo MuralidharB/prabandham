@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Is a Reasoning Partner, Not a Tool — Part 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --abyss:#0B1920;--petrol:#102630;--petrol-2:#17323E;
+    --paper:#F3EEE4;--paper-2:#EAE2D2;--ink:#14232B;--ink-soft:#4C6472;
+    --copper:#C97E42;--copper-br:#E89A5B;--signal:#4FB3A3;
+    --line-dark:rgba(255,255,255,.11);--line-light:rgba(20,35,43,.15);
+    --maxprose:44rem;--maxwide:66rem;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Newsreader",Georgia,serif;font-size:1.18rem;line-height:1.72;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--copper);margin:0 0 1.1rem;display:inline-flex;align-items:center;gap:.7em}
+  .eyebrow::before{content:"";width:2.2em;height:1px;background:var(--copper);display:inline-block}
+  h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:600;line-height:1.08;letter-spacing:-.015em;color:var(--ink)}
+  h2{font-size:clamp(1.9rem,4.2vw,3rem);margin:0 0 1.4rem}
+  h3{font-size:1.32rem;letter-spacing:-.01em;margin:0 0 .55rem}
+  p{margin:0 0 1.25rem}
+  a{color:var(--copper)}
+  strong{font-weight:500}
+  em{font-style:italic}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .band{padding:6rem 1.5rem}
+  .band-dark{background:var(--petrol);color:#DDE7EB}
+  .band-dark h2,.band-dark h3{color:#F4F0E8}
+  .band-abyss{background:var(--abyss);color:#C6D2D8}
+  .band-abyss h2,.band-abyss h3{color:#F4F0E8}
+  .band-paper2{background:var(--paper-2)}
+  .prose{max-width:var(--maxprose);margin:0 auto}
+  .wide{max-width:var(--maxwide);margin:0 auto}
+  .band-dark .eyebrow,.band-abyss .eyebrow{color:var(--copper-br)}
+  .band-dark .eyebrow::before,.band-abyss .eyebrow::before{background:var(--copper-br)}
+  .hero{background:radial-gradient(120% 90% at 82% 6%,rgba(201,126,66,.18),transparent 55%),radial-gradient(90% 70% at 6% 100%,rgba(79,179,163,.10),transparent 60%),var(--abyss);color:#DDE7EB;padding:clamp(3.5rem,7vw,6rem) 1.5rem clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+  .hero-inner{max-width:var(--maxwide);margin:0 auto}
+  .hero .tag{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--copper-br);margin-bottom:1.8rem;display:flex;gap:.8em;align-items:center;flex-wrap:wrap}
+  .hero .tag .dot{width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 12px var(--signal)}
+  .hero h1{font-size:clamp(2.2rem,5.6vw,4.4rem);font-weight:700;color:#F6F2EA;max-width:20ch;margin:0 0 1.6rem}
+  .hero h1 .hl{color:var(--copper-br)}
+  .hero .lede{font-size:clamp(1.18rem,2vw,1.5rem);line-height:1.5;max-width:46ch;color:#B9C7CE;margin:0}
+  .hero .byline{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em;color:#7C929C;margin-top:2.4rem}
+  .lead-in{font-size:1.3rem;line-height:1.6}
+  .lead-in::first-letter{font-family:"Space Grotesk",sans-serif;font-weight:700;float:left;font-size:4rem;line-height:.72;padding:.35rem .5rem 0 0;color:var(--copper)}
+  .pq{max-width:var(--maxwide);margin:3rem auto;padding:0 1.5rem}
+  .pq blockquote{margin:0;border-left:3px solid var(--copper);padding:.4rem 0 .4rem 1.6rem;font-family:"Space Grotesk",sans-serif;font-weight:500;letter-spacing:-.01em;font-size:clamp(1.5rem,3.4vw,2.3rem);line-height:1.2;color:var(--ink)}
+  .band-abyss .pq blockquote,.band-dark .pq blockquote{color:#F4F0E8;border-color:var(--copper-br)}
+  .pq cite{display:block;font-family:"IBM Plex Mono",monospace;font-style:normal;font-size:.78rem;letter-spacing:.08em;color:var(--ink-soft);margin-top:1rem}
+  .band-abyss .pq cite,.band-dark .pq cite{color:#8DA3AD}
+  .note{margin:2rem 0;background:var(--paper-2);border:1px solid var(--line-light);border-left:3px solid var(--copper);border-radius:3px;padding:1.3rem 1.5rem}
+  .note .nk{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);margin-bottom:.6rem}
+  .note p{font-size:1rem;line-height:1.6;color:var(--ink);margin:0}
+  .note p+p{margin-top:.7rem}
+  .band-dark .note{background:rgba(255,255,255,.03);border-color:var(--line-dark);border-left-color:var(--copper-br)}
+  .band-dark .note p{color:#DDE7EB}
+  .band-dark .note .nk{color:var(--copper-br)}
+  .contrast{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;max-width:var(--maxwide);margin:2.6rem auto 0}
+  .cbox{border:1px solid var(--line-light);border-radius:4px;padding:1.7rem 1.6rem;background:var(--paper)}
+  .cbox.bad{background:var(--paper-2)}
+  .cbox .k{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.9rem;display:block}
+  .cbox.bad .k{color:var(--ink-soft)}
+  .cbox.good .k{color:var(--copper)}
+  .cbox h3{font-size:1.12rem;margin-bottom:.5rem}
+  .cbox p{font-size:.98rem;line-height:1.6;color:var(--ink);margin:0}
+  .cbox .sample{font-family:"IBM Plex Mono",monospace;font-size:.9rem;line-height:1.7;margin-top:.9rem}
+  .cbox .sample .muted{color:var(--ink-soft)}
+  @media(max-width:620px){.contrast{grid-template-columns:1fr}}
+  .fig-cap{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);text-align:center;margin-top:1rem}
+  .band-dark .fig-cap,.band-abyss .fig-cap{color:#8DA3AD}
+  svg.fig{width:100%;max-width:var(--maxwide);margin:2.5rem auto 0;display:block}
+  .closing p{font-size:1.28rem;line-height:1.6}
+  .next{max-width:var(--maxwide);margin:3rem auto 0;border:1px solid var(--line-dark);border-radius:4px;padding:1.6rem 1.7rem;display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap}
+  .next .lbl{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper-br);display:block;margin-bottom:.4rem}
+  .next .t{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.25rem;color:#F4F0E8}
+  .next .arrow{font-family:"Space Grotesk",sans-serif;font-size:1.8rem;color:var(--copper-br)}
+  footer{background:var(--abyss);color:#7C929C;padding:2.6rem 1.5rem;font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em}
+  footer .wide{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
+  /* brand logo */
+  .trilio-logo{display:inline-flex;align-items:center;line-height:0}
+  .trilio-logo svg{height:30px;width:auto;display:block}
+  .trilio-logo.sm svg{height:20px}
+  .trilio-logo .cls-2{fill:var(--logo-word,#001641)}
+  .trilio-logo .cls-3{fill:var(--logo-mark,#58B847)}
+  .hero-brand{--logo-word:#F4F0E8;margin-bottom:1.9rem}
+  .foot-brand{--logo-word:#DDE7EB;display:inline-flex;align-items:center;gap:.7em;color:#7C929C}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-brand"><span class="trilio-logo"><svg viewBox="0 0 144 37" role="img" xmlns="http://www.w3.org/2000/svg"><title>Trilio</title><polygon class="cls-2" points=".07 6.05 .07 11.38 8.59 11.38 8.59 35.9 14.24 35.9 14.24 11.38 22.88 11.38 22.88 6.05 .07 6.05"/><path class="cls-2" d="M37.91,24.71h-3.73v11.19h-5.54V6.05h11.08c6.82,0,10.02,4.48,10.02,9.38,0,3.62-1.92,7.25-6.29,8.74l7.57,11.83h-6.4l-6.71-11.3Zm-3.62-5.01h5.01c3.62,0,5.01-2.13,5.01-4.37s-1.49-4.26-4.37-4.26h-5.65v8.63Z"/><rect class="cls-2" x="58.16" y="6.05" width="5.54" height="29.84"/><polygon class="cls-2" points="72.97 6.05 78.51 6.05 78.51 30.57 93.86 30.57 93.86 35.9 72.97 35.9 72.97 6.05"/><rect class="cls-2" x="99.94" y="6.05" width="5.54" height="29.84"/><path class="cls-3" d="M128.29,34.77c3.72,0,7.16-1.4,9.69-3.95,2.56-2.58,3.95-6.1,3.93-9.91,0-7.81-5.98-13.92-13.61-13.92h-1.56v1.08h1.56c7.03,0,12.54,5.64,12.54,12.85,.03,3.53-1.26,6.78-3.61,9.15-2.33,2.34-5.5,3.63-8.92,3.63-7.15,0-12.54-5.5-12.54-12.79,0-3.19,1.1-6.22,3.11-8.55l-.77-.77c-2.2,2.53-3.42,5.83-3.42,9.32,0,7.91,5.85,13.87,13.61,13.87Z"/><path class="cls-3" d="M128.29,36.91c4.29,0,8.26-1.62,11.18-4.56,2.95-2.97,4.56-7.04,4.53-11.44,0-8.97-6.87-16.02-15.63-16.06h-.58V-.19l-7.31,7.76,7.31,7.76v-5.12h.5c5.85,0,10.44,4.7,10.44,10.7,.02,2.94-1.05,5.65-3.01,7.62-1.94,1.95-4.58,3.03-7.43,3.03-5.95,0-10.44-4.58-10.44-10.65,0-2.61,.89-5.11,2.52-7.04l-.77-.77c-1.82,2.13-2.83,4.9-2.83,7.8,0,6.69,4.95,11.73,11.51,11.73,3.14,0,6.05-1.19,8.19-3.34,2.16-2.18,3.34-5.16,3.32-8.38,0-6.6-5.06-11.77-11.51-11.77h-1.58v3.48l-4.76-5.05,4.76-5.05v3.4h1.58c8.21,0,14.64,6.59,14.64,14.99,.03,4.12-1.47,7.91-4.22,10.68-2.72,2.74-6.42,4.24-10.42,4.24-8.34,0-14.64-6.42-14.64-14.93,0-3.76,1.31-7.33,3.7-10.06l-.77-.76c-2.59,2.93-4.01,6.77-4.01,10.83,0,9.12,6.75,16.01,15.71,16.01Z"/></svg></span></div>
+    <div class="tag"><span class="dot"></span>AI-First · Part 2 of 3 · The Mindset</div>
+    <h1>AI is a reasoning partner, not a tool — and your org is built for <span class="hl">the wrong one.</span></h1>
+    <p class="lede">The models are extraordinary and getting better every quarter. The bottleneck is no longer the machine's ability to think. It is our willingness to think <b>with</b> it.</p>
+    <p class="byline">By Murali Balcha</p>
+  </div>
+</header>
+
+<!-- BRIDGE / OPENING -->
+<section class="band">
+  <div class="prose">
+    <p class="eyebrow">Picking up the thread</p>
+    <p class="lead-in">In Part 1, I traced my own arc — from copy-pasting code out of a chat window to running a single AI session for months — and I ended on a claim I want to defend properly here. The thing that changed most over those years was not the tool. It was how I talked to it. This piece is the argument for why that distinction is the whole game.</p>
+    <p>Because here is what I keep seeing. Organizations buy the tools, hand them out, and wait for the productivity to arrive. Some of it does. But most of the potential leaks away — not because the models fall short, but because almost everyone is using a reasoning machine as if it were a vending machine.</p>
+  </div>
+</section>
+
+<!-- THE FALLACY -->
+<section class="band band-paper2">
+  <div class="prose">
+    <p class="eyebrow">The fallacy of easy</p>
+    <h2>"It's so easy it needs no training"</h2>
+    <p>The most expensive belief in the AI era is that using AI requires no learning. It is easy to <em>start</em> — you type, it answers — and people mistake that low barrier to entry for mastery. So companies skip the part where people actually learn to work with it, and assume the value will show up on its own.</p>
+    <p>It rarely does. In my experience, only a few people naturally become fluent — genuinely at home conversing with the machine, coaxing its best thinking out of it. For most, it does not come naturally at all. And that is not a knock on them. It is a signal that we have badly underestimated what kind of skill this is.</p>
+    <div class="note">
+      <span class="nk">The gap</span>
+      <p>Easy to start is not the same as easy to master. A chessboard is easy to set up, too. The distance between "I can type a prompt" and "I can think alongside this thing" is enormous — and almost no organization is investing in closing it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE MENTAL MODEL -->
+<section class="band band-dark">
+  <div class="prose">
+    <p class="eyebrow">The mental model</p>
+    <h2>Vending machine, or thinking partner?</h2>
+    <p>It comes down to the picture in your head. Many people picture AI as a tool that responds to prompts — you press a button, it dispenses an output. So they feed it verbs. <span class="mono">Read the logs. Commit the changes. Add a page to the UI.</span> Every one of those is a command you could have barked at a script.</p>
+    <p>But that is not what you are talking to. You are talking to a reasoning machine — something that can hold a real dialogue with you about any complex topic in the world, weigh competing designs, argue both sides, find the flaw in your logic. It is a tireless thinker that never gets frustrated, never gets bored of your follow-up, never sighs when you ask "but why?" for the fifth time.</p>
+  </div>
+
+  <!-- FIGURE: tool vs partner -->
+  <svg class="fig" viewBox="0 0 760 250" role="img" aria-label="Two panels contrasted: on the left, a person issues a one-way command to a tool and receives a single output; on the right, a person and a reasoning partner exchange a back-and-forth dialogue.">
+    <!-- left: tool -->
+    <g>
+      <text x="180" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="#8DA3AD">AS A TOOL</text>
+      <circle cx="70" cy="120" r="22" fill="none" stroke="#8DA3AD" stroke-width="1.6"/>
+      <rect x="250" y="98" width="60" height="44" rx="4" fill="none" stroke="#8DA3AD" stroke-width="1.6"/>
+      <line x1="94" y1="112" x2="246" y2="112" stroke="var(--copper-br)" stroke-width="1.6" marker-end="url(#ah2)"/>
+      <text x="170" y="104" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#B9C7CE">command</text>
+      <line x1="246" y1="132" x2="98" y2="132" stroke="#5E7480" stroke-width="1.6" marker-end="url(#ah3)"/>
+      <text x="170" y="150" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#8DA3AD">one output</text>
+      <text x="180" y="210" text-anchor="middle" font-family="Newsreader, serif" font-size="14" fill="#8DA3AD" font-style="italic">a vending machine for verbs</text>
+    </g>
+    <line x1="380" y1="60" x2="380" y2="200" stroke="var(--line-dark)" stroke-width="1"/>
+    <!-- right: partner -->
+    <g>
+      <text x="580" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="var(--copper-br)">AS A PARTNER</text>
+      <circle cx="470" cy="120" r="22" fill="none" stroke="var(--signal)" stroke-width="1.8"/>
+      <circle cx="690" cy="120" r="22" fill="none" stroke="var(--signal)" stroke-width="1.8"/>
+      <path d="M494 106 H666" stroke="var(--copper-br)" stroke-width="1.6" fill="none" marker-end="url(#ah2)"/>
+      <path d="M666 120 H494" stroke="var(--signal)" stroke-width="1.6" fill="none" marker-end="url(#ah4)"/>
+      <path d="M494 134 H666" stroke="var(--copper-br)" stroke-width="1.6" fill="none" marker-end="url(#ah2)"/>
+      <text x="580" y="170" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#7FC9BC">question &rarr; challenge &rarr; refine</text>
+      <text x="580" y="210" text-anchor="middle" font-family="Newsreader, serif" font-size="14" fill="#B9C7CE" font-style="italic">a mind that thinks back</text>
+    </g>
+    <defs>
+      <marker id="ah2" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--copper-br)"/></marker>
+      <marker id="ah3" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5E7480"/></marker>
+      <marker id="ah4" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--signal)"/></marker>
+    </defs>
+  </svg>
+  <p class="fig-cap">Same model. Two entirely different relationships — and only one of them uses what you're paying for.</p>
+
+  <div class="prose">
+    <div class="note">
+      <span class="nk">Why it matters</span>
+      <p>When you treat a reasoning machine as a tool, you cap it at the ceiling of your own instructions. It can only be as good as the command you already knew how to write. Treat it as a partner and it can take you somewhere you did not know to ask for.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CURIOSITY -->
+<section class="band">
+  <div class="prose">
+    <p class="eyebrow">The scarce skill</p>
+    <h2>Curiosity is the new literacy</h2>
+    <p>So what separates the fluent few from everyone else? It is not prompt-engineering tricks. It is not a secret syntax. It is curiosity — the habit of asking real questions, framed with genuine intelligence, and then staying in the conversation long enough to follow the answer somewhere interesting.</p>
+    <p>When you are curious, and you can frame a question well, you unlock the machine. You stop asking it to hand you an answer and start asking it to think with you toward one. The quality of what you get out is bounded almost entirely by the quality of the question you put in.</p>
+  </div>
+
+  <div class="pq">
+    <blockquote>The scarce skill was never typing the code. It is the quality of the question you're willing to ask.</blockquote>
+    <cite>— the reframe at the center of this whole series</cite>
+  </div>
+
+  <div class="contrast">
+    <div class="cbox bad">
+      <span class="k">A command</span>
+      <h3>Closes the loop</h3>
+      <p>You get exactly what you asked for — no more, no less. The ceiling is your own foresight.</p>
+      <p class="sample">&gt; fix the failing test<br><span class="muted"># it fixes that test</span></p>
+    </div>
+    <div class="cbox good">
+      <span class="k">A question</span>
+      <h3>Opens one</h3>
+      <p>You invite the machine to reason, disagree, and surface what you didn't know to look for.</p>
+      <p class="sample">&gt; this test keeps failing — is the test<br>&nbsp;&nbsp;wrong, or is it telling us the design<br>&nbsp;&nbsp;is wrong?<br><span class="muted"># now you're thinking together</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY IT'S HARD -->
+<section class="band band-paper2">
+  <div class="prose">
+    <p class="eyebrow">Why the instinct fights us</p>
+    <h2>We were trained to command machines</h2>
+    <p>If conversing with AI does not come naturally, there is a reason, and it is not personal. For decades, every machine we touched rewarded commands and punished conversation. Search boxes wanted keywords. Terminals wanted exact syntax. Software did precisely what you told it and nothing more — and "nothing more" was a feature, because a machine that improvised was a machine that was broken.</p>
+    <p>We spent our whole careers learning to be precise, literal, and imperative with computers. That training runs deep. So when we sit down with something that would rather have a conversation, our hands reach for the old reflex — issue the command, get the output, move on. The reflex is learned, which is the good news: what is learned can be unlearned.</p>
+    <div class="note">
+      <span class="nk">The unlearning</span>
+      <p>Fluency with AI is less about learning something new than about switching off something old — the deep habit of treating a computer as a thing that obeys rather than a thing that thinks. The people who adapt fastest are often not the most senior engineers. They are the most curious ones.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE ORG TURN -->
+<section class="band band-abyss">
+  <div class="prose">
+    <p class="eyebrow">And your organization?</p>
+    <h2>Built for the wrong one</h2>
+    <p>Now scale that reflex up to a whole company. If individuals instinctively treat AI as a tool, organizations do it structurally. We hand engineers AI and then measure them on ticket throughput. We break work into fragments small enough to be "tasks." We run the same standups, the same sprints, the same review rituals — and drop a reasoning machine into the middle of a process designed around the assumption that thinking is the expensive, scarce, human part.</p>
+    <p>But if AI is a reasoning partner, that assumption is inverted. Thinking is no longer the bottleneck. Which means the entire shape of how we organize work — how we assign it, how we collaborate, what we treat as precious and what we treat as disposable — was designed for a world that no longer exists. Your org chart, your process, your definition of a "task": all of it quietly assumes the wrong mental model.</p>
+  </div>
+
+  <div class="pq">
+    <blockquote>You can give a team the best reasoning partner ever built and still wrap it in a process that only knows how to use a tool.</blockquote>
+    <cite>— the problem Part 3 is about solving</cite>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="band band-dark">
+  <div class="closing prose">
+    <p class="eyebrow">Closing thought</p>
+    <p>The mindset shift sounds soft — "treat it as a partner, be curious" — but it is the hardest and highest-leverage change there is, precisely because it is invisible. You cannot buy it in a license or install it in a rollout. It lives in the picture people carry in their heads, and in the questions they are brave enough to ask.</p>
+    <p>Get the mindset right and the tools deliver what they promised. Get it wrong and no amount of tooling will save you. In Part 3, I will get concrete: what we actually changed at Trilio once we took this seriously — the process we scrapped, the one we kept, and the products that came out the other side.</p>
+  </div>
+
+  <div class="next">
+    <div>
+      <span class="lbl">Next in the series</span>
+      <span class="t">Part 3 — What We Unlearned Making AI Central at Trilio</span>
+    </div>
+    <span class="arrow">&rarr;</span>
+  </div>
+</section>
+
+<footer>
+  <div class="wide">
+    <span class="foot-brand"><span class="trilio-logo sm"><svg viewBox="0 0 144 37" role="img" xmlns="http://www.w3.org/2000/svg"><title>Trilio</title><polygon class="cls-2" points=".07 6.05 .07 11.38 8.59 11.38 8.59 35.9 14.24 35.9 14.24 11.38 22.88 11.38 22.88 6.05 .07 6.05"/><path class="cls-2" d="M37.91,24.71h-3.73v11.19h-5.54V6.05h11.08c6.82,0,10.02,4.48,10.02,9.38,0,3.62-1.92,7.25-6.29,8.74l7.57,11.83h-6.4l-6.71-11.3Zm-3.62-5.01h5.01c3.62,0,5.01-2.13,5.01-4.37s-1.49-4.26-4.37-4.26h-5.65v8.63Z"/><rect class="cls-2" x="58.16" y="6.05" width="5.54" height="29.84"/><polygon class="cls-2" points="72.97 6.05 78.51 6.05 78.51 30.57 93.86 30.57 93.86 35.9 72.97 35.9 72.97 6.05"/><rect class="cls-2" x="99.94" y="6.05" width="5.54" height="29.84"/><path class="cls-3" d="M128.29,34.77c3.72,0,7.16-1.4,9.69-3.95,2.56-2.58,3.95-6.1,3.93-9.91,0-7.81-5.98-13.92-13.61-13.92h-1.56v1.08h1.56c7.03,0,12.54,5.64,12.54,12.85,.03,3.53-1.26,6.78-3.61,9.15-2.33,2.34-5.5,3.63-8.92,3.63-7.15,0-12.54-5.5-12.54-12.79,0-3.19,1.1-6.22,3.11-8.55l-.77-.77c-2.2,2.53-3.42,5.83-3.42,9.32,0,7.91,5.85,13.87,13.61,13.87Z"/><path class="cls-3" d="M128.29,36.91c4.29,0,8.26-1.62,11.18-4.56,2.95-2.97,4.56-7.04,4.53-11.44,0-8.97-6.87-16.02-15.63-16.06h-.58V-.19l-7.31,7.76,7.31,7.76v-5.12h.5c5.85,0,10.44,4.7,10.44,10.7,.02,2.94-1.05,5.65-3.01,7.62-1.94,1.95-4.58,3.03-7.43,3.03-5.95,0-10.44-4.58-10.44-10.65,0-2.61,.89-5.11,2.52-7.04l-.77-.77c-1.82,2.13-2.83,4.9-2.83,7.8,0,6.69,4.95,11.73,11.51,11.73,3.14,0,6.05-1.19,8.19-3.34,2.16-2.18,3.34-5.16,3.32-8.38,0-6.6-5.06-11.77-11.51-11.77h-1.58v3.48l-4.76-5.05,4.76-5.05v3.4h1.58c8.21,0,14.64,6.59,14.64,14.99,.03,4.12-1.47,7.91-4.22,10.68-2.72,2.74-6.42,4.24-10.42,4.24-8.34,0-14.64-6.42-14.64-14.93,0-3.76,1.31-7.33,3.7-10.06l-.77-.76c-2.59,2.93-4.01,6.77-4.01,10.83,0,9.12,6.75,16.01,15.71,16.01Z"/></svg></span> · Part 2 of 3</span>
+    <span>The Mindset · Murali Balcha</span>
+  </div>
+</footer>
+
+</body>
+</html>

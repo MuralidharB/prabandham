@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What We Unlearned Making AI Central at Trilio — Part 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --abyss:#0B1920;--petrol:#102630;--petrol-2:#17323E;
+    --paper:#F3EEE4;--paper-2:#EAE2D2;--ink:#14232B;--ink-soft:#4C6472;
+    --copper:#C97E42;--copper-br:#E89A5B;--signal:#4FB3A3;
+    --line-dark:rgba(255,255,255,.11);--line-light:rgba(20,35,43,.15);
+    --maxprose:44rem;--maxwide:66rem;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Newsreader",Georgia,serif;font-size:1.18rem;line-height:1.72;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--copper);margin:0 0 1.1rem;display:inline-flex;align-items:center;gap:.7em}
+  .eyebrow::before{content:"";width:2.2em;height:1px;background:var(--copper);display:inline-block}
+  h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:600;line-height:1.08;letter-spacing:-.015em;color:var(--ink)}
+  h2{font-size:clamp(1.9rem,4.2vw,3rem);margin:0 0 1.4rem}
+  h3{font-size:1.32rem;letter-spacing:-.01em;margin:0 0 .55rem}
+  p{margin:0 0 1.25rem}
+  a{color:var(--copper)}
+  strong{font-weight:500}
+  em{font-style:italic}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .band{padding:6rem 1.5rem}
+  .band-dark{background:var(--petrol);color:#DDE7EB}
+  .band-dark h2,.band-dark h3{color:#F4F0E8}
+  .band-abyss{background:var(--abyss);color:#C6D2D8}
+  .band-abyss h2,.band-abyss h3{color:#F4F0E8}
+  .band-paper2{background:var(--paper-2)}
+  .prose{max-width:var(--maxprose);margin:0 auto}
+  .wide{max-width:var(--maxwide);margin:0 auto}
+  .band-dark .eyebrow,.band-abyss .eyebrow{color:var(--copper-br)}
+  .band-dark .eyebrow::before,.band-abyss .eyebrow::before{background:var(--copper-br)}
+  .hero{background:radial-gradient(120% 90% at 82% 6%,rgba(201,126,66,.18),transparent 55%),radial-gradient(90% 70% at 6% 100%,rgba(79,179,163,.10),transparent 60%),var(--abyss);color:#DDE7EB;padding:clamp(3.5rem,7vw,6rem) 1.5rem clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+  .hero-inner{max-width:var(--maxwide);margin:0 auto}
+  .hero .tag{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--copper-br);margin-bottom:1.8rem;display:flex;gap:.8em;align-items:center;flex-wrap:wrap}
+  .hero .tag .dot{width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 12px var(--signal)}
+  .hero h1{font-size:clamp(2.3rem,5.8vw,4.6rem);font-weight:700;color:#F6F2EA;max-width:18ch;margin:0 0 1.6rem}
+  .hero h1 .hl{color:var(--copper-br)}
+  .hero .lede{font-size:clamp(1.18rem,2vw,1.5rem);line-height:1.5;max-width:46ch;color:#B9C7CE;margin:0}
+  .hero .byline{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em;color:#7C929C;margin-top:2.4rem}
+  .lead-in{font-size:1.3rem;line-height:1.6}
+  .lead-in::first-letter{font-family:"Space Grotesk",sans-serif;font-weight:700;float:left;font-size:4rem;line-height:.72;padding:.35rem .5rem 0 0;color:var(--copper)}
+  .pq{max-width:var(--maxwide);margin:3rem auto;padding:0 1.5rem}
+  .pq blockquote{margin:0;border-left:3px solid var(--copper);padding:.4rem 0 .4rem 1.6rem;font-family:"Space Grotesk",sans-serif;font-weight:500;letter-spacing:-.01em;font-size:clamp(1.5rem,3.4vw,2.3rem);line-height:1.2;color:var(--ink)}
+  .band-abyss .pq blockquote,.band-dark .pq blockquote{color:#F4F0E8;border-color:var(--copper-br)}
+  .pq cite{display:block;font-family:"IBM Plex Mono",monospace;font-style:normal;font-size:.78rem;letter-spacing:.08em;color:var(--ink-soft);margin-top:1rem}
+  .band-abyss .pq cite,.band-dark .pq cite{color:#8DA3AD}
+  .note{margin:2rem 0;background:var(--paper-2);border:1px solid var(--line-light);border-left:3px solid var(--copper);border-radius:3px;padding:1.3rem 1.5rem}
+  .note .nk{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);margin-bottom:.6rem}
+  .note p{font-size:1rem;line-height:1.6;color:var(--ink);margin:0}
+  .note p+p{margin-top:.7rem}
+  .band-dark .note{background:rgba(255,255,255,.03);border-color:var(--line-dark);border-left-color:var(--copper-br)}
+  .band-dark .note p{color:#DDE7EB}
+  .band-dark .note .nk{color:var(--copper-br)}
+  .fig-cap{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);text-align:center;margin-top:1rem}
+  .band-dark .fig-cap,.band-abyss .fig-cap{color:#8DA3AD}
+  svg.fig{width:100%;max-width:var(--maxwide);margin:2.5rem auto 0;display:block}
+  /* stats */
+  .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:1.6rem;max-width:var(--maxwide);margin:2.4rem auto 0}
+  .stat{border-top:2px solid var(--copper);padding-top:1rem}
+  .stat .n{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(2rem,4vw,2.8rem);line-height:1;color:var(--copper);letter-spacing:-.03em;display:block}
+  .band-dark .stat .n,.band-abyss .stat .n{color:var(--copper-br)}
+  .stat .l{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.05em;color:var(--ink-soft);margin-top:.7rem;display:block;line-height:1.5}
+  .band-dark .stat .l,.band-abyss .stat .l{color:#8DA3AD}
+  .band-dark .stat,.band-abyss .stat{border-top-color:var(--copper-br)}
+  /* case study card */
+  .case{max-width:var(--maxwide);margin:2.4rem auto 0;background:rgba(255,255,255,.03);border:1px solid var(--line-dark);border-radius:5px;padding:2rem 1.9rem}
+  .band-paper2 .case{background:#fff;border-color:var(--line-light)}
+  .case .tagline{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--copper);margin-bottom:.6rem}
+  /* unlearn rows */
+  .ul-row{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:var(--maxwide);margin:0 auto;border-top:1px solid var(--line-light)}
+  .ul-row:last-child{border-bottom:1px solid var(--line-light)}
+  .ul-cell{padding:1.6rem 1.5rem}
+  .ul-cell.old{border-right:1px solid var(--line-light)}
+  .ul-k{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:.6rem}
+  .ul-cell.old .ul-k{color:var(--ink-soft)}
+  .ul-cell.new .ul-k{color:var(--copper)}
+  .ul-cell h3{font-size:1.06rem;margin-bottom:.35rem}
+  .ul-cell.old h3{color:var(--ink-soft);font-weight:500;text-decoration:line-through;text-decoration-color:rgba(76,100,114,.5)}
+  .ul-cell p{font-size:.95rem;line-height:1.55;margin:0;color:var(--ink)}
+  .ul-cell.old p{color:var(--ink-soft)}
+  .ul-head{display:grid;grid-template-columns:1fr 1fr;max-width:var(--maxwide);margin:2.6rem auto 0}
+  .ul-head div{padding:0 1.5rem .4rem;font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.05rem}
+  .ul-head .oldh{color:var(--ink-soft)}
+  .ul-head .newh{color:var(--copper)}
+  @media(max-width:640px){
+    .ul-row{grid-template-columns:1fr}
+    .ul-cell.old{border-right:none;border-bottom:1px dashed var(--line-light)}
+    .ul-head{display:none}
+  }
+  /* workflow */
+  .wf{display:flex;flex-wrap:wrap;gap:.7rem;align-items:stretch;justify-content:center;max-width:var(--maxwide);margin:2.6rem auto 0}
+  .wf .step{flex:1 1 8rem;min-width:8rem;background:rgba(255,255,255,.03);border:1px solid var(--line-dark);border-radius:4px;padding:1rem .9rem;text-align:center}
+  .wf .step .si{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.14em;color:var(--copper-br);display:block;margin-bottom:.4rem}
+  .wf .step .st{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:.98rem;color:#F4F0E8;line-height:1.2}
+  .wf .step .ss{font-family:"IBM Plex Mono",monospace;font-size:.64rem;color:#8DA3AD;margin-top:.35rem;display:block;line-height:1.4}
+  .wf .step.loop{border-color:var(--copper-br);background:rgba(201,126,66,.08)}
+  .wf .step.final{border-color:var(--signal);background:rgba(79,179,163,.08)}
+  .wf .step.final .st{color:#F4F0E8}
+  .loop-note{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.06em;color:var(--copper-br);text-align:center;margin:1rem auto 0;max-width:var(--maxwide)}
+  /* fixed vs yours */
+  .fy{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;max-width:var(--maxwide);margin:2.6rem auto 0}
+  .fy .col{border:1px solid var(--line-dark);border-radius:5px;padding:1.7rem 1.6rem}
+  .fy .col.fixed{background:rgba(201,126,66,.06)}
+  .fy .col.yours{background:rgba(79,179,163,.06)}
+  .fy .col .k{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:1rem;display:block}
+  .fy .col.fixed .k{color:var(--copper-br)}
+  .fy .col.yours .k{color:var(--signal)}
+  .fy ul{list-style:none;margin:0;padding:0}
+  .fy li{position:relative;padding-left:1.4rem;margin-bottom:.7rem;font-size:1rem;line-height:1.5;color:#DDE7EB}
+  .fy li:last-child{margin-bottom:0}
+  .fy li::before{content:"";position:absolute;left:0;top:.55em;width:.5rem;height:.5rem;border-radius:1px;transform:rotate(45deg)}
+  .fy .col.fixed li::before{background:var(--copper-br)}
+  .fy .col.yours li::before{background:var(--signal)}
+  @media(max-width:620px){.fy{grid-template-columns:1fr}}
+  .closing p{font-size:1.28rem;line-height:1.6}
+  .end-card{max-width:var(--maxwide);margin:3rem auto 0;border:1px solid var(--line-dark);border-radius:4px;padding:1.6rem 1.7rem}
+  .end-card .lbl{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper-br);display:block;margin-bottom:.6rem}
+  .end-card .t{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.05rem;color:#F4F0E8}
+  footer{background:var(--abyss);color:#7C929C;padding:2.6rem 1.5rem;font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em}
+  footer .wide{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
+  /* brand logo */
+  .trilio-logo{display:inline-flex;align-items:center;line-height:0}
+  .trilio-logo svg{height:30px;width:auto;display:block}
+  .trilio-logo.sm svg{height:20px}
+  .trilio-logo .cls-2{fill:var(--logo-word,#001641)}
+  .trilio-logo .cls-3{fill:var(--logo-mark,#58B847)}
+  .hero-brand{--logo-word:#F4F0E8;margin-bottom:1.9rem}
+  .foot-brand{--logo-word:#DDE7EB;display:inline-flex;align-items:center;gap:.7em;color:#7C929C}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-brand"><span class="trilio-logo"><svg viewBox="0 0 144 37" role="img" xmlns="http://www.w3.org/2000/svg"><title>Trilio</title><polygon class="cls-2" points=".07 6.05 .07 11.38 8.59 11.38 8.59 35.9 14.24 35.9 14.24 11.38 22.88 11.38 22.88 6.05 .07 6.05"/><path class="cls-2" d="M37.91,24.71h-3.73v11.19h-5.54V6.05h11.08c6.82,0,10.02,4.48,10.02,9.38,0,3.62-1.92,7.25-6.29,8.74l7.57,11.83h-6.4l-6.71-11.3Zm-3.62-5.01h5.01c3.62,0,5.01-2.13,5.01-4.37s-1.49-4.26-4.37-4.26h-5.65v8.63Z"/><rect class="cls-2" x="58.16" y="6.05" width="5.54" height="29.84"/><polygon class="cls-2" points="72.97 6.05 78.51 6.05 78.51 30.57 93.86 30.57 93.86 35.9 72.97 35.9 72.97 6.05"/><rect class="cls-2" x="99.94" y="6.05" width="5.54" height="29.84"/><path class="cls-3" d="M128.29,34.77c3.72,0,7.16-1.4,9.69-3.95,2.56-2.58,3.95-6.1,3.93-9.91,0-7.81-5.98-13.92-13.61-13.92h-1.56v1.08h1.56c7.03,0,12.54,5.64,12.54,12.85,.03,3.53-1.26,6.78-3.61,9.15-2.33,2.34-5.5,3.63-8.92,3.63-7.15,0-12.54-5.5-12.54-12.79,0-3.19,1.1-6.22,3.11-8.55l-.77-.77c-2.2,2.53-3.42,5.83-3.42,9.32,0,7.91,5.85,13.87,13.61,13.87Z"/><path class="cls-3" d="M128.29,36.91c4.29,0,8.26-1.62,11.18-4.56,2.95-2.97,4.56-7.04,4.53-11.44,0-8.97-6.87-16.02-15.63-16.06h-.58V-.19l-7.31,7.76,7.31,7.76v-5.12h.5c5.85,0,10.44,4.7,10.44,10.7,.02,2.94-1.05,5.65-3.01,7.62-1.94,1.95-4.58,3.03-7.43,3.03-5.95,0-10.44-4.58-10.44-10.65,0-2.61,.89-5.11,2.52-7.04l-.77-.77c-1.82,2.13-2.83,4.9-2.83,7.8,0,6.69,4.95,11.73,11.51,11.73,3.14,0,6.05-1.19,8.19-3.34,2.16-2.18,3.34-5.16,3.32-8.38,0-6.6-5.06-11.77-11.51-11.77h-1.58v3.48l-4.76-5.05,4.76-5.05v3.4h1.58c8.21,0,14.64,6.59,14.64,14.99,.03,4.12-1.47,7.91-4.22,10.68-2.72,2.74-6.42,4.24-10.42,4.24-8.34,0-14.64-6.42-14.64-14.93,0-3.76,1.31-7.33,3.7-10.06l-.77-.76c-2.59,2.93-4.01,6.77-4.01,10.83,0,9.12,6.75,16.01,15.71,16.01Z"/></svg></span></div>
+    <div class="tag"><span class="dot"></span>AI-First · Part 3 of 3 · The Playbook</div>
+    <h1>What we unlearned making AI central at <span class="hl">Trilio.</span></h1>
+    <p class="lede">Parts 1 and 2 were the argument. This is what we actually changed — the process we scrapped, the one we kept, and the two products that came out the other side.</p>
+    <p class="byline">By Murali Balcha</p>
+  </div>
+</header>
+
+<!-- BRIDGE -->
+<section class="band">
+  <div class="prose">
+    <p class="eyebrow">From theory to practice</p>
+    <p class="lead-in">A worldview is cheap until it costs you something. It is easy to say "AI is a reasoning partner" in a blog post. It is harder to reorganize a company around the claim — to change how you assign work, what you measure, and what you are willing to throw away. We did that at Trilio, and I want to show you the specifics, because the specifics are where the argument either holds or falls apart.</p>
+    <p>Everything below rests on one shift that took me longer to accept than it should have. So let me start there.</p>
+  </div>
+</section>
+
+<!-- ORGANIZING IDEA -->
+<section class="band band-dark">
+  <div class="prose">
+    <p class="eyebrow">The idea underneath everything</p>
+    <h2>The economics of software just inverted</h2>
+    <p>For my entire career, code was expensive. It took skilled people a long time to produce, so we treated it as the asset. We protected it. We avoided rewrites. We accumulated it and guarded it and let sunk cost quietly steer our decisions, because throwing code away meant throwing away money and months.</p>
+    <p>That premise is gone. Code is now cheap to produce and cheap to regenerate. And once code is cheap, it stops being the asset — it becomes disposable. What is durable, what is actually worth protecting, are the two things code is generated <em>from</em> and measured <em>against</em>: the <strong>specification</strong> (what to build) and the <strong>test suite</strong> (proof it works).</p>
+  </div>
+
+  <!-- FIGURE: inversion -->
+  <svg class="fig" viewBox="0 0 760 220" role="img" aria-label="Two columns. Before: code sits at the top as the expensive, protected asset, with specs and tests as supporting scaffolding. After: specs and tests are the durable assets at the top, and code is a cheap, regenerable output at the bottom.">
+    <text x="200" y="30" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="#8DA3AD">BEFORE — CODE IS EXPENSIVE</text>
+    <text x="560" y="30" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="var(--copper-br)">AFTER — CODE IS CHEAP</text>
+    <!-- before -->
+    <rect x="90" y="52" width="220" height="52" rx="4" fill="rgba(201,126,66,.16)" stroke="var(--copper)" stroke-width="1.4"/>
+    <text x="200" y="83" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="16" fill="#F4F0E8">CODE · the asset</text>
+    <rect x="110" y="120" width="80" height="34" rx="3" fill="none" stroke="var(--line-dark)"/>
+    <text x="150" y="142" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#8DA3AD">specs</text>
+    <rect x="210" y="120" width="80" height="34" rx="3" fill="none" stroke="var(--line-dark)"/>
+    <text x="250" y="142" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#8DA3AD">tests</text>
+    <text x="200" y="182" text-anchor="middle" font-family="Newsreader, serif" font-size="13" fill="#8DA3AD" font-style="italic">protect it · never rewrite</text>
+    <line x1="380" y1="45" x2="380" y2="185" stroke="var(--line-dark)" stroke-width="1"/>
+    <!-- after -->
+    <rect x="450" y="52" width="105" height="46" rx="4" fill="rgba(79,179,163,.12)" stroke="var(--signal)" stroke-width="1.6"/>
+    <text x="502" y="80" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="14" fill="#F4F0E8">SPECS</text>
+    <rect x="565" y="52" width="105" height="46" rx="4" fill="rgba(79,179,163,.12)" stroke="var(--signal)" stroke-width="1.6"/>
+    <text x="617" y="80" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="14" fill="#F4F0E8">TESTS</text>
+    <text x="560" y="118" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#7FC9BC">the durable assets</text>
+    <rect x="490" y="132" width="140" height="30" rx="3" fill="none" stroke="var(--copper)" stroke-dasharray="4 3"/>
+    <text x="560" y="152" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--copper-br)">code · regenerate freely</text>
+    <text x="560" y="186" text-anchor="middle" font-family="Newsreader, serif" font-size="13" fill="#B9C7CE" font-style="italic">throw it away · make it again</text>
+  </svg>
+  <p class="fig-cap">Flip which layer is precious, and almost every old rule about how to build software has to change.</p>
+
+  <div class="prose">
+    <div class="note">
+      <span class="nk">The loop that replaces the old rules</span>
+      <p>Spec &rarr; generate &rarr; test hard &rarr; keep or discard &rarr; repeat. Every provocation later in this piece is just a consequence of taking that loop seriously — and of admitting that most of our habits were built to protect a layer that is no longer expensive.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF 1: QCOW2 -->
+<section class="band">
+  <div class="prose">
+    <p class="eyebrow">Proof · one</p>
+    <h2>The project we would not have attempted</h2>
+    <p>Someone on the team pointed to an open-source project, written in Rust, that showed how to stream a disk image straight into a qcow2 file on S3. The performance was compelling — but it was a demo, missing everything that would make it a real product: sparseness, overlays, encryption, deduplication, chunking. And Trilio had exactly zero Rust expertise.</p>
+    <p>None of that stopped us. One engineer took it from proof of concept to a shipping product — adding all of the missing functionality, in a language we had never used, on a problem that demanded deep knowledge of disk-image layout and encryption. Some of the hardest systems work we have ever done, carried largely by one person with a tireless collaborator.</p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat"><span class="n">1</span><span class="l">engineer, start to finish</span></div>
+    <div class="stat"><span class="n">~6 mo</span><span class="l">POC (Dec) to release (Jul)</span></div>
+    <div class="stat"><span class="n">0</span><span class="l">prior Rust experience</span></div>
+    <div class="stat"><span class="n">~4&times;</span><span class="l">faster backups than the old path</span></div>
+  </div>
+
+  <div class="pq">
+    <blockquote>A company my size would not have ventured it, if not for AI.</blockquote>
+    <cite>— the feasibility half of the thesis, in one line</cite>
+  </div>
+
+  <div class="prose">
+    <p>This is the point I most want to land. AI did not make an existing project go faster. It changed which projects were <em>possible</em> for a company our size at all. When ambition gets that much cheaper, the interesting question stops being "can we afford to build this?" and becomes "why aren't we building more?"</p>
+  </div>
+</section>
+
+<!-- PROOF 2: SITE RECOVERY -->
+<section class="band band-paper2">
+  <div class="prose">
+    <p class="eyebrow">Proof · two</p>
+    <h2>The rewrite we simply did</h2>
+    <p>Trilio Site Recovery for OpenShift Virtualization — which we demonstrated at Red Hat Summit — was first built with all its Kubernetes controllers in Python. Once we pushed toward a production-grade product, the team judged that the Python framework was the wrong foundation: it was cron-driven, polling the workload cluster on a timer. The right model was event-driven — watchers that reconcile on every create, update, and delete — with the maturity, static typing, and performance of Go's controller-runtime behind it.</p>
+    <p>So they rewrote all of the controllers in Go. The entire controller layer, one language to another. It took about five weeks.</p>
+  </div>
+
+  <div class="case">
+    <div class="tagline">Before &rarr; after</div>
+    <div class="stat-row" style="margin-top:.4rem">
+      <div class="stat"><span class="n">~5 wk</span><span class="l">full Python &rarr; Go rewrite</span></div>
+      <div class="stat"><span class="n">100%</span><span class="l">of controllers rewritten</span></div>
+      <div class="stat"><span class="n">cron &rarr; event</span><span class="l">polling to real-time reconcile</span></div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <div class="note">
+      <span class="nk">Be honest about this one</span>
+      <p>The Python framework <em>could</em> have been pushed to do event-driven watchers with extra plumbing. We didn't rewrite because Python was incapable — we rewrote because Go's controller-runtime was the right foundation, and the cost of switching to it had collapsed. That is the real lesson: the rewrite wasn't a heroic gamble, it was a rational Tuesday.</p>
+    </div>
+    <p>Price that out under the old economics. "Let's rewrite all our controllers from Python to Go" is a proposal that dies in a planning meeting — the cost is impossible to justify against everything else it would delay. Five weeks is the disposability half of the thesis made concrete: when code is cheap, reaching for the right foundation mid-flight beats defending the wrong one out of sunk cost.</p>
+  </div>
+</section>
+
+<!-- THE UNLEARN LIST -->
+<section class="band band-dark">
+  <div class="prose">
+    <p class="eyebrow">The playbook</p>
+    <h2>Five things we had to unlearn</h2>
+    <p>Those two products did not come from better tools alone. They came from dismantling habits that quietly assumed code was still expensive and thinking was still the bottleneck. Here is what we had to let go of — and what we replaced it with.</p>
+  </div>
+
+  <div class="ul-head">
+    <div class="oldh">Unlearn</div>
+    <div class="newh">Relearn</div>
+  </div>
+  <div class="ul-list">
+    <div class="ul-row">
+      <div class="ul-cell old">
+        <span class="ul-k">The old reflex</span>
+        <h3>Lean on 30 years of experience</h3>
+        <p>Let the most senior, most experienced people run AI-first teams the way they always ran teams.</p>
+      </div>
+      <div class="ul-cell new">
+        <span class="ul-k">What replaced it</span>
+        <h3>Keep the judgment, drop the process</h3>
+        <p>Architectural taste and knowing what's worth building matter more than ever. The process orthodoxy built up over decades is what does damage — when influential people lead from old instincts, it holds the whole team back.</p>
+      </div>
+    </div>
+    <div class="ul-row">
+      <div class="ul-cell old">
+        <span class="ul-k">The old reflex</span>
+        <h3>Scrum, sprints, standups</h3>
+        <p>Coordinate humans through ceremony because thinking and typing were the scarce, expensive resources.</p>
+      </div>
+      <div class="ul-cell new">
+        <span class="ul-k">What replaced it</span>
+        <h3>One spec-first loop</h3>
+        <p>We scrapped scrum. The unit of collaboration moved from the standup to the spec. (The exact lightweight workflow is below — it is the one thing we made non-negotiable.)</p>
+      </div>
+    </div>
+    <div class="ul-row">
+      <div class="ul-cell old">
+        <span class="ul-k">The old reflex</span>
+        <h3>Bite-sized tasks</h3>
+        <p>Break work into tickets: add this button, wire up that endpoint, patch this page.</p>
+      </div>
+      <div class="ul-cell new">
+        <span class="ul-k">What replaced it</span>
+        <h3>Own a module or a product</h3>
+        <p>One engineer now owns a whole feature end to end — UI, middleware, backend, testing, release. We still break work down, but at the module or product level, not the individual-task level. (See: one engineer, one storage product.)</p>
+      </div>
+    </div>
+    <div class="ul-row">
+      <div class="ul-cell old">
+        <span class="ul-k">The old reflex</span>
+        <h3>Generate code, drop it into review</h3>
+        <p>Let AI write it, push the diff, and let the team sort out what it means.</p>
+      </div>
+      <div class="ul-cell new">
+        <span class="ul-k">What replaced it</span>
+        <h3>You generate it, you own it</h3>
+        <p>The author owns the code and must walk the team through it, live, and answer every question. This quietly solves the thing everyone fears about AI — a codebase full of code nobody understands. If you can't explain it, you don't ship it.</p>
+      </div>
+    </div>
+    <div class="ul-row">
+      <div class="ul-cell old">
+        <span class="ul-k">The old reflex</span>
+        <h3>Code is precious; protect it</h3>
+        <p>Avoid rewrites. Carry technical baggage forward. Let sunk cost make the call.</p>
+      </div>
+      <div class="ul-cell new">
+        <span class="ul-k">What replaced it</span>
+        <h3>Code is never sacrosanct</h3>
+        <p>Code is the output of a good spec — regenerable, not precious. Iterate fast and throw away what doesn't work. And write test suites that penetrate deep into the functionality: a thorough test suite is only a prompt away, and it is the safety net that makes throwing code away <em>safe</em>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE OPERATING MODEL -->
+<section class="band band-abyss">
+  <div class="prose">
+    <p class="eyebrow">What replaced scrum</p>
+    <h2>The one process we kept</h2>
+    <p>Scrapping scrum is not the same as scrapping structure. If you remove process and put nothing in its place, you get chaos, not velocity. So we kept exactly one thing — a single, deliberately lightweight workflow. This is close to verbatim what I told the team.</p>
+  </div>
+
+  <!-- WORKFLOW -->
+  <div class="wf">
+    <div class="step"><span class="si">01</span><span class="st">Configure Claude Code</span><span class="ss">set up the repo</span></div>
+    <div class="step"><span class="si">02</span><span class="st">Brainstorm the feature</span><span class="ss">explore approaches</span></div>
+    <div class="step loop"><span class="si">03 &#8635;</span><span class="st">Develop specs</span><span class="ss">draft with AI</span></div>
+    <div class="step loop"><span class="si">04 &#8635;</span><span class="st">Stakeholder review</span><span class="ss">gather feedback</span></div>
+    <div class="step final"><span class="si">05</span><span class="st">Implement &amp; test</span><span class="ss">AI executes the spec</span></div>
+  </div>
+  <p class="loop-note">Steps 3 &amp; 4 loop until every stakeholder signs off. Nothing gets implemented before approval.</p>
+
+  <div class="prose">
+    <p style="margin-top:2.6rem">The key insight is the spec loop. Teams that iterate on specs until every stakeholder signs off find that implementation becomes pure execution — the machine moves fast when the target is clear, and there is far less rework. Get the spec right and the code almost writes itself, because in a real sense it does.</p>
+  </div>
+
+  <!-- FIXED VS YOURS -->
+  <div class="fy">
+    <div class="col fixed">
+      <span class="k">What is fixed</span>
+      <ul>
+        <li>One shared workflow, above</li>
+        <li>Specs reviewed by stakeholders</li>
+        <li>Approval before implementation</li>
+      </ul>
+    </div>
+    <div class="col yours">
+      <span class="k">What is yours</span>
+      <ul>
+        <li>Any plugins</li>
+        <li>Any skills</li>
+        <li>Any agents and workflows</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="prose">
+    <div class="note">
+      <span class="nk">Why it's deliberately thin</span>
+      <p>I am not interested in making us process-heavy — that would kill the flexibility that makes each engineer effective. This is the minimum structure needed to keep stakeholders engaged and collaboration real. The process defines the checkpoints, not the tools. And it isn't theoretical: it is already producing the results we want, here, with our codebase and our people.</p>
+    </div>
+  </div>
+
+  <div class="pq">
+    <blockquote>The result we were after: alignment without overhead. Structure where it earns its keep, freedom everywhere else.</blockquote>
+    <cite>— the whole operating model in one sentence</cite>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="band">
+  <div class="closing prose">
+    <p class="eyebrow">Closing the series</p>
+    <h2>Cheap to throw away, cheap to attempt</h2>
+    <p>Look at the two products together and you can see both halves of the same shift. Site Recovery is what happens when code becomes cheap enough to <em>throw away</em> — an entire controller layer rewritten in five weeks because sunk cost stopped mattering. The streaming storage product is what happens when ambition becomes cheap enough to <em>attempt</em> — a project a company our size would never have dared, shipped by one engineer in six months.</p>
+    <p>Between them sits everything I have argued across these three pieces. Stop treating AI as a tool and start thinking out loud with it. Recognize it as a reasoning partner and rebuild your assumptions accordingly. Then unlearn the habits — the process, the ceremony, the reverence for code — that only made sense back when thinking was scarce and code was expensive. Neither is true anymore.</p>
+    <p>The companies that internalize that will not just move faster. They will attempt things their size was never supposed to allow — and ship them.</p>
+  </div>
+
+  <div class="end-card">
+    <span class="lbl">End of series</span>
+    <span class="t">Part 1 · Stop Prompting, Start Thinking Out Loud &nbsp;→&nbsp; Part 2 · A Reasoning Partner, Not a Tool &nbsp;→&nbsp; Part 3 · What We Unlearned</span>
+  </div>
+</section>
+
+<footer>
+  <div class="wide">
+    <span class="foot-brand"><span class="trilio-logo sm"><svg viewBox="0 0 144 37" role="img" xmlns="http://www.w3.org/2000/svg"><title>Trilio</title><polygon class="cls-2" points=".07 6.05 .07 11.38 8.59 11.38 8.59 35.9 14.24 35.9 14.24 11.38 22.88 11.38 22.88 6.05 .07 6.05"/><path class="cls-2" d="M37.91,24.71h-3.73v11.19h-5.54V6.05h11.08c6.82,0,10.02,4.48,10.02,9.38,0,3.62-1.92,7.25-6.29,8.74l7.57,11.83h-6.4l-6.71-11.3Zm-3.62-5.01h5.01c3.62,0,5.01-2.13,5.01-4.37s-1.49-4.26-4.37-4.26h-5.65v8.63Z"/><rect class="cls-2" x="58.16" y="6.05" width="5.54" height="29.84"/><polygon class="cls-2" points="72.97 6.05 78.51 6.05 78.51 30.57 93.86 30.57 93.86 35.9 72.97 35.9 72.97 6.05"/><rect class="cls-2" x="99.94" y="6.05" width="5.54" height="29.84"/><path class="cls-3" d="M128.29,34.77c3.72,0,7.16-1.4,9.69-3.95,2.56-2.58,3.95-6.1,3.93-9.91,0-7.81-5.98-13.92-13.61-13.92h-1.56v1.08h1.56c7.03,0,12.54,5.64,12.54,12.85,.03,3.53-1.26,6.78-3.61,9.15-2.33,2.34-5.5,3.63-8.92,3.63-7.15,0-12.54-5.5-12.54-12.79,0-3.19,1.1-6.22,3.11-8.55l-.77-.77c-2.2,2.53-3.42,5.83-3.42,9.32,0,7.91,5.85,13.87,13.61,13.87Z"/><path class="cls-3" d="M128.29,36.91c4.29,0,8.26-1.62,11.18-4.56,2.95-2.97,4.56-7.04,4.53-11.44,0-8.97-6.87-16.02-15.63-16.06h-.58V-.19l-7.31,7.76,7.31,7.76v-5.12h.5c5.85,0,10.44,4.7,10.44,10.7,.02,2.94-1.05,5.65-3.01,7.62-1.94,1.95-4.58,3.03-7.43,3.03-5.95,0-10.44-4.58-10.44-10.65,0-2.61,.89-5.11,2.52-7.04l-.77-.77c-1.82,2.13-2.83,4.9-2.83,7.8,0,6.69,4.95,11.73,11.51,11.73,3.14,0,6.05-1.19,8.19-3.34,2.16-2.18,3.34-5.16,3.32-8.38,0-6.6-5.06-11.77-11.51-11.77h-1.58v3.48l-4.76-5.05,4.76-5.05v3.4h1.58c8.21,0,14.64,6.59,14.64,14.99,.03,4.12-1.47,7.91-4.22,10.68-2.72,2.74-6.42,4.24-10.42,4.24-8.34,0-14.64-6.42-14.64-14.93,0-3.76,1.31-7.33,3.7-10.06l-.77-.76c-2.59,2.93-4.01,6.77-4.01,10.83,0,9.12,6.75,16.01,15.71,16.01Z"/></svg></span> · Part 3 of 3</span>
+    <span>The Playbook · Murali Balcha</span>
+  </div>
+</footer>
+
+</body>
+</html>
