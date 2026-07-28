@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="robots" content="noindex">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What We Unlearned Making AI Central at Trilio — Part 3</title>
@@ -64,19 +63,12 @@
   .fig-cap{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);text-align:center;margin-top:1rem}
   .band-dark .fig-cap,.band-abyss .fig-cap{color:#8DA3AD}
   svg.fig{width:100%;max-width:var(--maxwide);margin:2.5rem auto 0;display:block}
-  /* stats */
   .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:1.6rem;max-width:var(--maxwide);margin:2.4rem auto 0}
   .stat{border-top:2px solid var(--copper);padding-top:1rem}
   .stat .n{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(2rem,4vw,2.8rem);line-height:1;color:var(--copper);letter-spacing:-.03em;display:block}
-  .band-dark .stat .n,.band-abyss .stat .n{color:var(--copper-br)}
   .stat .l{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.05em;color:var(--ink-soft);margin-top:.7rem;display:block;line-height:1.5}
-  .band-dark .stat .l,.band-abyss .stat .l{color:#8DA3AD}
-  .band-dark .stat,.band-abyss .stat{border-top-color:var(--copper-br)}
-  /* case study card */
-  .case{max-width:var(--maxwide);margin:2.4rem auto 0;background:rgba(255,255,255,.03);border:1px solid var(--line-dark);border-radius:5px;padding:2rem 1.9rem}
-  .band-paper2 .case{background:#fff;border-color:var(--line-light)}
+  .case{max-width:var(--maxwide);margin:2.4rem auto 0;background:#fff;border:1px solid var(--line-light);border-radius:5px;padding:2rem 1.9rem}
   .case .tagline{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--copper);margin-bottom:.6rem}
-  /* unlearn rows */
   .ul-row{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:var(--maxwide);margin:0 auto;border-top:1px solid var(--line-light)}
   .ul-row:last-child{border-bottom:1px solid var(--line-light)}
   .ul-cell{padding:1.6rem 1.5rem}
@@ -97,7 +89,6 @@
     .ul-cell.old{border-right:none;border-bottom:1px dashed var(--line-light)}
     .ul-head{display:none}
   }
-  /* workflow */
   .wf{display:flex;flex-wrap:wrap;gap:.7rem;align-items:stretch;justify-content:center;max-width:var(--maxwide);margin:2.6rem auto 0}
   .wf .step{flex:1 1 8rem;min-width:8rem;background:rgba(255,255,255,.03);border:1px solid var(--line-dark);border-radius:4px;padding:1rem .9rem;text-align:center}
   .wf .step .si{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.14em;color:var(--copper-br);display:block;margin-bottom:.4rem}
@@ -105,9 +96,7 @@
   .wf .step .ss{font-family:"IBM Plex Mono",monospace;font-size:.64rem;color:#8DA3AD;margin-top:.35rem;display:block;line-height:1.4}
   .wf .step.loop{border-color:var(--copper-br);background:rgba(201,126,66,.08)}
   .wf .step.final{border-color:var(--signal);background:rgba(79,179,163,.08)}
-  .wf .step.final .st{color:#F4F0E8}
   .loop-note{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.06em;color:var(--copper-br);text-align:center;margin:1rem auto 0;max-width:var(--maxwide)}
-  /* fixed vs yours */
   .fy{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;max-width:var(--maxwide);margin:2.6rem auto 0}
   .fy .col{border:1px solid var(--line-dark);border-radius:5px;padding:1.7rem 1.6rem}
   .fy .col.fixed{background:rgba(201,126,66,.06)}
@@ -123,12 +112,16 @@
   .fy .col.yours li::before{background:var(--signal)}
   @media(max-width:620px){.fy{grid-template-columns:1fr}}
   .closing p{font-size:1.28rem;line-height:1.6}
-  .end-card{max-width:var(--maxwide);margin:3rem auto 0;border:1px solid var(--line-dark);border-radius:4px;padding:1.6rem 1.7rem}
-  .end-card .lbl{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper-br);display:block;margin-bottom:.6rem}
-  .end-card .t{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.05rem;color:#F4F0E8}
+  .next{max-width:var(--maxwide);margin:3rem auto 0;border:1px solid var(--line-dark);border-radius:4px;padding:1.6rem 1.7rem;display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap}
+  .next .lbl{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper-br);display:block;margin-bottom:.4rem}
+  .next .t{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.25rem;color:#F4F0E8}
+  .next .arrow{font-family:"Space Grotesk",sans-serif;font-size:1.8rem;color:var(--copper-br)}
+  a.next{text-decoration:none;transition:border-color .2s,transform .2s}
+  a.next:hover{border-color:var(--copper-br);transform:translateX(3px)}
+  .next.soon{opacity:.78}
+  .next .badge{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--copper-br);border:1px solid var(--line-dark);border-radius:99px;padding:.42rem .85rem;white-space:nowrap}
   footer{background:var(--abyss);color:#7C929C;padding:2.6rem 1.5rem;font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em}
   footer .wide{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
-  /* brand logo */
   .trilio-logo{display:inline-flex;align-items:center;line-height:0}
   .trilio-logo svg{height:30px;width:auto;display:block}
   .trilio-logo.sm svg{height:20px}
@@ -141,18 +134,16 @@
 </head>
 <body>
 
-<!-- HERO -->
 <header class="hero">
   <div class="hero-inner">
     <div class="hero-brand"><span class="trilio-logo"><svg viewBox="0 0 144 37" role="img" xmlns="http://www.w3.org/2000/svg"><title>Trilio</title><polygon class="cls-2" points=".07 6.05 .07 11.38 8.59 11.38 8.59 35.9 14.24 35.9 14.24 11.38 22.88 11.38 22.88 6.05 .07 6.05"/><path class="cls-2" d="M37.91,24.71h-3.73v11.19h-5.54V6.05h11.08c6.82,0,10.02,4.48,10.02,9.38,0,3.62-1.92,7.25-6.29,8.74l7.57,11.83h-6.4l-6.71-11.3Zm-3.62-5.01h5.01c3.62,0,5.01-2.13,5.01-4.37s-1.49-4.26-4.37-4.26h-5.65v8.63Z"/><rect class="cls-2" x="58.16" y="6.05" width="5.54" height="29.84"/><polygon class="cls-2" points="72.97 6.05 78.51 6.05 78.51 30.57 93.86 30.57 93.86 35.9 72.97 35.9 72.97 6.05"/><rect class="cls-2" x="99.94" y="6.05" width="5.54" height="29.84"/><path class="cls-3" d="M128.29,34.77c3.72,0,7.16-1.4,9.69-3.95,2.56-2.58,3.95-6.1,3.93-9.91,0-7.81-5.98-13.92-13.61-13.92h-1.56v1.08h1.56c7.03,0,12.54,5.64,12.54,12.85,.03,3.53-1.26,6.78-3.61,9.15-2.33,2.34-5.5,3.63-8.92,3.63-7.15,0-12.54-5.5-12.54-12.79,0-3.19,1.1-6.22,3.11-8.55l-.77-.77c-2.2,2.53-3.42,5.83-3.42,9.32,0,7.91,5.85,13.87,13.61,13.87Z"/><path class="cls-3" d="M128.29,36.91c4.29,0,8.26-1.62,11.18-4.56,2.95-2.97,4.56-7.04,4.53-11.44,0-8.97-6.87-16.02-15.63-16.06h-.58V-.19l-7.31,7.76,7.31,7.76v-5.12h.5c5.85,0,10.44,4.7,10.44,10.7,.02,2.94-1.05,5.65-3.01,7.62-1.94,1.95-4.58,3.03-7.43,3.03-5.95,0-10.44-4.58-10.44-10.65,0-2.61,.89-5.11,2.52-7.04l-.77-.77c-1.82,2.13-2.83,4.9-2.83,7.8,0,6.69,4.95,11.73,11.51,11.73,3.14,0,6.05-1.19,8.19-3.34,2.16-2.18,3.34-5.16,3.32-8.38,0-6.6-5.06-11.77-11.51-11.77h-1.58v3.48l-4.76-5.05,4.76-5.05v3.4h1.58c8.21,0,14.64,6.59,14.64,14.99,.03,4.12-1.47,7.91-4.22,10.68-2.72,2.74-6.42,4.24-10.42,4.24-8.34,0-14.64-6.42-14.64-14.93,0-3.76,1.31-7.33,3.7-10.06l-.77-.76c-2.59,2.93-4.01,6.77-4.01,10.83,0,9.12,6.75,16.01,15.71,16.01Z"/></svg></span></div>
-    <div class="tag"><span class="dot"></span>AI-First · Part 3 of 3 · The Playbook</div>
+    <div class="tag"><span class="dot"></span>AI-First · Part 3 of 4 · The Playbook</div>
     <h1>What we unlearned making AI central at <span class="hl">Trilio.</span></h1>
     <p class="lede">Parts 1 and 2 were the argument. This is what we actually changed — the process we scrapped, the one we kept, and the two products that came out the other side.</p>
     <p class="byline">By Murali Balcha</p>
   </div>
 </header>
 
-<!-- BRIDGE -->
 <section class="band">
   <div class="prose">
     <p class="eyebrow">From theory to practice</p>
@@ -161,7 +152,6 @@
   </div>
 </section>
 
-<!-- ORGANIZING IDEA -->
 <section class="band band-dark">
   <div class="prose">
     <p class="eyebrow">The idea underneath everything</p>
@@ -170,11 +160,9 @@
     <p>That premise is gone. Code is now cheap to produce and cheap to regenerate. And once code is cheap, it stops being the asset — it becomes disposable. What is durable, what is actually worth protecting, are the two things code is generated <em>from</em> and measured <em>against</em>: the <strong>specification</strong> (what to build) and the <strong>test suite</strong> (proof it works).</p>
   </div>
 
-  <!-- FIGURE: inversion -->
   <svg class="fig" viewBox="0 0 760 220" role="img" aria-label="Two columns. Before: code sits at the top as the expensive, protected asset, with specs and tests as supporting scaffolding. After: specs and tests are the durable assets at the top, and code is a cheap, regenerable output at the bottom.">
     <text x="200" y="30" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="#8DA3AD">BEFORE — CODE IS EXPENSIVE</text>
     <text x="560" y="30" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="var(--copper-br)">AFTER — CODE IS CHEAP</text>
-    <!-- before -->
     <rect x="90" y="52" width="220" height="52" rx="4" fill="rgba(201,126,66,.16)" stroke="var(--copper)" stroke-width="1.4"/>
     <text x="200" y="83" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="16" fill="#F4F0E8">CODE · the asset</text>
     <rect x="110" y="120" width="80" height="34" rx="3" fill="none" stroke="var(--line-dark)"/>
@@ -183,7 +171,6 @@
     <text x="250" y="142" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#8DA3AD">tests</text>
     <text x="200" y="182" text-anchor="middle" font-family="Newsreader, serif" font-size="13" fill="#8DA3AD" font-style="italic">protect it · never rewrite</text>
     <line x1="380" y1="45" x2="380" y2="185" stroke="var(--line-dark)" stroke-width="1"/>
-    <!-- after -->
     <rect x="450" y="52" width="105" height="46" rx="4" fill="rgba(79,179,163,.12)" stroke="var(--signal)" stroke-width="1.6"/>
     <text x="502" y="80" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="14" fill="#F4F0E8">SPECS</text>
     <rect x="565" y="52" width="105" height="46" rx="4" fill="rgba(79,179,163,.12)" stroke="var(--signal)" stroke-width="1.6"/>
@@ -203,7 +190,6 @@
   </div>
 </section>
 
-<!-- PROOF 1: QCOW2 -->
 <section class="band">
   <div class="prose">
     <p class="eyebrow">Proof · one</p>
@@ -229,7 +215,6 @@
   </div>
 </section>
 
-<!-- PROOF 2: SITE RECOVERY -->
 <section class="band band-paper2">
   <div class="prose">
     <p class="eyebrow">Proof · two</p>
@@ -256,7 +241,6 @@
   </div>
 </section>
 
-<!-- THE UNLEARN LIST -->
 <section class="band band-dark">
   <div class="prose">
     <p class="eyebrow">The playbook</p>
@@ -332,7 +316,6 @@
   </div>
 </section>
 
-<!-- THE OPERATING MODEL -->
 <section class="band band-abyss">
   <div class="prose">
     <p class="eyebrow">What replaced scrum</p>
@@ -340,7 +323,6 @@
     <p>Scrapping scrum is not the same as scrapping structure. If you remove process and put nothing in its place, you get chaos, not velocity. So we kept exactly one thing — a single, deliberately lightweight workflow. This is close to verbatim what I told the team.</p>
   </div>
 
-  <!-- WORKFLOW -->
   <div class="wf">
     <div class="step"><span class="si">01</span><span class="st">Configure Claude Code</span><span class="ss">set up the repo</span></div>
     <div class="step"><span class="si">02</span><span class="st">Brainstorm the feature</span><span class="ss">explore approaches</span></div>
@@ -354,7 +336,6 @@
     <p style="margin-top:2.6rem">The key insight is the spec loop. Teams that iterate on specs until every stakeholder signs off find that implementation becomes pure execution — the machine moves fast when the target is clear, and there is far less rework. Get the spec right and the code almost writes itself, because in a real sense it does.</p>
   </div>
 
-  <!-- FIXED VS YOURS -->
   <div class="fy">
     <div class="col fixed">
       <span class="k">What is fixed</span>
@@ -387,25 +368,36 @@
   </div>
 </section>
 
-<!-- CLOSING -->
 <section class="band">
   <div class="closing prose">
-    <p class="eyebrow">Closing the series</p>
+    <p class="eyebrow">Where this leaves us</p>
     <h2>Cheap to throw away, cheap to attempt</h2>
     <p>Look at the two products together and you can see both halves of the same shift. Site Recovery is what happens when code becomes cheap enough to <em>throw away</em> — an entire controller layer rewritten in five weeks because sunk cost stopped mattering. The streaming storage product is what happens when ambition becomes cheap enough to <em>attempt</em> — a project a company our size would never have dared, shipped by one engineer in six months.</p>
-    <p>Between them sits everything I have argued across these three pieces. Stop treating AI as a tool and start thinking out loud with it. Recognize it as a reasoning partner and rebuild your assumptions accordingly. Then unlearn the habits — the process, the ceremony, the reverence for code — that only made sense back when thinking was scarce and code was expensive. Neither is true anymore.</p>
-    <p>The companies that internalize that will not just move faster. They will attempt things their size was never supposed to allow — and ship them.</p>
+    <p>Between them sits everything I have argued so far. Stop treating AI as a tool and start thinking out loud with it. Recognize it as a reasoning partner and rebuild your assumptions accordingly. Then unlearn the habits — the process, the ceremony, the reverence for code — that only made sense back when thinking was scarce and code was expensive. Neither is true anymore.</p>
+    <p>That is our story. But it is a small instance of something much larger — a whole discipline, and the entire ecosystem around it, being rewritten in real time. That is where the final part goes.</p>
   </div>
 
-  <div class="end-card">
-    <span class="lbl">End of series</span>
-    <span class="t">Part 1 · Stop Prompting, Start Thinking Out Loud &nbsp;→&nbsp; Part 2 · A Reasoning Partner, Not a Tool &nbsp;→&nbsp; Part 3 · What We Unlearned</span>
+  <!-- When Part 4 is published, replace the block below with:
+  <a href="part4-speed-of-thought-3587bc0bd9.html" class="next">
+    <div>
+      <span class="lbl">Next in the series · the finale</span>
+      <span class="t">Part 4 — At the Speed of Thought</span>
+    </div>
+    <span class="arrow">&rarr;</span>
+  </a>
+  -->
+  <div class="next soon">
+    <div>
+      <span class="lbl">Next in the series · the finale</span>
+      <span class="t">Part 4 — At the Speed of Thought</span>
+    </div>
+    <span class="badge">Coming soon</span>
   </div>
 </section>
 
 <footer>
   <div class="wide">
-    <span class="foot-brand"><span class="trilio-logo sm"><svg viewBox="0 0 144 37" role="img" xmlns="http://www.w3.org/2000/svg"><title>Trilio</title><polygon class="cls-2" points=".07 6.05 .07 11.38 8.59 11.38 8.59 35.9 14.24 35.9 14.24 11.38 22.88 11.38 22.88 6.05 .07 6.05"/><path class="cls-2" d="M37.91,24.71h-3.73v11.19h-5.54V6.05h11.08c6.82,0,10.02,4.48,10.02,9.38,0,3.62-1.92,7.25-6.29,8.74l7.57,11.83h-6.4l-6.71-11.3Zm-3.62-5.01h5.01c3.62,0,5.01-2.13,5.01-4.37s-1.49-4.26-4.37-4.26h-5.65v8.63Z"/><rect class="cls-2" x="58.16" y="6.05" width="5.54" height="29.84"/><polygon class="cls-2" points="72.97 6.05 78.51 6.05 78.51 30.57 93.86 30.57 93.86 35.9 72.97 35.9 72.97 6.05"/><rect class="cls-2" x="99.94" y="6.05" width="5.54" height="29.84"/><path class="cls-3" d="M128.29,34.77c3.72,0,7.16-1.4,9.69-3.95,2.56-2.58,3.95-6.1,3.93-9.91,0-7.81-5.98-13.92-13.61-13.92h-1.56v1.08h1.56c7.03,0,12.54,5.64,12.54,12.85,.03,3.53-1.26,6.78-3.61,9.15-2.33,2.34-5.5,3.63-8.92,3.63-7.15,0-12.54-5.5-12.54-12.79,0-3.19,1.1-6.22,3.11-8.55l-.77-.77c-2.2,2.53-3.42,5.83-3.42,9.32,0,7.91,5.85,13.87,13.61,13.87Z"/><path class="cls-3" d="M128.29,36.91c4.29,0,8.26-1.62,11.18-4.56,2.95-2.97,4.56-7.04,4.53-11.44,0-8.97-6.87-16.02-15.63-16.06h-.58V-.19l-7.31,7.76,7.31,7.76v-5.12h.5c5.85,0,10.44,4.7,10.44,10.7,.02,2.94-1.05,5.65-3.01,7.62-1.94,1.95-4.58,3.03-7.43,3.03-5.95,0-10.44-4.58-10.44-10.65,0-2.61,.89-5.11,2.52-7.04l-.77-.77c-1.82,2.13-2.83,4.9-2.83,7.8,0,6.69,4.95,11.73,11.51,11.73,3.14,0,6.05-1.19,8.19-3.34,2.16-2.18,3.34-5.16,3.32-8.38,0-6.6-5.06-11.77-11.51-11.77h-1.58v3.48l-4.76-5.05,4.76-5.05v3.4h1.58c8.21,0,14.64,6.59,14.64,14.99,.03,4.12-1.47,7.91-4.22,10.68-2.72,2.74-6.42,4.24-10.42,4.24-8.34,0-14.64-6.42-14.64-14.93,0-3.76,1.31-7.33,3.7-10.06l-.77-.76c-2.59,2.93-4.01,6.77-4.01,10.83,0,9.12,6.75,16.01,15.71,16.01Z"/></svg></span> · Part 3 of 3</span>
+    <span class="foot-brand"><span class="trilio-logo sm"><svg viewBox="0 0 144 37" role="img" xmlns="http://www.w3.org/2000/svg"><title>Trilio</title><polygon class="cls-2" points=".07 6.05 .07 11.38 8.59 11.38 8.59 35.9 14.24 35.9 14.24 11.38 22.88 11.38 22.88 6.05 .07 6.05"/><path class="cls-2" d="M37.91,24.71h-3.73v11.19h-5.54V6.05h11.08c6.82,0,10.02,4.48,10.02,9.38,0,3.62-1.92,7.25-6.29,8.74l7.57,11.83h-6.4l-6.71-11.3Zm-3.62-5.01h5.01c3.62,0,5.01-2.13,5.01-4.37s-1.49-4.26-4.37-4.26h-5.65v8.63Z"/><rect class="cls-2" x="58.16" y="6.05" width="5.54" height="29.84"/><polygon class="cls-2" points="72.97 6.05 78.51 6.05 78.51 30.57 93.86 30.57 93.86 35.9 72.97 35.9 72.97 6.05"/><rect class="cls-2" x="99.94" y="6.05" width="5.54" height="29.84"/><path class="cls-3" d="M128.29,34.77c3.72,0,7.16-1.4,9.69-3.95,2.56-2.58,3.95-6.1,3.93-9.91,0-7.81-5.98-13.92-13.61-13.92h-1.56v1.08h1.56c7.03,0,12.54,5.64,12.54,12.85,.03,3.53-1.26,6.78-3.61,9.15-2.33,2.34-5.5,3.63-8.92,3.63-7.15,0-12.54-5.5-12.54-12.79,0-3.19,1.1-6.22,3.11-8.55l-.77-.77c-2.2,2.53-3.42,5.83-3.42,9.32,0,7.91,5.85,13.87,13.61,13.87Z"/><path class="cls-3" d="M128.29,36.91c4.29,0,8.26-1.62,11.18-4.56,2.95-2.97,4.56-7.04,4.53-11.44,0-8.97-6.87-16.02-15.63-16.06h-.58V-.19l-7.31,7.76,7.31,7.76v-5.12h.5c5.85,0,10.44,4.7,10.44,10.7,.02,2.94-1.05,5.65-3.01,7.62-1.94,1.95-4.58,3.03-7.43,3.03-5.95,0-10.44-4.58-10.44-10.65,0-2.61,.89-5.11,2.52-7.04l-.77-.77c-1.82,2.13-2.83,4.9-2.83,7.8,0,6.69,4.95,11.73,11.51,11.73,3.14,0,6.05-1.19,8.19-3.34,2.16-2.18,3.34-5.16,3.32-8.38,0-6.6-5.06-11.77-11.51-11.77h-1.58v3.48l-4.76-5.05,4.76-5.05v3.4h1.58c8.21,0,14.64,6.59,14.64,14.99,.03,4.12-1.47,7.91-4.22,10.68-2.72,2.74-6.42,4.24-10.42,4.24-8.34,0-14.64-6.42-14.64-14.93,0-3.76,1.31-7.33,3.7-10.06l-.77-.76c-2.59,2.93-4.01,6.77-4.01,10.83,0,9.12,6.75,16.01,15.71,16.01Z"/></svg></span> · Part 3 of 4</span>
     <span>The Playbook · Murali Balcha</span>
   </div>
 </footer>
