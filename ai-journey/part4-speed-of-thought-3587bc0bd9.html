@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>At the Speed of Thought — Part 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --abyss:#0B1920;--petrol:#102630;--petrol-2:#17323E;
+    --paper:#F3EEE4;--paper-2:#EAE2D2;--ink:#14232B;--ink-soft:#4C6472;
+    --copper:#C97E42;--copper-br:#E89A5B;--signal:#4FB3A3;
+    --line-dark:rgba(255,255,255,.11);--line-light:rgba(20,35,43,.15);
+    --maxprose:44rem;--maxwide:66rem;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Newsreader",Georgia,serif;font-size:1.18rem;line-height:1.72;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--copper);margin:0 0 1.1rem;display:inline-flex;align-items:center;gap:.7em}
+  .eyebrow::before{content:"";width:2.2em;height:1px;background:var(--copper);display:inline-block}
+  h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:600;line-height:1.08;letter-spacing:-.015em;color:var(--ink)}
+  h2{font-size:clamp(1.9rem,4.2vw,3rem);margin:0 0 1.4rem}
+  h3{font-size:1.32rem;letter-spacing:-.01em;margin:0 0 .55rem}
+  p{margin:0 0 1.25rem}
+  a{color:var(--copper)}
+  strong{font-weight:500}
+  em{font-style:italic}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .band{padding:6rem 1.5rem}
+  .band-dark{background:var(--petrol);color:#DDE7EB}
+  .band-dark h2,.band-dark h3{color:#F4F0E8}
+  .band-abyss{background:var(--abyss);color:#C6D2D8}
+  .band-abyss h2,.band-abyss h3{color:#F4F0E8}
+  .band-paper2{background:var(--paper-2)}
+  .prose{max-width:var(--maxprose);margin:0 auto}
+  .wide{max-width:var(--maxwide);margin:0 auto}
+  .band-dark .eyebrow,.band-abyss .eyebrow{color:var(--copper-br)}
+  .band-dark .eyebrow::before,.band-abyss .eyebrow::before{background:var(--copper-br)}
+  .hero{background:radial-gradient(120% 90% at 82% 6%,rgba(201,126,66,.18),transparent 55%),radial-gradient(90% 70% at 6% 100%,rgba(79,179,163,.10),transparent 60%),var(--abyss);color:#DDE7EB;padding:clamp(3.5rem,7vw,6rem) 1.5rem clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+  .hero-inner{max-width:var(--maxwide);margin:0 auto}
+  .hero .tag{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--copper-br);margin-bottom:1.8rem;display:flex;gap:.8em;align-items:center;flex-wrap:wrap}
+  .hero .tag .dot{width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 12px var(--signal)}
+  .hero h1{font-size:clamp(2.3rem,5.8vw,4.6rem);font-weight:700;color:#F6F2EA;max-width:18ch;margin:0 0 1.6rem}
+  .hero h1 .hl{color:var(--copper-br)}
+  .hero .lede{font-size:clamp(1.18rem,2vw,1.5rem);line-height:1.5;max-width:46ch;color:#B9C7CE;margin:0}
+  .hero .byline{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em;color:#7C929C;margin-top:2.4rem}
+  .lead-in{font-size:1.3rem;line-height:1.6}
+  .lead-in::first-letter{font-family:"Space Grotesk",sans-serif;font-weight:700;float:left;font-size:4rem;line-height:.72;padding:.35rem .5rem 0 0;color:var(--copper)}
+  .pq{max-width:var(--maxwide);margin:3rem auto;padding:0 1.5rem}
+  .pq blockquote{margin:0;border-left:3px solid var(--copper);padding:.4rem 0 .4rem 1.6rem;font-family:"Space Grotesk",sans-serif;font-weight:500;letter-spacing:-.01em;font-size:clamp(1.5rem,3.4vw,2.3rem);line-height:1.2;color:var(--ink)}
+  .band-abyss .pq blockquote,.band-dark .pq blockquote{color:#F4F0E8;border-color:var(--copper-br)}
+  .pq cite{display:block;font-family:"IBM Plex Mono",monospace;font-style:normal;font-size:.78rem;letter-spacing:.08em;color:var(--ink-soft);margin-top:1rem}
+  .band-abyss .pq cite,.band-dark .pq cite{color:#8DA3AD}
+  .note{margin:2rem 0;background:var(--paper-2);border:1px solid var(--line-light);border-left:3px solid var(--copper);border-radius:3px;padding:1.3rem 1.5rem}
+  .note .nk{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);margin-bottom:.6rem}
+  .note p{font-size:1rem;line-height:1.6;color:var(--ink);margin:0}
+  .band-dark .note{background:rgba(255,255,255,.03);border-color:var(--line-dark);border-left-color:var(--copper-br)}
+  .band-dark .note p{color:#DDE7EB}
+  .band-dark .note .nk{color:var(--copper-br)}
+  .fig-cap{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);text-align:center;margin-top:1rem}
+  .band-dark .fig-cap,.band-abyss .fig-cap{color:#8DA3AD}
+  svg.fig{width:100%;max-width:var(--maxwide);margin:2.5rem auto 0;display:block}
+  /* numbered theses */
+  .thesis{display:grid;grid-template-columns:auto 1fr;gap:1.6rem;max-width:var(--maxwide);margin:0 auto;padding:2rem 0;border-top:1px solid var(--line-light)}
+  .thesis:first-of-type{border-top:none}
+  .thesis .idx{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.05rem;color:var(--abyss);background:var(--copper-br);width:2.6rem;height:2.6rem;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .band-dark .thesis{border-top-color:var(--line-dark)}
+  .thesis h3{margin-bottom:.5rem}
+  .thesis p{margin:0;font-size:1.04rem;line-height:1.62}
+  .band-dark .thesis p{color:#C6D2D8}
+  .closing p{font-size:1.28rem;line-height:1.6}
+  .end-card{max-width:var(--maxwide);margin:3rem auto 0;border:1px solid var(--line-dark);border-radius:4px;padding:1.6rem 1.7rem}
+  .end-card .lbl{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper-br);display:block;margin-bottom:.6rem}
+  .end-card .t{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.02rem;color:#F4F0E8;line-height:1.5}
+  footer{background:var(--abyss);color:#7C929C;padding:2.6rem 1.5rem;font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em}
+  footer .wide{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
+  /* brand logo */
+  .trilio-logo{display:inline-flex;align-items:center;line-height:0}
+  .trilio-logo svg{height:30px;width:auto;display:block}
+  .trilio-logo.sm svg{height:20px}
+  .trilio-logo .cls-2{fill:var(--logo-word,#001641)}
+  .trilio-logo .cls-3{fill:var(--logo-mark,#58B847)}
+  .hero-brand{--logo-word:#F4F0E8;margin-bottom:1.9rem}
+  .foot-brand{--logo-word:#DDE7EB;display:inline-flex;align-items:center;gap:.7em;color:#7C929C}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-brand"><span class="trilio-logo"><svg viewBox="0 0 144 37" role="img" xmlns="http://www.w3.org/2000/svg"><title>Trilio</title><polygon class="cls-2" points=".07 6.05 .07 11.38 8.59 11.38 8.59 35.9 14.24 35.9 14.24 11.38 22.88 11.38 22.88 6.05 .07 6.05"/><path class="cls-2" d="M37.91,24.71h-3.73v11.19h-5.54V6.05h11.08c6.82,0,10.02,4.48,10.02,9.38,0,3.62-1.92,7.25-6.29,8.74l7.57,11.83h-6.4l-6.71-11.3Zm-3.62-5.01h5.01c3.62,0,5.01-2.13,5.01-4.37s-1.49-4.26-4.37-4.26h-5.65v8.63Z"/><rect class="cls-2" x="58.16" y="6.05" width="5.54" height="29.84"/><polygon class="cls-2" points="72.97 6.05 78.51 6.05 78.51 30.57 93.86 30.57 93.86 35.9 72.97 35.9 72.97 6.05"/><rect class="cls-2" x="99.94" y="6.05" width="5.54" height="29.84"/><path class="cls-3" d="M128.29,34.77c3.72,0,7.16-1.4,9.69-3.95,2.56-2.58,3.95-6.1,3.93-9.91,0-7.81-5.98-13.92-13.61-13.92h-1.56v1.08h1.56c7.03,0,12.54,5.64,12.54,12.85,.03,3.53-1.26,6.78-3.61,9.15-2.33,2.34-5.5,3.63-8.92,3.63-7.15,0-12.54-5.5-12.54-12.79,0-3.19,1.1-6.22,3.11-8.55l-.77-.77c-2.2,2.53-3.42,5.83-3.42,9.32,0,7.91,5.85,13.87,13.61,13.87Z"/><path class="cls-3" d="M128.29,36.91c4.29,0,8.26-1.62,11.18-4.56,2.95-2.97,4.56-7.04,4.53-11.44,0-8.97-6.87-16.02-15.63-16.06h-.58V-.19l-7.31,7.76,7.31,7.76v-5.12h.5c5.85,0,10.44,4.7,10.44,10.7,.02,2.94-1.05,5.65-3.01,7.62-1.94,1.95-4.58,3.03-7.43,3.03-5.95,0-10.44-4.58-10.44-10.65,0-2.61,.89-5.11,2.52-7.04l-.77-.77c-1.82,2.13-2.83,4.9-2.83,7.8,0,6.69,4.95,11.73,11.51,11.73,3.14,0,6.05-1.19,8.19-3.34,2.16-2.18,3.34-5.16,3.32-8.38,0-6.6-5.06-11.77-11.51-11.77h-1.58v3.48l-4.76-5.05,4.76-5.05v3.4h1.58c8.21,0,14.64,6.59,14.64,14.99,.03,4.12-1.47,7.91-4.22,10.68-2.72,2.74-6.42,4.24-10.42,4.24-8.34,0-14.64-6.42-14.64-14.93,0-3.76,1.31-7.33,3.7-10.06l-.77-.76c-2.59,2.93-4.01,6.77-4.01,10.83,0,9.12,6.75,16.01,15.71,16.01Z"/></svg></span></div>
+    <div class="tag"><span class="dot"></span>AI-First · Part 4 of 4 · The Horizon</div>
+    <h1>At the speed of thought: software engineering is being rebuilt <span class="hl">overnight.</span></h1>
+    <p class="lede">The first three parts were my company's story. This one is bigger than any company. The discipline itself — and the entire ecosystem built around it — is transforming faster than most teams can perceive.</p>
+    <p class="byline">By Murali Balcha</p>
+  </div>
+</header>
+
+<!-- BRIDGE -->
+<section class="band">
+  <div class="prose">
+    <p class="eyebrow">Zooming out</p>
+    <p class="lead-in">I have spent three essays on how we changed the way we build software at Trilio — the mindset, the process we scrapped, the products that came out the other side. But step back far enough and you can see that this is not a story about one company adopting a tool. It is a story about a discipline being rewritten in real time, and an ecosystem of habits, roles, and multi-billion-dollar tools quietly losing their reason to exist.</p>
+    <p>Here is what I believe is actually happening — five shifts that, taken together, describe a different profession than the one most of us trained for.</p>
+  </div>
+</section>
+
+<!-- THE FIVE SHIFTS -->
+<section class="band band-dark">
+  <div class="prose">
+    <p class="eyebrow">Five shifts</p>
+    <h2>What is transforming, and how fast</h2>
+    <p>None of these is a prediction about some distant future. Every one of them is already underway in teams that have taken AI seriously — mine included.</p>
+  </div>
+
+  <div class="wide" style="margin-top:2.4rem">
+    <div class="thesis">
+      <div class="idx">1</div>
+      <div>
+        <h3>Context is everything</h3>
+        <p>The single biggest determinant of a successful outcome is no longer the quality of your code — it is how well you manage context. The right context, assembled and maintained well, is what turns a capable model into a capable teammate. Learning to curate it, protect it, and hand it off cleanly is fast becoming the core engineering skill. Get the context right and good output follows almost automatically. Get it wrong and the most powerful model in the world flails.</p>
+      </div>
+    </div>
+    <div class="thesis">
+      <div class="idx">2</div>
+      <div>
+        <h3>The tool ecosystem is collapsing into context</h3>
+        <p>The software-engineering tools that have anchored every team for two decades are quietly becoming unnecessary. Backlogs, issue trackers, the sprawling apparatus of project management — all of it can live as context. And context can be checked in alongside the source code, version-controlled, reviewed, and diffed like everything else. One repository becomes the single source of truth for what to build, why, and where it stands. The separate systems we bolted on to coordinate humans start to look like scaffolding around a building that no longer needs it.</p>
+      </div>
+    </div>
+    <div class="thesis">
+      <div class="idx">3</div>
+      <div>
+        <h3>Scrum is not just redundant — it is a drag</h3>
+        <p>I will say this more strongly than I did earlier in the series. Scrum is not merely unnecessary in an AI-first team; it is actively harmful. The ceremonies, the fixed cadences, the ritual coordination all assume that thinking and typing are the scarce, expensive resources — and they are not anymore. Keeping that machinery running now slows engineering down, adds overhead where none is needed, and can quietly steer a project toward failure. The honest move is to stop, not to reform it.</p>
+      </div>
+    </div>
+    <div class="thesis">
+      <div class="idx">4</div>
+      <div>
+        <h3>Product development at the speed of thought</h3>
+        <p>When context is the source of truth, tools collapse into the repo, and ceremony falls away, what remains is a very short distance between an idea and a working product. Think it, specify it, build it, ship it — in a loop tight enough that the bottleneck becomes your own clarity about what to build. Development at the speed of thought is not a slogan. It is the recipe, and it is the thing that will separate the teams that win from the teams that merely keep up.</p>
+      </div>
+    </div>
+    <div class="thesis">
+      <div class="idx">5</div>
+      <div>
+        <h3>Code is not your asset — and the moat is gone</h3>
+        <p>This is the one that should keep founders up at night. Code is disposable. It does not keep a company afloat, and it is no longer a moat, because the moat that code used to provide disappeared almost overnight the moment anyone could generate it in bulk. What keeps you alive is different now: rapid value-add, engaging your customers ever more closely, and widening the distance between you and your competition faster than they can close it. Your durable advantage is your ability to constantly amaze customers with differentiating features — not the lines of code that happen to implement them this quarter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTEXT AS SOURCE OF TRUTH -->
+<section class="band band-paper2">
+  <div class="prose">
+    <p class="eyebrow">Shift 2, made concrete</p>
+    <h2>One repository, one source of truth</h2>
+    <p>The clearest signal of the transformation is where the truth lives. In the old world, the truth about a product was scattered: code in the repo, requirements in a wiki, the backlog in one SaaS tool, issues in another, decisions lost in chat. Keeping them in sync was a full-time coordination tax. In the new world, all of it becomes context — and context belongs with the code.</p>
+  </div>
+
+  <svg class="fig" viewBox="0 0 780 300" role="img" aria-label="Before: code in a repo surrounded by disconnected external tools for backlog, issues, and specs. After: a single repository containing code, specs, backlog, and issues together as version-controlled context.">
+    <!-- BEFORE -->
+    <text x="195" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="2" fill="var(--ink-soft)">BEFORE — SCATTERED</text>
+    <rect x="150" y="120" width="90" height="70" rx="5" fill="#fff" stroke="var(--line-light)" stroke-width="1.4"/>
+    <text x="195" y="160" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="600" font-size="14" fill="var(--ink)">code</text>
+    <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--ink-soft)">
+      <rect x="60" y="60" width="80" height="30" rx="4" fill="none" stroke="var(--line-light)" stroke-dasharray="3 3"/>
+      <text x="100" y="80" text-anchor="middle">backlog</text>
+      <rect x="250" y="60" width="80" height="30" rx="4" fill="none" stroke="var(--line-light)" stroke-dasharray="3 3"/>
+      <text x="290" y="80" text-anchor="middle">issues</text>
+      <rect x="250" y="220" width="80" height="30" rx="4" fill="none" stroke="var(--line-light)" stroke-dasharray="3 3"/>
+      <text x="290" y="240" text-anchor="middle">specs wiki</text>
+      <rect x="60" y="220" width="80" height="30" rx="4" fill="none" stroke="var(--line-light)" stroke-dasharray="3 3"/>
+      <text x="100" y="240" text-anchor="middle">chat</text>
+    </g>
+    <g stroke="var(--ink-soft)" stroke-width="1" stroke-dasharray="4 4" opacity=".6">
+      <line x1="140" y1="80" x2="160" y2="122"/>
+      <line x1="250" y1="80" x2="230" y2="122"/>
+      <line x1="250" y1="235" x2="230" y2="188"/>
+      <line x1="140" y1="235" x2="160" y2="188"/>
+    </g>
+    <text x="195" y="284" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="13" fill="var(--ink-soft)">a full-time sync tax</text>
+
+    <line x1="390" y1="50" x2="390" y2="260" stroke="var(--line-light)" stroke-width="1"/>
+
+    <!-- AFTER -->
+    <text x="585" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="2" fill="var(--copper)">AFTER — ONE REPO</text>
+    <rect x="470" y="70" width="230" height="170" rx="7" fill="rgba(201,126,66,.06)" stroke="var(--copper)" stroke-width="1.8"/>
+    <text x="585" y="98" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="var(--copper)">SOURCE OF TRUTH</text>
+    <g font-family="Space Grotesk, sans-serif" font-weight="600" font-size="13" fill="var(--ink)">
+      <rect x="492" y="116" width="88" height="42" rx="4" fill="#fff" stroke="var(--line-light)"/>
+      <text x="536" y="142" text-anchor="middle">code</text>
+      <rect x="590" y="116" width="88" height="42" rx="4" fill="#fff" stroke="var(--line-light)"/>
+      <text x="634" y="142" text-anchor="middle">specs</text>
+      <rect x="492" y="168" width="88" height="42" rx="4" fill="#fff" stroke="var(--line-light)"/>
+      <text x="536" y="194" text-anchor="middle">backlog</text>
+      <rect x="590" y="168" width="88" height="42" rx="4" fill="#fff" stroke="var(--line-light)"/>
+      <text x="634" y="194" text-anchor="middle">issues</text>
+    </g>
+    <text x="585" y="284" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="13" fill="var(--ink-soft)">version-controlled · reviewed · diffed</text>
+  </svg>
+  <p class="fig-cap">When the backlog checks in next to the code, the coordination tools become scaffolding you can remove.</p>
+</section>
+
+<!-- THE MOAT -->
+<section class="band band-abyss">
+  <div class="prose">
+    <p class="eyebrow">The uncomfortable part</p>
+    <h2>The software moat disappeared overnight</h2>
+    <p>For a generation, a hard-won codebase was a defensible moat. Rebuilding it was expensive enough that incumbents could rest on it. That is over. When code can be regenerated in bulk, the code itself defends nothing — and a great deal of enterprise value that was quietly resting on "it would take years to rebuild this" evaporated the moment that stopped being true.</p>
+    <p>I do not say this to alarm; I say it because it reorders what you should invest in. If code is not the moat, then the moat is the pace at which you add value, the closeness of your relationship with the customer, and the rate at which you widen the gap before anyone can close it.</p>
+  </div>
+
+  <div class="pq">
+    <blockquote>Code is not your asset. Your ability to constantly amaze your customers is.</blockquote>
+    <cite>— where durable advantage actually lives now</cite>
+  </div>
+
+  <div class="prose">
+    <div class="note">
+      <span class="nk">What to do with this</span>
+      <p>Stop defending the codebase and start compounding customer value. Pour the velocity AI gives you into features that differentiate, into shortening the loop between customer need and shipped answer, and into a pace of improvement competitors cannot match. The teams that treat code as precious will guard a moat that has already drained. The teams that treat it as disposable will spend that same energy pulling further ahead.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="band">
+  <div class="closing prose">
+    <p class="eyebrow">The end of the series</p>
+    <h2>A different profession than the one we trained for</h2>
+    <p>Put the four parts together and the shape is clear. It starts as a personal habit — thinking out loud with the machine instead of commanding it. It becomes a mindset — treating AI as a reasoning partner rather than a tool. It becomes an operating model — spec-first, ownership-driven, ruthless about disposing of code. And it ends here, as an industry-wide transformation happening at the blink of an eye: context as the source of truth, the old tooling collapsing into the repo, ceremony falling away, products built at the speed of thought, and the code moat gone.</p>
+    <p>None of this waits for permission. It is already happening, in teams that decided to stop protecting the old way and start building the new one. The only real question left is how quickly your organization is willing to see it — and whether you would rather be the team that gets rebuilt, or the team doing the rebuilding.</p>
+  </div>
+
+  <div class="end-card">
+    <span class="lbl">The AI-First series · complete</span>
+    <span class="t">1 · Stop Prompting, Start Thinking Out Loud &nbsp;→&nbsp; 2 · A Reasoning Partner, Not a Tool &nbsp;→&nbsp; 3 · What We Unlearned at Trilio &nbsp;→&nbsp; 4 · At the Speed of Thought</span>
+  </div>
+</section>
+
+<footer>
+  <div class="wide">
+    <span class="foot-brand"><span class="trilio-logo sm"><svg viewBox="0 0 144 37" role="img" xmlns="http://www.w3.org/2000/svg"><title>Trilio</title><polygon class="cls-2" points=".07 6.05 .07 11.38 8.59 11.38 8.59 35.9 14.24 35.9 14.24 11.38 22.88 11.38 22.88 6.05 .07 6.05"/><path class="cls-2" d="M37.91,24.71h-3.73v11.19h-5.54V6.05h11.08c6.82,0,10.02,4.48,10.02,9.38,0,3.62-1.92,7.25-6.29,8.74l7.57,11.83h-6.4l-6.71-11.3Zm-3.62-5.01h5.01c3.62,0,5.01-2.13,5.01-4.37s-1.49-4.26-4.37-4.26h-5.65v8.63Z"/><rect class="cls-2" x="58.16" y="6.05" width="5.54" height="29.84"/><polygon class="cls-2" points="72.97 6.05 78.51 6.05 78.51 30.57 93.86 30.57 93.86 35.9 72.97 35.9 72.97 6.05"/><rect class="cls-2" x="99.94" y="6.05" width="5.54" height="29.84"/><path class="cls-3" d="M128.29,34.77c3.72,0,7.16-1.4,9.69-3.95,2.56-2.58,3.95-6.1,3.93-9.91,0-7.81-5.98-13.92-13.61-13.92h-1.56v1.08h1.56c7.03,0,12.54,5.64,12.54,12.85,.03,3.53-1.26,6.78-3.61,9.15-2.33,2.34-5.5,3.63-8.92,3.63-7.15,0-12.54-5.5-12.54-12.79,0-3.19,1.1-6.22,3.11-8.55l-.77-.77c-2.2,2.53-3.42,5.83-3.42,9.32,0,7.91,5.85,13.87,13.61,13.87Z"/><path class="cls-3" d="M128.29,36.91c4.29,0,8.26-1.62,11.18-4.56,2.95-2.97,4.56-7.04,4.53-11.44,0-8.97-6.87-16.02-15.63-16.06h-.58V-.19l-7.31,7.76,7.31,7.76v-5.12h.5c5.85,0,10.44,4.7,10.44,10.7,.02,2.94-1.05,5.65-3.01,7.62-1.94,1.95-4.58,3.03-7.43,3.03-5.95,0-10.44-4.58-10.44-10.65,0-2.61,.89-5.11,2.52-7.04l-.77-.77c-1.82,2.13-2.83,4.9-2.83,7.8,0,6.69,4.95,11.73,11.51,11.73,3.14,0,6.05-1.19,8.19-3.34,2.16-2.18,3.34-5.16,3.32-8.38,0-6.6-5.06-11.77-11.51-11.77h-1.58v3.48l-4.76-5.05,4.76-5.05v3.4h1.58c8.21,0,14.64,6.59,14.64,14.99,.03,4.12-1.47,7.91-4.22,10.68-2.72,2.74-6.42,4.24-10.42,4.24-8.34,0-14.64-6.42-14.64-14.93,0-3.76,1.31-7.33,3.7-10.06l-.77-.76c-2.59,2.93-4.01,6.77-4.01,10.83,0,9.12,6.75,16.01,15.71,16.01Z"/></svg></span> · Part 4 of 4</span>
+    <span>The Horizon · Murali Balcha</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="robots" content="noindex">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stop Prompting. Start Thinking Out Loud. — Part 1</title>
@@ -10,38 +9,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --abyss:#0B1920;
-    --petrol:#102630;
-    --petrol-2:#17323E;
-    --paper:#F3EEE4;
-    --paper-2:#EAE2D2;
-    --ink:#14232B;
-    --ink-soft:#4C6472;
-    --copper:#C97E42;
-    --copper-br:#E89A5B;
-    --signal:#4FB3A3;
-    --line-dark:rgba(255,255,255,.11);
-    --line-light:rgba(20,35,43,.15);
-    --maxprose:44rem;
-    --maxwide:66rem;
+    --abyss:#0B1920;--petrol:#102630;--petrol-2:#17323E;
+    --paper:#F3EEE4;--paper-2:#EAE2D2;--ink:#14232B;--ink-soft:#4C6472;
+    --copper:#C97E42;--copper-br:#E89A5B;--signal:#4FB3A3;
+    --line-dark:rgba(255,255,255,.11);--line-light:rgba(20,35,43,.15);
+    --maxprose:44rem;--maxwide:66rem;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:"Newsreader",Georgia,serif;
-    font-size:1.18rem;
-    line-height:1.72;
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
-  }
-  .eyebrow{
-    font-family:"IBM Plex Mono",monospace;
-    font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;
-    color:var(--copper);margin:0 0 1.1rem;display:inline-flex;align-items:center;gap:.7em;
-  }
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Newsreader",Georgia,serif;font-size:1.18rem;line-height:1.72;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--copper);margin:0 0 1.1rem;display:inline-flex;align-items:center;gap:.7em}
   .eyebrow::before{content:"";width:2.2em;height:1px;background:var(--copper);display:inline-block}
   h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:600;line-height:1.08;letter-spacing:-.015em;color:var(--ink)}
   h2{font-size:clamp(1.9rem,4.2vw,3rem);margin:0 0 1.4rem}
@@ -51,7 +28,6 @@
   strong{font-weight:500}
   em{font-style:italic}
   .mono{font-family:"IBM Plex Mono",monospace}
-
   .band{padding:6rem 1.5rem}
   .band-dark{background:var(--petrol);color:#DDE7EB}
   .band-dark h2,.band-dark h3{color:#F4F0E8}
@@ -62,67 +38,34 @@
   .wide{max-width:var(--maxwide);margin:0 auto}
   .band-dark .eyebrow,.band-abyss .eyebrow{color:var(--copper-br)}
   .band-dark .eyebrow::before,.band-abyss .eyebrow::before{background:var(--copper-br)}
-
-  /* hero */
-  .hero{
-    background:
-      radial-gradient(120% 90% at 82% 6%,rgba(201,126,66,.18),transparent 55%),
-      radial-gradient(90% 70% at 6% 100%,rgba(79,179,163,.10),transparent 60%),
-      var(--abyss);
-    color:#DDE7EB;padding:clamp(3.5rem,7vw,6rem) 1.5rem clamp(2.5rem,5vw,4rem);
-    position:relative;overflow:hidden;
-  }
+  .hero{background:radial-gradient(120% 90% at 82% 6%,rgba(201,126,66,.18),transparent 55%),radial-gradient(90% 70% at 6% 100%,rgba(79,179,163,.10),transparent 60%),var(--abyss);color:#DDE7EB;padding:clamp(3.5rem,7vw,6rem) 1.5rem clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
   .hero-inner{max-width:var(--maxwide);margin:0 auto}
-  .hero .tag{
-    font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
-    color:var(--copper-br);margin-bottom:1.8rem;display:flex;gap:.8em;align-items:center;flex-wrap:wrap;
-  }
+  .hero .tag{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--copper-br);margin-bottom:1.8rem;display:flex;gap:.8em;align-items:center;flex-wrap:wrap}
   .hero .tag .dot{width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 12px var(--signal)}
   .hero h1{font-size:clamp(2.4rem,6.4vw,5rem);font-weight:700;color:#F6F2EA;max-width:18ch;margin:0 0 1.6rem}
   .hero h1 .hl{color:var(--copper-br)}
-  .hero .lede{font-size:clamp(1.18rem,2vw,1.5rem);line-height:1.5;max-width:44ch;color:#B9C7CE;margin:0 0 1rem}
-  .hero .lede b{color:#E4EAED;font-weight:500}
+  .hero .lede{font-size:clamp(1.18rem,2vw,1.5rem);line-height:1.5;max-width:44ch;color:#B9C7CE;margin:0}
   .hero .byline{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em;color:#7C929C;margin-top:2.4rem}
-
   .lead-in{font-size:1.3rem;line-height:1.6}
-  .lead-in::first-letter{
-    font-family:"Space Grotesk",sans-serif;font-weight:700;float:left;
-    font-size:4rem;line-height:.72;padding:.35rem .5rem 0 0;color:var(--copper);
-  }
-
-  /* pull quote */
+  .lead-in::first-letter{font-family:"Space Grotesk",sans-serif;font-weight:700;float:left;font-size:4rem;line-height:.72;padding:.35rem .5rem 0 0;color:var(--copper)}
   .pq{max-width:var(--maxwide);margin:3rem auto;padding:0 1.5rem}
-  .pq blockquote{
-    margin:0;border-left:3px solid var(--copper);padding:.4rem 0 .4rem 1.6rem;
-    font-family:"Space Grotesk",sans-serif;font-weight:500;letter-spacing:-.01em;
-    font-size:clamp(1.5rem,3.4vw,2.3rem);line-height:1.2;color:var(--ink);
-  }
+  .pq blockquote{margin:0;border-left:3px solid var(--copper);padding:.4rem 0 .4rem 1.6rem;font-family:"Space Grotesk",sans-serif;font-weight:500;letter-spacing:-.01em;font-size:clamp(1.5rem,3.4vw,2.3rem);line-height:1.2;color:var(--ink)}
   .band-abyss .pq blockquote,.band-dark .pq blockquote{color:#F4F0E8;border-color:var(--copper-br)}
   .pq cite{display:block;font-family:"IBM Plex Mono",monospace;font-style:normal;font-size:.78rem;letter-spacing:.08em;color:var(--ink-soft);margin-top:1rem}
   .band-abyss .pq cite,.band-dark .pq cite{color:#8DA3AD}
-
-  /* callout note */
-  .note{
-    margin:2rem 0;background:var(--paper-2);border:1px solid var(--line-light);
-    border-left:3px solid var(--copper);border-radius:3px;padding:1.3rem 1.5rem;
-  }
+  .note{margin:2rem 0;background:var(--paper-2);border:1px solid var(--line-light);border-left:3px solid var(--copper);border-radius:3px;padding:1.3rem 1.5rem}
   .note .nk{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);margin-bottom:.6rem}
   .note p{font-size:1rem;line-height:1.6;color:var(--ink);margin:0}
-  .note p+p{margin-top:.7rem}
   .band-dark .note{background:rgba(255,255,255,.03);border-color:var(--line-dark);border-left-color:var(--copper-br)}
   .band-dark .note p{color:#DDE7EB}
   .band-dark .note .nk{color:var(--copper-br)}
-
-  /* stat */
   .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:1.6rem;max-width:var(--maxwide);margin:2.6rem auto 0}
   .stat{border-top:2px solid var(--copper);padding-top:1rem}
   .stat .n{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(2.2rem,4.5vw,3rem);line-height:1;color:var(--copper);letter-spacing:-.03em;display:block}
-  .band-dark .stat .n,.band-abyss .stat .n{color:var(--copper-br)}
   .stat .l{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.05em;color:var(--ink-soft);margin-top:.7rem;display:block;line-height:1.5}
-  .band-dark .stat .l,.band-abyss .stat .l{color:#8DA3AD}
-  .band-dark .stat,.band-abyss .stat{border-top-color:var(--copper-br)}
-
-  /* prompt vs dialogue cards */
+  .fig-cap{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);text-align:center;margin-top:1rem}
+  .band-dark .fig-cap,.band-abyss .fig-cap{color:#8DA3AD}
+  svg.fig{width:100%;max-width:var(--maxwide);margin:2.5rem auto 0;display:block}
   .contrast{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;max-width:var(--maxwide);margin:2.6rem auto 0}
   .cbox{border:1px solid var(--line-light);border-radius:4px;padding:1.6rem 1.5rem;background:var(--paper)}
   .cbox.bad{background:var(--paper-2)}
@@ -132,16 +75,8 @@
   .cbox .sample{font-family:"IBM Plex Mono",monospace;font-size:.92rem;line-height:1.7;color:var(--ink);margin:0}
   .cbox .sample .muted{color:var(--ink-soft)}
   @media(max-width:620px){.contrast{grid-template-columns:1fr}}
-
-  .fig-cap{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);text-align:center;margin-top:1rem}
-  .band-dark .fig-cap,.band-abyss .fig-cap{color:#8DA3AD}
-  svg.fig{width:100%;max-width:var(--maxwide);margin:2.5rem auto 0;display:block}
-
   .closing p{font-size:1.28rem;line-height:1.6}
-  .next{
-    max-width:var(--maxwide);margin:3rem auto 0;border:1px solid var(--line-dark);border-radius:4px;
-    padding:1.6rem 1.7rem;display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap;
-  }
+  .next{max-width:var(--maxwide);margin:3rem auto 0;border:1px solid var(--line-dark);border-radius:4px;padding:1.6rem 1.7rem;display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap}
   .next .lbl{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper-br);display:block;margin-bottom:.4rem}
   .next .t{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.25rem;color:#F4F0E8}
   .next .arrow{font-family:"Space Grotesk",sans-serif;font-size:1.8rem;color:var(--copper-br)}
@@ -149,10 +84,8 @@
   a.next:hover{border-color:var(--copper-br);transform:translateX(3px)}
   .next.soon{opacity:.78}
   .next .badge{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--copper-br);border:1px solid var(--line-dark);border-radius:99px;padding:.42rem .85rem;white-space:nowrap}
-
   footer{background:var(--abyss);color:#7C929C;padding:2.6rem 1.5rem;font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em}
   footer .wide{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
-  /* brand logo */
   .trilio-logo{display:inline-flex;align-items:center;line-height:0}
   .trilio-logo svg{height:30px;width:auto;display:block}
   .trilio-logo.sm svg{height:20px}
@@ -160,24 +93,21 @@
   .trilio-logo .cls-3{fill:var(--logo-mark,#58B847)}
   .hero-brand{--logo-word:#F4F0E8;margin-bottom:1.9rem}
   .foot-brand{--logo-word:#DDE7EB;display:inline-flex;align-items:center;gap:.7em;color:#7C929C}
-
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <header class="hero">
   <div class="hero-inner">
     <div class="hero-brand"><span class="trilio-logo"><svg viewBox="0 0 144 37" role="img" xmlns="http://www.w3.org/2000/svg"><title>Trilio</title><polygon class="cls-2" points=".07 6.05 .07 11.38 8.59 11.38 8.59 35.9 14.24 35.9 14.24 11.38 22.88 11.38 22.88 6.05 .07 6.05"/><path class="cls-2" d="M37.91,24.71h-3.73v11.19h-5.54V6.05h11.08c6.82,0,10.02,4.48,10.02,9.38,0,3.62-1.92,7.25-6.29,8.74l7.57,11.83h-6.4l-6.71-11.3Zm-3.62-5.01h5.01c3.62,0,5.01-2.13,5.01-4.37s-1.49-4.26-4.37-4.26h-5.65v8.63Z"/><rect class="cls-2" x="58.16" y="6.05" width="5.54" height="29.84"/><polygon class="cls-2" points="72.97 6.05 78.51 6.05 78.51 30.57 93.86 30.57 93.86 35.9 72.97 35.9 72.97 6.05"/><rect class="cls-2" x="99.94" y="6.05" width="5.54" height="29.84"/><path class="cls-3" d="M128.29,34.77c3.72,0,7.16-1.4,9.69-3.95,2.56-2.58,3.95-6.1,3.93-9.91,0-7.81-5.98-13.92-13.61-13.92h-1.56v1.08h1.56c7.03,0,12.54,5.64,12.54,12.85,.03,3.53-1.26,6.78-3.61,9.15-2.33,2.34-5.5,3.63-8.92,3.63-7.15,0-12.54-5.5-12.54-12.79,0-3.19,1.1-6.22,3.11-8.55l-.77-.77c-2.2,2.53-3.42,5.83-3.42,9.32,0,7.91,5.85,13.87,13.61,13.87Z"/><path class="cls-3" d="M128.29,36.91c4.29,0,8.26-1.62,11.18-4.56,2.95-2.97,4.56-7.04,4.53-11.44,0-8.97-6.87-16.02-15.63-16.06h-.58V-.19l-7.31,7.76,7.31,7.76v-5.12h.5c5.85,0,10.44,4.7,10.44,10.7,.02,2.94-1.05,5.65-3.01,7.62-1.94,1.95-4.58,3.03-7.43,3.03-5.95,0-10.44-4.58-10.44-10.65,0-2.61,.89-5.11,2.52-7.04l-.77-.77c-1.82,2.13-2.83,4.9-2.83,7.8,0,6.69,4.95,11.73,11.51,11.73,3.14,0,6.05-1.19,8.19-3.34,2.16-2.18,3.34-5.16,3.32-8.38,0-6.6-5.06-11.77-11.51-11.77h-1.58v3.48l-4.76-5.05,4.76-5.05v3.4h1.58c8.21,0,14.64,6.59,14.64,14.99,.03,4.12-1.47,7.91-4.22,10.68-2.72,2.74-6.42,4.24-10.42,4.24-8.34,0-14.64-6.42-14.64-14.93,0-3.76,1.31-7.33,3.7-10.06l-.77-.76c-2.59,2.93-4.01,6.77-4.01,10.83,0,9.12,6.75,16.01,15.71,16.01Z"/></svg></span></div>
-    <div class="tag"><span class="dot"></span>AI-First · Part 1 of 3 · The Arc</div>
+    <div class="tag"><span class="dot"></span>AI-First · Part 1 of 4 · The Arc</div>
     <h1>Stop prompting. Start <span class="hl">thinking out loud.</span></h1>
     <p class="lede">I was building software with AI before coding agents existed. Here is how I went from copy-pasting code out of a chat window to running <b>a single AI session for months</b> — and why the real shift was never about the tool getting better.</p>
     <p class="byline">By Murali Balcha</p>
   </div>
 </header>
 
-<!-- OPENING -->
 <section class="band">
   <div class="prose">
     <p class="eyebrow">Where this starts</p>
@@ -186,7 +116,6 @@
   </div>
 </section>
 
-<!-- ERA 1 -->
 <section class="band band-paper2">
   <div class="prose">
     <p class="eyebrow">Era one · The chat window</p>
@@ -195,7 +124,6 @@
     <p>It worked. I got real velocity out of it, and for exploring new ideas and approaches it was already phenomenal — I could reason through a design with something that never got tired of my questions. But the loop had a seam running down the middle of it: <strong>I</strong> was the integration layer. Every handoff — model to editor, editor to test, back to model — was a manual copy and a context reset.</p>
   </div>
 
-  <!-- FIGURE: the manual loop -->
   <svg class="fig" viewBox="0 0 720 200" role="img" aria-label="A loop diagram: brainstorm, break into tasks, generate code, review copy and test, then repeat — with the human sitting in the middle of every handoff.">
     <defs>
       <marker id="a1" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--copper)"/></marker>
@@ -225,7 +153,6 @@
   <p class="fig-cap">Era one: fast, but the human sat in the seam of every handoff.</p>
 </section>
 
-<!-- ERA 2 -->
 <section class="band band-dark">
   <div class="prose">
     <p class="eyebrow">Era two · The agent arrives</p>
@@ -239,7 +166,6 @@
   </div>
 </section>
 
-<!-- ERA 3 -->
 <section class="band band-abyss">
   <div class="prose">
     <p class="eyebrow">Era three · The ceiling lifts</p>
@@ -253,32 +179,22 @@
     <cite>— on the jump from a small context window to a million tokens</cite>
   </div>
 
-  <!-- FIGURE: three eras timeline -->
   <svg class="fig" viewBox="0 0 760 210" role="img" aria-label="Timeline of three eras: chat window with the human in the loop, Claude Code with a closed loop but limited memory, and Opus 4.8 with a persistent months-long session.">
     <line x1="60" y1="150" x2="700" y2="150" stroke="var(--line-dark)" stroke-width="1"/>
-    <!-- era 1 -->
     <circle cx="140" cy="150" r="7" fill="var(--copper-br)"/>
-    <g font-family="Space Grotesk, sans-serif" fill="#F4F0E8">
-      <text x="140" y="70" text-anchor="middle" font-weight="600" font-size="15">Chat window</text>
-    </g>
+    <g font-family="Space Grotesk, sans-serif" fill="#F4F0E8"><text x="140" y="70" text-anchor="middle" font-weight="600" font-size="15">Chat window</text></g>
     <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#8DA3AD">
       <text x="140" y="92" text-anchor="middle">copy / paste / test</text>
       <text x="140" y="180" text-anchor="middle">human in the loop</text>
     </g>
-    <!-- era 2 -->
     <circle cx="400" cy="150" r="7" fill="var(--copper-br)"/>
-    <g font-family="Space Grotesk, sans-serif" fill="#F4F0E8">
-      <text x="400" y="70" text-anchor="middle" font-weight="600" font-size="15">Claude Code</text>
-    </g>
+    <g font-family="Space Grotesk, sans-serif" fill="#F4F0E8"><text x="400" y="70" text-anchor="middle" font-weight="600" font-size="15">Claude Code</text></g>
     <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#8DA3AD">
       <text x="400" y="92" text-anchor="middle">loop closes — memory caps it</text>
       <text x="400" y="180" text-anchor="middle">small tasks, frequent resets</text>
     </g>
-    <!-- era 3 -->
     <circle cx="660" cy="150" r="9" fill="var(--signal)"/>
-    <g font-family="Space Grotesk, sans-serif" fill="#F4F0E8">
-      <text x="660" y="70" text-anchor="middle" font-weight="600" font-size="15">Opus 4.8</text>
-    </g>
+    <g font-family="Space Grotesk, sans-serif" fill="#F4F0E8"><text x="660" y="70" text-anchor="middle" font-weight="600" font-size="15">Opus 4.8</text></g>
     <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#7FC9BC">
       <text x="660" y="92" text-anchor="middle">1M tokens · months-long session</text>
       <text x="660" y="180" text-anchor="middle">whole projects, no resets</text>
@@ -287,7 +203,6 @@
   <p class="fig-cap">The arc: from human-in-the-loop, to a closed loop with a memory ceiling, to a session that simply holds.</p>
 </section>
 
-<!-- WHAT BECAME POSSIBLE -->
 <section class="band">
   <div class="prose">
     <p class="eyebrow">What it unlocked</p>
@@ -308,7 +223,6 @@
   </div>
 </section>
 
-<!-- THE TURN -->
 <section class="band band-paper2">
   <div class="prose">
     <p class="eyebrow">The real shift</p>
@@ -337,7 +251,6 @@
   </div>
 </section>
 
-<!-- CLOSING -->
 <section class="band band-abyss">
   <div class="closing prose">
     <p class="eyebrow">Closing thought</p>
@@ -365,7 +278,7 @@
 
 <footer>
   <div class="wide">
-    <span class="foot-brand"><span class="trilio-logo sm"><svg viewBox="0 0 144 37" role="img" xmlns="http://www.w3.org/2000/svg"><title>Trilio</title><polygon class="cls-2" points=".07 6.05 .07 11.38 8.59 11.38 8.59 35.9 14.24 35.9 14.24 11.38 22.88 11.38 22.88 6.05 .07 6.05"/><path class="cls-2" d="M37.91,24.71h-3.73v11.19h-5.54V6.05h11.08c6.82,0,10.02,4.48,10.02,9.38,0,3.62-1.92,7.25-6.29,8.74l7.57,11.83h-6.4l-6.71-11.3Zm-3.62-5.01h5.01c3.62,0,5.01-2.13,5.01-4.37s-1.49-4.26-4.37-4.26h-5.65v8.63Z"/><rect class="cls-2" x="58.16" y="6.05" width="5.54" height="29.84"/><polygon class="cls-2" points="72.97 6.05 78.51 6.05 78.51 30.57 93.86 30.57 93.86 35.9 72.97 35.9 72.97 6.05"/><rect class="cls-2" x="99.94" y="6.05" width="5.54" height="29.84"/><path class="cls-3" d="M128.29,34.77c3.72,0,7.16-1.4,9.69-3.95,2.56-2.58,3.95-6.1,3.93-9.91,0-7.81-5.98-13.92-13.61-13.92h-1.56v1.08h1.56c7.03,0,12.54,5.64,12.54,12.85,.03,3.53-1.26,6.78-3.61,9.15-2.33,2.34-5.5,3.63-8.92,3.63-7.15,0-12.54-5.5-12.54-12.79,0-3.19,1.1-6.22,3.11-8.55l-.77-.77c-2.2,2.53-3.42,5.83-3.42,9.32,0,7.91,5.85,13.87,13.61,13.87Z"/><path class="cls-3" d="M128.29,36.91c4.29,0,8.26-1.62,11.18-4.56,2.95-2.97,4.56-7.04,4.53-11.44,0-8.97-6.87-16.02-15.63-16.06h-.58V-.19l-7.31,7.76,7.31,7.76v-5.12h.5c5.85,0,10.44,4.7,10.44,10.7,.02,2.94-1.05,5.65-3.01,7.62-1.94,1.95-4.58,3.03-7.43,3.03-5.95,0-10.44-4.58-10.44-10.65,0-2.61,.89-5.11,2.52-7.04l-.77-.77c-1.82,2.13-2.83,4.9-2.83,7.8,0,6.69,4.95,11.73,11.51,11.73,3.14,0,6.05-1.19,8.19-3.34,2.16-2.18,3.34-5.16,3.32-8.38,0-6.6-5.06-11.77-11.51-11.77h-1.58v3.48l-4.76-5.05,4.76-5.05v3.4h1.58c8.21,0,14.64,6.59,14.64,14.99,.03,4.12-1.47,7.91-4.22,10.68-2.72,2.74-6.42,4.24-10.42,4.24-8.34,0-14.64-6.42-14.64-14.93,0-3.76,1.31-7.33,3.7-10.06l-.77-.76c-2.59,2.93-4.01,6.77-4.01,10.83,0,9.12,6.75,16.01,15.71,16.01Z"/></svg></span> · Part 1 of 3</span>
+    <span class="foot-brand"><span class="trilio-logo sm"><svg viewBox="0 0 144 37" role="img" xmlns="http://www.w3.org/2000/svg"><title>Trilio</title><polygon class="cls-2" points=".07 6.05 .07 11.38 8.59 11.38 8.59 35.9 14.24 35.9 14.24 11.38 22.88 11.38 22.88 6.05 .07 6.05"/><path class="cls-2" d="M37.91,24.71h-3.73v11.19h-5.54V6.05h11.08c6.82,0,10.02,4.48,10.02,9.38,0,3.62-1.92,7.25-6.29,8.74l7.57,11.83h-6.4l-6.71-11.3Zm-3.62-5.01h5.01c3.62,0,5.01-2.13,5.01-4.37s-1.49-4.26-4.37-4.26h-5.65v8.63Z"/><rect class="cls-2" x="58.16" y="6.05" width="5.54" height="29.84"/><polygon class="cls-2" points="72.97 6.05 78.51 6.05 78.51 30.57 93.86 30.57 93.86 35.9 72.97 35.9 72.97 6.05"/><rect class="cls-2" x="99.94" y="6.05" width="5.54" height="29.84"/><path class="cls-3" d="M128.29,34.77c3.72,0,7.16-1.4,9.69-3.95,2.56-2.58,3.95-6.1,3.93-9.91,0-7.81-5.98-13.92-13.61-13.92h-1.56v1.08h1.56c7.03,0,12.54,5.64,12.54,12.85,.03,3.53-1.26,6.78-3.61,9.15-2.33,2.34-5.5,3.63-8.92,3.63-7.15,0-12.54-5.5-12.54-12.79,0-3.19,1.1-6.22,3.11-8.55l-.77-.77c-2.2,2.53-3.42,5.83-3.42,9.32,0,7.91,5.85,13.87,13.61,13.87Z"/><path class="cls-3" d="M128.29,36.91c4.29,0,8.26-1.62,11.18-4.56,2.95-2.97,4.56-7.04,4.53-11.44,0-8.97-6.87-16.02-15.63-16.06h-.58V-.19l-7.31,7.76,7.31,7.76v-5.12h.5c5.85,0,10.44,4.7,10.44,10.7,.02,2.94-1.05,5.65-3.01,7.62-1.94,1.95-4.58,3.03-7.43,3.03-5.95,0-10.44-4.58-10.44-10.65,0-2.61,.89-5.11,2.52-7.04l-.77-.77c-1.82,2.13-2.83,4.9-2.83,7.8,0,6.69,4.95,11.73,11.51,11.73,3.14,0,6.05-1.19,8.19-3.34,2.16-2.18,3.34-5.16,3.32-8.38,0-6.6-5.06-11.77-11.51-11.77h-1.58v3.48l-4.76-5.05,4.76-5.05v3.4h1.58c8.21,0,14.64,6.59,14.64,14.99,.03,4.12-1.47,7.91-4.22,10.68-2.72,2.74-6.42,4.24-10.42,4.24-8.34,0-14.64-6.42-14.64-14.93,0-3.76,1.31-7.33,3.7-10.06l-.77-.76c-2.59,2.93-4.01,6.77-4.01,10.83,0,9.12,6.75,16.01,15.71,16.01Z"/></svg></span> · Part 1 of 4</span>
     <span>The Arc · Murali Balcha</span>
   </div>
 </footer>
