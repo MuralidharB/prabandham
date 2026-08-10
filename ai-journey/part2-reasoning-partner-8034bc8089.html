@@ -46,8 +46,6 @@
   .hero h1 .hl{color:var(--copper-br)}
   .hero .lede{font-size:clamp(1.18rem,2vw,1.5rem);line-height:1.5;max-width:46ch;color:#B9C7CE;margin:0}
   .hero .byline{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em;color:#7C929C;margin-top:2.4rem}
-  .hero .backlink{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--copper-br);text-decoration:none;display:inline-block;margin-bottom:1.6rem;transition:transform .2s}
-  .hero .backlink:hover{transform:translateX(-3px)}
   .lead-in{font-size:1.3rem;line-height:1.6}
   .lead-in::first-letter{font-family:"Space Grotesk",sans-serif;font-weight:700;float:left;font-size:4rem;line-height:.72;padding:.35rem .5rem 0 0;color:var(--copper)}
   .pq{max-width:var(--maxwide);margin:3rem auto;padding:0 1.5rem}
@@ -76,14 +74,21 @@
   .band-dark .fig-cap,.band-abyss .fig-cap{color:#8DA3AD}
   svg.fig{width:100%;max-width:var(--maxwide);margin:2.5rem auto 0;display:block}
   .closing p{font-size:1.28rem;line-height:1.6}
-  .next{max-width:var(--maxwide);margin:3rem auto 0;border:1px solid var(--line-dark);border-radius:4px;padding:1.6rem 1.7rem;display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap}
-  .next .lbl{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper-br);display:block;margin-bottom:.4rem}
-  .next .t{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.25rem;color:#F4F0E8}
-  .next .arrow{font-family:"Space Grotesk",sans-serif;font-size:1.8rem;color:var(--copper-br)}
-  a.next{text-decoration:none;transition:border-color .2s,transform .2s}
-  a.next:hover{border-color:var(--copper-br);transform:translateX(3px)}
-  .next.soon{opacity:.78}
-  .next .badge{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--copper-br);border:1px solid var(--line-dark);border-radius:99px;padding:.42rem .85rem;white-space:nowrap}
+  .pager{max-width:var(--maxwide);margin:3rem auto 0;display:flex;gap:1rem;flex-wrap:wrap}
+  .pager-cell{flex:1 1 0;min-width:min(100%,14rem)}
+  .pager-cell.next{text-align:right}
+  .pager-cell a,.pager-cell .soon{display:block;height:100%;box-sizing:border-box;border:1px solid var(--line-light);border-radius:4px;padding:1.4rem 1.5rem;text-decoration:none;transition:border-color .2s,transform .2s}
+  .pager-cell.prev a:hover{border-color:var(--copper);transform:translateX(-3px)}
+  .pager-cell.next a:hover{border-color:var(--copper);transform:translateX(3px)}
+  .pager .lbl{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);display:block;margin-bottom:.45rem}
+  .pager .t{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.08rem;line-height:1.25;color:var(--ink);display:block}
+  .pager .soon{opacity:.72}
+  .pager .badge{display:inline-block;margin-top:.55rem;font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--copper);border:1px solid var(--line-light);border-radius:99px;padding:.32rem .7rem}
+  .band-abyss .pager-cell a,.band-dark .pager-cell a,.band-abyss .pager-cell .soon,.band-dark .pager-cell .soon{border-color:var(--line-dark)}
+  .band-abyss .pager-cell.prev a:hover,.band-dark .pager-cell.prev a:hover,.band-abyss .pager-cell.next a:hover,.band-dark .pager-cell.next a:hover{border-color:var(--copper-br)}
+  .band-abyss .pager .lbl,.band-dark .pager .lbl,.band-abyss .pager .badge,.band-dark .pager .badge{color:var(--copper-br)}
+  .band-abyss .pager .badge,.band-dark .pager .badge{border-color:var(--line-dark)}
+  .band-abyss .pager .t,.band-dark .pager .t{color:#F4F0E8}
   footer{background:var(--abyss);color:#7C929C;padding:2.6rem 1.5rem;font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em}
   footer .wide{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
   .trilio-logo{display:inline-flex;align-items:center;line-height:0}
@@ -100,7 +105,6 @@
 
 <header class="hero">
   <div class="hero-inner">
-    <a class="backlink" href="part1-stop-prompting-9a3cb7c791.html">&larr; Part 1 — Stop Prompting</a>
     <div class="tag"><span class="dot"></span>AI-First · Part 2 of 4 · The Mindset</div>
     <h1>AI is a reasoning partner, not a tool — and your org is built for <span class="hl">the wrong one.</span></h1>
     <p class="lede">The models are extraordinary and getting better every quarter. The bottleneck is no longer the machine's ability to think. It is our willingness to think <b>with</b> it.</p>
@@ -238,13 +242,20 @@
     <p>Get the mindset right and the tools deliver what they promised. Get it wrong and no amount of tooling will save you. In Part 3, I will get concrete: what we actually changed at Trilio once we took this seriously — the process we scrapped, the one we kept, and the products that came out the other side.</p>
   </div>
 
-  <a href="part3-what-we-unlearned-ae9caa3733.html" class="next">
-    <div>
-      <span class="lbl">Next in the series</span>
-      <span class="t">Part 3 — What We Unlearned Making AI Central at Trilio</span>
+  <nav class="pager">
+    <div class="pager-cell prev">
+      <a href="part1-stop-prompting-9a3cb7c791.html">
+        <span class="lbl">&larr; Previous</span>
+        <span class="t">Part 1 — Stop Prompting</span>
+      </a>
     </div>
-    <span class="arrow">&rarr;</span>
-  </a>
+    <div class="pager-cell next">
+      <a href="part3-what-we-unlearned-ae9caa3733.html">
+        <span class="lbl">Next &rarr;</span>
+        <span class="t">Part 3 — What We Unlearned Making AI Central at Trilio</span>
+      </a>
+    </div>
+  </nav>
 </section>
 
 <footer>

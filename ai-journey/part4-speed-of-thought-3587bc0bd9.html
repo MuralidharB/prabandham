@@ -74,6 +74,21 @@
   .end-card{max-width:var(--maxwide);margin:3rem auto 0;border:1px solid var(--line-dark);border-radius:4px;padding:1.6rem 1.7rem}
   .end-card .lbl{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper-br);display:block;margin-bottom:.6rem}
   .end-card .t{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.02rem;color:#F4F0E8;line-height:1.5}
+  .pager{max-width:var(--maxwide);margin:3rem auto 0;display:flex;gap:1rem;flex-wrap:wrap}
+  .pager-cell{flex:1 1 0;min-width:min(100%,14rem)}
+  .pager-cell.next{text-align:right}
+  .pager-cell a,.pager-cell .soon{display:block;height:100%;box-sizing:border-box;border:1px solid var(--line-light);border-radius:4px;padding:1.4rem 1.5rem;text-decoration:none;transition:border-color .2s,transform .2s}
+  .pager-cell.prev a:hover{border-color:var(--copper);transform:translateX(-3px)}
+  .pager-cell.next a:hover{border-color:var(--copper);transform:translateX(3px)}
+  .pager .lbl{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);display:block;margin-bottom:.45rem}
+  .pager .t{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.08rem;line-height:1.25;color:var(--ink);display:block}
+  .pager .soon{opacity:.72}
+  .pager .badge{display:inline-block;margin-top:.55rem;font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--copper);border:1px solid var(--line-light);border-radius:99px;padding:.32rem .7rem}
+  .band-abyss .pager-cell a,.band-dark .pager-cell a,.band-abyss .pager-cell .soon,.band-dark .pager-cell .soon{border-color:var(--line-dark)}
+  .band-abyss .pager-cell.prev a:hover,.band-dark .pager-cell.prev a:hover,.band-abyss .pager-cell.next a:hover,.band-dark .pager-cell.next a:hover{border-color:var(--copper-br)}
+  .band-abyss .pager .lbl,.band-dark .pager .lbl,.band-abyss .pager .badge,.band-dark .pager .badge{color:var(--copper-br)}
+  .band-abyss .pager .badge,.band-dark .pager .badge{border-color:var(--line-dark)}
+  .band-abyss .pager .t,.band-dark .pager .t{color:#F4F0E8}
   footer{background:var(--abyss);color:#7C929C;padding:2.6rem 1.5rem;font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em}
   footer .wide{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
   /* brand logo */
@@ -343,6 +358,16 @@
     <span class="lbl">The AI-First series · complete</span>
     <span class="t">1 · Stop Prompting, Start Thinking Out Loud &nbsp;→&nbsp; 2 · A Reasoning Partner, Not a Tool &nbsp;→&nbsp; 3 · What We Unlearned at Trilio &nbsp;→&nbsp; 4 · At the Speed of Thought</span>
   </div>
+
+  <nav class="pager">
+    <div class="pager-cell prev">
+      <a href="part3-what-we-unlearned-ae9caa3733.html">
+        <span class="lbl">&larr; Previous</span>
+        <span class="t">Part 3 — What We Unlearned Making AI Central at Trilio</span>
+      </a>
+    </div>
+    <div class="pager-cell next"></div>
+  </nav>
 </section>
 
 <footer>
