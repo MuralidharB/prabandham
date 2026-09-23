@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Product's Next Reader Isn't Human — Part 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --abyss:#0B1920;--petrol:#102630;--petrol-2:#17323E;
+    --paper:#F3EEE4;--paper-2:#EAE2D2;--ink:#14232B;--ink-soft:#4C6472;
+    --copper:#C97E42;--copper-br:#E89A5B;--signal:#4FB3A3;
+    --line-dark:rgba(255,255,255,.11);--line-light:rgba(20,35,43,.15);
+    --maxprose:44rem;--maxwide:66rem;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Newsreader",Georgia,serif;font-size:1.18rem;line-height:1.72;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--copper);margin:0 0 1.1rem;display:inline-flex;align-items:center;gap:.7em}
+  .eyebrow::before{content:"";width:2.2em;height:1px;background:var(--copper);display:inline-block}
+  h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:600;line-height:1.08;letter-spacing:-.015em;color:var(--ink)}
+  h2{font-size:clamp(1.9rem,4.2vw,3rem);margin:0 0 1.4rem}
+  h3{font-size:1.32rem;letter-spacing:-.01em;margin:0 0 .55rem}
+  p{margin:0 0 1.25rem}
+  a{color:var(--copper)}
+  strong{font-weight:500}
+  em{font-style:italic}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .band{padding:6rem 1.5rem}
+  .band-dark{background:var(--petrol);color:#DDE7EB}
+  .band-dark h2,.band-dark h3{color:#F4F0E8}
+  .band-abyss{background:var(--abyss);color:#C6D2D8}
+  .band-abyss h2,.band-abyss h3{color:#F4F0E8}
+  .band-paper2{background:var(--paper-2)}
+  .prose{max-width:var(--maxprose);margin:0 auto}
+  .wide{max-width:var(--maxwide);margin:0 auto}
+  .band-dark .eyebrow,.band-abyss .eyebrow{color:var(--copper-br)}
+  .band-dark .eyebrow::before,.band-abyss .eyebrow::before{background:var(--copper-br)}
+
+  /* HERO */
+  .hero{background:radial-gradient(120% 90% at 82% 6%,rgba(201,126,66,.18),transparent 55%),radial-gradient(90% 70% at 6% 100%,rgba(79,179,163,.10),transparent 60%),var(--abyss);color:#DDE7EB;padding:clamp(3.5rem,7vw,6rem) 1.5rem clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+  .hero-inner{max-width:var(--maxwide);margin:0 auto}
+  .hero .tag{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--copper-br);margin-bottom:1.8rem;display:flex;gap:.8em;align-items:center;flex-wrap:wrap}
+  .hero .tag .dot{width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 12px var(--signal)}
+  .hero h1{font-size:clamp(2.4rem,6.4vw,5rem);font-weight:700;color:#F6F2EA;max-width:20ch;margin:0 0 1.6rem}
+  .hero h1 .hl{color:var(--copper-br)}
+  .hero .lede{font-size:clamp(1.18rem,2vw,1.5rem);line-height:1.5;max-width:46ch;color:#B9C7CE;margin:0}
+  .hero .byline{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em;color:#7C929C;margin-top:2.4rem}
+
+  /* LEAD-IN */
+  .lead-in{font-size:1.3rem;line-height:1.6}
+  .lead-in::first-letter{font-family:"Space Grotesk",sans-serif;font-weight:700;float:left;font-size:4rem;line-height:.72;padding:.35rem .5rem 0 0;color:var(--copper)}
+
+  /* PULL QUOTES */
+  .pq{max-width:var(--maxwide);margin:3rem auto;padding:0 1.5rem}
+  .pq blockquote{margin:0;border-left:3px solid var(--copper);padding:.4rem 0 .4rem 1.6rem;font-family:"Space Grotesk",sans-serif;font-weight:500;letter-spacing:-.01em;font-size:clamp(1.5rem,3.4vw,2.3rem);line-height:1.2;color:var(--ink)}
+  .band-abyss .pq blockquote,.band-dark .pq blockquote{color:#F4F0E8;border-color:var(--copper-br)}
+  .pq cite{display:block;font-family:"IBM Plex Mono",monospace;font-style:normal;font-size:.78rem;letter-spacing:.08em;color:var(--ink-soft);margin-top:1rem}
+  .band-abyss .pq cite,.band-dark .pq cite{color:#8DA3AD}
+
+  /* NOTES */
+  .note{margin:2rem 0;background:var(--paper-2);border:1px solid var(--line-light);border-left:3px solid var(--copper);border-radius:3px;padding:1.3rem 1.5rem}
+  .note .nk{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);margin-bottom:.6rem}
+  .note p{font-size:1rem;line-height:1.6;color:var(--ink);margin:0}
+  .band-dark .note{background:rgba(255,255,255,.03);border-color:var(--line-dark);border-left-color:var(--copper-br)}
+  .band-dark .note p{color:#DDE7EB}
+  .band-dark .note .nk{color:var(--copper-br)}
+
+  /* STATS */
+  .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:1.6rem;max-width:var(--maxwide);margin:2.6rem auto 0}
+  .stat{border-top:2px solid var(--copper);padding-top:1rem}
+  .stat .n{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(2.2rem,4.5vw,3rem);line-height:1;color:var(--copper);letter-spacing:-.03em;display:block}
+  .stat .l{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.05em;color:var(--ink-soft);margin-top:.7rem;display:block;line-height:1.5}
+  .band-dark .stat .l,.band-abyss .stat .l{color:#8DA3AD}
+  .band-dark .stat .n,.band-abyss .stat .n{color:var(--copper-br)}
+
+  /* FIGURES */
+  .fig-cap{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);text-align:center;margin-top:1rem}
+  .band-dark .fig-cap,.band-abyss .fig-cap{color:#8DA3AD}
+  svg.fig{width:100%;max-width:var(--maxwide);margin:2.5rem auto 0;display:block}
+
+  /* CONTRAST (side-by-side) — used for the human vs. agent content negotiation moment */
+  .contrast{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;max-width:var(--maxwide);margin:2.6rem auto 0}
+  .cbox{border:1px solid var(--line-light);border-radius:4px;padding:1.6rem 1.5rem;background:var(--paper)}
+  .cbox.bad{background:var(--paper-2)}
+  .cbox .k{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.9rem;display:block}
+  .cbox.bad .k{color:var(--ink-soft)}
+  .cbox.good .k{color:var(--copper)}
+  .cbox h3{margin-bottom:.75rem}
+  .cbox .sample{font-family:"IBM Plex Mono",monospace;font-size:.88rem;line-height:1.7;color:var(--ink);margin:0;white-space:pre-wrap}
+  .cbox .sample .muted{color:var(--ink-soft)}
+  .cbox .sample .key{color:var(--copper)}
+  .cbox .prose-sample{font-family:"Newsreader",serif;font-size:1rem;line-height:1.5;color:var(--ink);margin:0}
+  @media(max-width:620px){.contrast{grid-template-columns:1fr}}
+
+  /* DELIVERABLE LIST — the five */
+  .deliverables{max-width:var(--maxwide);margin:2.6rem auto 0}
+  .deliv{display:grid;grid-template-columns:3.5rem 1fr;gap:1.5rem;padding:1.8rem 0;border-top:1px solid var(--line-dark);align-items:baseline}
+  .deliv:last-child{border-bottom:1px solid var(--line-dark)}
+  .deliv .idx{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.6rem;color:var(--copper-br);letter-spacing:-.02em}
+  .deliv h3{margin-bottom:.35rem;color:#F4F0E8}
+  .deliv p{font-family:"Newsreader",serif;font-size:1.02rem;line-height:1.55;color:#DDE7EB;max-width:38rem;margin:0}
+  .deliv .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.85rem}
+  .deliv .tag-item{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--copper-br);background:rgba(201,126,66,.09);border:1px solid rgba(201,126,66,.25);padding:.25rem .6rem;border-radius:2px;letter-spacing:.02em}
+
+  /* FLYWHEEL SVG uses same fig styles */
+
+  /* CLOSING */
+  .closing p{font-size:1.28rem;line-height:1.6}
+  .next{max-width:var(--maxwide);margin:3rem auto 0;border:1px solid var(--line-dark);border-radius:4px;padding:1.6rem 1.7rem;display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap}
+  .next .lbl{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper-br);display:block;margin-bottom:.4rem}
+  .next .t{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.25rem;color:#F4F0E8}
+  .next .arrow{font-family:"Space Grotesk",sans-serif;font-size:1.8rem;color:var(--copper-br)}
+  .end-card{max-width:var(--maxwide);margin:3rem auto 0;border:1px solid var(--line-light);border-radius:4px;padding:1.6rem 1.7rem;background:var(--paper-2)}
+  .end-card .lbl{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);display:block;margin-bottom:.5rem}
+  .end-card .t{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:.98rem;color:var(--ink);line-height:1.7}
+
+  .pager{max-width:var(--maxwide);margin:3rem auto 0;display:flex;gap:1rem;flex-wrap:wrap}
+  .pager-cell{flex:1 1 0;min-width:min(100%,14rem)}
+  .pager-cell.next{text-align:right}
+  .pager-cell a,.pager-cell .soon{display:block;height:100%;box-sizing:border-box;border:1px solid var(--line-light);border-radius:4px;padding:1.4rem 1.5rem;text-decoration:none;transition:border-color .2s,transform .2s}
+  .pager-cell.prev a:hover{border-color:var(--copper);transform:translateX(-3px)}
+  .pager-cell.next a:hover{border-color:var(--copper);transform:translateX(3px)}
+  .pager .lbl{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);display:block;margin-bottom:.45rem}
+  .pager .t{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.08rem;line-height:1.25;color:var(--ink);display:block}
+  .pager .soon{opacity:.72}
+  .pager .badge{display:inline-block;margin-top:.55rem;font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--copper);border:1px solid var(--line-light);border-radius:99px;padding:.32rem .7rem}
+  .band-abyss .pager-cell a,.band-dark .pager-cell a,.band-abyss .pager-cell .soon,.band-dark .pager-cell .soon{border-color:var(--line-dark)}
+  .band-abyss .pager-cell.prev a:hover,.band-dark .pager-cell.prev a:hover,.band-abyss .pager-cell.next a:hover,.band-dark .pager-cell.next a:hover{border-color:var(--copper-br)}
+  .band-abyss .pager .lbl,.band-dark .pager .lbl,.band-abyss .pager .badge,.band-dark .pager .badge{color:var(--copper-br)}
+  .band-abyss .pager .badge,.band-dark .pager .badge{border-color:var(--line-dark)}
+  .band-abyss .pager .t,.band-dark .pager .t{color:#F4F0E8}
+
+  /* FOOTER */
+  footer{background:var(--abyss);color:#7C929C;padding:2.6rem 1.5rem;font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em}
+  footer .wide{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="tag"><span class="dot"></span>AI-First · Part 5 of 5 · The Interface</div>
+    <h1>Your product's next reader <span class="hl">isn't human.</span></h1>
+    <p class="lede">Part 4 asked whether you'd rather be the team getting rebuilt or the team doing the rebuilding. This is what <b>doing the rebuilding</b> actually looks like — and the horizon just moved again.</p>
+    <p class="byline">By Murali Balcha</p>
+  </div>
+</header>
+
+<!-- ============ BRIDGE ============ -->
+<section class="band">
+  <div class="prose">
+    <p class="eyebrow">Where we left off</p>
+    <p class="lead-in">The series was supposed to close at Part 4. I called it "the end" and meant it — I had made the case I set out to make, the discipline was being rebuilt in real time, and readers deserved a clean ending. Then, in the months since, the ground moved again. Not inside the codebase this time, but on the very interface where software meets the world. And once I saw it clearly, I could not leave the series where it stood.</p>
+    <p>Here is the shift. For thirty years, we wrote software for humans to consume: through screens, through docs, through prose. That reader is being replaced. Not augmented — <em>replaced</em> — by agents that arrive at your product not to read but to act. Everything downstream of that fact has to change, and most companies have not noticed it has already happened.</p>
+  </div>
+</section>
+
+<!-- ============ THE SHIFT (BIG STAT) ============ -->
+<section class="band band-dark">
+  <div class="prose">
+    <p class="eyebrow">The shift, in one number</p>
+    <h2>66%</h2>
+    <p>Across roughly 20,000 documentation sites hosted by Mintlify, the share of traffic served to AI agents climbed from <strong>15.2% at the beginning of 2026 to 66% by July</strong>. Six months. Not a trend line to project forward — a transition that has already happened. Cloudflare, measuring a much broader slice of the internet independently, puts the figure at roughly 57% for HTML content. Two very different sources, the same conclusion.</p>
+    <p>This is where the series' argument about "context is everything" meets its ultimate test. In Part 4, I wrote that context was becoming the source of truth. What I did not fully appreciate then was that <em>the consumer of that context was changing too.</em> Documentation stopped being something humans read and became infrastructure that agents query. The people using our software are increasingly not the ones talking to it.</p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat"><span class="n">66%</span><span class="l">agent share of documentation traffic, July 2026 (Mintlify)</span></div>
+    <div class="stat"><span class="n">~57%</span><span class="l">agent share of HTML traffic, independent measurement (Cloudflare)</span></div>
+    <div class="stat"><span class="n">1.1&times;</span><span class="l">human readership grew this modestly. Agent readership grew by multiples.</span></div>
+    <div class="stat"><span class="n">83.7%</span><span class="l">of agent traffic arrived via explicit machine routes — .md, llms.txt, MCP</span></div>
+  </div>
+
+  <div class="pq">
+    <blockquote>Documentation stopped being something humans read. It became infrastructure that agents query.</blockquote>
+    <cite>— the shift Part 5 is really about</cite>
+  </div>
+
+  <div class="prose">
+    <div class="note">
+      <span class="nk">The tell</span>
+      <p>The behavioural signals are as telling as the volumes. Human traffic follows population — Virginia, California, Oregon, and every other state proportionally. Agent traffic follows cloud regions — Virginia, California, Oregon, and almost nothing elsewhere. Humans read during working hours. Agents never dip. Humans linger on a page for seconds. Agents leave in milliseconds — they arrived to extract structured information, not to be persuaded. These are different readers with different needs. Serving them the same artifact serves neither well.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTENT NEGOTIATION MOMENT ============ -->
+<section class="band band-paper2">
+  <div class="prose">
+    <p class="eyebrow">The signature move</p>
+    <h2>Same knowledge, two treatments</h2>
+    <p>The shift does not ask you to choose between humans and agents. It asks you to serve them differently, from a single source. The pattern has an old name: <em>content negotiation</em>. Same underlying content, rendered for whoever is asking. What is new is that the second reader now matters as much as the first — often more.</p>
+    <p>Here is what the same section of a product's install docs looks like when you take the shift seriously.</p>
+  </div>
+
+  <div class="contrast">
+    <div class="cbox bad">
+      <span class="k">For the human reader</span>
+      <h3>Get it running on your cluster</h3>
+      <p class="prose-sample">The product installs through a Helm chart. You'll need a cluster running Kubernetes 1.24 or later, cluster-admin access, and an object store for backup data. Most teams have it running in under fifteen minutes. If you hit a snag, support is a click away.</p>
+    </div>
+    <div class="cbox good">
+      <span class="k">For the agent reader</span>
+<pre class="sample"><span class="muted"># install</span>
+<span class="key">product:</span>        my-product
+<span class="key">version:</span>        4.2
+<span class="key">install_method:</span> helm
+
+<span class="key">requirements:</span>
+  <span class="key">- kubernetes:</span> ">= 1.24"
+  <span class="key">- rbac:</span>       cluster-admin
+  <span class="key">- storage:</span>    s3-compatible
+
+<span class="key">command:</span>
+  helm repo add ...
+  helm install ...
+
+<span class="key">verify:</span>
+  kubectl get pods
+
+<span class="key">on_error:</span>      see errors.md</pre>
+    </div>
+  </div>
+  <p class="fig-cap">One source of truth. Two representations. Nothing hidden, nothing duplicated — and the agent finally has something it can actually act on.</p>
+</section>
+
+<!-- ============ WHAT AGENT-NATIVE MEANS ============ -->
+<section class="band band-abyss">
+  <div class="prose">
+    <p class="eyebrow">The framework</p>
+    <h2>Five things that make software agent-native</h2>
+    <p>If the reader has changed, the product must change with it. Not by bolting on a chatbot. By making the entire surface an agent can perceive — documentation an agent can parse, operations an agent can execute, failures an agent can diagnose, and a reference implementation the agent can pattern-match against. These are the five moves I believe any software company must make now, and they are what Trilio is building toward across our product line.</p>
+  </div>
+
+  <div class="deliverables">
+    <div class="deliv">
+      <div class="idx">01</div>
+      <div>
+        <h3>Agent-readable documentation</h3>
+        <p>Every human-readable page also served as clean, structured Markdown at a predictable route. A repository-level <span class="mono">llms.txt</span> giving agents a map of what exists and where. Content negotiation as first-class product surface — not an afterthought.</p>
+        <div class="tags">
+          <span class="tag-item">llms.txt</span>
+          <span class="tag-item">.md routes</span>
+          <span class="tag-item">content negotiation</span>
+        </div>
+      </div>
+    </div>
+    <div class="deliv">
+      <div class="idx">02</div>
+      <div>
+        <h3>Published skills for install and lifecycle operations</h3>
+        <p>Reusable, machine-executable playbooks for the operations customers repeatedly perform: install, upgrade, configure, backup, restore. Distributed in every format customer agents actually consume — <span class="mono">skill.md</span> packages, MCP servers, CLI plugins — because you do not get to pick which agent your customer runs.</p>
+        <div class="tags">
+          <span class="tag-item">skill.md</span>
+          <span class="tag-item">MCP servers</span>
+          <span class="tag-item">CLI plugins</span>
+        </div>
+      </div>
+    </div>
+    <div class="deliv">
+      <div class="idx">03</div>
+      <div>
+        <h3>Agent-friendly APIs on the deployed product</h3>
+        <p>Not a SaaS API — a discoverable, documented surface on the product an agent is running next to. Schemas published. Endpoints predictable. Naming stable. No inference required to figure out what a call does. If your product runs in the customer's environment, the agent lives there too.</p>
+        <div class="tags">
+          <span class="tag-item">OpenAPI</span>
+          <span class="tag-item">stable contracts</span>
+          <span class="tag-item">schema-first</span>
+        </div>
+      </div>
+    </div>
+    <div class="deliv">
+      <div class="idx">04</div>
+      <div>
+        <h3>Structured, agent-consumable errors and status</h3>
+        <p>When something breaks, the response includes an error code, a category, the failing component, the likely cause, and — where possible — the remediation path. Same for health and status. Agents can act on this. They cannot act on <em>"something went wrong; please contact support."</em></p>
+        <div class="tags">
+          <span class="tag-item">error taxonomies</span>
+          <span class="tag-item">status schemas</span>
+          <span class="tag-item">remediation hints</span>
+        </div>
+      </div>
+    </div>
+    <div class="deliv">
+      <div class="idx">05</div>
+      <div>
+        <h3>A canonical agent reference implementation</h3>
+        <p>Your own agentic interaction with the product, published as the pattern others follow. For us, that is the AI Support Portal — trained on our codebase, our operational data, and our support history. Rolling out internally now so we can build confidence in how it responds; external deployment with guardrails to follow. The reference implementation is how every other deliverable comes together.</p>
+        <div class="tags">
+          <span class="tag-item">internal launch</span>
+          <span class="tag-item">external with guardrails</span>
+          <span class="tag-item">reference architecture</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE FLYWHEEL, AT THE NEXT SCALE ============ -->
+<section class="band band-paper2">
+  <div class="prose">
+    <p class="eyebrow">The flywheel, at a larger surface</p>
+    <h2>Skills at the centre. Everything else turns around them.</h2>
+    <p>Part 4 showed a flywheel: the AI support portal captures customer signal, which feeds the roadmap, which feeds engineering, which serves the customer better — the loop that made "context compounds" concrete. That flywheel is still spinning. What Part 5 adds is the flywheel one level up — the one that runs when the shift above is taken seriously across the whole software lifecycle.</p>
+    <p>At the centre sits the shared artifact everyone reads and writes: <em>skills</em>. Engineering writes to them. A publishing pipeline — we use <strong>Git2docs</strong>, which turns every commit into agent-friendly documentation and validates it against the code — moves them into the world. Testing runs them against the build. Customer agents execute them. The support portal detects where they break, and that signal returns to engineering as the next thing to fix. Each turn accelerates the next.</p>
+  </div>
+
+  <svg class="fig" viewBox="-140 -20 1180 940" role="img" aria-label="A flywheel diagram with Skills at the centre. Six stages arrange clockwise around the perimeter: engineering, Git2docs, testing, customer, AI support portal, and roadmap and patches. A dashed feedback arc labelled issues, roadmap signal, patches loops back from the support portal into the hub.">
+    <defs>
+      <marker id="arrEnd" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#4C6472"/>
+      </marker>
+      <marker id="arrFb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#C97E42"/>
+      </marker>
+      <radialGradient id="hubGlow" cx="0.5" cy="0.5" r="0.6">
+        <stop offset="0%" stop-color="#C97E42" stop-opacity="0.15"/>
+        <stop offset="100%" stop-color="#C97E42" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <circle cx="450" cy="450" r="220" fill="url(#hubGlow)"/>
+
+    <!-- Six arcs between stages -->
+    <path d="M 553 194 A 280 280 0 0 1 728 322" stroke="rgba(20,35,43,0.18)" stroke-width="1.5" fill="none" marker-end="url(#arrEnd)"/>
+    <path d="M 728 322 A 280 280 0 0 1 728 578" stroke="rgba(20,35,43,0.18)" stroke-width="1.5" fill="none" marker-end="url(#arrEnd)"/>
+    <path d="M 728 578 A 280 280 0 0 1 553 706" stroke="rgba(20,35,43,0.18)" stroke-width="1.5" fill="none" marker-end="url(#arrEnd)"/>
+    <path d="M 347 706 A 280 280 0 0 1 172 578" stroke="rgba(20,35,43,0.18)" stroke-width="1.5" fill="none" marker-end="url(#arrEnd)"/>
+    <path d="M 172 578 A 280 280 0 0 1 172 322" stroke="rgba(20,35,43,0.18)" stroke-width="1.5" fill="none" marker-end="url(#arrEnd)"/>
+    <path d="M 172 322 A 280 280 0 0 1 347 194" stroke="rgba(20,35,43,0.18)" stroke-width="1.5" fill="none" marker-end="url(#arrEnd)"/>
+
+    <!-- Hub -->
+    <circle cx="450" cy="450" r="115" fill="#0B1920" stroke="#C97E42" stroke-width="2.5"/>
+    <text x="450" y="428" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="44" fill="#F4F0E8" letter-spacing="-1.5">Skills</text>
+    <text x="450" y="462" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#E89A5B" letter-spacing="2.5">SKILL.MD · MCP · CLI</text>
+    <text x="450" y="498" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="15" fill="#B9C7CE">the shared artifact</text>
+
+    <!-- Feedback loop (rust dashed) -->
+    <path d="M 260 620 Q 355 620 385 555" stroke="#C97E42" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#arrFb)" opacity="0.85"/>
+    <text x="325" y="650" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#C97E42" letter-spacing="1.5" font-weight="600">issues · roadmap signal · patches</text>
+
+    <!-- 01 Engineering (12 o'clock) -->
+    <g transform="translate(450, 165)">
+      <circle r="42" fill="#F3EEE4" stroke="#14232B" stroke-width="2"/>
+      <text y="9" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="28" fill="#14232B" letter-spacing="-1">01</text>
+      <text y="-70" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="600" font-size="20" fill="#14232B">Engineering</text>
+      <text y="-48" text-anchor="middle" font-family="Newsreader, serif" font-size="13" fill="#4C6472">coding agent develops the code</text>
+    </g>
+
+    <!-- 02 Git2docs (2 o'clock) -->
+    <g transform="translate(697, 302)">
+      <circle r="42" fill="#F3EEE4" stroke="#14232B" stroke-width="2"/>
+      <text y="9" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="28" fill="#14232B" letter-spacing="-1">02</text>
+      <text x="60" y="-4" font-family="Space Grotesk, sans-serif" font-weight="600" font-size="20" fill="#14232B">Git2docs</text>
+      <text x="60" y="18" font-family="Newsreader, serif" font-size="13" fill="#4C6472">publishes docs and skills,</text>
+      <text x="60" y="35" font-family="Newsreader, serif" font-size="13" fill="#4C6472">validates them against the code</text>
+    </g>
+
+    <!-- 03 Testing (4 o'clock) -->
+    <g transform="translate(697, 598)">
+      <circle r="42" fill="#F3EEE4" stroke="#14232B" stroke-width="2"/>
+      <text y="9" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="28" fill="#14232B" letter-spacing="-1">03</text>
+      <text x="60" y="-4" font-family="Space Grotesk, sans-serif" font-weight="600" font-size="20" fill="#14232B">Testing</text>
+      <text x="60" y="18" font-family="Newsreader, serif" font-size="13" fill="#4C6472">QA runs the published skills</text>
+      <text x="60" y="35" font-family="Newsreader, serif" font-size="13" fill="#4C6472">against the build</text>
+    </g>
+
+    <!-- 04 Customer (6 o'clock) -->
+    <g transform="translate(450, 735)">
+      <circle r="42" fill="#F3EEE4" stroke="#14232B" stroke-width="2"/>
+      <text y="9" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="28" fill="#14232B" letter-spacing="-1">04</text>
+      <text y="82" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="600" font-size="20" fill="#14232B">Customer</text>
+      <text y="102" text-anchor="middle" font-family="Newsreader, serif" font-size="13" fill="#4C6472">deploys and manages the product</text>
+      <text y="119" text-anchor="middle" font-family="Newsreader, serif" font-size="13" fill="#4C6472">using skills and agent-friendly docs</text>
+    </g>
+
+    <!-- 05 AI Support Portal (8 o'clock) -->
+    <g transform="translate(203, 598)">
+      <circle r="42" fill="#F3EEE4" stroke="#14232B" stroke-width="2"/>
+      <text y="9" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="28" fill="#14232B" letter-spacing="-1">05</text>
+      <text x="-60" y="-4" text-anchor="end" font-family="Space Grotesk, sans-serif" font-weight="600" font-size="20" fill="#14232B">AI support portal</text>
+      <text x="-60" y="18" text-anchor="end" font-family="Newsreader, serif" font-size="13" fill="#4C6472">customer interfaces via their agent,</text>
+      <text x="-60" y="35" text-anchor="end" font-family="Newsreader, serif" font-size="13" fill="#4C6472">using a support skill (another skill)</text>
+    </g>
+
+    <!-- 06 Roadmap and Patches (10 o'clock) -->
+    <g transform="translate(203, 302)">
+      <circle r="42" fill="#F3EEE4" stroke="#14232B" stroke-width="2"/>
+      <text y="9" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="28" fill="#14232B" letter-spacing="-1">06</text>
+      <text x="-60" y="-4" text-anchor="end" font-family="Space Grotesk, sans-serif" font-weight="600" font-size="20" fill="#14232B">Roadmap &amp; patches</text>
+      <text x="-60" y="18" text-anchor="end" font-family="Newsreader, serif" font-size="13" fill="#4C6472">portal signals become roadmap</text>
+      <text x="-60" y="35" text-anchor="end" font-family="Newsreader, serif" font-size="13" fill="#4C6472">input and code patches</text>
+    </g>
+  </svg>
+  <p class="fig-cap">The flywheel one level up: skills as the shared artifact, every stage reading and writing to them.</p>
+
+  <div class="pq">
+    <blockquote>Each turn accelerates the next. Better skills produce better docs. Better docs enable cleaner customer installs. Cleaner installs produce sharper portal signal. Sharper signal produces faster patches.</blockquote>
+    <cite>— the flywheel isn't a metaphor; it is the operating model</cite>
+  </div>
+</section>
+
+<!-- ============ Q1'27 COMMITMENT ============ -->
+<section class="band band-dark">
+  <div class="prose">
+    <p class="eyebrow">The commitment</p>
+    <h2>Trilio is committing to Q1'27</h2>
+    <p>Every deliverable above ships across the Trilio product line by <strong>Q1 of 2027</strong>. The date is not chosen because it is convenient. It is chosen because the window in which customers form their mental model of "which vendors are agent-native" is closing this year, and after Q1'27 we would be catching up rather than leading. I would rather set the standard than reach for it.</p>
+    <p>This is not a promise other companies need to make on the same timeline. But it is a marker I am willing to plant publicly, because the question is not <em>whether</em> to become agent-native — the traffic numbers already answered that — but <em>how quickly</em> your company decides to see it. Marking the date is how I make sure ours has decided.</p>
+
+    <div class="note">
+      <span class="nk">A caveat, for honesty</span>
+      <p>This is not a story about Trilio being ahead. It is a story about a shift that has already happened and a small company choosing to move on it before the shift becomes conventional wisdom. Being early is not the same as being unique, and this piece is not a boast. It is an invitation. If your product ships to environments where an agent might read the docs and act on your API — and today, that is most products — the question is not <em>if</em> you rebuild for the agent. It is <em>when.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="band band-abyss">
+  <div class="closing prose">
+    <p class="eyebrow">The end of the series, actually</p>
+    <h2>The reader changed. The only question is how long you take to notice.</h2>
+    <p>The four parts before this one were about a discipline being rebuilt. Personal habit, mindset, operating model, industry shift — every step zooming out. Part 5 is the interface being rebuilt too. The people who consume your software are increasingly agents that arrive not to read but to act, and every layer of your product — from documentation to APIs to error responses — was designed for a reader who is being replaced.</p>
+    <p>Trilio has always been where its customers are. Its customers are increasingly agents. So must Trilio be. That is what "the team doing the rebuilding" looks like from the inside, and it is the answer to the question Part 4 left open.</p>
+    <p class="mono" style="font-size:.95rem;color:#8DA3AD;margin-top:2.4rem;letter-spacing:.02em">Stop prompting → treat as a partner → unlearn the process → ship at the speed of thought → <b style="color:#E89A5B">ship for the agent.</b></p>
+  </div>
+
+  <div class="end-card">
+    <span class="lbl">The AI-First series · now five parts</span>
+    <span class="t">1 · Stop Prompting, Start Thinking Out Loud &nbsp;→&nbsp; 2 · A Reasoning Partner, Not a Tool &nbsp;→&nbsp; 3 · What We Unlearned at Trilio &nbsp;→&nbsp; 4 · At the Speed of Thought &nbsp;→&nbsp; 5 · Your Product's Next Reader Isn't Human</span>
+  </div>
+
+  <nav class="pager">
+    <div class="pager-cell prev">
+      <a href="part4-speed-of-thought-3587bc0bd9.html">
+        <span class="lbl">&larr; Previous</span>
+        <span class="t">Part 4 — At the Speed of Thought</span>
+      </a>
+    </div>
+    <div class="pager-cell next"></div>
+  </nav>
+</section>
+
+<footer>
+  <div class="wide">
+    <span>Part 5 of 5</span>
+    <span>The Interface · Murali Balcha</span>
+  </div>
+</footer>
+
+</body>
+</html>
