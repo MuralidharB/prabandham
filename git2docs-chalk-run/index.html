@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chalk Docs Run</title>
+<style>
+:root{
+  --ember:#b8501f;
+  --ember-soft:#f6e7de;
+  --moss:#2f6b3c;
+  --moss-soft:#e4efe4;
+  --amber:#8f6414;
+  --amber-soft:#f6eeda;
+  --ink:#16191c;
+  --paper:#f5f5f2;
+  --card:#ffffff;
+  --slate:#6b6f73;
+  --rule:#dedcd6;
+  --rule-strong:#c6c3bb;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --term-bg:#1c1a18;
+  --term-fg:#ded7cf;
+  --term-dim:#8d8378;
+  --term-accent:#e08a50;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ember:#e08a50;
+    --ember-soft:#3a251a;
+    --moss:#6fb07c;
+    --moss-soft:#1d2a20;
+    --amber:#d9ab52;
+    --amber-soft:#30281540;
+    --ink:#e6e4e0;
+    --paper:#111315;
+    --card:#191c1f;
+    --slate:#9aa0a5;
+    --rule:#2b2f33;
+    --rule-strong:#3d4247;
+    --term-bg:#0e0d0c;
+    --term-fg:#ded7cf;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ember:#e08a50;
+  --ember-soft:#3a251a;
+  --moss:#6fb07c;
+  --moss-soft:#1d2a20;
+  --amber:#d9ab52;
+  --amber-soft:#30281540;
+  --ink:#e6e4e0;
+  --paper:#111315;
+  --card:#191c1f;
+  --slate:#9aa0a5;
+  --rule:#2b2f33;
+  --rule-strong:#3d4247;
+  --term-bg:#0e0d0c;
+  --term-fg:#ded7cf;
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --ember:#b8501f;
+  --ember-soft:#f6e7de;
+  --moss:#2f6b3c;
+  --moss-soft:#e4efe4;
+  --amber:#8f6414;
+  --amber-soft:#f6eeda;
+  --ink:#16191c;
+  --paper:#f5f5f2;
+  --card:#ffffff;
+  --slate:#6b6f73;
+  --rule:#dedcd6;
+  --rule-strong:#c6c3bb;
+  --term-bg:#1c1a18;
+  --term-fg:#ded7cf;
+  color-scheme:light;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--moss)}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 96px}
+
+/* ─── masthead ─────────────────────────────────────────── */
+.mast{padding:64px 0 40px;border-bottom:1px solid var(--rule)}
+.kicker{
+  font-family:var(--mono);font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--slate);margin:0 0 18px;
+}
+h1{
+  font-size:clamp(34px,6vw,54px);line-height:1.04;margin:0 0 18px;
+  letter-spacing:-.025em;font-weight:760;text-wrap:balance;max-width:16ch;
+}
+.standfirst{font-size:clamp(17px,2.2vw,20px);line-height:1.5;max-width:62ch;color:var(--ink);margin:0 0 30px}
+.standfirst b{font-weight:650}
+
+.meta{
+  display:flex;flex-wrap:wrap;gap:8px 10px;font-family:var(--mono);font-size:12.5px;
+}
+.meta span{
+  border:1px solid var(--rule-strong);border-radius:999px;padding:4px 11px;color:var(--slate);
+}
+
+.stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));
+  gap:1px;background:var(--rule);border:1px solid var(--rule);
+  margin:34px 0 0;border-radius:3px;overflow:hidden;
+}
+.stat{background:var(--card);padding:16px 18px}
+.stat b{display:block;font-family:var(--mono);font-size:25px;font-weight:620;letter-spacing:-.02em;line-height:1.15}
+.stat small{display:block;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin-top:5px}
+.stat.conv b{font-size:20px}
+
+/* ─── lane legend ──────────────────────────────────────── */
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:48px 0 8px}
+.legend .who{
+  border:1px solid var(--rule);background:var(--card);border-radius:3px;padding:18px 20px;
+  border-top:3px solid var(--rule-strong);
+}
+.legend .who.cc{border-top-color:var(--ember)}
+.legend .who.g2{border-top-color:var(--moss)}
+.who h3{margin:0 0 7px;font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.who.cc h3{color:var(--ember)}
+.who.g2 h3{color:var(--moss)}
+.who p{margin:0;font-size:14.5px;color:var(--slate);line-height:1.5}
+
+/* ─── timeline ─────────────────────────────────────────── */
+.tl{position:relative;margin:34px 0 0;padding:14px 0}
+.tl::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;
+  background:var(--rule-strong);transform:translateX(-.5px);
+}
+.row{position:relative;display:grid;grid-template-columns:1fr 86px 1fr;align-items:start;margin:0 0 26px}
+.node{
+  grid-column:2;display:flex;justify-content:center;padding-top:16px;
+}
+.node i{
+  font-family:var(--mono);font-style:normal;font-size:12px;font-weight:650;
+  width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  background:var(--paper);border:1px solid var(--rule-strong);color:var(--slate);
+}
+.row.cc .node i{border-color:var(--ember);color:var(--ember)}
+.row.g2 .node i{border-color:var(--moss);color:var(--moss)}
+
+.card{
+  background:var(--card);border:1px solid var(--rule);border-radius:3px;
+  padding:20px 22px;position:relative;
+}
+.row.cc .card{grid-column:1;border-left:3px solid var(--ember)}
+.row.g2 .card{grid-column:3;border-left:3px solid var(--moss)}
+
+.lane{
+  font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  margin:0 0 9px;
+}
+.row.cc .lane{color:var(--ember)}
+.row.g2 .lane{color:var(--moss)}
+.card h2{font-size:19px;margin:0 0 9px;letter-spacing:-.015em;line-height:1.25;font-weight:660}
+.card p{margin:0 0 11px;font-size:15px;line-height:1.55;color:var(--ink)}
+.card p:last-child{margin-bottom:0}
+.card .note{color:var(--slate);font-size:13.5px;line-height:1.5}
+
+/* terminal block */
+.term{
+  background:var(--term-bg);color:var(--term-fg);font-family:var(--mono);
+  font-size:12.5px;line-height:1.62;padding:14px 15px;border-radius:3px;
+  overflow-x:auto;margin:12px 0;white-space:pre;
+}
+.term .pr{color:var(--term-accent)}
+.term .dim{color:var(--term-dim)}
+.term .out{color:#a8c9a0}
+
+figure{margin:14px 0 0}
+figure img{border:1px solid var(--rule);border-radius:3px}
+figcaption{font-size:12.5px;color:var(--slate);margin-top:7px;font-family:var(--mono);line-height:1.45}
+
+ul.tight{margin:10px 0 0;padding-left:19px}
+ul.tight li{font-size:14.5px;line-height:1.55;margin-bottom:6px}
+ul.tight li:last-child{margin-bottom:0}
+code{font-family:var(--mono);font-size:.9em;background:var(--ember-soft);padding:1px 5px;border-radius:2px}
+.row.g2 code{background:var(--moss-soft)}
+
+/* handoff band */
+.hand{
+  grid-column:1 / -1;display:flex;align-items:stretch;gap:0;
+  border:1px dashed var(--amber);border-radius:3px;background:var(--amber-soft);
+  margin:4px 0 26px;overflow:hidden;
+}
+.hand .dir{
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--amber);padding:13px 16px;border-right:1px dashed var(--amber);
+  display:flex;align-items:center;white-space:nowrap;font-weight:650;
+}
+.hand .load{padding:13px 16px;font-size:14px;line-height:1.5}
+.hand .load b{font-family:var(--mono);font-size:13px;font-weight:650}
+
+/* ─── ledger ───────────────────────────────────────────── */
+.section-head{margin:76px 0 0;padding-top:30px;border-top:1px solid var(--rule)}
+.section-head h2{font-size:clamp(25px,4vw,34px);margin:0 0 10px;letter-spacing:-.025em;font-weight:720}
+.section-head p{margin:0;color:var(--slate);font-size:16px;max-width:66ch}
+
+.tablewrap{overflow-x:auto;margin:26px 0 0;border:1px solid var(--rule);border-radius:3px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:780px}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--rule);vertical-align:top;font-size:14px;line-height:1.5}
+th{
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--slate);font-weight:600;background:var(--paper);
+}
+tr:last-child td{border-bottom:none}
+td.dirc{font-family:var(--mono);font-size:12px;white-space:nowrap;font-weight:650}
+td.dirc.r{color:var(--moss)}
+td.dirc.l{color:var(--ember)}
+td code{background:transparent;padding:0;color:var(--slate)}
+
+/* ─── findings ─────────────────────────────────────────── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:26px 0 0}
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:20px 22px}
+.panel h3{margin:0 0 9px;font-size:16.5px;letter-spacing:-.01em;font-weight:660}
+.panel p{margin:0;font-size:14.5px;line-height:1.55;color:var(--slate)}
+.panel p + p{margin-top:9px}
+.panel.flag{border-left:3px solid var(--amber)}
+
+.redact{
+  margin:40px 0 0;border:1px solid var(--rule-strong);border-left:3px solid var(--ember);
+  background:var(--card);border-radius:3px;padding:18px 20px;
+}
+.redact h3{margin:0 0 7px;font-size:14px;font-family:var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ember)}
+.redact p{margin:0;font-size:14px;color:var(--slate);line-height:1.55;max-width:74ch}
+
+footer{margin:70px 0 0;padding-top:22px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:12px;color:var(--slate);line-height:1.6}
+
+@media (max-width:900px){
+  .tl::before{left:15px}
+  .row{grid-template-columns:30px 1fr;gap:0 16px;margin-bottom:20px}
+  .node{grid-column:1;grid-row:1;padding-top:14px;justify-content:flex-start}
+  .row.cc .card,.row.g2 .card{grid-column:2;grid-row:1}
+  .hand{grid-column:1 / -1;flex-direction:column;margin-left:46px}
+  .hand .dir{border-right:none;border-bottom:1px dashed var(--amber)}
+  .legend,.grid2{grid-template-columns:1fr}
+  .mast{padding-top:42px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <p class="kicker"><a href="../index.html" style="color:inherit;text-decoration:none">&larr; Prabandham</a></p>
+  <p class="kicker">git2docs · run record · 15 November 2026</p>
+  <h1>Generating docs for <em style="font-style:normal;font-family:var(--mono);font-size:.82em">chalk</em></h1>
+  <p class="standfirst">
+    A complete pass over one repository, from <b>git clone</b> to <b>locked and published</b> — told as the
+    handoff it actually is. Two systems do the work: <b>Claude Code</b> reads the code and argues with the
+    docs; <b>git2docs</b> holds the inputs, writes the pages and keeps score. Neither finishes the job alone.
+  </p>
+  <div class="meta">
+    <span>your-org/chalk</span>
+    <span>product “Amazing CLI”</span>
+    <span>version main</span>
+    <span>13 pages · 78 sections</span>
+    <span>4 validation passes</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>13</b><small>pages generated</small></div>
+    <div class="stat"><b>78</b><small>sections checked</small></div>
+    <div class="stat conv"><b>19→9→7→3</b><small>findings per pass</small></div>
+    <div class="stat"><b>38</b><small>fixed in total</small></div>
+    <div class="stat"><b>0</b><small>left open</small></div>
+  </div>
+</header>
+
+<section class="legend">
+  <div class="who cc">
+    <h3>Claude Code</h3>
+    <p>Runs in your terminal, against your checkout. It reads the source, executes the examples, writes
+    the anchored facts, and files findings. It never edits a published page.</p>
+  </div>
+  <div class="who g2">
+    <h3>git2docs</h3>
+    <p>Holds the repository, the product identity and the committed facts. It generates every page,
+    collects findings into one patch, tracks convergence, and decides nothing on its own.</p>
+  </div>
+</section>
+
+<div class="tl">
+
+  <!-- 1 -->
+  <div class="row cc">
+    <div class="node"><i>1</i></div>
+    <div class="card">
+      <p class="lane">Claude Code</p>
+      <h2>Clone the repo and orient the agent</h2>
+      <div class="term"><span class="pr">$</span> git clone git@github.com:your-org/chalk.git
+<span class="dim">Receiving objects: 100% (1706/1706), 1.06 MiB | 2.88 MiB/s, done.</span>
+<span class="pr">$</span> cd chalk && claude
+
+<span class="pr">❯</span> /init</div>
+      <p>Claude Code writes <code>CLAUDE.md</code> at the repo root: what <code>npm test</code> runs, how chained
+      styles like <code>chalk.red.bold</code> are built once and cached, why files starting with <code>_</code>
+      are helper scripts rather than tests, and the Node ≥ 22 requirement.</p>
+      <p class="note">This step is for the agent, not for git2docs — but everything the agent later knows
+      about the codebase starts here.</p>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="row g2">
+    <div class="node"><i>2</i></div>
+    <div class="card">
+      <p class="lane">git2docs</p>
+      <h2>Connect the repository</h2>
+      <p>Repositories → <b>Add repos from GitHub</b>, then grant the GitHub App access to
+      <code>your-org/chalk</code>.</p>
+      <figure><img src="img/image7.png" alt="The git2docs Repositories tab with Add repos from GitHub"><figcaption>Repositories → Add repos from GitHub</figcaption></figure>
+      <figure><img src="img/image6.png" alt="GitHub App repository access, searching for chalk"><figcaption>GitHub App → Only select repositories → chalk</figcaption></figure>
+      <figure><img src="img/image1.png" alt="chalk appears in the git2docs org, marked Not configured"><figcaption>The repo lands in the org, marked <b>Not configured</b></figcaption></figure>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="row g2">
+    <div class="node"><i>3</i></div>
+    <div class="card">
+      <p class="lane">git2docs</p>
+      <h2>The Configure hub asks for anchored facts — and hands you a prompt</h2>
+      <p><b>Anchored facts: Not set.</b> These are the exact names, namespaces and compatibility claims no
+      extractor can read from source. git2docs does not guess them. It gives you the sentence to paste into
+      Claude Code instead.</p>
+      <figure><img src="img/image18.png" alt="The Anchored facts card, offering a prompt to run in Claude Code"><figcaption>“The git2docs skill writes the file for you; it needs no token and no MCP connection.”</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="hand">
+      <div class="dir">git2docs → Claude Code</div>
+      <div class="load">A prompt, copied from the Configure hub:
+        <b>“Use the git2docs skill to bootstrap docs/docsync-context.yaml for this repo.”</b>
+        No token, no MCP connection — this crossing is a clipboard, nothing more.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="row cc">
+    <div class="node"><i>4</i></div>
+    <div class="card">
+      <p class="lane">Claude Code</p>
+      <h2>Install the skill and write the facts</h2>
+      <div class="term"><span class="pr">❯</span> /plugin marketplace add git2docs/git2docs-skill
+<span class="out">⎿ Successfully added marketplace: git2docs</span>
+<span class="pr">❯</span> /plugin install git2docs-skill
+
+<span class="pr">❯</span> Use the git2docs skill to bootstrap docs/docsync-context.yaml for this repo.
+<span class="out">⏺ Skill(git2docs-skill:git2docs)</span>
+<span class="dim">I'm writing docs/docsync-context.yaml from the checkout alone. First
+I'll collect the exact strings users depend on, with their lines.</span>
+
+<span class="pr">❯</span> commit the docsync-context file
+<span class="pr">❯</span> push it</div>
+      <p class="note">Written from the checkout alone, before a single page exists. Grounding the first draft
+      beats correcting it afterwards.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="hand">
+      <div class="dir">Claude Code → git2docs</div>
+      <div class="load"><b>docs/docsync-context.yaml</b>, committed and pushed. git2docs reads it from the
+        repository at generation time — the file in the repo is the interface, not an upload.</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="row g2">
+    <div class="node"><i>5</i></div>
+    <div class="card">
+      <p class="lane">git2docs</p>
+      <h2>Set the product identity and the look</h2>
+      <p>Product name, one-line description, theme. These are inputs to the synthesizer, not decoration —
+      the name you type here is the name that appears in every page summary.</p>
+      <figure><img src="img/image19.png" alt="Product and branding settings: product name Amazing CLI"><figcaption>Product name <b>Amazing CLI</b>, one-liner “for Bash Shell”</figcaption></figure>
+      <figure><img src="img/image20.png" alt="Theme and style picker with Docs, Editorial and Terminal themes"><figcaption>Theme → Editorial</figcaption></figure>
+      <p class="note">Keep this card in mind. Both values are placeholders, and four passes later the agent
+      will report them back as a defect it cannot fix from the terminal.</p>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="row g2">
+    <div class="node"><i>6</i></div>
+    <div class="card">
+      <p class="lane">git2docs</p>
+      <h2>Choose a version, choose the path, generate</h2>
+      <figure><img src="img/image11.png" alt="The repo card now reads Ready to generate"><figcaption>Configured — <b>Ready to generate</b></figcaption></figure>
+      <p>Pick <code>main</code>, choose <b>Validate with an AI agent</b> over <b>Edit it myself</b>, and press
+      Generate. The four-step path appears: generate → validate → review &amp; apply → re-validate until clean.</p>
+      <figure><img src="img/image8.png" alt="Version picker and the four-step Path to accurate docs, step 1 of 4"><figcaption>Step 1 of 4 — the path is the contract for everything that follows</figcaption></figure>
+      <figure><img src="img/image2.png" alt="Generation in progress, analyzing repository"><figcaption>Analyzing repository — reading signal files and understanding the codebase</figcaption></figure>
+      <figure><img src="img/image17.png" alt="Generation completed: main, 13 pages, 10 of 10 synthesised"><figcaption>Completed — main · 13 pages · 10/10 synthesised · 3 subpages</figcaption></figure>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="row g2">
+    <div class="node"><i>7</i></div>
+    <div class="card">
+      <p class="lane">git2docs</p>
+      <h2>A first draft exists — and it is not yet true</h2>
+      <figure><img src="img/image4.png" alt="The generated Getting Started page for chalk"><figcaption>Getting Started · grounding: high · <b>6 sections with low/medium confidence</b></figcaption></figure>
+      <p class="note">Read the Prerequisites list in that screenshot: <i>“Chalk 5 is ESM-only and cannot be
+      <code>require()</code>’d with CommonJS.”</i> It came from <code>readme.md:42</code>, it is stale, and nothing
+      on this page knows that yet. This is what validation is for.</p>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="row g2">
+    <div class="node"><i>8</i></div>
+    <div class="card">
+      <p class="lane">git2docs</p>
+      <h2>Hand the agent a way in</h2>
+      <p>One-time MCP setup, scoped to the organisation: install the skill, generate a token, copy the server
+      URL. The token is shown once.</p>
+      <figure><img src="img/image12.png" alt="MCP setup panel: install skill, generate token, connect the MCP server, run it"><figcaption>“It never runs anything; it validates in your environment.”</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="hand">
+      <div class="dir">git2docs → Claude Code</div>
+      <div class="load">An MCP endpoint and a bearer token —
+        <b>https://git2docs.com/api/mcp/wabam/amazing-cli/agent</b>.
+        This is the only credential that crosses in the whole run, and it is scoped to one organisation.</div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="row cc">
+    <div class="node"><i>9</i></div>
+    <div class="card">
+      <p class="lane">Claude Code</p>
+      <h2>Connect, then validate everything</h2>
+      <div class="term"><span class="pr">$</span> cat .mcp.json
+{
+  <span class="dim">"mcpServers"</span>: {
+    <span class="dim">"git2docs"</span>: {
+      <span class="dim">"type"</span>: "http",
+      <span class="dim">"url"</span>: "https://git2docs.com/api/mcp/wabam/amazing-cli/agent",
+      <span class="dim">"headers"</span>: { "Authorization": "Bearer <span class="out">g2d_••••••••REDACTED••••••••</span>" }
+    }
+  }
+}
+
+<span class="pr">$</span> claude --resume bc8d6b6b-93fc-4f80-923c-7081bcd3a9b3
+<span class="dim">New MCP server found in this project: git2docs</span>
+<span class="pr">❯</span> Use this MCP server
+
+<span class="pr">❯</span> Validate the docs against the code and file findings.</div>
+      <p><b>Pass 1 result:</b> all 13 pages, 78 sections. 19 findings, 1 anchored fact, 3 table-of-contents
+      proposals. Session closed with a <b>regenerate</b> recommendation.</p>
+      <ul class="tight">
+        <li><b>NO_COLOR isn’t supported</b>, but five pages say it is. Nothing in <code>source/</code> reads it.</li>
+        <li><b>An invented tagged-template API</b> (<code>chalk`…`</code>) appears on about eight pages. That
+        feature lives in the separate <code>chalk-template</code> package — an anchored fact was staged so future
+        regenerations stop inventing it.</li>
+        <li><b>Stale “use Chalk 4” text</b> on about eight pages, traced to <code>readme.md:42</code>. No findings
+        filed: <i>fixing the readme line is the lasting fix.</i></li>
+        <li><b>Reversed precedence and misleading CI advice</b> — <code>FORCE_COLOR</code> overrides
+        <code>--no-color</code>, and provider detection only applies when output is a TTY.</li>
+      </ul>
+      <p class="note">Every runnable example was executed; colour-detection claims were tested in a clean
+      environment and in a real terminal.</p>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="row cc">
+    <div class="node"><i>10</i></div>
+    <div class="card">
+      <p class="lane">Claude Code</p>
+      <h2>Fix the source of the error, not its copies</h2>
+      <div class="term"><span class="pr">❯</span> fix the readme line and add the fact to the branch</div>
+      <p>Commit <code>4847b89</code> on <code>docs/docsync-context</code>: <code>readme.md:42</code> rewritten, and two
+      new <code>api</code> entries in <code>docsync-context.yaml</code> — <code>tagged-templates</code> and
+      <code>base-function-join</code>, each pointing at the line that proves it. All 25 facts still resolve after
+      the edit, none ambiguous.</p>
+      <p class="note">The readme line was fixed in the repository rather than filed as eight page findings.
+      A finding repairs a page; a source fix repairs every future generation of it.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="hand">
+      <div class="dir">Claude Code → git2docs</div>
+      <div class="load"><b>19 findings · 1 anchored fact · 3 TOC proposals</b>, filed over MCP — plus a
+        pushed branch carrying the readme fix and two new facts. Nothing is applied yet.</div>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="row g2">
+    <div class="node"><i>11</i></div>
+    <div class="card">
+      <p class="lane">git2docs</p>
+      <h2>Review, apply, regenerate — each a separate decision</h2>
+      <p>22 open items on the Findings page: the 19 findings plus 3 proposed changes to the table of contents.
+      Review consolidates them into one patch against the brief, so the editor never has to be opened.</p>
+      <figure><img src="img/image5.png" alt="The Findings page listing 22 items and 3 proposed TOC changes"><figcaption>“Your agent checked 78 of 78 sections.” The TOC proposals: add <b>API Reference</b>, remove <b>Command Reference</b> and <b>Your First Command</b></figcaption></figure>
+      <figure><img src="img/image15.png" alt="Three individual agent findings with evidence and suggested fixes"><figcaption>Each finding carries its evidence — file, line, and the command that proved it</figcaption></figure>
+      <figure><img src="img/image13.png" alt="Applying findings dialog, consolidating in batches"><figcaption>Applying — consolidated in batches, automatically</figcaption></figure>
+      <figure><img src="img/image3.png" alt="Applied, not yet regenerated, with three regeneration scope options"><figcaption>Applying changes nothing on the page. Regeneration is a separate, scoped choice.</figcaption></figure>
+    </div>
+  </div>
+
+  <!-- 12 -->
+  <div class="row g2">
+    <div class="node"><i>12</i></div>
+    <div class="card">
+      <p class="lane">git2docs</p>
+      <h2>Repeat until a pass finds nothing</h2>
+      <p>Four passes, each one re-run against freshly generated pages: <b>19 → 9 → 7 → 3</b>.</p>
+      <figure><img src="img/image9.png" alt="Convergence chart showing 19, 9, 7 and 3 findings across four passes"><figcaption>38 fixed · 0 still open · 38 filed in total</figcaption></figure>
+      <p class="note">The chart also carries a warning worth reading: <i>“Last run rewrote 64 of 64 sections.
+      64 checks are no longer current.”</i> A regeneration invalidates the validation that preceded it.</p>
+    </div>
+  </div>
+
+  <!-- 13 -->
+  <div class="row cc">
+    <div class="node"><i>13</i></div>
+    <div class="card">
+      <p class="lane">Claude Code</p>
+      <h2>Recommend lock, and say why not regenerate</h2>
+      <p><b>Pass 4:</b> 12 pages, 70 sections, checked against <code>main</code> at <code>e17cb03</code>. Three small
+      errors remain, all minor and unrelated.</p>
+      <p>The agent recommended <b>lock</b> rather than another run, and gave its reasoning rather than a verdict:</p>
+      <p class="note" style="border-left:2px solid var(--rule-strong);padding-left:14px;margin-top:12px">
+      “Another run would rewrite 17 sections to fix these 3, re-rolling 14 that are correct today. Each recent
+      run has introduced roughly as many new errors as it fixed. If you want the three gone, I can edit those
+      three sections directly — but those sections then stop updating from the code, so I’ll only do it with
+      your OK.”</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="hand">
+      <div class="dir">Claude Code → git2docs</div>
+      <div class="load">A <b>lock recommendation</b> with its reasoning, 32 learned facts awaiting
+        confirmation, and one more staged fact. The decision itself stays with the maintainer.</div>
+    </div>
+  </div>
+
+  <!-- 14 -->
+  <div class="row g2">
+    <div class="node"><i>14</i></div>
+    <div class="card">
+      <p class="lane">git2docs</p>
+      <h2>Locked and published</h2>
+      <figure><img src="img/image10.png" alt="The path showing Locked, with the generation marked Published"><figcaption>Path to accurate docs — <b>Locked</b> · main · 13 pages · <b>Published ✓</b></figcaption></figure>
+    </div>
+  </div>
+
+</div><!-- /tl -->
+
+<section class="section-head">
+  <h2>The handoff ledger</h2>
+  <p>Five crossings in the whole run. Each one is a specific artifact moving in a specific direction — never a
+  system reaching into the other’s territory.</p>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr><th>#</th><th>Direction</th><th>What crossed</th><th>Why it crosses rather than stays</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="dirc">A</td>
+          <td class="dirc r">git2docs →<br>Claude Code</td>
+          <td>A prompt string from the Configure hub</td>
+          <td>git2docs cannot read exact names, namespaces or compatibility claims out of source. It asks for
+          them instead of inferring them.</td>
+        </tr>
+        <tr>
+          <td class="dirc">B</td>
+          <td class="dirc l">Claude Code →<br>git2docs</td>
+          <td><code>docs/docsync-context.yaml</code>, committed to the repo</td>
+          <td>The facts live in version control, beside the code they describe, so they travel with the branch
+          and can be reviewed like code.</td>
+        </tr>
+        <tr>
+          <td class="dirc">C</td>
+          <td class="dirc r">git2docs →<br>Claude Code</td>
+          <td>MCP endpoint + org-scoped bearer token</td>
+          <td>The agent validates in <i>your</i> environment against <i>your</i> checkout. git2docs never runs
+          your code; it only receives what the agent found.</td>
+        </tr>
+        <tr>
+          <td class="dirc">D</td>
+          <td class="dirc l">Claude Code →<br>git2docs</td>
+          <td>19 findings, 1 anchored fact, 3 TOC proposals</td>
+          <td>Findings are evidence, not edits. They queue for review, consolidate into one patch, and change
+          nothing until a person applies them.</td>
+        </tr>
+        <tr>
+          <td class="dirc">E</td>
+          <td class="dirc l">Claude Code →<br>git2docs</td>
+          <td>A lock recommendation, with reasoning</td>
+          <td>The agent can say a pass found nothing worth another run. It cannot decide that the release is
+          ready to ship.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section-head">
+  <h2>What this run exposed</h2>
+  <p>Three things worth keeping from a run that ended clean.</p>
+  <div class="grid2">
+    <div class="panel flag">
+      <h3>A defect the agent could see and not fix</h3>
+      <p>The product is named <b>“Amazing CLI”</b> with the one-liner <b>“for Bash Shell”</b>, and several page
+      summaries duly described a CLI tool with a binary download. Chalk is a library with no CLI.</p>
+      <p>The agent identified it precisely and reported where the fix had to happen: <i>“Those come from the
+      product settings in git2docs, so you’ll need to change them there.”</i> A terminal-side agent cannot reach
+      a web-side input — which is exactly why step 5 above is worth getting right the first time.</p>
+    </div>
+    <div class="panel flag">
+      <h3>A regression, caught by the loop</h3>
+      <p>At pass 4 the API Reference went back to claiming that style properties return <code>this</code>, the same
+      <code>ChalkInstance</code>. An earlier pass had already fixed it; a later regeneration re-rolled it.</p>
+      <p>Verified by running it: <code>c.red === c</code> → false. Each access creates a new builder
+      (<code>source/index.js:71</code>), cached per receiver. The loop caught its own regression — which is the
+      argument for re-validating after every apply rather than trusting a clean pass.</p>
+    </div>
+    <div class="panel">
+      <h3>Fix the source, not the copies</h3>
+      <p>Eight pages repeated the stale “use Chalk 4” advice. The agent filed <b>zero</b> findings for it and
+      edited <code>readme.md:42</code> instead.</p>
+      <p>Eight findings would have corrected eight pages once. One readme line corrects every regeneration from
+      here on.</p>
+    </div>
+    <div class="panel">
+      <h3>Convergence is the signal, not the count</h3>
+      <p>19 → 9 → 7 → 3 is the shape you want. A flat line means the applies aren’t landing; a rising line means
+      regeneration is costing more than it fixes.</p>
+      <p>At 3 remaining, the agent argued the next run would re-roll 14 correct sections to fix 3 — and said so
+      instead of running it.</p>
+    </div>
+  </div>
+</section>
+
+<div class="redact">
+  <h3>One redaction</h3>
+  <p>The source document pasted the contents of <code>.mcp.json</code> including a live git2docs bearer token.
+  It is masked here. That token is valid, organisation-scoped, and should be rotated — and anyone holding a copy
+  of the original document holds the credential too.</p>
+</div>
+
+<footer>
+  Source: git2docs-chalk-gen.docx · 15 November 2026 · all screenshots from the run described above.<br>
+  The GitHub account name is blurred in the screenshots and written as <code>your-org</code> in the text.
+  Browser tab bars were cropped from three screenshots; one screenshot was cropped to remove an unrelated
+  repository card.
+</footer>
+
+</div>
+</body>
+</html>
