@@ -417,24 +417,6 @@
   <h1>What on-prem actually costs</h1>
   <p class="lede">An enterprise install runs in the customer's own AWS account: two services, one Postgres, one ingress. The infrastructure is the predictable part and the model usage is the variable part. Here is the monthly bill, with Claude reached through the hosted API and through Bedrock.</p>
 
-  <div class="stats">
-    <div class="stat">
-      <div class="k">Hosted git2docs</div>
-      <div class="v" id="s-saas">$99<span class="u">/mo</span></div>
-      <div class="d" id="s-saas-d">Team plan · nothing to run</div>
-    </div>
-    <div class="stat lead">
-      <div class="k">Self-managed · Claude API</div>
-      <div class="v" id="s-api">$0<span class="u">/mo</span></div>
-      <div class="d" id="s-api-d">AWS infrastructure + tokens billed by Anthropic</div>
-    </div>
-    <div class="stat lead">
-      <div class="k">Self-managed · Bedrock</div>
-      <div class="v" id="s-bed">$0<span class="u">/mo</span></div>
-      <div class="d" id="s-bed-d">AWS infrastructure + tokens billed by AWS</div>
-    </div>
-  </div>
-
   <section>
     <h2>What you actually install</h2>
     <p class="flag">Specified, not yet built</p>
@@ -526,6 +508,24 @@
       </dl>
     </div>
   </section>
+
+  <div class="stats" style="margin-top:46px">
+    <div class="stat">
+      <div class="k">Hosted git2docs</div>
+      <div class="v" id="s-saas">$99<span class="u">/mo</span></div>
+      <div class="d" id="s-saas-d">Team plan · nothing to run</div>
+    </div>
+    <div class="stat lead">
+      <div class="k">Self-managed · Claude API</div>
+      <div class="v" id="s-api">$0<span class="u">/mo</span></div>
+      <div class="d" id="s-api-d">AWS infrastructure + tokens billed by Anthropic</div>
+    </div>
+    <div class="stat lead">
+      <div class="k">Self-managed · Bedrock</div>
+      <div class="v" id="s-bed">$0<span class="u">/mo</span></div>
+      <div class="d" id="s-bed-d">AWS infrastructure + tokens billed by AWS</div>
+    </div>
+  </div>
 
   <section>
     <h2>Move the dials</h2>
