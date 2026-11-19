@@ -470,7 +470,7 @@
   <div class="shell">
     <nav class="side" aria-label="Sections">
       <span class="rail-k">On this page</span>
-      <a href="#install">What you install</a>
+      <a href="#install">Standing one up</a>
       <a href="#cost">Monthly cost</a>
       <a href="#lines">Line by line</a>
       <a href="#bedrock">Bedrock or API</a>
@@ -483,9 +483,35 @@
       <p class="lede">Three ways to give an enterprise its own git2docs: a dedicated instance we operate, or a self-managed install in their AWS account reaching Claude through the hosted API or through Bedrock. Here is the monthly bill for each, and what it takes to stand one up.</p>
 
       <section id="install">
-        <h2>What you actually install</h2>
+        <h2>Standing one up</h2>
+        <p style="max-width:44rem">Two paths, and the prerequisites differ far more than the price does. Lead with the first one: most customers who say “on-prem” want their own database and their own region, not their own cluster. Neither path is shippable today — the difference is that one is days of engineering away and the other is months.</p>
+
+        <h3 style="margin-top:26px">Path one — the managed stack, no cluster</h3>
+        <p class="flag" style="color:var(--accent);border-color:var(--accent)">Days of engineering away</p>
+        <p style="max-width:44rem">The stack production already runs on: one Vercel project, one Neon project in the region they name, one Render service. Nothing is installed in the customer's environment, so there is no cluster, no IAM role and no questionnaire about their perimeter. It comes in two variants, and the only difference is whose accounts hold the three projects — which happens to be the difference procurement cares about.</p>
+        <div class="cards" style="margin-bottom:22px">
+          <div class="card pick">
+            <div class="k">Variant A — we operate it</div>
+            <p>The projects live in our accounts. They get their own database, their own region and no operational burden; we run migrations, upgrades and backups on our cadence, and carry the pager.</p>
+            <p style="margin-top:10px"><strong>Procurement:</strong> we remain a processor, and so do Vercel, Neon, Render and Anthropic — all under our contracts. Good enough for an isolation or residency question; not an answer to a third-party-processing one.</p>
+            <p style="margin-top:10px"><strong>Drift:</strong> none. Every instance is current because we upgrade it.</p>
+          </div>
+          <div class="card">
+            <div class="k">Variant B — they operate it</div>
+            <p>The same three projects, created in the customer's own Vercel, Neon and Render accounts, with their own model credentials. Their billing, their contracts, their change control.</p>
+            <p style="margin-top:10px"><strong>Procurement:</strong> this is the strong one. Those vendors become theirs under their own DPAs, and we stop being a processor at all — we are a software vendor. It also answers “our infrastructure” for every enterprise that means their accounts rather than their VPC.</p>
+            <p style="margin-top:10px"><strong>Drift:</strong> it returns. They run the version they last upgraded to, and support becomes advisory because we cannot see the instance.</p>
+          </div>
+        </div>
+        <p style="max-width:44rem"><strong>Both variants need the same thing from the customer:</strong> a GitHub App approval on their org — the one enterprise gate that never goes away — plus the region their policy requires, a DNS name if they want their own, and an identity provider if they want SSO.</p>
+
+        <h3 style="margin-top:24px">How variant B ships: a deploy skill over declarative config</h3>
+        <p style="max-width:44rem">We already distribute agent guidance as a Claude Code plugin, so the customer's own Claude Code is the natural operator here — the same pattern as the validation loop. One correction to the obvious version of this idea: the skill should not be the installer. Three vendor APIs driven conversationally with someone else's credentials fails in ways nobody can see, and “the agent half-created my Neon project” is an unanswerable support ticket.</p>
+        <p style="max-width:44rem">Ship declarative provisioning underneath it — all three vendors have Terraform providers, so the whole instance is roughly fifteen resources — and let the skill do what a runbook cannot: preflight the prerequisites, drive the apply, verify the worker booted and the migration ledger advanced, apply version upgrades, and diagnose a sick instance from the outside. That keeps the failure modes idempotent and inspectable, and it still turns weeks of install documentation into a plugin version bump.</p>
+
+        <h3>Path two — a self-managed install</h3>
         <p class="flag">Specified, not yet built</p>
-        <p style="max-width:44rem">This applies only to the self-managed option. The chart below is the shape agreed in the engineering spec, not a published artifact — treat it as what an install will look like, and do not promise a delivery date from this page. A customer who only needs their own database rather than their own cluster wants the dedicated instance instead, which needs none of this.</p>
+        <p style="max-width:44rem">For the customer who genuinely needs it inside their perimeter and under their change control. The chart below is the shape agreed in the engineering spec, not a published artifact — treat it as what an install will look like, and do not promise a delivery date from this page.</p>
 
         <h3 style="margin-top:24px">One values file</h3>
         <pre class="code"><b>git2docs</b>:
@@ -539,6 +565,7 @@
             </thead>
             <tbody>
               <tr><td>Kubernetes 1.28+ — EKS or equivalent</td><td>Customer</td><td>Yes</td></tr>
+              <!-- chart-only prerequisites; the dedicated instance needs none of these -->
               <tr><td>PostgreSQL 15+ with the <span class="m">vector</span> and <span class="m">pg_trgm</span> extensions</td><td>Customer's RDS, or the chart</td><td>Yes</td></tr>
               <tr><td>Ingress controller, TLS certificate and a DNS name</td><td>Customer</td><td>Yes</td></tr>
               <tr><td>A GitHub App installed on their org, or a GitLab token</td><td>Customer</td><td>Yes</td></tr>
@@ -551,26 +578,39 @@
           </table>
         </div>
 
-        <h3>How long until it is doing something useful</h3>
-        <div class="panel">
-          <dl class="clock">
-            <div>
-              <dt>30–60 min</dt>
-              <dd><strong>Chart to working portal</strong>, on a cluster where the prerequisites above are already met. Migrations apply themselves when the worker boots, so there is no schema step.</dd>
-            </div>
-            <div>
-              <dt>Hours</dt>
-              <dd><strong>First documentation set.</strong> Generation is model work proportional to the size of the repository, running as a background job. Nobody sits and watches it, but do not promise a live demo twenty minutes after install.</dd>
-            </div>
-            <div>
-              <dt>2–4 weeks</dt>
-              <dd><strong>Realistic calendar time inside an enterprise</strong>, and almost none of it is the chart: IAM roles, the DNS name, the identity provider, the egress allowlist, the security questionnaire, and getting a GitHub App approved on their own instance. Plan the engagement around those, not around the install.</dd>
-            </div>
-            <div>
-              <dt>Minutes</dt>
-              <dd><strong>A dedicated instance, by comparison.</strong> Same stack as production — one Vercel project, one Neon project, one Render service, provisioned in the region they name. No cluster, no IAM, no questionnaire about their own network.</dd>
-            </div>
-          </dl>
+        <h3 style="margin-top:26px">How long until it is doing something useful</h3>
+        <div class="panel scroll">
+          <table>
+            <thead>
+              <tr><th scope="col">&nbsp;</th><th scope="col">Dedicated instance</th><th scope="col">Self-managed install</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Stand-up</td>
+                <td>Minutes — three projects from one env set</td>
+                <td>30–60 min of <span class="m">helm install</span>, on a cluster that already meets the list above</td>
+              </tr>
+              <tr>
+                <td>First documentation set</td>
+                <td colspan="2">Hours, on both. Generation is model work proportional to the size of the repository, running as a background job — so do not promise a live demo twenty minutes after either one.</td>
+              </tr>
+              <tr>
+                <td>Realistic enterprise calendar</td>
+                <td>Days. The GitHub App approval is the only gate, because nothing of ours touches their infrastructure.</td>
+                <td>2–4 weeks, and almost none of it is the chart: IAM roles, DNS, the identity provider, the egress allowlist, the security questionnaire.</td>
+              </tr>
+              <tr>
+                <td>Who operates it afterwards</td>
+                <td>Us. It never drifts from the current version.</td>
+                <td>Their platform engineer. They will run a version from months ago.</td>
+              </tr>
+              <tr class="sum">
+                <td>Engineering left to do</td>
+                <td>Days — the first-party host list moves to config, plus a provisioning path.</td>
+                <td>3–5 weeks for a chart that installs; 3–4 months for one that can be supported.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
@@ -668,7 +708,7 @@
         </div>
         <div class="panel scroll">
           <table>
-            <caption>Dedicated instance — the same stack production runs on, provisioned for one customer.</caption>
+            <caption>The managed stack — the same figures either way; the only question is whose account the invoice lands in. Variant A is our cost and the floor under a negotiated price; variant B is billed to the customer directly.</caption>
             <thead>
               <tr><th scope="col">Service</th><th scope="col" class="num">Per month</th></tr>
             </thead>
@@ -732,6 +772,7 @@
           <li><strong>Someone has to operate it.</strong> These are platform invoices only. On the self-managed option that operator is the customer's platform engineer, and their time is the larger cost.</li>
           <li><strong>Versions drift, but only on one option.</strong> A self-managed customer runs whatever they last upgraded to and will report bugs fixed months ago. A dedicated instance never drifts, because we upgrade it. That, not cost, is the strongest argument for the middle rung.</li>
           <li><strong>N instances is somebody's job.</strong> Three dedicated instances by hand is fine; twelve is not. The fan-out has to be automated from the first customer rather than the fourth.</li>
+          <li><strong>The deploy skill holds real credentials.</strong> Vercel, Neon, Render and a model key in one agent session is a wide blast radius. That is an argument for declarative provisioning the customer can read before applying, and against a skill that improvises against three APIs.</li>
         </ul>
       </section>
 
