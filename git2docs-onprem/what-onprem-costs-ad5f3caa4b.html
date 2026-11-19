@@ -10,9 +10,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <style>
-  /* Layout: a stat row that answers the question before anything else, then one
-     calculator whose controls sit above the bars they change, then the honest
-     parts. Series hues are the validated categorical slots 1-5. */
+  /* Layout: a sticky section rail on the left, one reading column on the right.
+     The cost tiles sit with the calculator rather than in the hero, so the
+     numbers and the dials that move them are on screen together. Series hues
+     are the validated categorical slots 1-5. */
   :root {
     --bg:       #f4f5f7;
     --surface:  #ffffff;
@@ -78,15 +79,64 @@
     line-height: 1.58;
     -webkit-font-smoothing: antialiased;
   }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto;
+    height: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: var(--bg);
+  }
   .wrap {
-    max-width: 66rem;
+    max-width: 72rem;
     margin: 0 auto;
     padding-block: 30px 70px;
     padding-left: max(16px, env(safe-area-inset-left, 0px));
     padding-right: max(16px, env(safe-area-inset-right, 0px));
   }
+  .shell {
+    display: grid;
+    grid-template-columns: 12.5rem minmax(0, 1fr);
+    gap: 0 44px;
+    align-items: start;
+  }
+
+  /* ---- section rail ---- */
+  .side {
+    position: sticky;
+    top: calc(env(safe-area-inset-top, 0px) + 26px);
+    display: grid;
+    gap: 1px;
+    font-size: 13.5px;
+    z-index: 9;
+  }
+  .side .rail-k {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 0 8px 11px;
+  }
+  .side a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 11px;
+    border-left: 2px solid var(--line);
+    border-radius: 0 6px 6px 0;
+  }
+  .side a:hover { color: var(--ink); }
+  .side a.on {
+    color: var(--ink);
+    font-weight: 600;
+    border-left-color: var(--accent);
+    background: var(--surface);
+  }
+  .side a:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
   h1 {
-    font-size: clamp(28px, 5.6vw, 42px);
+    font-size: clamp(27px, 5.2vw, 40px);
     font-weight: 700;
     letter-spacing: -.025em;
     line-height: 1.08;
@@ -103,52 +153,44 @@
   h3 { font-size: 15px; font-weight: 600; margin: 0 0 6px; }
   p { margin: 0 0 13px; }
   p:last-child { margin-bottom: 0; }
-  .lede { font-size: 18px; color: var(--ink2); max-width: 44rem; }
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    font-weight: 600;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 12px;
-  }
+  .lede { font-size: 17.5px; color: var(--ink2); max-width: 44rem; }
   code, .m { font-family: var(--mono); font-size: .88em; }
-  section { margin-top: 46px; }
+  section { margin-top: 44px; scroll-margin-top: 72px; }
 
-  /* ---- headline stats ---- */
+  /* ---- stat tiles ---- */
   .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
-    margin-top: 26px;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 10px;
+    margin-bottom: 14px;
   }
   .stat {
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 10px;
-    padding: 16px 18px;
+    padding: 13px 15px;
   }
   .stat.lead { border-color: var(--accent); }
   .stat .k {
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 600;
-    letter-spacing: .05em;
+    letter-spacing: .04em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 8px;
+    margin-bottom: 7px;
+    min-height: 2.6em;
   }
   .stat .v {
-    font-size: clamp(28px, 5vw, 36px);
+    font-size: clamp(24px, 4vw, 31px);
     font-weight: 700;
     letter-spacing: -.03em;
     font-variant-numeric: tabular-nums;
     line-height: 1;
   }
-  .stat .u { font-size: 14px; font-weight: 500; color: var(--muted); }
-  .stat .d { font-size: 13px; color: var(--ink2); margin-top: 7px; }
+  .stat .u { font-size: 13px; font-weight: 500; color: var(--muted); }
+  .stat .d { font-size: 12.5px; color: var(--ink2); margin-top: 6px; }
 
-  /* ---- calculator ---- */
+  /* ---- panels, controls ---- */
   .panel {
     background: var(--surface);
     border: 1px solid var(--line);
@@ -157,7 +199,7 @@
   }
   .controls {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 16px 20px;
     padding-bottom: 18px;
     border-bottom: 1px solid var(--line);
@@ -212,7 +254,6 @@
   }
   .legend span { display: inline-flex; align-items: center; gap: 7px; }
   .sw { width: 11px; height: 11px; border-radius: 3px; flex: none; }
-
   .rows { display: grid; gap: 18px; }
   .row { display: grid; gap: 7px; }
   .row-top {
@@ -232,9 +273,8 @@
     white-space: nowrap;
   }
   .row-total small { font-size: 12px; font-weight: 400; color: var(--muted); }
-  .bar { display: flex; gap: 2px; height: 34px; }
+  .bar { display: flex; gap: 2px; height: 32px; }
   .bar i {
-    display: block;
     height: 100%;
     font-style: normal;
     font-family: var(--mono);
@@ -253,12 +293,61 @@
   .bar i.dim { color: transparent; }
   .note-inline { font-size: 13px; color: var(--muted); }
 
-  /* ---- table ---- */
+  /* ---- install section ---- */
+  .flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--s-ops);
+    border: 1px solid var(--s-ops);
+    border-radius: 999px;
+    padding: 4px 12px;
+    margin-bottom: 14px;
+  }
+  pre.code {
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.65;
+    margin: 0 0 8px;
+    color: var(--ink);
+    tab-size: 2;
+  }
+  pre.code b { color: var(--accent); font-weight: 600; }
+  pre.code i { color: var(--muted); font-style: normal; }
+  .objects { display: inline-flex; flex-wrap: wrap; gap: 6px; vertical-align: middle; }
+  .objects span {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 3px 8px;
+    color: var(--ink2);
+  }
+  .clock { display: grid; gap: 12px; margin: 0; }
+  .clock > div {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    gap: 4px 18px;
+    align-items: start;
+  }
+  .clock dt { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--accent); }
+  .clock dd { margin: 0; font-size: 14.5px; }
+  .sub { font-size: 13px; color: var(--muted); margin: 0 0 20px; }
+
+  /* ---- tables ---- */
   .scroll { overflow-x: auto; }
   table {
     border-collapse: collapse;
     width: 100%;
-    min-width: 30rem;
+    min-width: 28rem;
     font-size: 14px;
   }
   caption {
@@ -291,69 +380,9 @@
   tr.sum td { font-weight: 600; border-bottom: 2px solid var(--ink); }
   .dot { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 8px; }
 
-  .flag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--s-ops);
-    border: 1px solid var(--s-ops);
-    border-radius: 999px;
-    padding: 4px 12px;
-    margin-bottom: 14px;
-  }
-  pre.code {
-    background: var(--surface2);
-    border: 1px solid var(--line);
-    border-radius: 9px;
-    padding: 14px 16px;
-    overflow-x: auto;
-    font-family: var(--mono);
-    font-size: 12.5px;
-    line-height: 1.65;
-    margin: 0 0 8px;
-    color: var(--ink);
-    tab-size: 2;
-  }
-  pre.code b { color: var(--accent); font-weight: 600; }
-  pre.code i { color: var(--muted); font-style: normal; }
-  .objects {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin: 0 0 6px;
-  }
-  .objects span {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    background: var(--surface2);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 3px 8px;
-    color: var(--ink2);
-  }
-  .clock { display: grid; gap: 12px; }
-  .clock > div {
-    display: grid;
-    grid-template-columns: 9.5rem 1fr;
-    gap: 4px 18px;
-    align-items: start;
-  }
-  .clock dt {
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--accent);
-  }
-  .clock dd { margin: 0; font-size: 14.5px; }
-  @media (max-width: 520px) {
-    .clock > div { grid-template-columns: 1fr; }
-  }
-  .sub { font-size: 13px; color: var(--muted); margin: 0 0 20px; }
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 14px;
   }
   .card {
@@ -363,11 +392,12 @@
     padding: 15px 17px;
     font-size: 14.5px;
   }
+  .card.pick { border-color: var(--accent); }
   .card .k {
     font-family: var(--mono);
     font-size: 11.5px;
     font-weight: 600;
-    letter-spacing: .07em;
+    letter-spacing: .06em;
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 7px;
@@ -383,7 +413,7 @@
   ul.tight { margin: 0; padding-left: 1.15em; }
   ul.tight li { margin-bottom: 7px; }
   .foot {
-    margin-top: 50px;
+    margin-top: 48px;
     border-top: 1px solid var(--line);
     padding-top: 14px;
     font-size: 12.5px;
@@ -403,8 +433,32 @@
     white-space: nowrap;
     transform: translate(-50%, -140%);
   }
+
+  @media (max-width: 860px) {
+    .shell { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .side {
+      display: flex;
+      overflow-x: auto;
+      gap: 4px;
+      top: env(safe-area-inset-top, 0px);
+      background: var(--bg);
+      padding-block: 9px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid var(--line);
+    }
+    .side .rail-k { display: none; }
+    .side a {
+      border-left: none;
+      border-bottom: 2px solid transparent;
+      border-radius: 6px 6px 0 0;
+      white-space: nowrap;
+      padding: 5px 9px;
+    }
+    .side a.on { border-bottom-color: var(--accent); background: none; }
+    .clock > div { grid-template-columns: 1fr; }
+  }
   @media (max-width: 520px) {
-    .bar { height: 30px; }
+    .bar { height: 29px; }
     .bar i { font-size: 0; }
   }
 </style>
@@ -413,17 +467,28 @@
 <body>
 
 <div class="wrap">
-  <p class="eyebrow">git2docs · self-managed deployment</p>
-  <h1>What on-prem actually costs</h1>
-  <p class="lede">An enterprise install runs in the customer's own AWS account: two services, one Postgres, one ingress. The infrastructure is the predictable part and the model usage is the variable part. Here is the monthly bill, with Claude reached through the hosted API and through Bedrock.</p>
+  <div class="shell">
+    <nav class="side" aria-label="Sections">
+      <span class="rail-k">On this page</span>
+      <a href="#install">What you install</a>
+      <a href="#cost">Monthly cost</a>
+      <a href="#lines">Line by line</a>
+      <a href="#bedrock">Bedrock or API</a>
+      <a href="#who">Who is asking</a>
+      <a href="#honest">Say this out loud</a>
+    </nav>
 
-  <section>
-    <h2>What you actually install</h2>
-    <p class="flag">Specified, not yet built</p>
-    <p style="max-width:44rem">The chart below is the shape agreed in the engineering spec, not a published artifact. Treat it as what an install will look like, and do not promise a delivery date from this page. Everything the chart depends on already exists in the product — the two services share nothing but the database, and schema migrations apply themselves on worker start.</p>
+    <div>
+      <h1>What on-prem actually costs</h1>
+      <p class="lede">Three ways to give an enterprise its own git2docs: a dedicated instance we operate, or a self-managed install in their AWS account reaching Claude through the hosted API or through Bedrock. Here is the monthly bill for each, and what it takes to stand one up.</p>
 
-    <h3 style="margin-top:24px">One values file</h3>
-    <pre class="code"><b>git2docs</b>:
+      <section id="install">
+        <h2>What you actually install</h2>
+        <p class="flag">Specified, not yet built</p>
+        <p style="max-width:44rem">This applies only to the self-managed option. The chart below is the shape agreed in the engineering spec, not a published artifact — treat it as what an install will look like, and do not promise a delivery date from this page. A customer who only needs their own database rather than their own cluster wants the dedicated instance instead, which needs none of this.</p>
+
+        <h3 style="margin-top:24px">One values file</h3>
+        <pre class="code"><b>git2docs</b>:
   host: docs.example.com          <i># the only DNS name you need</i>
   licence:
     secretName: git2docs-licence
@@ -464,202 +529,227 @@
 <b>ingress</b>:
   className: alb
   certificateArn: arn:aws:acm:us-east-1:123456789012:certificate/…</pre>
-    <p class="sub">What it renders: <span class="objects" style="display:inline-flex;vertical-align:middle"><span>Deployment × 2</span><span>Service</span><span>Ingress</span><span>ServiceAccount (IRSA)</span><span>Secret</span><span>ConfigMap</span><span>CronJob × 2</span><span>NetworkPolicy</span><span>StatefulSet + PVC (optional)</span></span></p>
+        <p class="sub">What it renders: <span class="objects"><span>Deployment &times; 2</span><span>Service</span><span>Ingress</span><span>ServiceAccount (IRSA)</span><span>Secret</span><span>ConfigMap</span><span>CronJob &times; 2</span><span>NetworkPolicy</span><span>StatefulSet + PVC (optional)</span></span></p>
 
-    <h3 style="margin-top:26px">Before the first <span class="m">helm install</span></h3>
-    <div class="panel scroll" style="margin-bottom:20px">
-      <table>
-        <thead>
-          <tr><th scope="col">Prerequisite</th><th scope="col">Who provides it</th><th scope="col">Blocks the install</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Kubernetes 1.28+ — EKS or equivalent</td><td>Customer</td><td>Yes</td></tr>
-          <tr><td>PostgreSQL 15+ with the <span class="m">vector</span> and <span class="m">pg_trgm</span> extensions</td><td>Customer's RDS, or the chart</td><td>Yes</td></tr>
-          <tr><td>Ingress controller, TLS certificate and a DNS name</td><td>Customer</td><td>Yes</td></tr>
-          <tr><td>A GitHub App installed on their org, or a GitLab token</td><td>Customer</td><td>Yes</td></tr>
-          <tr><td>Outbound to Anthropic and Voyage, or an IAM role for Bedrock</td><td>Customer's network team</td><td>Yes</td></tr>
-          <tr><td>Licence file and embedding key</td><td>git2docs</td><td>Yes</td></tr>
-          <tr><td>An OIDC provider for SSO — Okta, Entra, Keycloak</td><td>Customer</td><td>No, a pilot can start with one seeded owner</td></tr>
-          <tr><td>Images mirrored into a private registry</td><td>Customer</td><td>No, unless their policy forbids external pulls</td></tr>
-          <tr><td>A named owner for upgrades and database backups</td><td>Customer</td><td>No — and this is the one that bites later</td></tr>
-        </tbody>
-      </table>
-    </div>
+        <h3 style="margin-top:26px">Before the first <span class="m">helm install</span></h3>
+        <div class="panel scroll" style="margin-bottom:20px">
+          <table>
+            <thead>
+              <tr><th scope="col">Prerequisite</th><th scope="col">Who provides it</th><th scope="col">Blocks the install</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Kubernetes 1.28+ — EKS or equivalent</td><td>Customer</td><td>Yes</td></tr>
+              <tr><td>PostgreSQL 15+ with the <span class="m">vector</span> and <span class="m">pg_trgm</span> extensions</td><td>Customer's RDS, or the chart</td><td>Yes</td></tr>
+              <tr><td>Ingress controller, TLS certificate and a DNS name</td><td>Customer</td><td>Yes</td></tr>
+              <tr><td>A GitHub App installed on their org, or a GitLab token</td><td>Customer</td><td>Yes</td></tr>
+              <tr><td>Outbound to Anthropic and Voyage, or an IAM role for Bedrock</td><td>Customer's network team</td><td>Yes</td></tr>
+              <tr><td>Licence file and embedding key</td><td>git2docs</td><td>Yes</td></tr>
+              <tr><td>An OIDC provider for SSO — Okta, Entra, Keycloak</td><td>Customer</td><td>No, a pilot can start with one seeded owner</td></tr>
+              <tr><td>Images mirrored into a private registry</td><td>Customer</td><td>No, unless their policy forbids external pulls</td></tr>
+              <tr><td>A named owner for upgrades and database backups</td><td>Customer</td><td>No — and this is the one that bites later</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-    <h3>How long until it is doing something useful</h3>
-    <div class="panel">
-      <dl class="clock">
-        <div>
-          <dt>30–60 min</dt>
-          <dd><strong>Chart to working portal</strong>, on a cluster where the prerequisites above are already met. Migrations apply themselves when the worker boots, so there is no schema step.</dd>
+        <h3>How long until it is doing something useful</h3>
+        <div class="panel">
+          <dl class="clock">
+            <div>
+              <dt>30–60 min</dt>
+              <dd><strong>Chart to working portal</strong>, on a cluster where the prerequisites above are already met. Migrations apply themselves when the worker boots, so there is no schema step.</dd>
+            </div>
+            <div>
+              <dt>Hours</dt>
+              <dd><strong>First documentation set.</strong> Generation is model work proportional to the size of the repository, running as a background job. Nobody sits and watches it, but do not promise a live demo twenty minutes after install.</dd>
+            </div>
+            <div>
+              <dt>2–4 weeks</dt>
+              <dd><strong>Realistic calendar time inside an enterprise</strong>, and almost none of it is the chart: IAM roles, the DNS name, the identity provider, the egress allowlist, the security questionnaire, and getting a GitHub App approved on their own instance. Plan the engagement around those, not around the install.</dd>
+            </div>
+            <div>
+              <dt>Minutes</dt>
+              <dd><strong>A dedicated instance, by comparison.</strong> Same stack as production — one Vercel project, one Neon project, one Render service, provisioned in the region they name. No cluster, no IAM, no questionnaire about their own network.</dd>
+            </div>
+          </dl>
         </div>
-        <div>
-          <dt>Hours</dt>
-          <dd><strong>First documentation set.</strong> Generation is model work proportional to the size of the repository, running as a background job. Nobody sits and watches it, but do not promise a live demo twenty minutes after install.</dd>
-        </div>
-        <div>
-          <dt>2–4 weeks</dt>
-          <dd><strong>Realistic calendar time inside an enterprise</strong>, and almost none of it is the chart: IAM roles, the DNS name, the identity provider, the egress allowlist, the security questionnaire, and getting a GitHub App approved on their own instance. Plan the engagement around those, not around the install.</dd>
-        </div>
-        <div>
-          <dt>Ongoing</dt>
-          <dd><strong>Someone operates it.</strong> Postgres backups, chart upgrades on our release cadence, and a single worker replica that scales by getting bigger rather than by multiplying. That person's time is not on the cost chart below and belongs in the business case.</dd>
-        </div>
-      </dl>
-    </div>
-  </section>
+      </section>
 
-  <div class="stats" style="margin-top:46px">
-    <div class="stat">
-      <div class="k">Hosted git2docs</div>
-      <div class="v" id="s-saas">$99<span class="u">/mo</span></div>
-      <div class="d" id="s-saas-d">Team plan · nothing to run</div>
-    </div>
-    <div class="stat lead">
-      <div class="k">Self-managed · Claude API</div>
-      <div class="v" id="s-api">$0<span class="u">/mo</span></div>
-      <div class="d" id="s-api-d">AWS infrastructure + tokens billed by Anthropic</div>
-    </div>
-    <div class="stat lead">
-      <div class="k">Self-managed · Bedrock</div>
-      <div class="v" id="s-bed">$0<span class="u">/mo</span></div>
-      <div class="d" id="s-bed-d">AWS infrastructure + tokens billed by AWS</div>
+      <section id="cost">
+        <h2>Monthly cost</h2>
+        <div class="stats">
+          <div class="stat">
+            <div class="k">Hosted, shared</div>
+            <div class="v" id="s-saas">$99<span class="u">/mo</span></div>
+            <div class="d" id="s-saas-d">Team plan · nothing to run</div>
+          </div>
+          <div class="stat lead">
+            <div class="k">Dedicated instance</div>
+            <div class="v" id="s-ded">$0<span class="u">/mo</span></div>
+            <div class="d" id="s-ded-d">What it costs us to run</div>
+          </div>
+          <div class="stat lead">
+            <div class="k">Self-managed · Claude API</div>
+            <div class="v" id="s-api">$0<span class="u">/mo</span></div>
+            <div class="d" id="s-api-d">AWS + tokens billed by Anthropic</div>
+          </div>
+          <div class="stat lead">
+            <div class="k">Self-managed · Bedrock</div>
+            <div class="v" id="s-bed">$0<span class="u">/mo</span></div>
+            <div class="d" id="s-bed-d">AWS + tokens billed by AWS</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="controls">
+            <div class="ctl" style="grid-column: 1 / -1">
+              <label for="size-group">Deployment size</label>
+              <div class="seg" id="size-group" role="group" aria-label="Deployment size">
+                <button type="button" data-size="pilot" aria-pressed="true">Pilot</button>
+                <button type="button" data-size="standard" aria-pressed="false">Standard</button>
+                <button type="button" data-size="ha" aria-pressed="false">High availability</button>
+              </div>
+            </div>
+            <div class="ctl">
+              <label for="repos">Repositories <span class="n" id="v-repos">10</span></label>
+              <input type="range" id="repos" min="1" max="40" step="1" value="10">
+            </div>
+            <div class="ctl">
+              <label for="pages">Pages per repo <span class="n" id="v-pages">25</span></label>
+              <input type="range" id="pages" min="5" max="120" step="5" value="25">
+            </div>
+            <div class="ctl">
+              <label for="regens">Full regenerations / month <span class="n" id="v-regens">2</span></label>
+              <input type="range" id="regens" min="0" max="12" step="1" value="2">
+            </div>
+            <div class="ctl">
+              <label for="chat">Doc-chat questions / month <span class="n" id="v-chat">1,000</span></label>
+              <input type="range" id="chat" min="0" max="20000" step="250" value="1000">
+            </div>
+            <div class="ctl">
+              <label for="cache">Input served from prompt cache <span class="n" id="v-cache">30%</span></label>
+              <input type="range" id="cache" min="0" max="80" step="5" value="30">
+            </div>
+            <div class="ctl">
+              <label for="region-group">Bedrock endpoint</label>
+              <div class="seg" id="region-group" role="group" aria-label="Bedrock endpoint">
+                <button type="button" data-region="global" aria-pressed="true">Global profile</button>
+                <button type="button" data-region="regional" aria-pressed="false">Regional (+10%)</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="legend">
+            <span><i class="sw" style="background:var(--s-compute)"></i>Compute</span>
+            <span><i class="sw" style="background:var(--s-db)"></i>Database</span>
+            <span><i class="sw" style="background:var(--s-net)"></i>Network &amp; hosting</span>
+            <span><i class="sw" style="background:var(--s-ops)"></i>Ops &amp; registry</span>
+            <span><i class="sw" style="background:var(--s-model)"></i>Model usage</span>
+            <span><i class="sw" style="background:var(--s-flat)"></i>Subscription</span>
+          </div>
+
+          <div class="rows" id="rows"></div>
+        </div>
+      </section>
+
+      <section id="lines">
+        <h2>Line by line</h2>
+        <div class="panel scroll" style="margin-bottom:16px">
+          <table>
+            <caption id="tbl-cap">AWS list prices, us-east-1, one environment.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Self-managed on AWS</th>
+                <th scope="col" class="num">Claude API</th>
+                <th scope="col" class="num">Bedrock</th>
+              </tr>
+            </thead>
+            <tbody id="tbl"></tbody>
+          </table>
+        </div>
+        <div class="panel scroll">
+          <table>
+            <caption>Dedicated instance — the same stack production runs on, provisioned for one customer.</caption>
+            <thead>
+              <tr><th scope="col">Service</th><th scope="col" class="num">Per month</th></tr>
+            </thead>
+            <tbody id="tbl-ded"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="bedrock">
+        <h2>Bedrock or the Claude API?</h2>
+        <div class="scroll" style="margin-bottom:18px">
+          <table>
+            <thead>
+              <tr><th scope="col">&nbsp;</th><th scope="col">Claude API</th><th scope="col">Bedrock</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Price per million tokens</td><td>$3 in / $15 out</td><td>$3 in / $15 out on the global profile; a regional profile runs about 10% higher</td></tr>
+              <tr><td>Where the traffic goes</td><td>Out through NAT to <span class="m">api.anthropic.com</span></td><td>Stays inside the VPC over a PrivateLink endpoint</td></tr>
+              <tr><td>Who invoices</td><td>Anthropic, separately</td><td>AWS, on the bill the customer already pays</td></tr>
+              <tr><td>Committed spend</td><td>Does not apply</td><td>Draws down an existing AWS commitment</td></tr>
+              <tr><td>New models</td><td>Available first</td><td>Arrives later, and per region</td></tr>
+              <tr><td>Credentials</td><td>A long-lived API key in the cluster</td><td>No key at all — an IAM role on the service account</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="call">
+          <p><strong>Bedrock is not the cheaper option, and selling it as one will go wrong at renewal.</strong> Per token it costs the same or slightly more, plus about $15–22 a month for the private endpoint. What the customer buys is the data boundary, one invoice, and no API key sitting in their cluster. For a security review, that is usually worth more than the difference.</p>
+        </div>
+      </section>
+
+      <section id="who">
+        <h2>Who is asking, and what answers them</h2>
+        <div class="cards">
+          <div class="card">
+            <div class="k">“Source can't leave our network”</div>
+            <p>No product to sell. Comprehension and synthesis run on Claude; that is the product, not a configuration flag. Disqualify on the first call rather than at the demo.</p>
+          </div>
+          <div class="card">
+            <div class="k">“No third party may hold our data”</div>
+            <p>Bedrock in their own account, hosted control plane. Days of engineering, no chart, no release tax. Satisfies more procurement reviews than it sounds like it should — lead with it.</p>
+          </div>
+          <div class="card pick">
+            <div class="k">“Not a database shared with your other customers”</div>
+            <p>A dedicated instance, in the region they name — which also answers EU residency, their own retention policy and their own maintenance window. This is the row most enterprises are actually in while using the vocabulary of the next one. Days of engineering, and we keep operating it.</p>
+          </div>
+          <div class="card">
+            <div class="k">“It runs on our infrastructure”</div>
+            <p>The full install: Helm chart, their EKS, their RDS, their change control. Weeks to build, and a permanent cost on every release after that. Price it accordingly.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="honest">
+        <h2>Say this part out loud</h2>
+        <div class="call" style="margin-bottom:14px">
+          <p id="honest-line">Self-managing costs several times the hosted subscription, before anyone writes a page. On-prem is a control purchase, not a savings purchase.</p>
+        </div>
+        <ul class="tight" style="max-width:46rem">
+          <li><strong>A dedicated instance is not row two.</strong> Vercel, Neon, Render and Anthropic all remain processors, and all remain in our accounts. Procurement counts processors, not instances — so do not offer it against a question about third-party processing.</li>
+          <li><strong>Documentation text still reaches Voyage</strong> for embeddings, on every option including Bedrock. Voyage also publishes model packages on AWS Marketplace that run in the customer's own VPC — confirm the model and its output dimension before offering that as a closed loop.</li>
+          <li><strong>Someone has to operate it.</strong> These are platform invoices only. On the self-managed option that operator is the customer's platform engineer, and their time is the larger cost.</li>
+          <li><strong>Versions drift, but only on one option.</strong> A self-managed customer runs whatever they last upgraded to and will report bugs fixed months ago. A dedicated instance never drifts, because we upgrade it. That, not cost, is the strongest argument for the middle rung.</li>
+          <li><strong>N instances is somebody's job.</strong> Three dedicated instances by hand is fine; twelve is not. The fan-out has to be automated from the first customer rather than the fourth.</li>
+        </ul>
+      </section>
+
+      <p class="foot">
+        AWS figures are list prices for us-east-1, on demand, retrieved November 2026 — verify in the
+        <a href="https://calculator.aws/" target="_blank" rel="noopener">AWS Pricing Calculator</a> before quoting.
+        EKS $0.10/cluster-hour, NAT gateway $0.045/hour plus data, ALB $16.20/month plus LCUs, public IPv4 $3.65/month,
+        RDS <span class="m">db.m7g.large</span> PostgreSQL about $0.168/hour.
+        Dedicated-instance figures use Neon at about $0.106 per compute-unit-hour plus $0.35/GB-month of storage, and Render
+        worker plans at $25 / $85 / $175. Note that the worker polls the database every ten seconds, so serverless
+        scale-to-zero never happens and the database is billed as continuously awake.
+        Model prices are Claude Sonnet 4.6 at $3.00 / $15.00 per million tokens, cache reads at $0.30.
+        Token volume per page is an internal working assumption — 45,000 input and 10,000 output — and should be
+        recalibrated from a real customer run before it appears in a quote. Reserved instances, Savings Plans and an AWS
+        enterprise discount all reduce the self-managed column materially.
+      </p>
     </div>
   </div>
-
-  <section>
-    <h2>Move the dials</h2>
-    <div class="panel">
-      <div class="controls">
-        <div class="ctl" style="grid-column: 1 / -1">
-          <label for="size-group">Deployment size</label>
-          <div class="seg" id="size-group" role="group" aria-label="Deployment size">
-            <button type="button" data-size="pilot" aria-pressed="true">Pilot · single-AZ</button>
-            <button type="button" data-size="standard" aria-pressed="false">Standard · HA database</button>
-            <button type="button" data-size="ha" aria-pressed="false">High availability</button>
-          </div>
-        </div>
-        <div class="ctl">
-          <label for="repos">Repositories <span class="n" id="v-repos">10</span></label>
-          <input type="range" id="repos" min="1" max="40" step="1" value="10">
-        </div>
-        <div class="ctl">
-          <label for="pages">Pages per repo <span class="n" id="v-pages">25</span></label>
-          <input type="range" id="pages" min="5" max="120" step="5" value="25">
-        </div>
-        <div class="ctl">
-          <label for="regens">Full regenerations / month <span class="n" id="v-regens">2</span></label>
-          <input type="range" id="regens" min="0" max="12" step="1" value="2">
-        </div>
-        <div class="ctl">
-          <label for="chat">Doc-chat questions / month <span class="n" id="v-chat">1,000</span></label>
-          <input type="range" id="chat" min="0" max="20000" step="250" value="1000">
-        </div>
-        <div class="ctl">
-          <label for="cache">Input served from prompt cache <span class="n" id="v-cache">30%</span></label>
-          <input type="range" id="cache" min="0" max="80" step="5" value="30">
-        </div>
-        <div class="ctl">
-          <label for="region-group">Bedrock endpoint</label>
-          <div class="seg" id="region-group" role="group" aria-label="Bedrock endpoint">
-            <button type="button" data-region="global" aria-pressed="true">Global profile</button>
-            <button type="button" data-region="regional" aria-pressed="false">Regional (+10%)</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="legend">
-        <span><i class="sw" style="background:var(--s-compute)"></i>Kubernetes &amp; compute</span>
-        <span><i class="sw" style="background:var(--s-db)"></i>Database</span>
-        <span><i class="sw" style="background:var(--s-net)"></i>Network &amp; TLS</span>
-        <span><i class="sw" style="background:var(--s-ops)"></i>Ops &amp; registry</span>
-        <span><i class="sw" style="background:var(--s-model)"></i>Model usage</span>
-        <span><i class="sw" style="background:var(--s-flat)"></i>Subscription</span>
-      </div>
-
-      <div class="rows" id="rows"></div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Line by line</h2>
-    <div class="panel scroll">
-      <table>
-        <caption id="tbl-cap">AWS list prices, us-east-1, one environment.</caption>
-        <thead>
-          <tr>
-            <th scope="col">Line item</th>
-            <th scope="col" class="num">Claude API</th>
-            <th scope="col" class="num">Bedrock</th>
-          </tr>
-        </thead>
-        <tbody id="tbl"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <section>
-    <h2>Bedrock or the Claude API?</h2>
-    <div class="scroll" style="margin-bottom:18px">
-      <table>
-        <thead>
-          <tr><th scope="col">&nbsp;</th><th scope="col">Claude API</th><th scope="col">Bedrock</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Price per million tokens</td><td>$3 in / $15 out</td><td>$3 in / $15 out on the global profile; a regional profile runs about 10% higher</td></tr>
-          <tr><td>Where the traffic goes</td><td>Out through NAT to <span class="m">api.anthropic.com</span></td><td>Stays inside the VPC over a PrivateLink endpoint</td></tr>
-          <tr><td>Who invoices</td><td>Anthropic, separately</td><td>AWS, on the bill the customer already pays</td></tr>
-          <tr><td>Committed spend</td><td>Does not apply</td><td>Draws down an existing AWS commitment</td></tr>
-          <tr><td>New models</td><td>Available first</td><td>Arrives later, and per region</td></tr>
-          <tr><td>Credentials</td><td>A long-lived API key in the cluster</td><td>No key at all — an IAM role on the service account</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="call">
-      <p><strong>Bedrock is not the cheaper option, and selling it as one will go wrong at renewal.</strong> Per token it costs the same or slightly more, plus about $15–22 a month for the private endpoint. What the customer buys is the data boundary, one invoice, and no API key sitting in their cluster. For a security review, that is usually worth more than the difference.</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>Three customers, three answers</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="k">“Source can't leave our network”</div>
-        <p>No product to sell. Comprehension and synthesis run on Claude; that is the product, not a configuration flag. Disqualify on the first call rather than at the demo.</p>
-      </div>
-      <div class="card">
-        <div class="k">“No third party may hold our data”</div>
-        <p>Bedrock in their own account, hosted control plane. Days of engineering, no chart, no release tax. This satisfies more procurement reviews than it sounds like it should — lead with it.</p>
-      </div>
-      <div class="card">
-        <div class="k">“It runs on our infrastructure”</div>
-        <p>The full install: Helm chart, their EKS, their RDS, their change control. Weeks to build, and a permanent cost on every release after that. Price it accordingly.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Say this part out loud</h2>
-    <div class="call" style="margin-bottom:14px">
-      <p id="honest">Self-managing costs several times the hosted subscription, before anyone writes a page. On-prem is a control purchase, not a savings purchase — a customer who expects it to be cheaper has misunderstood what they are buying.</p>
-    </div>
-    <ul class="tight" style="max-width:46rem">
-      <li><strong>Documentation text still reaches Voyage</strong> for embeddings, even on Bedrock. Voyage also publishes model packages on AWS Marketplace that run in the customer's own VPC — confirm the model and its output dimension before offering that as a closed loop.</li>
-      <li><strong>Someone has to operate it.</strong> The numbers here are AWS invoice only. A platform engineer's time on upgrades, backups and incidents is the larger cost and it belongs in the business case.</li>
-      <li><strong>Versions drift.</strong> A self-managed customer runs whatever they last upgraded to, and will report bugs that the hosted build fixed months ago. Put the upgrade cadence in the contract.</li>
-      <li><strong>The worker runs as a single replica.</strong> Generation throughput scales by making that node bigger, not by adding more of them.</li>
-    </ul>
-  </section>
-
-  <p class="foot">
-    Infrastructure figures are AWS list prices for us-east-1, on demand, retrieved November 2026 — verify in the
-    <a href="https://calculator.aws/" target="_blank" rel="noopener">AWS Pricing Calculator</a> before quoting.
-    EKS $0.10/cluster-hour, NAT gateway $0.045/hour plus data, ALB $16.20/month plus LCUs, public IPv4 $3.65/month,
-    RDS <span class="m">db.m7g.large</span> PostgreSQL about $0.168/hour. Model prices are Claude Sonnet 4.6 at
-    $3.00 / $15.00 per million tokens, cache reads at $0.30. Token volume per page is an internal working assumption —
-    45,000 input and 10,000 output — and should be recalibrated from a real customer run before it appears in a quote.
-    Reserved instances, Savings Plans and an AWS enterprise discount all reduce the infrastructure column materially.
-  </p>
 </div>
 <div id="tip" hidden></div>
 
@@ -667,7 +757,7 @@
 (function () {
   var SIZES = {
     pilot: {
-      label: 'Pilot', sub: 'single-AZ · 2 nodes · 10 repos comfortably', endpoint: 15,
+      label: 'Pilot', sub: 'single-AZ · 2 nodes', endpoint: 15,
       items: [
         ['EKS control plane', 73, 'compute'],
         ['2 × m7g.large nodes', 119, 'compute'],
@@ -679,6 +769,11 @@
         ['Public IPv4 addresses', 4, 'net'],
         ['Secrets Manager + ECR', 4, 'ops'],
         ['CloudWatch logs', 10, 'ops']
+      ],
+      dedicated: [
+        ['Render worker (Standard, 2 GB)', 25, 'compute'],
+        ['Neon Postgres (1 CU, always awake + storage)', 84, 'db'],
+        ['Vercel project', 20, 'net']
       ]
     },
     standard: {
@@ -694,6 +789,11 @@
         ['Public IPv4 addresses', 8, 'net'],
         ['Secrets Manager + ECR', 5, 'ops'],
         ['CloudWatch logs', 20, 'ops']
+      ],
+      dedicated: [
+        ['Render worker (Pro, 4 GB)', 85, 'compute'],
+        ['Neon Postgres (2 CU, always awake + storage)', 162, 'db'],
+        ['Vercel project', 20, 'net']
       ]
     },
     ha: {
@@ -709,6 +809,11 @@
         ['Public IPv4 addresses', 12, 'net'],
         ['Secrets Manager + ECR', 6, 'ops'],
         ['CloudWatch logs', 40, 'ops']
+      ],
+      dedicated: [
+        ['Render worker (Pro Plus, 8 GB)', 175, 'compute'],
+        ['Neon Postgres (4 CU, always awake + storage)', 318, 'db'],
+        ['Vercel project + bandwidth', 40, 'net']
       ]
     }
   };
@@ -720,64 +825,72 @@
   var CHAT_PER_MSG = 0.017;
 
   var GROUPS = [
-    { key: 'compute', name: 'Kubernetes & compute', color: 'var(--s-compute)' },
-    { key: 'db',      name: 'Database',             color: 'var(--s-db)' },
-    { key: 'net',     name: 'Network & TLS',        color: 'var(--s-net)' },
-    { key: 'ops',     name: 'Ops & registry',       color: 'var(--s-ops)' },
-    { key: 'model',   name: 'Model usage',          color: 'var(--s-model)' }
+    { key: 'compute', name: 'Compute',            color: 'var(--s-compute)' },
+    { key: 'db',      name: 'Database',           color: 'var(--s-db)' },
+    { key: 'net',     name: 'Network & hosting',  color: 'var(--s-net)' },
+    { key: 'ops',     name: 'Ops & registry',     color: 'var(--s-ops)' },
+    { key: 'model',   name: 'Model usage',        color: 'var(--s-model)' }
   ];
 
   var state = { size: 'pilot', repos: 10, pages: 25, regens: 2, chat: 1000, cache: 30, region: 'global' };
 
-  function money(n) {
-    return '$' + Math.round(n).toLocaleString('en-US');
-  }
+  function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+  function group(key) { return GROUPS.filter(function (x) { return x.key === key; })[0]; }
 
   function modelCost() {
     var pages = state.repos * state.pages * state.regens;
     var c = state.cache / 100;
-    var inTok = pages * IN_PER_PAGE;
-    var runIn = state.repos * state.regens * IN_PER_RUN;
-    var runOut = state.repos * state.regens * OUT_PER_RUN;
-    var input = (inTok + runIn) * ((1 - c) * P_IN + c * P_CACHE);
-    var output = (pages * OUT_PER_PAGE + runOut) * P_OUT;
-    return input + output + state.chat * CHAT_PER_MSG;
+    var inTok = pages * IN_PER_PAGE + state.repos * state.regens * IN_PER_RUN;
+    var outTok = pages * OUT_PER_PAGE + state.repos * state.regens * OUT_PER_RUN;
+    return inTok * ((1 - c) * P_IN + c * P_CACHE) + outTok * P_OUT + state.chat * CHAT_PER_MSG;
   }
 
-  function infra(size) {
+  function sumBy(items) {
     var g = { compute: 0, db: 0, net: 0, ops: 0 };
-    SIZES[size].items.forEach(function (it) { g[it[2]] += it[1]; });
+    items.forEach(function (it) { g[it[2]] += it[1]; });
     return g;
   }
 
   function scenarios() {
-    var g = infra(state.size);
+    var S = SIZES[state.size];
+    var aws = sumBy(S.items);
+    var ded = sumBy(S.dedicated);
     var model = modelCost();
     var bedrockModel = model * (state.region === 'regional' ? 1.10 : 1);
-    var api = {
-      name: 'Self-managed on AWS · Claude API',
-      sub: SIZES[state.size].sub,
-      segs: [
-        { key: 'compute', v: g.compute }, { key: 'db', v: g.db },
-        { key: 'net', v: g.net }, { key: 'ops', v: g.ops },
-        { key: 'model', v: model }
-      ]
+
+    return {
+      model: model,
+      bedrockModel: bedrockModel,
+      dedicated: {
+        name: 'Dedicated instance · we operate it',
+        sub: 'the production stack, provisioned for one customer',
+        segs: [
+          { key: 'compute', v: ded.compute }, { key: 'db', v: ded.db },
+          { key: 'net', v: ded.net }, { key: 'model', v: model }
+        ]
+      },
+      api: {
+        name: 'Self-managed on AWS · Claude API',
+        sub: S.sub,
+        segs: [
+          { key: 'compute', v: aws.compute }, { key: 'db', v: aws.db },
+          { key: 'net', v: aws.net }, { key: 'ops', v: aws.ops },
+          { key: 'model', v: model }
+        ]
+      },
+      bed: {
+        name: 'Self-managed on AWS · Bedrock',
+        sub: S.sub + ' + PrivateLink endpoint',
+        segs: [
+          { key: 'compute', v: aws.compute }, { key: 'db', v: aws.db },
+          { key: 'net', v: aws.net + S.endpoint }, { key: 'ops', v: aws.ops },
+          { key: 'model', v: bedrockModel }
+        ]
+      }
     };
-    var bed = {
-      name: 'Self-managed on AWS · Bedrock',
-      sub: SIZES[state.size].sub + ' + PrivateLink endpoint',
-      segs: [
-        { key: 'compute', v: g.compute }, { key: 'db', v: g.db },
-        { key: 'net', v: g.net + SIZES[state.size].endpoint }, { key: 'ops', v: g.ops },
-        { key: 'model', v: bedrockModel }
-      ]
-    };
-    return { api: api, bed: bed, model: model, bedrockModel: bedrockModel, g: g };
   }
 
-  function total(s) {
-    return s.segs.reduce(function (a, b) { return a + b.v; }, 0);
-  }
+  function total(s) { return s.segs.reduce(function (a, b) { return a + b.v; }, 0); }
 
   var tip = document.getElementById('tip');
   function showTip(e, text) {
@@ -788,62 +901,57 @@
   }
   function hideTip() { tip.hidden = true; }
 
-  function barRow(s, max) {
-    var t = total(s);
+  function rowShell(name, sub, totalText) {
     var row = document.createElement('div');
     row.className = 'row';
-
     var top = document.createElement('div');
     top.className = 'row-top';
     var nm = document.createElement('div');
     nm.className = 'row-name';
-    nm.innerHTML = s.name + '<small>' + s.sub + '</small>';
+    nm.innerHTML = name + '<small>' + sub + '</small>';
     var tot = document.createElement('div');
     tot.className = 'row-total';
-    tot.innerHTML = money(t) + '<small>/mo</small>';
+    tot.innerHTML = totalText;
     top.appendChild(nm); top.appendChild(tot);
+    row.appendChild(top);
+    return row;
+  }
 
+  function barRow(s, max) {
+    var t = total(s);
+    var row = rowShell(s.name, s.sub, money(t) + '<small>/mo</small>');
     var bar = document.createElement('div');
     bar.className = 'bar';
     bar.style.width = Math.max(4, (t / max) * 100) + '%';
     s.segs.forEach(function (seg) {
       if (seg.v <= 0) return;
-      var g = GROUPS.filter(function (x) { return x.key === seg.key; })[0];
+      var g = group(seg.key);
       var el = document.createElement('i');
       var share = seg.v / t;
       el.style.background = g.color;
       el.style.flex = seg.v + ' 1 0';
-      el.textContent = share > 0.16 ? money(seg.v) : '';
-      if (share <= 0.16) el.className = 'dim';
+      if (share > 0.16) el.textContent = money(seg.v); else el.className = 'dim';
       var label = g.name + ' — ' + money(seg.v) + '/mo (' + Math.round(share * 100) + '%)';
       el.setAttribute('aria-label', label);
       el.addEventListener('mousemove', function (e) { showTip(e, label); });
       el.addEventListener('mouseleave', hideTip);
       bar.appendChild(el);
     });
-
-    row.appendChild(top);
     row.appendChild(bar);
     return row;
   }
 
+  function hostedPrice() {
+    return state.repos <= 5 ? 69 : state.repos <= 10 ? 99 : null;
+  }
+
   function flatRow(max) {
-    var hosted = state.repos <= 5 ? 69 : state.repos <= 10 ? 99 : null;
-    var row = document.createElement('div');
-    row.className = 'row';
-    var top = document.createElement('div');
-    top.className = 'row-top';
-    var nm = document.createElement('div');
-    nm.className = 'row-name';
-    nm.innerHTML = 'Hosted git2docs<small>' +
-      (hosted === null ? 'above 10 repositories the plan is negotiated' :
-        (state.repos <= 5 ? 'Builder plan · 5 repos' : 'Team plan · 10 repos') + ' · model usage included') +
-      '</small>';
-    var tot = document.createElement('div');
-    tot.className = 'row-total';
-    tot.innerHTML = hosted === null ? 'Enterprise<small> · negotiated</small>' : money(hosted) + '<small>/mo</small>';
-    top.appendChild(nm); top.appendChild(tot);
-    row.appendChild(top);
+    var hosted = hostedPrice();
+    var sub = hosted === null
+      ? 'above 10 repositories the plan is negotiated'
+      : (state.repos <= 5 ? 'Builder plan · 5 repos' : 'Team plan · 10 repos') + ' · model usage included';
+    var row = rowShell('Hosted git2docs · shared', sub,
+      hosted === null ? 'Enterprise<small> · negotiated</small>' : money(hosted) + '<small>/mo</small>');
 
     if (hosted !== null) {
       var bar = document.createElement('div');
@@ -868,16 +976,15 @@
     return row;
   }
 
-  function renderTable(sc) {
+  function renderTables(sc) {
+    var S = SIZES[state.size];
     var tb = document.getElementById('tbl');
     tb.innerHTML = '';
-    var endpoint = SIZES[state.size].endpoint;
 
-    SIZES[state.size].items.forEach(function (it) {
-      var g = GROUPS.filter(function (x) { return x.key === it[2]; })[0];
+    S.items.forEach(function (it) {
       var tr = document.createElement('tr');
       tr.innerHTML =
-        '<td><span class="dot" style="background:' + g.color + '"></span>' + it[0] + '</td>' +
+        '<td><span class="dot" style="background:' + group(it[2]).color + '"></span>' + it[0] + '</td>' +
         '<td class="num">' + money(it[1]) + '</td>' +
         '<td class="num">' + money(it[1]) + '</td>';
       tb.appendChild(tr);
@@ -886,44 +993,65 @@
     var ep = document.createElement('tr');
     ep.innerHTML =
       '<td><span class="dot" style="background:var(--s-net)"></span>Bedrock PrivateLink endpoint</td>' +
-      '<td class="num">—</td><td class="num">' + money(endpoint) + '</td>';
+      '<td class="num">—</td><td class="num">' + money(S.endpoint) + '</td>';
     tb.appendChild(ep);
 
     var pages = state.repos * state.pages * state.regens;
+    var usage = 'Model usage — ' + pages.toLocaleString('en-US') + ' pages + ' +
+                state.chat.toLocaleString('en-US') + ' chat answers';
     var md = document.createElement('tr');
     md.innerHTML =
-      '<td><span class="dot" style="background:var(--s-model)"></span>Model usage — ' +
-        pages.toLocaleString('en-US') + ' pages + ' + state.chat.toLocaleString('en-US') + ' chat answers</td>' +
+      '<td><span class="dot" style="background:var(--s-model)"></span>' + usage + '</td>' +
       '<td class="num">' + money(sc.model) + '</td>' +
       '<td class="num">' + money(sc.bedrockModel) + '</td>';
     tb.appendChild(md);
 
     var sum = document.createElement('tr');
     sum.className = 'sum';
-    sum.innerHTML =
-      '<td>Monthly total</td>' +
+    sum.innerHTML = '<td>Monthly total</td>' +
       '<td class="num">' + money(total(sc.api)) + '</td>' +
       '<td class="num">' + money(total(sc.bed)) + '</td>';
     tb.appendChild(sum);
 
     document.getElementById('tbl-cap').textContent =
-      'AWS list prices, us-east-1, on demand — ' + SIZES[state.size].label.toLowerCase() +
-      ' sizing, one environment.';
+      'AWS list prices, us-east-1, on demand — ' + S.label.toLowerCase() + ' sizing, one environment.';
+
+    var dt = document.getElementById('tbl-ded');
+    dt.innerHTML = '';
+    S.dedicated.forEach(function (it) {
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td><span class="dot" style="background:' + group(it[2]).color + '"></span>' + it[0] + '</td>' +
+        '<td class="num">' + money(it[1]) + '</td>';
+      dt.appendChild(tr);
+    });
+    var dm = document.createElement('tr');
+    dm.innerHTML = '<td><span class="dot" style="background:var(--s-model)"></span>' + usage + '</td>' +
+      '<td class="num">' + money(sc.model) + '</td>';
+    dt.appendChild(dm);
+    var ds = document.createElement('tr');
+    ds.className = 'sum';
+    ds.innerHTML = '<td>Monthly total</td><td class="num">' + money(total(sc.dedicated)) + '</td>';
+    dt.appendChild(ds);
   }
 
   function render() {
     var sc = scenarios();
-    var tApi = total(sc.api), tBed = total(sc.bed);
-    var max = Math.max(tApi, tBed);
+    var tDed = total(sc.dedicated), tApi = total(sc.api), tBed = total(sc.bed);
+    var max = Math.max(tApi, tBed, tDed);
+    var hosted = hostedPrice();
 
+    document.getElementById('s-ded').innerHTML = money(tDed) + '<span class="u">/mo</span>';
     document.getElementById('s-api').innerHTML = money(tApi) + '<span class="u">/mo</span>';
     document.getElementById('s-bed').innerHTML = money(tBed) + '<span class="u">/mo</span>';
-    var hosted = state.repos <= 5 ? 69 : state.repos <= 10 ? 99 : null;
     document.getElementById('s-saas').innerHTML = hosted === null
       ? 'Custom' : money(hosted) + '<span class="u">/mo</span>';
+
     document.getElementById('s-saas-d').textContent = hosted === null
       ? 'Enterprise plan · negotiated annually'
       : (state.repos <= 5 ? 'Builder plan' : 'Team plan') + ' · nothing to run';
+    document.getElementById('s-ded-d').textContent =
+      money(tDed - sc.model) + ' of platform + ' + money(sc.model) + ' of tokens — our cost, not their price';
     document.getElementById('s-api-d').textContent =
       money(tApi - sc.model) + ' of AWS + ' + money(sc.model) + ' of tokens billed by Anthropic';
     document.getElementById('s-bed-d').textContent =
@@ -932,21 +1060,22 @@
     var rows = document.getElementById('rows');
     rows.innerHTML = '';
     rows.appendChild(flatRow(max));
+    rows.appendChild(barRow(sc.dedicated, max));
     rows.appendChild(barRow(sc.api, max));
     rows.appendChild(barRow(sc.bed, max));
 
-    renderTable(sc);
+    renderTables(sc);
 
-    var honest = document.getElementById('honest');
+    var ratio = (tApi / tDed).toFixed(1).replace(/\.0$/, '');
+    var line = '<strong>The self-managed install costs about ' + ratio +
+      '× a dedicated instance</strong> — ' + money(tApi) + ' a month against ' + money(tDed) +
+      ', for the same documentation.';
     if (hosted !== null) {
-      var mult = Math.round(tApi / hosted);
-      honest.innerHTML = '<strong>At this size, self-managing costs about ' + mult +
-        '× the hosted subscription</strong> — ' + money(tApi) + ' a month against ' + money(hosted) +
-        ', before anyone writes a page. On-prem is a control purchase, not a savings purchase. A customer who expects it to be cheaper has misunderstood what they are buying, and it is kinder to say so on the first call than at renewal.';
-    } else {
-      honest.innerHTML = '<strong>Self-managing costs ' + money(tApi) +
-        ' a month in AWS and tokens</strong>, before anyone writes a page or operates anything. On-prem is a control purchase, not a savings purchase. A customer who expects it to be cheaper has misunderstood what they are buying, and it is kinder to say so on the first call than at renewal.';
+      line += ' The shared hosted plan is ' + money(hosted) + '.';
     }
+    line += ' On-prem is a control purchase, not a savings purchase. A customer who expects it to be cheaper has ' +
+      'misunderstood what they are buying, and it is kinder to say so on the first call than at renewal.';
+    document.getElementById('honest-line').innerHTML = line;
 
     document.getElementById('v-repos').textContent = state.repos;
     document.getElementById('v-pages').textContent = state.pages;
@@ -976,6 +1105,26 @@
   }
   segGroup('size-group', 'size');
   segGroup('region-group', 'region');
+
+  // Mark the section the reader is in on the rail.
+  var links = Array.prototype.slice.call(document.querySelectorAll('.side a'));
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var seen = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { seen[en.target.id] = en.isIntersecting; });
+      var active = null;
+      links.forEach(function (a) {
+        var id = a.getAttribute('href').slice(1);
+        if (seen[id] && !active) active = id;
+      });
+      links.forEach(function (a) {
+        a.classList.toggle('on', a.getAttribute('href').slice(1) === active);
+      });
+    }, { rootMargin: '-70px 0px -55% 0px' });
+    Array.prototype.forEach.call(document.querySelectorAll('section[id]'), function (s) { io.observe(s); });
+  }
 
   render();
 })();
